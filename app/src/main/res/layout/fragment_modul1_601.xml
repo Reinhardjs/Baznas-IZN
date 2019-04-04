@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:layout_marginBottom="50dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar6"
+            android:layout_width="0dp"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Informasi Zakat"
+            app:titleTextColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar6">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="1. Siapakah Anggota Rumah Tangga yang menerima bantuan Zakat ? " />
+
+            <Spinner
+                android:id="@+id/edt1_601"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/items_modul1_601"
+                android:fontFamily="@font/poppins_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="2. Jenis lembaga amil penyalur zakat" />
+
+            <Spinner
+                android:id="@+id/edt1_602"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/items_modul1_602"
+                android:fontFamily="@font/poppins_light" />
+
+            <TextView
+                android:id="@+id/txt1_603"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="3. Jenis lembaga program" />
+
+            <Spinner
+                android:id="@+id/edt1_603"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/items_modul1_603"
+                android:fontFamily="@font/poppins_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="4. Kapan pertama kali rumah tangga Ibu/Bapak/Sdr menerima bantuan zakat (bulan dan Tahun) ?" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edt1_604"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:maxLength="2"
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="Bulan" />
+                <TextView
+                    android:id="@+id/txt_604lj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:textSize="30dp"
+                    android:text="/"/>
+                <EditText
+                    android:id="@+id/edt1_604_lanjut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:maxLength="4"
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="Tahun" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="5. Berapa pendapatan keluarga (kepala keluarga dan seluruh anggota keluarga) sebelum menerima zakat ? " />
+
+            <EditText
+                android:id="@+id/edt1_605"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="6. Selama ini, sudah berapa kali Ibu/Bapak/Sdr menerima bantuan zakat ?" />
+
+            <EditText
+                android:id="@+id/edt1_606"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Contoh 2X" />
+
+            <TextView
+                android:id="@+id/txt_607"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="7. Jenis Zakat yang diterima" />
+
+            <Spinner
+                android:id="@+id/edt1_607"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/items_modul1_607"
+                android:fontFamily="@font/poppins_light" />
+
+
+            <TextView
+                android:id="@+id/txt1_608"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="8. Bantuan Zakat Konsumtif Pangan" />
+
+            <EditText
+                android:id="@+id/edt1_608"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+            <TextView
+                android:id="@+id/txt1_609"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="9. Bantuan Zakat Konsumtif Kesehatan" />
+
+            <EditText
+                android:id="@+id/edt1_609"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+            <TextView
+                android:id="@+id/txt1_610"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="10. Bantuan Zakat Konsumtif Pendidikan" />
+
+            <EditText
+                android:id="@+id/edt1_610"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+            <TextView
+                android:id="@+id/txt1_611"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="11. Bantuan Zakat Konsumtif Lainnya" />
+
+            <EditText
+                android:id="@+id/edt1_611"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+
+            <TextView
+                android:id="@+id/txt1_612"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="12. Bantuan Zakat Konsumtif Total " />
+
+            <EditText
+                android:id="@+id/edt1_612"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+
+
+            <TextView
+                android:id="@+id/txt1_613"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="13. Bantuan Zakat Produktif Modal " />
+
+            <EditText
+                android:id="@+id/edt1_613"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+            <TextView
+                android:id="@+id/txt1_614"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="14. Bantuan Zakat Produktif Alat " />
+
+            <EditText
+                android:id="@+id/edt1_614"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+            <TextView
+                android:id="@+id/txt1_615"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="15. Bantuan Zakat Produktif Lain " />
+
+            <EditText
+                android:id="@+id/edt1_615"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+            <TextView
+                android:id="@+id/txt1_616"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="16. Bantuan Zakat Produktif Total " />
+
+            <EditText
+                android:id="@+id/edt1_616"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+
+
+            <TextView
+                android:id="@+id/txt1_617"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="17. Apakah sebelum menerima zakat sudah memiliki usaha ? " />
+
+            <RadioGroup
+                android:id="@+id/edt1_617"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa617"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak617"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2. Tidak" />
+
+            </RadioGroup>
+            <TextView
+                android:id="@+id/txt1_618"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="18. Berapakah penerimaan/pendapatan usaha per bulan setelah mendapat zakat? " />
+
+            <EditText
+                android:id="@+id/edt1_618"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Rp." />
+
+
+            <Button
+                android:id="@+id/btn_next1_601"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rounded_btn2"
+                android:text="Next"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

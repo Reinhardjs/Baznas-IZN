@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:layout_marginBottom="50dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar6"
+            android:layout_width="0dp"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Informasi tabungan dan simpanan"
+            app:titleTextColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar6">
+
+]
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="1. Memiliki Tabungan di Bank Konvensional" />
+
+            <RadioGroup
+                android:id="@+id/edt1_401"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa401"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak401"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="2. Memiliki Tabungan di Bank Syariah" />
+
+            <RadioGroup
+                android:id="@+id/edt1_402"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa402"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak402"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak" />
+
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="3. Memiliki Tabungan di Koperasi Konvensional " />
+
+            <RadioGroup
+                android:id="@+id/edt1_403"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa403"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak403"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak" />
+
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="4. Memiliki Tabungan di Koperasi Syariah/BMT" />
+
+            <RadioGroup
+                android:id="@+id/edt1_404"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa404"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak404"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak" />
+
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="5. Memiliki Tabungan di Lembaga Zakat" />
+
+            <RadioGroup
+                android:id="@+id/edt1_405"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa405"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak405"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak" />
+
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="6. Mengikuti Arisan Uang Rutin" />
+
+            <RadioGroup
+                android:id="@+id/edt1_406"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa406"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak406"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak" />
+
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="7. Memiliki Simpanan di rumah dalam bentuk celengan brankas dan sebagainya" />
+
+            <RadioGroup
+                android:id="@+id/edt1_407"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/radioYa407"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="1. Ya" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak407"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak" />
+
+            </RadioGroup>
+
+
+
+            <Button
+                android:id="@+id/btn_next1_401"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rounded_btn2"
+                android:text="Next"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

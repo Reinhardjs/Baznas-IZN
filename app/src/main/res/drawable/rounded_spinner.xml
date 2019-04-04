@@ -1,0 +1,19 @@
+<selector xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@android:color/white" />
+                    <stroke android:width="2px" android:color="@android:color/darker_gray" />
+                    <corners android:radius="5dp" />
+                </shape>
+            </item>
+            <item>
+                <bitmap
+                    android:gravity="right" android:src="@drawable/ic_data" />
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

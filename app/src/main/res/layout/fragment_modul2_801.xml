@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar9"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Pelaporan"
+            app:titleMarginStart="20dp"
+            app:titleTextColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txt_801"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="1. Apakah memiliki laporan keuangan dalam 1 tahun terakhir?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar9" />
+
+        <RadioGroup
+            android:id="@+id/radioGrup801"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_801"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_801"
+            app:layout_constraintTop_toBottomOf="@+id/txt_801">
+
+            <RadioButton
+                android:id="@+id/radioYa801"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Ada" />
+
+            <RadioButton
+                android:id="@+id/radioTidak801"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak Ada" />
+
+        </RadioGroup>
+
+
+
+        <LinearLayout
+            android:id="@+id/ll_801"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/radioGrup801"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/radioGrup801"
+            app:layout_constraintTop_toBottomOf="@+id/radioGrup801">
+
+            <TextView
+                android:id="@+id/txt_802"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="2. Laporan setahun terakhir" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/radioGrup802"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_802"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/txt_802"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_802">
+
+                    <RadioButton
+                        android:id="@+id/radioYa802"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Teraudit" />
+
+                    <RadioButton
+                        android:id="@+id/radioTidak802"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tidak Teraudit" />
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/radioGrup8022"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_802"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/txt_802"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_802">
+
+                    <RadioButton
+                        android:id="@+id/radioYa8022"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Opini WTP" />
+
+                    <RadioButton
+                        android:id="@+id/radioTidak8022"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tidak WTP" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+            <RadioGroup
+                android:id="@+id/radioGrup803"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintHorizontal_bias="0.0">
+
+                <RadioButton
+                    android:id="@+id/radioYa803"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Dipublikasikan" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak803"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Dipublikasikan" />
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/txt_804"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="3. Laporan audit syariah"/>
+
+            <RadioGroup
+                android:id="@+id/radioGrup804"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_804"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt_804"
+                app:layout_constraintTop_toBottomOf="@+id/txt_804">
+
+                <RadioButton
+                    android:id="@+id/radioYa804"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Ada" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak804"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Ada" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btn_next_801"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_btn2"
+                android:text="Next"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

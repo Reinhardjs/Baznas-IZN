@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Regulasi"
+        app:titleTextColor="@android:color/white"
+        app:titleMarginStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_201"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="1. Regulasi Tingkat Nasional/Provinsi/ Kabupaten/Kota tentang Zakat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+
+    <RadioGroup
+        android:id="@+id/radioGrup201"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_201"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txt_201"
+        app:layout_constraintTop_toBottomOf="@+id/txt_201">
+
+        <RadioButton
+            android:id="@+id/radioYa201"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Ada" />
+
+        <RadioButton
+            android:id="@+id/radioTidak201"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tidak Ada" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edt_iya_201"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+
+        android:fontFamily="@font/poppins_light"
+        android:hint="Nomor Regulasi"
+
+        app:layout_constraintBottom_toBottomOf="@+id/radioGrup201"
+        app:layout_constraintEnd_toEndOf="@+id/txt_201"
+        app:layout_constraintStart_toEndOf="@+id/radioGrup201"
+        app:layout_constraintTop_toBottomOf="@+id/txt_201"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_next_201"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_btn2"
+        android:text="Next"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/txt_201"
+        app:layout_constraintStart_toStartOf="@+id/txt_201"
+        app:layout_constraintTop_toBottomOf="@+id/radioGrup201" />
+</android.support.constraint.ConstraintLayout>

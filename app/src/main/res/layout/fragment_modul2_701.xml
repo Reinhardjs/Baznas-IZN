@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar8"
+            android:layout_width="0dp"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Penyaluran"
+            app:titleMarginStart="20dp"
+            app:titleTextColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txt_702"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="2. Dana ZIS untuk kegiatan Dakwah"
+            app:layout_constraintEnd_toEndOf="@+id/txt_701"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_701"
+            app:layout_constraintTop_toBottomOf="@+id/edt_701" />
+
+        <RadioGroup
+            android:id="@+id/radioGrup702"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/txt_702"
+            app:layout_constraintTop_toBottomOf="@+id/txt_702">
+
+            <RadioButton
+                android:id="@+id/radioYa702"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Ada" />
+
+            <RadioButton
+                android:id="@+id/radioTidak702"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak Ada" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/edt_iya_702"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins_light"
+            android:hint="Jumlah"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@+id/radioGrup702"
+            app:layout_constraintEnd_toEndOf="@+id/txt_702"
+            app:layout_constraintStart_toEndOf="@+id/radioGrup702"
+            app:layout_constraintTop_toTopOf="@+id/radioGrup702" />
+
+        <Button
+            android:id="@+id/btn_next_702"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_btn2"
+            android:text="Next"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/txt_702"
+            app:layout_constraintStart_toStartOf="@+id/txt_702"
+            app:layout_constraintTop_toBottomOf="@+id/edt_7041" />
+
+        <TextView
+            android:id="@+id/txt_701"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="1. Total dana ZIS yang disalurkan "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar8" />
+
+        <EditText
+            android:id="@+id/edt_701"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+
+            android:fontFamily="@font/poppins_light"
+
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/txt_701"
+            app:layout_constraintStart_toStartOf="@+id/txt_701"
+            app:layout_constraintTop_toBottomOf="@+id/txt_701" />
+
+        <TextView
+            android:id="@+id/txt_7031"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="3. Rencana penyaluran ZIS produktif"
+            app:layout_constraintStart_toStartOf="@+id/txt_702"
+            app:layout_constraintTop_toBottomOf="@+id/radioGrup702" />
+
+        <TextView
+            android:id="@+id/txt_7041"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="5. Rencana penyaluran ZIS sosial/konsumtif"
+            app:layout_constraintEnd_toEndOf="@+id/edt_7031"
+            app:layout_constraintStart_toStartOf="@+id/edt_7031"
+            app:layout_constraintTop_toBottomOf="@+id/edt_7031" />
+
+        <Spinner
+            android:id="@+id/edt_7031"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_7031"
+            app:layout_constraintStart_toStartOf="@+id/txt_7031"
+            app:layout_constraintTop_toBottomOf="@+id/txt_7031" />
+
+        <TextView
+            android:id="@+id/txt_7032"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="4. Realisasi penyaluran ZIS produktif"
+            app:layout_constraintBottom_toTopOf="@+id/edt_7031"
+            app:layout_constraintEnd_toEndOf="@+id/txt_702"
+            app:layout_constraintTop_toTopOf="@+id/txt_7031" />
+
+        <Spinner
+            android:id="@+id/edt_7032"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_7031"
+            app:layout_constraintEnd_toEndOf="@+id/txt_7032"
+            app:layout_constraintStart_toStartOf="@+id/txt_7032"
+            app:layout_constraintTop_toTopOf="@+id/edt_7031" />
+
+        <TextView
+            android:id="@+id/txt_7042"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="6. Realisasi penyaluran ZIS sosial/konsumtif"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_7041"
+            app:layout_constraintEnd_toEndOf="@+id/edt_7032"
+            app:layout_constraintStart_toStartOf="@+id/edt_7032"
+            app:layout_constraintTop_toTopOf="@+id/txt_7041" />
+
+        <Spinner
+            android:id="@+id/edt_7041"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_7041"
+            app:layout_constraintStart_toStartOf="@+id/txt_7041"
+            app:layout_constraintTop_toBottomOf="@+id/txt_7041" />
+
+        <Spinner
+            android:id="@+id/edt_7042"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_7041"
+            app:layout_constraintEnd_toEndOf="@+id/txt_7042"
+            app:layout_constraintStart_toStartOf="@+id/txt_7042"
+            app:layout_constraintTop_toTopOf="@+id/edt_7041" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

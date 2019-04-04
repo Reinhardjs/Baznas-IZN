@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/radioGrup604"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_604"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_604"
+            app:layout_constraintTop_toBottomOf="@+id/txt_604">
+
+            <RadioButton
+                android:id="@+id/radioYa604"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Ada" />
+
+            <RadioButton
+                android:id="@+id/radioTidak604"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak Ada" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/txt_603"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="3. SOP 1 tahun terakhir"
+            app:layout_constraintEnd_toEndOf="@+id/radioGrup602"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/radioGrup602"
+            app:layout_constraintTop_toBottomOf="@+id/radioGrup602" />
+
+        <TextView
+            android:id="@+id/txt_604"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="4. Sertifikat ISO 1 tahun terakhir"
+            app:layout_constraintEnd_toEndOf="@+id/txt_603"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_603"
+            app:layout_constraintTop_toBottomOf="@+id/radioGrup603" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar7"
+            android:layout_width="0dp"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Pengelolaan"
+            app:titleMarginStart="20dp"
+            app:titleTextColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txt_601"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="1. Program kerja 1 tahun terakhir"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar7" />
+
+        <RadioGroup
+            android:id="@+id/radioGrup601"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_601"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_601"
+            app:layout_constraintTop_toBottomOf="@+id/txt_601">
+
+            <RadioButton
+                android:id="@+id/radioYa601"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Ada" />
+
+            <RadioButton
+                android:id="@+id/radioTidak601"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak Ada" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/radioGrup602"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_602"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_602"
+            app:layout_constraintTop_toBottomOf="@+id/txt_602">
+
+            <RadioButton
+                android:id="@+id/radioYa602"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Ada" />
+
+            <RadioButton
+                android:id="@+id/radioTidak602"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak Ada" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/txt_602"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="2. Rencana strategis 1 tahun terakhir"
+            app:layout_constraintEnd_toEndOf="@+id/txt_601"
+            app:layout_constraintStart_toStartOf="@+id/txt_601"
+            app:layout_constraintTop_toBottomOf="@+id/radioGrup601" />
+
+        <RadioGroup
+            android:id="@+id/radioGrup603"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/txt_603"
+            app:layout_constraintTop_toBottomOf="@+id/txt_603">
+
+            <RadioButton
+                android:id="@+id/radioYa603"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Ada" />
+
+            <RadioButton
+                android:id="@+id/radioTidak603"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tidak Ada" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_next_601"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_btn2"
+            android:text="Next"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/txt_604"
+            app:layout_constraintStart_toStartOf="@+id/txt_604"
+            app:layout_constraintTop_toBottomOf="@+id/radioGrup604" />
+
+        <EditText
+            android:id="@+id/edt_iya_603"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="Jenis SOP"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/radioGrup603"
+            app:layout_constraintEnd_toEndOf="@+id/txt_603"
+            app:layout_constraintStart_toEndOf="@+id/radioGrup603"
+            app:layout_constraintTop_toTopOf="@+id/radioGrup603" />
+
+        <EditText
+            android:id="@+id/edt_iya_604"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="Jenis ISO"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/radioGrup604"
+            app:layout_constraintEnd_toEndOf="@+id/txt_604"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/radioGrup604"
+            app:layout_constraintTop_toTopOf="@+id/radioGrup604"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
