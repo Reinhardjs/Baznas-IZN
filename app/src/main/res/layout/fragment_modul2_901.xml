@@ -54,7 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_btn2"
-        android:text="Save All"
+        android:text="Simpan Semua"
+
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/edt_901"
         app:layout_constraintHorizontal_bias="0.0"

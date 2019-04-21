@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:layout_marginBottom="50dp">
+    android:layout_height="match_parent" >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
         <android.support.v7.widget.Toolbar
@@ -129,6 +129,16 @@
                 android:fontFamily="@font/poppins_light"
                 android:text="5. Berapa pendapatan keluarga (kepala keluarga dan seluruh anggota keluarga) sebelum menerima zakat ? " />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spin1_605"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/items_per"></Spinner>
             <EditText
                 android:id="@+id/edt1_605"
                 android:layout_width="match_parent"
@@ -136,8 +146,8 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp" />
-
+                android:hint="Minimal 4 Digit" />
+        </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -186,7 +196,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
             <TextView
                 android:id="@+id/txt1_609"
                 android:layout_width="match_parent"
@@ -202,7 +212,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
             <TextView
                 android:id="@+id/txt1_610"
                 android:layout_width="match_parent"
@@ -218,7 +228,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
             <TextView
                 android:id="@+id/txt1_611"
                 android:layout_width="match_parent"
@@ -234,7 +244,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
 
             <TextView
                 android:id="@+id/txt1_612"
@@ -251,7 +261,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
 
 
             <TextView
@@ -269,7 +279,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
             <TextView
                 android:id="@+id/txt1_614"
                 android:layout_width="match_parent"
@@ -285,7 +295,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
             <TextView
                 android:id="@+id/txt1_615"
                 android:layout_width="match_parent"
@@ -301,7 +311,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
             <TextView
                 android:id="@+id/txt1_616"
                 android:layout_width="match_parent"
@@ -317,7 +327,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
 
 
             <TextView
@@ -363,7 +373,7 @@
                 android:layout_marginTop="8dp"
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
-                android:hint="Rp." />
+                android:hint="Minimal 4 Digit" />
 
 
             <Button

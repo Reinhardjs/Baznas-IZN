@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
 
 public class FragmentModul2601  extends Fragment {
@@ -136,6 +137,6 @@ public class FragmentModul2601  extends Fragment {
         if (edt_iya_604.getVisibility() == View.VISIBLE){
             Prefs.putString(StaticStrings.M2_604, edt_iya_604.getText().toString());
         }
-
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
 }

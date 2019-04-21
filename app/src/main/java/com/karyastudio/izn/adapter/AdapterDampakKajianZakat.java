@@ -61,8 +61,8 @@ public class AdapterDampakKajianZakat  extends RecyclerView.Adapter<AdapterDampa
             jenis_lembaga.setText(fi_jenis_lembaga);
 
             counKel.setText("jumlah keluarga : "+countKeluarga);
-            date_updated.setText("Tanggal penyelesaian : "+fi_date_updated);
-            date_created.setText("Tanggal memulai : "+fi_date_created);
+            date_updated.setText("Tanggal penyelesaian : \n"+fi_date_updated);
+            date_created.setText("Tanggal memulai : \n"+fi_date_created);
         }
     }
 }

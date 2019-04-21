@@ -157,6 +157,12 @@
         <item>2. Bantuan Produktif</item>
         <item>3. Keduanya</item>
     </string-array>
+    <string-array name="items_per">
+        <item>per hari</item>
+        <item>per bulan</item>
+        <item>per tahun</item>
+
+    </string-array>
     <string-array name="list_preference_entries">
         <item>Entry 1</item>
         <item>Entry 2</item>

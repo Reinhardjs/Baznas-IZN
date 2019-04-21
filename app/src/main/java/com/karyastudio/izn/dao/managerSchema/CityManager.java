@@ -14,6 +14,16 @@ public class CityManager{
     public static List<City> loadAll(Context ctx) {
         return getCityDao(ctx).loadAll();
     }
+    public static List<City> loadByProCode(Context ctx, String proCode){
+        List<City> list = getCityDao(ctx).loadAll();
+        List<City> temp = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++){
+            if (list.get(i).getPro_code().equals(proCode)){
+                temp.add(list.get(i));
+            }
+        }
+        return temp;
+    }
 
     public static List<City> loadByID(Context ctx) {
         return getCityDao(ctx).queryBuilder().orderDesc(CityDao.Properties.Pro_id).list();

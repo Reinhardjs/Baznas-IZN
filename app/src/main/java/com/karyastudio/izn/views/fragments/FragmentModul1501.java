@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
 
 public class FragmentModul1501 extends Fragment {
@@ -132,5 +133,6 @@ public class FragmentModul1501 extends Fragment {
         int selectedId10 = edt_510.getCheckedRadioButtonId();
         RadioButton M1_510 = view.findViewById(selectedId10);
         Prefs.putString(StaticStrings.M1_510, M1_510.getText().toString());
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
 }

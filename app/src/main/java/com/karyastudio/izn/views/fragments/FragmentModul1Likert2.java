@@ -119,7 +119,11 @@ public class FragmentModul1Likert2 extends Fragment {
             @Override
             public void onClick(View v) {
                 saveAndNext(rootView);
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentDataModul1()).commit();
+                fms= getActivity().getSupportFragmentManager();
+                for(int i = 0; i < fms.getBackStackEntryCount(); ++i) {
+                    fms.popBackStack();
+                }
+                fms.beginTransaction().replace(R.id.content_frames, new FragmentDashboard()).commit();
             }
         });
 
@@ -146,7 +150,7 @@ public class FragmentModul1Likert2 extends Fragment {
             Utils.sendModul1(getActivity());
             Toast.makeText(getActivity(), "Berhasil Dimasukan Data Telah Tersimpan", Toast.LENGTH_LONG).show();
         }else{
-            //Toast.makeText(getActivity(),"Koneksi anda tidak ada, data anda akan dikirim setelah anda online", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(),"Koneksi anda tidak ada, data anda akan dikirim setelah anda online", Toast.LENGTH_LONG).show();
             StaticStrings.readyToSendViaOfflineModul1 = true;
         }
     }

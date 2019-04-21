@@ -3668,6 +3668,11 @@
         <item>1. Laki-laki</item>
         <item>2. Perempuan</item>
 
+    </string-array><string-array name="items_per">
+        <item>per hari</item>
+        <item>per bulan</item>
+        <item>per tahun</item>
+
     </string-array><string-array name="items_207">
         <item>1. Belum kawin</item>
         <item>2. Kawin/nikah</item>

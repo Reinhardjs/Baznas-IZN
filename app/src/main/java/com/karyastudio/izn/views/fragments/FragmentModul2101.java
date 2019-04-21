@@ -19,23 +19,17 @@ import android.widget.TextView;
 
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
+import com.karyastudio.izn.dao.generateSchema.City;
 import com.karyastudio.izn.dao.generateSchema.Provinsi;
+import com.karyastudio.izn.dao.managerSchema.CityManager;
 import com.karyastudio.izn.dao.managerSchema.ProvinsiManager;
-import com.karyastudio.izn.model.api.city.DataCity;
-import com.karyastudio.izn.model.api.province.DataProvinsi;
-import com.karyastudio.izn.network.BaseApi;
 import com.karyastudio.izn.utils.StaticStrings;
 import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FragmentModul2101 extends Fragment {
     private FragmentManager fms;
@@ -55,7 +49,7 @@ public class FragmentModul2101 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_modul2_101, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_modul2_101, container, false);
         fms = ((MainActivity) getActivity()).fms;
         Toolbar toolbar = rootView.findViewById(R.id.toolbar2);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -99,42 +93,37 @@ public class FragmentModul2101 extends Fragment {
 
 
         //provinsi
-        getDataProvinsi();
-
         String [] provinsiTemp = new String[ProvinsiManager.loadAll(getActivity()).size()];
         List<Provinsi> provinsiList = ProvinsiManager.loadAll(getActivity());
         for (int x = 0; x < ProvinsiManager.loadAll(getActivity()).size(); x++){
             provinsiTemp [x] = provinsiList.get(x).getPro_code()+". "+provinsiList.get(x).getPro_province();
         }
-
         ArrayAdapter<String> spinnerArrayAdapter3 = new ArrayAdapter<String>(
                 rootView.getContext(),R.layout.spinner_style,provinsiTemp
         );
 
         spinnerArrayAdapter3.setDropDownViewResource(R.layout.spinner_style);
-
         edt_103.setAdapter(spinnerArrayAdapter3);
-
-
-        //getCity
         edt_103.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("apa"+parent.getSelectedItem().toString().substring(Math.max(parent.getSelectedItem().toString().length() - 2, 0)));
-                getDataCity( parent.getSelectedItem().toString().substring(0, 2));
+                List <City> cityList = CityManager.loadByProCode(getContext(),  parent.getSelectedItem().toString().substring(0, 2));
+                String [] cityTemp = new String[cityList.size()];
+                for (int x = 0; x < cityList.size(); x++){
+                    cityTemp [x] = cityList.get(x).getCit_code()+". "+cityList.get(x).getPro_city();
+                }
+                ArrayAdapter<String> spinnerArrayAdapter4 = new ArrayAdapter<String>(
+                        rootView.getContext(),R.layout.spinner_style,cityTemp
+                );
+                spinnerArrayAdapter4.setDropDownViewResource(R.layout.spinner_style);
+                edt_104.setAdapter(spinnerArrayAdapter4);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-
         });
-
-
-
-
-
 
         spinner_101.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -227,73 +216,6 @@ public class FragmentModul2101 extends Fragment {
         if (edt_104.getVisibility() == View.VISIBLE){
             Prefs.putString(StaticStrings.M2_104,edt_104.getSelectedItem().toString());
         }
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
-
-
-    private void getDataProvinsi(){
-        BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
-        Call<DataProvinsi> result = apiService.getProvince(StaticStrings.API_KEY);
-        result.enqueue(new Callback<DataProvinsi>() {
-            @Override
-            public void onResponse(Call<DataProvinsi> call, Response<DataProvinsi> response) {
-                try {
-                    List<Provinsi> list = new ArrayList<>();
-                    for (int i = 0; i < response.body().getData().getProvince().size(); i++) {
-                        list.add(new Provinsi(
-                                response.body().getData().getProvince().get(i).getProId(),
-                                response.body().getData().getProvince().get(i).getProCode(),
-                                response.body().getData().getProvince().get(i).getProProvince()
-                        ));
-                    }
-
-                    ProvinsiManager.removeAll(getActivity());
-                    ProvinsiManager.insertOrReplaceArray(getActivity(), list);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<DataProvinsi> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
-    private void getDataCity(String idCity){
-        BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
-        Call<DataCity> result = apiService.getCity(StaticStrings.API_KEY, idCity);
-        result.enqueue(new Callback<DataCity>() {
-            @Override
-            public void onResponse(Call<DataCity> call, Response<DataCity> response) {
-                try {
-                        String cityTemp [] = new String[response.body().getData().getProvince().size()];
-                    for (int i = 0; i < response.body().getData().getProvince().size(); i++) {
-                        cityTemp [i] = response.body().getData().getProvince().get(i).getCitCode()+". "+response.body().getData().getProvince().get(i).getProCity();
-                    }
-
-                    ArrayAdapter<String> spinnerArrayAdapter4 = new ArrayAdapter<String>(
-                            getActivity(),R.layout.spinner_style,cityTemp
-                    );
-                    spinnerArrayAdapter4.setDropDownViewResource(R.layout.spinner_style);
-
-                    spinnerArrayAdapter4.notifyDataSetChanged();
-                    edt_104.setAdapter(spinnerArrayAdapter4);
-                    spinnerArrayAdapter4.notifyDataSetChanged();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<DataCity> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
-
 }

@@ -45,6 +45,7 @@ array items_modul1_601
 array items_modul1_602
 array items_modul1_603
 array items_modul1_607
+array items_per
 array list_preference_entries
 array list_preference_entry_values
 array multi_select_list_preference_default_value
@@ -1178,6 +1179,7 @@ id design_navigation_view
 id dimensions
 id direct
 id disableHome
+id dua
 id edit_query
 id edt1_100
 id edt1_101
@@ -1360,11 +1362,13 @@ id parentPanel
 id parent_matrix
 id password
 id password_reg
+id password_reg2
 id percent
 id phone
 id pin
 id progress_circular
 id progress_horizontal
+id provinsi_reg
 id radio
 id radioGrup201
 id radioGrup301
@@ -1461,6 +1465,7 @@ id recyclerView3
 id right
 id right_icon
 id right_side
+id satu
 id save_image_matrix
 id save_non_transition_alpha
 id save_scale_type
@@ -1492,6 +1497,10 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
+id spin1_305
+id spin1_306
+id spin1_307
+id spin1_605
 id split_action_bar
 id spread
 id spread_inside
@@ -1603,9 +1612,9 @@ id unlabeled
 id up
 id useLogo
 id username
-id username_reg
 id view
 id view2
+id view3
 id view_offset_helper
 id visible
 id withText

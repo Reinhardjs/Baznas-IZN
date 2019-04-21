@@ -56,7 +56,7 @@ public class FragmentModul2901 extends Fragment {
                 for(int i = 0; i < fms.getBackStackEntryCount(); ++i) {
                     fms.popBackStack();
                 }
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentDataModul2()).commit();
+                fms.beginTransaction().replace(R.id.content_frames, new FragmentDashboard()).commit();
             }
         });
         return rootView;

@@ -1,6 +1,7 @@
 package com.karyastudio.izn.utils;
 
 public class StaticStrings {
+    public static final String TOAST_SUKSES_SIMPAN = "Sukses disimpan";
     public static final String BASE_URL = "https://baznas.playon-id.com/webservice/v1/";
     public static final String API_KEY = "155150200111030";
     public static final String M2_101 = "M2_101";
@@ -59,7 +60,9 @@ public class StaticStrings {
     public static final String M2_update_at = "M2_update_at";
 
     public static final String M2_901 = "M2_901";
-    public static boolean M2_902 = true; //ready to send offline jika false offline jika true online
+    public static final String ISI_SEMUA = "Harap semua diisi semua!!";
+    public static final String TIDAK_MATCH = "Email dan password tidak sama";
+    public static boolean M2_902 = false; //ready to send offline jika false offline jika true online
     public static boolean readyToSendViaOffline = false; //ready to send offline jika false offline jika true online
     public static boolean readyToSendViaOfflineModul1 = false; //ready to send offline jika false offline jika true online
 

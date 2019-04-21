@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
 
 public class FragmentModul1Likert1 extends Fragment {
@@ -135,5 +136,6 @@ public class FragmentModul1Likert1 extends Fragment {
         Prefs.putString(StaticStrings.M1_lik3,edt_lik3.getSelectedItem().toString());
         Prefs.putString(StaticStrings.M1_lik4,edt_lik4.getSelectedItem().toString());
         Prefs.putString(StaticStrings.M1_lik5,edt_lik5.getSelectedItem().toString());
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
 }

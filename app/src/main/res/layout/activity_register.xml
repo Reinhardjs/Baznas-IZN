@@ -14,36 +14,36 @@
         >
 
         <EditText
-            android:id="@+id/username_reg"
+            android:id="@+id/provinsi_reg"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded"
             android:ems="10"
-            android:textColor="@color/colorPrimaryDark"
-            android:hint="Username"
+            android:hint="Provinsi"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/imageView4"
-            app:layout_constraintStart_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="@+id/email"
+            app:layout_constraintStart_toStartOf="@+id/email"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="@+id/username_reg"
-            app:layout_constraintStart_toStartOf="@+id/username_reg"
-            app:layout_constraintTop_toBottomOf="@+id/username_reg" />
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="@+id/name"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
 
         <EditText
@@ -58,9 +58,9 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="@+id/phone"
-            app:layout_constraintStart_toStartOf="@+id/phone"
-            app:layout_constraintTop_toBottomOf="@+id/phone" />
+            app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <EditText
             android:id="@+id/phone"
@@ -85,15 +85,30 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded"
             android:ems="10"
+            android:hint="Ulangi password"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="@+id/password_reg2"
+            app:layout_constraintStart_toStartOf="@+id/password_reg2"
+            app:layout_constraintTop_toBottomOf="@+id/password_reg2" />
+
+        <EditText
+            android:id="@+id/password_reg2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded"
+            android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="@+id/email"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/email"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
+            app:layout_constraintEnd_toEndOf="@+id/provinsi_reg"
+            app:layout_constraintStart_toStartOf="@+id/provinsi_reg"
+            app:layout_constraintTop_toBottomOf="@+id/provinsi_reg" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -101,7 +116,7 @@
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,13 +128,13 @@
             android:id="@+id/btn_exe_daftar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_btn"
             android:text="Daftar"
             android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="@+id/name"
-            app:layout_constraintStart_toStartOf="@+id/name"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintEnd_toEndOf="@+id/phone"
+            app:layout_constraintStart_toStartOf="@+id/phone"
+            app:layout_constraintTop_toBottomOf="@+id/phone" />
 
 
         <Button

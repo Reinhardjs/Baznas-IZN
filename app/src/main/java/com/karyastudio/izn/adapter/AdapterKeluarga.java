@@ -3,7 +3,6 @@ package com.karyastudio.izn.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,45 +96,50 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
             Prefs.putString(StaticStrings.M1_307, viewHolder.edt_307.getText().toString());
             m307 = viewHolder.edt_307.getText().toString();
         }
-
-
-
-        Log.d("whoaa", "onBindViewHolder: ");
         viewHolder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (viewHolder.edt_202nik.getText().toString().length() < 16) {
+                    Toast.makeText(v.getContext(), "NIK harus 16 digit", Toast.LENGTH_LONG).show();
+                } else if (viewHolder.edt_305.getText().toString().length() < 4 ||
+                        viewHolder.edt_306.getText().toString().length() < 4 ||
+                        viewHolder.edt_307.getText().toString().length() < 4) {
+                    Toast.makeText(v.getContext(), "Nominal minimal harus 4 digit", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    int selectedId = viewHolder.edt_210.getCheckedRadioButtonId();
+                    RadioButton M1_210 = viewHolder.mView.findViewById(selectedId);
+                    Prefs.putString(StaticStrings.M1_210, M1_210.getText().toString());
+                    int selectedId1 = viewHolder.edt_303.getCheckedRadioButtonId();
+                    RadioButton M1_303 = viewHolder.mView.findViewById(selectedId1);
+                    m210 = M1_210.getText().toString();
+                    Toast.makeText(v.getContext(), "Data Dimasukan Antrian", Toast.LENGTH_SHORT).show();
 
-                int selectedId = viewHolder.edt_210.getCheckedRadioButtonId();
-                RadioButton M1_210 = viewHolder.mView.findViewById(selectedId);
-                Prefs.putString(StaticStrings.M1_210, M1_210.getText().toString());
-                int selectedId1 = viewHolder.edt_303.getCheckedRadioButtonId();
-                RadioButton M1_303 = viewHolder.mView.findViewById(selectedId1);
-                m210 = M1_210.getText().toString();
-                Toast.makeText(v.getContext(),"Data Dimasukan Antrian",Toast.LENGTH_SHORT).show();
-                list.add(i, new Keluarga(
-                        "",
-                        Prefs.getString("parent_id", "kosong"),
-                        viewHolder.edt_202nama.getText().toString(),
-                        viewHolder.edt_202nik.getText().toString(),
-                        viewHolder.edt_203.getSelectedItem().toString(),
-                        viewHolder.edt_204.getSelectedItem().toString(),
-                        viewHolder.edt_205.getText().toString(),
-                        "",
-                        viewHolder.edt_207.getSelectedItem().toString(),
-                        viewHolder.edt_208.getSelectedItem().toString(),
-                        viewHolder.edt_209.getSelectedItem().toString(),
-                        M1_210.getText().toString(),
-                        M1_303.getText().toString(),
-                        viewHolder.edt_304.getSelectedItem().toString(),
-                        viewHolder.edt_305.getText().toString(),
-                        viewHolder.edt_306.getText().toString(),
-                        viewHolder.edt_307.getText().toString(),
-                        ""
-                        ));
-                if ((KeluargaManager.loadAll(context).size() < 1)) {
-                    KeluargaManager.insertOrReplaceArray(context, list);
-                }else{
-                    KeluargaManager.addNewList(KeluargaManager.loadAll(context), list, context);
+                    list.add(i, new Keluarga(
+                            "",
+                            Prefs.getString("parent_id", "kosong"),
+                            viewHolder.edt_202nama.getText().toString(),
+                            viewHolder.edt_202nik.getText().toString(),
+                            viewHolder.edt_203.getSelectedItem().toString(),
+                            viewHolder.edt_204.getSelectedItem().toString(),
+                            viewHolder.edt_205.getText().toString(),
+                            "",
+                            viewHolder.edt_207.getSelectedItem().toString(),
+                            viewHolder.edt_208.getSelectedItem().toString(),
+                            viewHolder.edt_209.getSelectedItem().toString(),
+                            M1_210.getText().toString(),
+                            M1_303.getText().toString(),
+                            viewHolder.edt_304.getSelectedItem().toString(),
+                            viewHolder.edt_305.getText().toString()+" "+viewHolder.spn_305.getSelectedItem().toString(),
+                            viewHolder.edt_306.getText().toString()+" "+viewHolder.spn_306.getSelectedItem().toString(),
+                            viewHolder.edt_307.getText().toString()+" "+viewHolder.spn_307.getSelectedItem().toString(),
+                            ""
+                    ));
+                    if ((KeluargaManager.loadAll(context).size() < 1)) {
+                        KeluargaManager.insertOrReplaceArray(context, list);
+                    } else {
+                        KeluargaManager.addNewList(KeluargaManager.loadAll(context), list, context);
+                    }
                 }
             }
         });
@@ -157,6 +161,12 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
         public TextView txt_307;
         public RadioGroup edt_303;
         public Spinner edt_304;
+
+
+        public Spinner spn_305;
+        public Spinner spn_306;
+        public Spinner spn_307;
+
         public EditText edt_305;
         public EditText edt_306;
         public EditText edt_307;
@@ -189,6 +199,12 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
 
             edt_303 = itemView.findViewById(R.id.edt1_303);
             edt_304 = itemView.findViewById(R.id.edt1_304);
+
+
+            spn_305 = itemView.findViewById(R.id.spin1_305);
+            spn_306 = itemView.findViewById(R.id.spin1_306);
+            spn_307 = itemView.findViewById(R.id.spin1_307);
+
             edt_305 = itemView.findViewById(R.id.edt1_305);
             edt_306 = itemView.findViewById(R.id.edt1_306);
             edt_307 = itemView.findViewById(R.id.edt1_307);
@@ -200,6 +216,7 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
             edt_205 = itemView.findViewById(R.id.edt1_205);
             edt_207 = itemView.findViewById(R.id.edt1_207);
             btn = itemView.findViewById(R.id.check_btn);
+
 
             edt_208.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -238,6 +255,9 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
                             edt_305.setVisibility(View.GONE);
                             edt_306.setVisibility(View.GONE);
                             edt_307.setVisibility(View.GONE);
+                            spn_305.setVisibility(View.GONE);
+                            spn_306.setVisibility(View.GONE);
+                            spn_307.setVisibility(View.GONE);
                             break;
                         case R.id.radioTidak303:
                             txt_304.setVisibility(View.VISIBLE);
@@ -248,6 +268,9 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
                             edt_305.setVisibility(View.VISIBLE);
                             edt_306.setVisibility(View.VISIBLE);
                             edt_307.setVisibility(View.VISIBLE);
+                            spn_305.setVisibility(View.VISIBLE);
+                            spn_306.setVisibility(View.VISIBLE);
+                            spn_307.setVisibility(View.VISIBLE);
                             break;
                     }
                 }

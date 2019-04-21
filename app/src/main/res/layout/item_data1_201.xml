@@ -8,8 +8,9 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginLeft="8dp"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="12dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginBottom="12dp"
     android:layout_marginRight="8dp"
     android:background="@color/colorAccent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -19,20 +20,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:orientation="vertical">
+        android:paddingRight="20dp">
 
         <TextView
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:background="#555555"
             android:fontFamily="@font/poppins_light"
             android:text="INFORMASI PERSONAL"
+
             android:textColor="@android:color/white"
-            android:background="#555555"
             android:textSize="18sp"
             android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,14 +44,14 @@
             android:text="1. NIK" />
 
         <EditText
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_202_nik"
-            android:fontFamily="@font/poppins_light"
             android:layout_width="match_parent"
-            android:inputType="number"
             android:layout_height="wrap_content"
-            android:hint="Hanya angka"
-            />
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:hint="Hanya angka 16 digit"
+            android:inputType="number"
+            android:maxLength="16" />
 
         <TextView
             android:layout_width="match_parent"
@@ -59,13 +62,13 @@
 
 
         <EditText
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_202_nama"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
-            android:hint="NAMA"
-            />
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:hint="NAMA" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,14 +78,14 @@
 
 
         <Spinner
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_203"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/items_203"
-            android:hint="Hubungan dengan Kepala Keluarga"
-            />
+            android:fontFamily="@font/poppins_light"
+            android:hint="Hubungan dengan Kepala Keluarga" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,14 +95,13 @@
 
 
         <Spinner
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_204"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
-            android:entries="@array/items_204"
             android:layout_height="wrap_content"
-            android:hint="NAMA"
-            />
+            android:layout_marginTop="8dp"
+            android:entries="@array/items_204"
+            android:fontFamily="@font/poppins_light"
+            android:hint="NAMA" />
 
         <TextView
             android:layout_width="match_parent"
@@ -110,16 +112,14 @@
 
 
         <EditText
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_205"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:hint="ANGKA SAJA, 4 DIGIT"
             android:inputType="number"
-            android:maxLength="4"
-            android:hint="Tahun lahir"
-            />
-
+            android:maxLength="4" />
 
 
         <TextView
@@ -131,14 +131,13 @@
 
 
         <Spinner
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_207"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/items_207"
-            android:hint="NAMA"
-            />
+            android:fontFamily="@font/poppins_light"
+            android:hint="NAMA" />
 
 
         <TextView
@@ -150,14 +149,13 @@
 
 
         <Spinner
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_208"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/items_208"
-            android:hint="NAMA"
-            />
+            android:fontFamily="@font/poppins_light"
+            android:hint="NAMA" />
 
         <TextView
             android:id="@+id/txt1_209"
@@ -169,14 +167,14 @@
 
 
         <Spinner
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_209"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/items_209"
-            android:hint="Kelas Tertinggi yang pernah/sedang diduduki"
-            />
+            android:fontFamily="@font/poppins_light"
+            android:hint="Kelas Tertinggi yang pernah/sedang diduduki" />
+
         <TextView
             android:id="@+id/txt1_210"
             android:layout_width="match_parent"
@@ -208,13 +206,13 @@
         </RadioGroup>
 
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:fontFamily="@font/poppins_light"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp"
             android:background="#555555"
-            android:text="10. PENDAPATAN DAN KETANAGAKERJAAN"
+            android:fontFamily="@font/poppins_light"
+            android:text="PENDAPATAN DAN KETANAGAKERJAAN"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -222,9 +220,10 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_light"
-            android:text="11. Status Pekerjaan (Satu Bulan Terakhir)" />
+            android:text="10. Status Pekerjaan (Satu Bulan Terakhir)" />
+
         <RadioGroup
             android:id="@+id/edt1_303"
             android:layout_width="match_parent"
@@ -240,9 +239,9 @@
 
             <RadioButton
                 android:id="@+id/radioTidak303"
-                android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="1. Bekerja" />
 
         </RadioGroup>
@@ -253,18 +252,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="12. Jenis Pekerjaan" />
+            android:text="11. Jenis Pekerjaan" />
 
 
         <Spinner
-            android:layout_marginTop="8dp"
             android:id="@+id/edt1_304"
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/items_304"
-            android:hint="NAMA"
-            />
+            android:fontFamily="@font/poppins_light"
+            android:hint="NAMA" />
 
 
         <TextView
@@ -273,19 +271,31 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="13. Pendapatan  Rutin (Rp/bulan)" />
+            android:text="12. Pendapatan  Rutin " />
 
-
-        <EditText
-            android:layout_marginTop="8dp"
-            android:id="@+id/edt1_305"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            android:inputType="number"
-            android:hint="Pendapatan  Rutin (Rp/bulan)"
-            />
+            <Spinner
+                android:id="@+id/spin1_305"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/items_per"></Spinner>
+
+            <EditText
+                android:id="@+id/edt1_305"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:hint="MINIMAL 4 DIGIT"
+
+                android:inputType="number" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/txt1_306"
@@ -293,19 +303,29 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="14. Pendapatan Tidak Rutin (Rp/bulan)" />
+            android:text="13. Pendapatan Tidak Rutin " />
 
-
-        <EditText
-            android:layout_marginTop="8dp"
-            android:id="@+id/edt1_306"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            android:inputType="number"
-            android:hint="Pendapatan Tidak Rutin (Rp/bulan)"
-            />
+            <Spinner
+                android:id="@+id/spin1_306"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/items_per"></Spinner>
+
+            <EditText
+                android:id="@+id/edt1_306"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+
+                android:hint="MINIMAL 4 DIGIT"
+                android:inputType="number" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txt1_307"
@@ -313,38 +333,49 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="15. Pendapatan dari Aset yang disewakan (Rp/bulan)" />
+            android:text="14. Pendapatan dari Aset yang disewakan " />
 
-
-        <EditText
-            android:layout_marginTop="8dp"
-            android:id="@+id/edt1_307"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_light"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            android:inputType="number"
-            android:hint="Pendapatan dari Aset yang disewakan (Rp/bulan)"
-            />
+            <Spinner
+                android:id="@+id/spin1_307"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/items_per"></Spinner>
 
+            <EditText
+                android:id="@+id/edt1_307"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
 
+                android:hint="MINIMAL 4 DIGIT"
+                android:inputType="number" />
+        </LinearLayout>
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textStyle="bold"
+            android:textColor="@android:color/black"
             android:fontFamily="@font/poppins_light"
-            android:text="Isi data keluarga sudah benar?" />
+            android:textSize="16sp"
+            android:text="Isi data keluarga sudah benar?"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/check_btn"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_btn"
-            android:text="Ya"/>
+            android:text="Ya"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

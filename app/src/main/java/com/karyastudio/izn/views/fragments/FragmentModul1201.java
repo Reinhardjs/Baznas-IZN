@@ -70,5 +70,6 @@ public class FragmentModul1201 extends Fragment {
 
     private void saveAndNext(View view){
         Utils.sendModulKeluarga(view.getContext());
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
 }

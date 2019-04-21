@@ -26,7 +26,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Utils {
 
-
+    public static Toast Toast(Context context, String msg) {
+        return Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+    }
     public static boolean isOnline(Context context) {
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

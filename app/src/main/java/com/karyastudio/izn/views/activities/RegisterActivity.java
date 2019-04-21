@@ -3,6 +3,7 @@ package com.karyastudio.izn.views.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,8 +21,9 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText txtUsername;
+    private EditText txtProvinsi;
     private EditText txtPassword;
+    private EditText txtPassword2;
     private EditText txtEmail;
     private EditText txtPhone;
     private EditText txtNama;
@@ -32,8 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        txtUsername = findViewById(R.id.username_reg);
+        txtProvinsi = findViewById(R.id.provinsi_reg);
         txtPassword = findViewById(R.id.password_reg);
+        txtPassword2 = findViewById(R.id.password_reg2);
         txtEmail = findViewById(R.id.email);
         txtPhone = findViewById(R.id.phone);
         txtNama = findViewById(R.id.name);
@@ -44,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register(txtUsername.getText().toString(),
+                register(txtProvinsi.getText().toString(),
                         txtPassword.getText().toString(),
                         txtEmail.getText().toString(),
                         txtNama.getText().toString(),
@@ -62,34 +65,41 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register(String username,
+    private void register(String province,
                           String password,
                           String email,
                           String name,
                           String alamat,
                           String phone) {
-        BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
-        Call<Daftar> result = apiService.daftar(StaticStrings.API_KEY, username, email, password, alamat, phone, name);
-        result.enqueue(new Callback<Daftar>() {
-            @Override
-            public void onResponse(Call<Daftar> call, Response<Daftar> response) {
-                try {
+        if (!txtPassword2.getText().toString().equals(txtPassword.getText().toString())){
+            Utils.Toast(getApplicationContext(), StaticStrings.TIDAK_MATCH).show();
+        }else if (TextUtils.isEmpty(province) || TextUtils.isEmpty(password) ||  TextUtils.isEmpty(email)
+                || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone)){
+            Utils.Toast(getApplicationContext(), StaticStrings.ISI_SEMUA).show();
+        } else {
+            BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
+            Call<Daftar> result = apiService.daftar(StaticStrings.API_KEY, province, email, password, alamat, phone, name);
+            result.enqueue(new Callback<Daftar>() {
+                @Override
+                public void onResponse(Call<Daftar> call, Response<Daftar> response) {
+                    try {
 
-                    if (response.body().getStatus().equalsIgnoreCase("success")) {
+                        if (response.body().getStatus().equalsIgnoreCase("success")) {
                             Toast.makeText(getApplicationContext(), "Berhasil Terdaftar", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    } else {
-                        Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Daftar> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+                @Override
+                public void onFailure(Call<Daftar> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        }
     }
 }

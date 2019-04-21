@@ -18,7 +18,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface BaseApi {
-    String BaseUrl = "https://baznas.playon-id.com/webservice/v1/";
+    String BaseUrl = "http://app.puskasbaznas.com/";
 
     //login
     @FormUrlEncoded
@@ -28,6 +28,10 @@ public interface BaseApi {
     //data getProvince
     @GET("getProvince")
     Call<DataProvinsi> getProvince(@Header("key") String apikey);
+
+    //data getCityAll
+    @GET("getCityAll")
+    Call<DataCity> getCityAll(@Header("key") String apikey);
 
     //data getCity
     @FormUrlEncoded
@@ -50,7 +54,7 @@ public interface BaseApi {
     @FormUrlEncoded
     @POST("registerPetugasProcess")
     Call<Daftar> daftar(@Header("key") String apikey,
-                        @Field("username") String username,
+                        @Field("u_province") String province,
                         @Field("email") String email,
                         @Field("password") String password,
                         @Field("address") String address,

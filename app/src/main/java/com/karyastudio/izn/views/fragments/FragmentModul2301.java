@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
 
 public class FragmentModul2301 extends Fragment {
@@ -129,7 +130,7 @@ public class FragmentModul2301 extends Fragment {
         if (edt_iya_3012.getVisibility() == View.VISIBLE){
             Prefs.putString(StaticStrings.M2_302, edt_iya_3012.getText().toString());
         }
-
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
 
 }

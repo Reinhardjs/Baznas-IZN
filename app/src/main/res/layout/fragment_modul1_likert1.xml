@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:layout_marginBottom="50dp">
+    android:layout_height="match_parent" >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
         <android.support.v7.widget.Toolbar
@@ -45,7 +45,7 @@
                 android:fontFamily="@font/poppins_light"
                 android:text="EVALUASI KEGIATAN IBADAH RUMAH TANGGA MUSTAHIK SEBELUM MENERIMA ZAKAT"
                 android:textStyle="bold" />
-         
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -60,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:entries="@array/items_likert_sholat"
-                android:spinnerMode="dialog"
-                android:fontFamily="@font/poppins_light" />
+                android:fontFamily="@font/poppins_light"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -75,9 +75,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:spinnerMode="dialog"
                 android:entries="@array/items_likert_puasa"
-                android:fontFamily="@font/poppins_light" />
+                android:fontFamily="@font/poppins_light"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -91,9 +91,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:spinnerMode="dialog"
                 android:entries="@array/items_likert_zakat"
-                android:fontFamily="@font/poppins_light" />
+                android:fontFamily="@font/poppins_light"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -107,9 +107,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:spinnerMode="dialog"
                 android:entries="@array/items_likert_lingkungan"
-                android:fontFamily="@font/poppins_light" />
+                android:fontFamily="@font/poppins_light"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -123,9 +123,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:spinnerMode="dialog"
                 android:entries="@array/items_likert_kebijakan"
-                android:fontFamily="@font/poppins_light" />
+                android:fontFamily="@font/poppins_light"
+                android:spinnerMode="dialog" />
 
 
             <Button

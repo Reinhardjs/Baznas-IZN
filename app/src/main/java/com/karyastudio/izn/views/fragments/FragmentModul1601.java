@@ -21,12 +21,14 @@ import android.widget.TextView;
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
 
 public class FragmentModul1601 extends Fragment {
     private FragmentManager fms;
     private Button btnNext;
     private Spinner edt_601;
+    private Spinner spn_605;
     private Spinner edt_602;
     private TextView txt_603;
     private Spinner edt_603;
@@ -85,6 +87,7 @@ public class FragmentModul1601 extends Fragment {
         edt_604 = rootView.findViewById(R.id.edt1_604);
         edt_604_lanjut = rootView.findViewById(R.id.edt1_604_lanjut);
         edt_605 = rootView.findViewById(R.id.edt1_605);
+        spn_605 = rootView.findViewById(R.id.spin1_605);
         edt_606 = rootView.findViewById(R.id.edt1_606);
         edt_607 = rootView.findViewById(R.id.edt1_607);
         edt_608 = rootView.findViewById(R.id.edt1_608);
@@ -224,8 +227,36 @@ public class FragmentModul1601 extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveAndNext(rootView);
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+                if (edt_605.getText().length() < 4) {
+                    Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                } else if (edt_607.getSelectedItem().toString().equals("1. Bantuan Konsumtif")){
+                    if (edt_608.getText().length() < 4 || edt_609.getText().length() < 4
+                    || edt_610.getText().length() < 4 || edt_611.getText().length() < 4) {
+                        Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                    }else{
+                        saveAndNext(rootView);
+                        fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+                    }
+                } else if (edt_607.getSelectedItem().toString().equals("2. Bantuan Produktif")){
+                    if (edt_613.getText().length() < 4 || edt_614.getText().length() < 4
+                            || edt_615.getText().length() < 4 || edt_618.getText().length() < 4) {
+                        Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                    }else{
+                        saveAndNext(rootView);
+                        fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+                    }
+                } else if (edt_607.getSelectedItem().toString().equals("3. Keduanya")){
+                    if (edt_608.getText().length() < 4 || edt_609.getText().length() < 4
+                            || edt_610.getText().length() < 4 || edt_611.getText().length() < 4 ||
+                            edt_613.getText().length() < 4 || edt_614.getText().length() < 4
+                            || edt_615.getText().length() < 4 || edt_618.getText().length() < 4) {
+                        Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                    }else{
+                        saveAndNext(rootView);
+                        fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+                    }
+                }
+
             }
         });
 
@@ -262,7 +293,7 @@ public class FragmentModul1601 extends Fragment {
         }
         Prefs.putString(StaticStrings.M1_604, edt_604.getText() + "/" + edt_604_lanjut.getText().toString());
 
-        Prefs.putString(StaticStrings.M1_605, edt_605.getText().toString());
+        Prefs.putString(StaticStrings.M1_605,edt_605.getText().toString() +" "+  spn_605.getSelectedItem().toString());
         Prefs.putString(StaticStrings.M1_606, edt_606.getText().toString());
         Prefs.putString(StaticStrings.M1_607, edt_607.getSelectedItem().toString());
 
@@ -302,6 +333,6 @@ public class FragmentModul1601 extends Fragment {
             Prefs.putString(StaticStrings.M1_618, edt_618.getText().toString());
         }
 
-
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
 }

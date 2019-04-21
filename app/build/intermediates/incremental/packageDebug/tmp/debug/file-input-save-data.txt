@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Apr 04 19:08:32 WIB 2019
+#Mon Apr 15 18:35:57 WIB 2019
 0.baseType=DIRECTORY
 0.base=/Users/maseza/Documents/projectandroids/Bazarnas/app/build/intermediates/transforms/dexMerger/debug/0
 0.path=classes.dex

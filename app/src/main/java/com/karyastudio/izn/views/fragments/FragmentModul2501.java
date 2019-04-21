@@ -16,6 +16,7 @@ import android.widget.EditText;
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
 
 public class FragmentModul2501 extends Fragment {
@@ -60,5 +61,6 @@ public class FragmentModul2501 extends Fragment {
         Prefs.remove(StaticStrings.M2_502);
         Prefs.putString(StaticStrings.M2_501, edt_501.getText().toString());
         Prefs.putString(StaticStrings.M2_502, edt_502.getText().toString());
+        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
     }
 }

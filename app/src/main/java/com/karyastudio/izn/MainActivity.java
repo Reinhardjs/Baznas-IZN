@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public FragmentManager fms = getSupportFragmentManager();
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -72,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         Utils.inizializePrefs(this, getPackageName());
         checkId();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         fms.beginTransaction().replace(R.id.content_frames, new FragmentDashboard()).commit();
 
     }
@@ -80,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         if (Utils.isOnline(this)) {
             getDataM1();
             getDataM2();
+
         }
     }
 
@@ -90,13 +95,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
 
         super.onRestart();
-        if (StaticStrings.readyToSendViaOffline){
-            Utils.sendModul2(getApplicationContext());
+        if (StaticStrings.readyToSendViaOffline && Utils.isOnline(getApplicationContext())){
             StaticStrings.readyToSendViaOffline = false;
+
+            Utils.sendModul2(getApplicationContext());
         }
-        if (StaticStrings.readyToSendViaOfflineModul1){
-            Utils.sendModul1(getApplicationContext());
+        if (StaticStrings.readyToSendViaOfflineModul1 && Utils.isOnline(getApplicationContext())){
             StaticStrings.readyToSendViaOfflineModul1 = false;
+            Utils.sendModul1(getApplicationContext());
         }
     }
 
@@ -179,6 +185,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
