@@ -21,24 +21,30 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        IZNDao.createTable(db, ifNotExists);
-        KeluargaDao.createTable(db, ifNotExists);
-        ProvinsiDao.createTable(db, ifNotExists);
-        KDZDao.createTable(db, ifNotExists);
-        ProvinceDao.createTable(db, ifNotExists);
         CityDao.createTable(db, ifNotExists);
+        IZNDao.createTable(db, ifNotExists);
+        KDZDao.createTable(db, ifNotExists);
+        KdzformqueueDao.createTable(db, ifNotExists);
+        KDZQueueDao.createTable(db, ifNotExists);
+        KeluargaDao.createTable(db, ifNotExists);
+        KeluargaQueueDao.createTable(db, ifNotExists);
         PetugasDao.createTable(db, ifNotExists);
+        ProvinceDao.createTable(db, ifNotExists);
+        ProvinsiDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        IZNDao.dropTable(db, ifExists);
-        KeluargaDao.dropTable(db, ifExists);
-        ProvinsiDao.dropTable(db, ifExists);
-        KDZDao.dropTable(db, ifExists);
-        ProvinceDao.dropTable(db, ifExists);
         CityDao.dropTable(db, ifExists);
+        IZNDao.dropTable(db, ifExists);
+        KDZDao.dropTable(db, ifExists);
+        KdzformqueueDao.dropTable(db, ifExists);
+        KDZQueueDao.dropTable(db, ifExists);
+        KeluargaDao.dropTable(db, ifExists);
+        KeluargaQueueDao.dropTable(db, ifExists);
         PetugasDao.dropTable(db, ifExists);
+        ProvinceDao.dropTable(db, ifExists);
+        ProvinsiDao.dropTable(db, ifExists);
     }
 
     /**
@@ -57,13 +63,16 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(IZNDao.class);
-        registerDaoClass(KeluargaDao.class);
-        registerDaoClass(ProvinsiDao.class);
-        registerDaoClass(KDZDao.class);
-        registerDaoClass(ProvinceDao.class);
         registerDaoClass(CityDao.class);
+        registerDaoClass(IZNDao.class);
+        registerDaoClass(KDZDao.class);
+        registerDaoClass(KdzformqueueDao.class);
+        registerDaoClass(KDZQueueDao.class);
+        registerDaoClass(KeluargaDao.class);
+        registerDaoClass(KeluargaQueueDao.class);
         registerDaoClass(PetugasDao.class);
+        registerDaoClass(ProvinceDao.class);
+        registerDaoClass(ProvinsiDao.class);
     }
 
     public DaoSession newSession() {

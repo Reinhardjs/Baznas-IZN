@@ -1,5 +1,6 @@
 package com.karyastudio.izn.views.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
+import com.karyastudio.izn.views.activities.SurveyKDZActivity;
 
 public class FragmentIsiSurvey extends Fragment {
     private FragmentManager fms;
@@ -37,7 +39,10 @@ public class FragmentIsiSurvey extends Fragment {
         linkToSurvey1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1101()).addToBackStack("3").commit();
+                // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1101()).addToBackStack("3").commit();
+                Intent intent = new Intent(getActivity(), SurveyKDZActivity.class);
+                intent.putExtra(SurveyKDZActivity.FORM_REQUEST_TYPE_DATA, SurveyKDZActivity.REQUEST_TYPE_INSERT);
+                startActivity(intent);
             }
         });
         return rootView;

@@ -63,7 +63,7 @@ public class StaticStrings {
     public static final String ISI_SEMUA = "Harap semua diisi semua!!";
     public static final String TIDAK_MATCH = "Email dan password tidak sama";
     public static boolean M2_902 = false; //ready to send offline jika false offline jika true online
-    public static boolean readyToSendViaOffline = false; //ready to send offline jika false offline jika true online
+    public static boolean readyToSendViaOfflineModul2 = false; //ready to send offline jika false offline jika true online
     public static boolean readyToSendViaOfflineModul1 = false; //ready to send offline jika false offline jika true online
 
     /*

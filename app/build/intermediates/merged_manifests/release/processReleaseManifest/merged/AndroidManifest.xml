@@ -24,16 +24,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.karyastudio.izn.views.activities.SurveyKDZActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <receiver android:name="com.karyastudio.izn.utils.NetworkStateChangeReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.karyastudio.izn.views.activities.RegisterActivity" />
-        <activity android:name="com.karyastudio.izn.views.activities.LoginActivity" />
+        <activity
+            android:name="com.karyastudio.izn.views.activities.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.karyastudio.izn.views.activities.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.karyastudio.izn.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

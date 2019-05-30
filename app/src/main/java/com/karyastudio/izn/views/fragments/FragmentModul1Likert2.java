@@ -13,16 +13,18 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
 import com.karyastudio.izn.utils.Utils;
+import com.karyastudio.izn.views.activities.SurveyKDZActivity;
 import com.pixplicity.easyprefs.library.Prefs;
+import com.stepstone.stepper.Step;
+import com.stepstone.stepper.VerificationError;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class FragmentModul1Likert2 extends Fragment {
+public class FragmentModul1Likert2 extends Fragment implements Step {
     private FragmentManager fms;
     private Spinner edt_lik1;
     private Spinner edt_lik2;
@@ -30,6 +32,8 @@ public class FragmentModul1Likert2 extends Fragment {
     private Spinner edt_lik4;
     private Spinner edt_lik5;
     private Button btnNext;
+    private boolean isSuccess;
+    private View rootView;
 
     public FragmentModul1Likert2() {
 
@@ -38,8 +42,8 @@ public class FragmentModul1Likert2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_modul1_likert2, container, false);
-        fms = ((MainActivity) getActivity()).fms;
+        rootView = inflater.inflate(R.layout.fragment_modul1_likert2, container, false);
+//        fms = ((MainActivity) getActivity()).fms;
         edt_lik1 = rootView.findViewById(R.id.edt1_lik_1);
         edt_lik2 = rootView.findViewById(R.id.edt1_lik_2);
         edt_lik3 = rootView.findViewById(R.id.edt1_lik_3);
@@ -115,15 +119,16 @@ public class FragmentModul1Likert2 extends Fragment {
         edt_lik5.setAdapter(spinnerArrayAdapter4);
 
         btnNext = rootView.findViewById(R.id.btn_next1_lik_1);
+//        btnNext.setVisibility(View.GONE);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndNext(rootView);
-                fms= getActivity().getSupportFragmentManager();
-                for(int i = 0; i < fms.getBackStackEntryCount(); ++i) {
-                    fms.popBackStack();
-                }
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentDashboard()).commit();
+//                fms= getActivity().getSupportFragmentManager();
+//                for(int i = 0; i < fms.getBackStackEntryCount(); ++i) {
+//                    fms.popBackStack();
+//                }
+//                fms.beginTransaction().replace(R.id.content_frames, new FragmentDashboard()).commit();
             }
         });
 
@@ -131,27 +136,62 @@ public class FragmentModul1Likert2 extends Fragment {
     }
 
 
-    private void saveAndNext(View view){
-        Prefs.remove(StaticStrings.M1_lik1B);
-        Prefs.remove(StaticStrings.M1_lik2B);
-        Prefs.remove(StaticStrings.M1_lik3B);
-        Prefs.remove(StaticStrings.M1_lik4B);
-        Prefs.remove(StaticStrings.M1_lik5B);
+    private VerificationError saveAndNext(View view){
+//        try {
+            Prefs.remove(StaticStrings.M1_lik1B);
+            Prefs.remove(StaticStrings.M1_lik2B);
+            Prefs.remove(StaticStrings.M1_lik3B);
+            Prefs.remove(StaticStrings.M1_lik4B);
+            Prefs.remove(StaticStrings.M1_lik5B);
 
-        Prefs.putString(StaticStrings.M1_lik1B,edt_lik1.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik2B,edt_lik2.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik3B,edt_lik3.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik4B,edt_lik4.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik5B,edt_lik5.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik1B, edt_lik1.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik2B, edt_lik2.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik3B, edt_lik3.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik4B, edt_lik4.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik5B, edt_lik5.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_update_at, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS").format(Calendar.getInstance().getTime()));
 
-        Prefs.putString(StaticStrings.M1_update_at, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS").format(Calendar.getInstance().getTime()));
 
-        if (Utils.isOnline(getActivity())){
-            Utils.sendModul1(getActivity());
-            Toast.makeText(getActivity(), "Berhasil Dimasukan Data Telah Tersimpan", Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(getActivity(),"Koneksi anda tidak ada, data anda akan dikirim setelah anda online", Toast.LENGTH_LONG).show();
-            StaticStrings.readyToSendViaOfflineModul1 = true;
+            Utils.addQueueModul1(view.getContext(), SurveyKDZActivity.form_request_type);
+            Utils.log("FORM REQUEST TYPE : " + SurveyKDZActivity.form_request_type);
+
+
+            if (Utils.isOnline(getActivity())) {
+                 Utils.sendModul1(view.getContext());
+                 Utils.sendModulKeluarga(view.getContext());
+                 Toast.makeText(getActivity(), "Berhasil Dimasukan Data Telah Tersimpan", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), "Tidak ada koneksi internet, data akan dikirim otomatis saat terhubung ke internet", Toast.LENGTH_LONG).show();
+                StaticStrings.readyToSendViaOfflineModul1 = true;
+            }
+
+            isSuccess = true;
+//        } catch (Exception e){
+//            Utils.log("ERRROR AT END FORM : " + e.getMessage());
+//            return new VerificationError("Mohon lengkapi form pada halaman ini");
+//        }
+
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public VerificationError verifyStep() {
+        if (isSuccess){
+            return null;
         }
+
+        return saveAndNext(rootView);
+
+    }
+
+    @Override
+    public void onSelected() {
+
+    }
+
+    @Override
+    public void onError(@NonNull VerificationError error) {
+
     }
 }

@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "KDZ".
 */
-public class KDZDao extends AbstractDao<KDZ, Void> {
+public class KDZDao extends AbstractDao<KDZ, String> {
 
     public static final String TABLENAME = "KDZ";
 
@@ -22,7 +22,7 @@ public class KDZDao extends AbstractDao<KDZ, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Fk_id = new Property(0, String.class, "fk_id", false, "FK_ID");
+        public final static Property Fk_id = new Property(0, String.class, "fk_id", true, "FK_ID");
         public final static Property Fk_date_created = new Property(1, String.class, "fk_date_created", false, "FK_DATE_CREATED");
         public final static Property Fk_date_updated = new Property(2, String.class, "fk_date_updated", false, "FK_DATE_UPDATED");
         public final static Property Fk_nama = new Property(3, String.class, "fk_nama", false, "FK_NAMA");
@@ -42,7 +42,7 @@ public class KDZDao extends AbstractDao<KDZ, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"KDZ\" (" + //
-                "\"FK_ID\" TEXT NOT NULL ," + // 0: fk_id
+                "\"FK_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: fk_id
                 "\"FK_DATE_CREATED\" TEXT NOT NULL ," + // 1: fk_date_created
                 "\"FK_DATE_UPDATED\" TEXT NOT NULL ," + // 2: fk_date_updated
                 "\"FK_NAMA\" TEXT NOT NULL ," + // 3: fk_nama
@@ -76,8 +76,8 @@ public class KDZDao extends AbstractDao<KDZ, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     @Override
@@ -102,20 +102,22 @@ public class KDZDao extends AbstractDao<KDZ, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(KDZ entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(KDZ entity, long rowId) {
+        return entity.getFk_id();
     }
     
     @Override
-    public Void getKey(KDZ entity) {
-        return null;
+    public String getKey(KDZ entity) {
+        if(entity != null) {
+            return entity.getFk_id();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(KDZ entity) {
-        // TODO
-        return false;
+        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
     }
 
     @Override

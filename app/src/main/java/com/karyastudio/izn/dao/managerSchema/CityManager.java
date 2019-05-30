@@ -3,9 +3,9 @@ package com.karyastudio.izn.dao.managerSchema;
 import android.content.Context;
 
 import com.karyastudio.izn.dao.dbdao.DbDao;
-import com.karyastudio.izn.dao.generateSchema.DaoSession;
 import com.karyastudio.izn.dao.generateSchema.City;
 import com.karyastudio.izn.dao.generateSchema.CityDao;
+import com.karyastudio.izn.dao.generateSchema.DaoSession;
 
 import java.util.ArrayList;
 import java.util.List;

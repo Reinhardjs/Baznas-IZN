@@ -14,13 +14,14 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
 import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
+import com.stepstone.stepper.Step;
+import com.stepstone.stepper.VerificationError;
 
-public class FragmentModul1501 extends Fragment {
+public class FragmentModul1501 extends Fragment implements Step {
     private FragmentManager fms;
 
     private RadioGroup edt_501;
@@ -35,16 +36,26 @@ public class FragmentModul1501 extends Fragment {
     private RadioGroup edt_510;
 
     private Button btnNext;
+    private boolean isSuccess;
+    private View rootView;
 
     public FragmentModul1501() {
 
     }
 
+    // method ini hanya dipanggil sekali untuk fragment ini
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // jangan hapus fragment ini saat activity dibuat ulang.
+        setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_modul1_501, container, false);
-        fms = ((MainActivity) getActivity()).fms;
+        rootView = inflater.inflate(R.layout.fragment_modul1_501, container, false);
+//        fms = ((MainActivity) getActivity()).fms;
         Toolbar toolbar = rootView.findViewById(R.id.toolbar6);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +77,12 @@ public class FragmentModul1501 extends Fragment {
         edt_510 = rootView.findViewById(R.id.edt1_510);
 
         btnNext = rootView.findViewById(R.id.btn_next1_501);
+//        btnNext.setVisibility(View.GONE);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndNext(rootView);
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1601()).addToBackStack("6").commit();
+//                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1601()).addToBackStack("6").commit();
             }
         });
 
@@ -78,61 +90,89 @@ public class FragmentModul1501 extends Fragment {
     }
 
 
-    private void saveAndNext(View view){
-        Prefs.remove(StaticStrings.M1_501);
-        Prefs.remove(StaticStrings.M1_502);
-        Prefs.remove(StaticStrings.M1_503);
-        Prefs.remove(StaticStrings.M1_504);
-        Prefs.remove(StaticStrings.M1_505);
-        Prefs.remove(StaticStrings.M1_506);
-        Prefs.remove(StaticStrings.M1_507);
-        Prefs.remove(StaticStrings.M1_508);
-        Prefs.remove(StaticStrings.M1_509);
-        Prefs.remove(StaticStrings.M1_510);
+    private VerificationError saveAndNext(View view){
+        try {
+            Prefs.remove(StaticStrings.M1_501);
+            Prefs.remove(StaticStrings.M1_502);
+            Prefs.remove(StaticStrings.M1_503);
+            Prefs.remove(StaticStrings.M1_504);
+            Prefs.remove(StaticStrings.M1_505);
+            Prefs.remove(StaticStrings.M1_506);
+            Prefs.remove(StaticStrings.M1_507);
+            Prefs.remove(StaticStrings.M1_508);
+            Prefs.remove(StaticStrings.M1_509);
+            Prefs.remove(StaticStrings.M1_510);
 
 
-        int selectedId1 = edt_501.getCheckedRadioButtonId();
-        RadioButton M1_501 = view.findViewById(selectedId1);
-        Prefs.putString(StaticStrings.M1_501, M1_501.getText().toString());
+            int selectedId1 = edt_501.getCheckedRadioButtonId();
+            RadioButton M1_501 = view.findViewById(selectedId1);
+            Prefs.putString(StaticStrings.M1_501, M1_501.getText().toString());
 
-        int selectedId2 = edt_502.getCheckedRadioButtonId();
-        RadioButton M1_502 = view.findViewById(selectedId2);
-        Prefs.putString(StaticStrings.M1_502, M1_502.getText().toString());
+            int selectedId2 = edt_502.getCheckedRadioButtonId();
+            RadioButton M1_502 = view.findViewById(selectedId2);
+            Prefs.putString(StaticStrings.M1_502, M1_502.getText().toString());
 
-        int selectedId3 = edt_503.getCheckedRadioButtonId();
-        RadioButton M1_503 = view.findViewById(selectedId3);
-        Prefs.putString(StaticStrings.M1_503, M1_503.getText().toString());
+            int selectedId3 = edt_503.getCheckedRadioButtonId();
+            RadioButton M1_503 = view.findViewById(selectedId3);
+            Prefs.putString(StaticStrings.M1_503, M1_503.getText().toString());
 
-        int selectedId4 = edt_504.getCheckedRadioButtonId();
-        RadioButton M1_504 = view.findViewById(selectedId4);
-        Prefs.putString(StaticStrings.M1_504, M1_504.getText().toString());
+            int selectedId4 = edt_504.getCheckedRadioButtonId();
+            RadioButton M1_504 = view.findViewById(selectedId4);
+            Prefs.putString(StaticStrings.M1_504, M1_504.getText().toString());
 
-        int selectedId5 = edt_505.getCheckedRadioButtonId();
-        RadioButton M1_505 = view.findViewById(selectedId5);
-        Prefs.putString(StaticStrings.M1_505, M1_505.getText().toString());
+            int selectedId5 = edt_505.getCheckedRadioButtonId();
+            RadioButton M1_505 = view.findViewById(selectedId5);
+            Prefs.putString(StaticStrings.M1_505, M1_505.getText().toString());
 
-        int selectedId6 = edt_506.getCheckedRadioButtonId();
-        RadioButton M1_506 = view.findViewById(selectedId6);
-        Prefs.putString(StaticStrings.M1_506, M1_506.getText().toString());
+            int selectedId6 = edt_506.getCheckedRadioButtonId();
+            RadioButton M1_506 = view.findViewById(selectedId6);
+            Prefs.putString(StaticStrings.M1_506, M1_506.getText().toString());
 
-        int selectedId7 = edt_507.getCheckedRadioButtonId();
-        RadioButton M1_507 = view.findViewById(selectedId7);
-        Prefs.putString(StaticStrings.M1_507, M1_507.getText().toString());
-
-
-        int selectedId8 = edt_508.getCheckedRadioButtonId();
-        RadioButton M1_508 = view.findViewById(selectedId8);
-        Prefs.putString(StaticStrings.M1_508, M1_508.getText().toString());
+            int selectedId7 = edt_507.getCheckedRadioButtonId();
+            RadioButton M1_507 = view.findViewById(selectedId7);
+            Prefs.putString(StaticStrings.M1_507, M1_507.getText().toString());
 
 
-        int selectedId9 = edt_509.getCheckedRadioButtonId();
-        RadioButton M1_509 = view.findViewById(selectedId9);
-        Prefs.putString(StaticStrings.M1_509, M1_509.getText().toString());
+            int selectedId8 = edt_508.getCheckedRadioButtonId();
+            RadioButton M1_508 = view.findViewById(selectedId8);
+            Prefs.putString(StaticStrings.M1_508, M1_508.getText().toString());
 
 
-        int selectedId10 = edt_510.getCheckedRadioButtonId();
-        RadioButton M1_510 = view.findViewById(selectedId10);
-        Prefs.putString(StaticStrings.M1_510, M1_510.getText().toString());
-        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
+            int selectedId9 = edt_509.getCheckedRadioButtonId();
+            RadioButton M1_509 = view.findViewById(selectedId9);
+            Prefs.putString(StaticStrings.M1_509, M1_509.getText().toString());
+
+
+            int selectedId10 = edt_510.getCheckedRadioButtonId();
+            RadioButton M1_510 = view.findViewById(selectedId10);
+            Prefs.putString(StaticStrings.M1_510, M1_510.getText().toString());
+
+            isSuccess = true;
+            Utils.Toast(getContext(), StaticStrings.TOAST_SUKSES_SIMPAN).show();
+        } catch (Exception e){
+            return new VerificationError("Mohon lengkapi form pada halaman ini");
+        }
+
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public VerificationError verifyStep() {
+        if (isSuccess){
+            return null;
+        }
+
+        return saveAndNext(rootView);
+    }
+
+    @Override
+    public void onSelected() {
+
+    }
+
+    @Override
+    public void onError(@NonNull VerificationError error) {
+
     }
 }

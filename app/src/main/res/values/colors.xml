@@ -6,4 +6,6 @@
     <color name="colorLabel">#212520</color>
 
     <color name="colorWhite">#FFFFFF</color>
+    <color name="text_form_normal">#201F1F</color>
+    <color name="actionMode">#00A795</color>
 </resources>

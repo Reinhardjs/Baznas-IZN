@@ -19,12 +19,14 @@ import com.karyastudio.izn.R;
 import com.karyastudio.izn.dao.generateSchema.Keluarga;
 import com.karyastudio.izn.dao.managerSchema.KeluargaManager;
 import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.views.activities.SurveyKDZActivity;
 import com.pixplicity.easyprefs.library.Prefs;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHolder> {
+public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHolder> implements Serializable {
 
     String m209 = "kosong";
     String m210 = "kosong";
@@ -33,14 +35,21 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
     String m305 = "kosong";
     String m306 = "kosong";
     String m307 = "kosong";
+
     int count = 0;
     public Context context;
     List<Keluarga> list;
 
-    public AdapterKeluarga(Context context, int count) {
-        this.count = count;
+    public AdapterKeluarga(Context context) {
         this.context = context;
-        list = new ArrayList<>();
+    }
+
+    public void setList(ArrayList<Keluarga> list){
+        this.list = list;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @NonNull
@@ -52,7 +61,43 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AdapterKeluarga.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final AdapterKeluarga.ViewHolder viewHolder, final int position) {
+
+        if (list != null)
+        if (list.size() > 0 && position < list.size()){
+
+            viewHolder.edt_208.setPrompt(list.get(position).getFk_208());
+            viewHolder.txt_209.setText(list.get(position).getFk_209());
+            viewHolder.txt_210.setText(list.get(position).getFk_210());
+            viewHolder.txt_304.setText(list.get(position).getFk_304());
+            viewHolder.txt_305.setText(list.get(position).getFk_305());
+            viewHolder.txt_306.setText(list.get(position).getFk_306());
+            viewHolder.txt_307.setText(list.get(position).getFk_307());
+            // viewHolder.edt_303.clearCheck()
+            // viewHolder.edt_304.clearCheck()
+
+
+            viewHolder.spn_305.setPrompt(list.get(position).getFk_305());
+            viewHolder.spn_306.setPrompt(list.get(position).getFk_306());
+            viewHolder.spn_307.setPrompt(list.get(position).getFk_307());
+
+            viewHolder.edt_305.setText(list.get(position).getFk_305());
+            viewHolder.edt_306.setText(list.get(position).getFk_306());
+            viewHolder.edt_307.setText(list.get(position).getFk_307());
+
+            viewHolder.edt_202nama.setText(list.get(position).getFk_202_nama());
+            viewHolder.edt_202nik.setText(list.get(position).getFk_202_nik());
+            viewHolder.edt_203.setPrompt(list.get(position).getFk_203());
+            viewHolder.edt_204.setPrompt(list.get(position).getFk_204());
+            viewHolder.edt_205.setText(list.get(position).getFk_205());
+            viewHolder.edt_207.setPrompt(list.get(position).getFk_207());
+
+            viewHolder.edt_209.setPrompt(list.get(position).getFk_209());
+
+            //viewHolder.edt_210.clearCheck();
+
+        }
+
 
         Prefs.putString(StaticStrings.M1_202nama, viewHolder.edt_202nama.getText().toString());
         Prefs.putString(StaticStrings.M1_202nik, viewHolder.edt_202nama.getText().toString());
@@ -96,11 +141,14 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
             Prefs.putString(StaticStrings.M1_307, viewHolder.edt_307.getText().toString());
             m307 = viewHolder.edt_307.getText().toString();
         }
+
         viewHolder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewHolder.edt_202nik.getText().toString().length() < 16) {
                     Toast.makeText(v.getContext(), "NIK harus 16 digit", Toast.LENGTH_LONG).show();
+                } else if (viewHolder.edt_205.getText().toString().length() < 4){
+                    Toast.makeText(v.getContext(), "Tahun lahir harus 4 digit", Toast.LENGTH_SHORT).show();
                 } else if (viewHolder.edt_305.getText().toString().length() < 4 ||
                         viewHolder.edt_306.getText().toString().length() < 4 ||
                         viewHolder.edt_307.getText().toString().length() < 4) {
@@ -115,31 +163,37 @@ public class AdapterKeluarga extends RecyclerView.Adapter<AdapterKeluarga.ViewHo
                     m210 = M1_210.getText().toString();
                     Toast.makeText(v.getContext(), "Data Dimasukan Antrian", Toast.LENGTH_SHORT).show();
 
-                    list.add(i, new Keluarga(
-                            "",
-                            Prefs.getString("parent_id", "kosong"),
-                            viewHolder.edt_202nama.getText().toString(),
-                            viewHolder.edt_202nik.getText().toString(),
-                            viewHolder.edt_203.getSelectedItem().toString(),
-                            viewHolder.edt_204.getSelectedItem().toString(),
-                            viewHolder.edt_205.getText().toString(),
-                            "",
-                            viewHolder.edt_207.getSelectedItem().toString(),
-                            viewHolder.edt_208.getSelectedItem().toString(),
-                            viewHolder.edt_209.getSelectedItem().toString(),
-                            M1_210.getText().toString(),
-                            M1_303.getText().toString(),
-                            viewHolder.edt_304.getSelectedItem().toString(),
-                            viewHolder.edt_305.getText().toString()+" "+viewHolder.spn_305.getSelectedItem().toString(),
-                            viewHolder.edt_306.getText().toString()+" "+viewHolder.spn_306.getSelectedItem().toString(),
-                            viewHolder.edt_307.getText().toString()+" "+viewHolder.spn_307.getSelectedItem().toString(),
-                            ""
-                    ));
-                    if ((KeluargaManager.loadAll(context).size() < 1)) {
-                        KeluargaManager.insertOrReplaceArray(context, list);
-                    } else {
-                        KeluargaManager.addNewList(KeluargaManager.loadAll(context), list, context);
-                    }
+                    Keluarga keluarga = new Keluarga();
+                    keluarga.setFki_id(SurveyKDZActivity.form_input_id);
+                    keluarga.setFki_fk_id(SurveyKDZActivity.form_input_id);
+                    // keluarga.setFki_fk_id(Prefs.getString("parent_id", "kosong"));
+                    keluarga.setFk_202_nama(viewHolder.edt_202nama.getText().toString());
+                    keluarga.setFk_202_nik(viewHolder.edt_202nik.getText().toString());
+                    keluarga.setFk_203(viewHolder.edt_203.getSelectedItem().toString());
+                    keluarga.setFk_204(viewHolder.edt_204.getSelectedItem().toString());
+                    keluarga.setFk_205(viewHolder.edt_205.getText().toString());
+                    keluarga.setFk_206("");
+                    keluarga.setFk_207(viewHolder.edt_207.getSelectedItem().toString());
+                    keluarga.setFk_208(viewHolder.edt_208.getSelectedItem().toString());
+                    keluarga.setFk_209(viewHolder.edt_209.getSelectedItem().toString());
+                    keluarga.setFk_210(M1_210.getText().toString());
+                    keluarga.setFk_303(M1_303.getText().toString());
+                    keluarga.setFk_304(viewHolder.edt_304.getSelectedItem().toString());
+                    keluarga.setFk_305(viewHolder.edt_305.getText().toString()+" "+viewHolder.spn_305.getSelectedItem().toString());
+                    keluarga.setFk_306(viewHolder.edt_306.getText().toString()+" "+viewHolder.spn_306.getSelectedItem().toString());
+                    keluarga.setFk_307(viewHolder.edt_307.getText().toString()+" "+viewHolder.spn_307.getSelectedItem().toString());
+                    keluarga.setFk_308("");
+
+                    list.add(keluarga);
+
+//                    if ((KeluargaManager.loadAll(context).size() < 1)) {
+                        // KeluargaManager.insertOrReplaceArray(context, list);
+
+                    KeluargaManager.insertOrReplace(context, keluarga);
+
+//                    } else {
+//                        KeluargaManager.addNewList(KeluargaManager.loadAll(context), list, context);
+//                    }
                 }
             }
         });

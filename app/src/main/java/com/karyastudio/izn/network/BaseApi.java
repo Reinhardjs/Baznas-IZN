@@ -18,9 +18,10 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface BaseApi {
+
     String BaseUrl = "http://app.puskasbaznas.com/";
 
-    //login
+    // login
     @FormUrlEncoded
     @POST("authPetugasProcess")
     Call<Login> login(@Header("key") String apikey, @Field("username") String username, @Field("password") String password);
@@ -50,16 +51,22 @@ public interface BaseApi {
     @POST("data/kajianDampakZakat")
     Call<DataKDZ> kdzData(@Header("key") String apikey,  @Field("idUser") String idUser);
 
+    //data kdz
+    @FormUrlEncoded
+    @POST("itemData/kajianDampakZakat")
+    Call<DataKDZ> kdzItemData(@Header("key") String apikey,  @Field("fk_id") String fk_id);
+
     //daftar
     @FormUrlEncoded
     @POST("registerPetugasProcess")
     Call<Daftar> daftar(@Header("key") String apikey,
-                        @Field("u_province") String province,
+                        @Field("username") String username,
                         @Field("email") String email,
+                        @Field("name") String name,
                         @Field("password") String password,
                         @Field("address") String address,
                         @Field("phone") String phone,
-                        @Field("name") String name);
+                        @Field("province") String province);
 
     //izn
     @FormUrlEncoded
@@ -145,6 +152,10 @@ public interface BaseApi {
                                                 @Field("fk_308") String fk_308);
 
     @FormUrlEncoded
+    @POST("delete/kajianDampakZakat")
+    Call<KajianDampakZakat> deleteKdz(@Header("key") String apiKey, @Field("fk_id") String fk_id);
+
+    @FormUrlEncoded
     @POST("input/kajianDampakZakat")
     Call<KajianDampakZakat> kdz(@Header("key") String apikey,
                                 @Field("fk_id") String fk_id,
@@ -183,6 +194,103 @@ public interface BaseApi {
                                 @Field("fk_601_kode") String fk_601_kode,
                                 @Field("fk_602_jenis_lembaga") String fk_602_jenis_lembaga,
 
+                                @Field("fk_602_kode") String fk_602_kode,
+                                @Field("fk_603_jenis_lembaga") String fk_603_jenis_lembaga,
+                                @Field("fk_603_kode") String fk_603_kode,
+                                @Field("fk_604_tanggal_menerima") String fk_604_tanggal_menerima,
+                                @Field("fk_605_pendapatan") String fk_605_pendapatan,
+                                @Field("fk_606_berapa_kali") String fk_606_berapa_kali,
+                                @Field("fk_607_jenis_zakat") String fk_607_jenis_zakat,
+                                @Field("fk_608_pangan") String fk_608_pangan,
+                                @Field("fk_609_kesehatan") String fk_609_kesehatan,
+                                @Field("fk_610_pendidikan") String fk_610_pendidikan,
+                                @Field("fk_611_lainnya") String fk_611_lainnya,
+                                @Field("fk_612_total_bantuan") String fk_612_total_bantuan,
+                                @Field("fk_613_bantuan_modal") String fk_613_bantuan_modal,
+                                @Field("fk_614_bantuan_alat") String fk_614_bantuan_alat,
+                                @Field("fk_615_bantuan_lain") String fk_615_bantuan_lain,
+                                @Field("fk_616_total_bantuan") String fk_616_total_bantuan,
+                                @Field("fk_617") String fk_617,
+                                @Field("fk_618") String fk_618,
+                                @Field("fk_701") String fk_701,
+                                @Field("fk_702") String fk_702,
+                                @Field("fk_703") String fk_703,
+                                @Field("fk_801") String fk_801,
+                                @Field("fk_802") String fk_802,
+                                @Field("fk_803") String fk_803,
+                                @Field("fk_804") String fk_804,
+                                @Field("fk_805") String fk_805,
+                                @Field("fk_806") String fk_806,
+                                @Field("fk_807") String fk_807,
+                                @Field("fk_808") String fk_808,
+                                @Field("fk_809") String fk_809,
+                                @Field("fk_810") String fk_810,
+                                @Field("fk_811") String fk_811,
+                                @Field("fk_812") String fk_812,
+                                @Field("fk_813") String fk_813,
+                                @Field("fk_814") String fk_814,
+                                @Field("fk_815") String fk_815,
+                                @Field("fk_shalat") String fk_shalat,
+                                @Field("fk_shalat_keterangan") String fk_shalat_keterangan,
+                                @Field("fk_puasa") String fk_puasa,
+                                @Field("fk_puasa_keterangan") String fk_puasa_keterangan,
+                                @Field("fk_zakat") String fk_zakat,
+                                @Field("fk_zakat_keterangan") String fk_zakat_keterangan,
+                                @Field("fk_lingkungan") String fk_lingkungan,
+                                @Field("fk_lingkungan_keterangan") String fk_lingkungan_keterangan,
+                                @Field("fk_kebijakan") String fk_kebijakan,
+                                @Field("fk_kebijakan_keterangan") String fk_kebijakan_keterangan,
+                                @Field("fk_shalat2") String fk_shalat2,
+                                @Field("fk_shalat2_keterangan") String fk_shalat2_keterangan,
+                                @Field("fk_puasa2") String fk_puasa2,
+                                @Field("fk_puasa2_keterangan") String fk_puasa2_keterangan,
+                                @Field("fk_zakat2") String fk_zakat2,
+                                @Field("fk_zakat2_keterangan") String fk_zakat2_keterangan,
+                                @Field("fk_lingkungan2") String fk_lingkungan2,
+                                @Field("fk_lingkungan2_keterangan") String fk_lingkungan2_keterangan,
+                                @Field("fk_kebijakan2") String fk_kebijakan2,
+                                @Field("fk_kebijakan2_keterangan") String fk_kebijakan2_keterangan
+    );
+
+
+    @FormUrlEncoded
+    @POST("update/kajianDampakZakat")
+    Call<KajianDampakZakat> kdzUpdate(@Header("key") String apikey,
+                                @Field("fk_id") String fk_id,
+                                @Field("fk_u_id") String fk_u_id,
+                                @Field("fk_date_created") String fk_date_created,
+                                @Field("fk_date_updated") String fk_date_updated,
+                                @Field("fk_nama") String fk_nama,
+                                @Field("fk_101_provinsi") String fk_101_provinsi,
+                                @Field("fk_102_kabupaten") String fk_102_kabupaten,
+                                @Field("fk_103_kecamatan") String fk_103_kecamatan,
+                                @Field("fk_104_desa") String fk_104_desa,
+                                @Field("fk_105_klasisfikasi_desan") String fk_105_klasisfikasi_desan,
+                                @Field("fk_106_kode_rumah") String fk_106_kode_rumah,
+                                @Field("fk_107_nama_kepala_rumah") String fk_107_nama_kepala_rumah,
+                                @Field("fk_108_jumlah_anggota_rumah") String fk_108_jumlah_anggota_rumah,
+                                @Field("fk_109_nomor_hp") String fk_109_nomor_hp,
+                                @Field("fk_110_alamat_lengkap") String fk_110_alamat_lengkap,
+                                @Field("fk_401_tabungan_bank_konvensional") String fk_401_tabungan_bank_konvensional,
+                                @Field("fk_402_tabungan_bank_syariah") String fk_402_tabungan_bank_syariah,
+                                @Field("fk_403_tabungan_koeprasi_konvensional") String fk_403_tabungan_koeprasi_konvensional,
+                                @Field("fk_404_tabungan_koeprasi_syariah") String fk_404_tabungan_koeprasi_syariah,
+                                @Field("fk_405_tabungan_lembaga_zakat") String fk_405_tabungan_lembaga_zakat,
+                                @Field("fk_406_arisan") String fk_406_arisan,
+                                @Field("fk_407_simpanan_di_rumah") String fk_407_simpanan_di_rumah,
+                                @Field("fk_501_memiliki_atap") String fk_501_memiliki_atap,
+                                @Field("fk_502_memiliki_dinding") String fk_502_memiliki_dinding,
+                                @Field("fk_503_memiliki_listrik") String fk_503_memiliki_listrik,
+                                @Field("fk_504_memiliki_lantai") String fk_504_memiliki_lantai,
+                                @Field("fk_505_memiliki_air") String fk_505_memiliki_air,
+                                @Field("fk_506_memiliki_sanitasi") String fk_506_memiliki_sanitasi,
+                                @Field("fk_507_memiliki_penyakit") String fk_507_memiliki_penyakit,
+                                @Field("fk_508_tidak_memiliki_cacat") String fk_508_tidak_memiliki_cacat,
+                                @Field("fk_509_memiliki_bpjs") String fk_509_memiliki_bpjs,
+                                @Field("fk_510_tidak_memiliki_rokok") String fk_510_tidak_memiliki_rokok,
+                                @Field("fk_601_penerima_zakat") String fk_601_penerima_zakat,
+                                @Field("fk_601_kode") String fk_601_kode,
+                                @Field("fk_602_jenis_lembaga") String fk_602_jenis_lembaga,
                                 @Field("fk_602_kode") String fk_602_kode,
                                 @Field("fk_603_jenis_lembaga") String fk_603_jenis_lembaga,
                                 @Field("fk_603_kode") String fk_603_kode,

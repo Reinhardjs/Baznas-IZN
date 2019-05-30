@@ -5,14 +5,18 @@ import android.content.ContextWrapper;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.karyastudio.izn.dao.generateSchema.Kdzformqueue;
 import com.karyastudio.izn.dao.generateSchema.Keluarga;
+import com.karyastudio.izn.dao.managerSchema.KDZFormQueueManager;
 import com.karyastudio.izn.dao.managerSchema.KeluargaManager;
 import com.karyastudio.izn.model.api.izn.IndeksZakatNasional;
 import com.karyastudio.izn.model.api.kdz.KajianDampakZakat;
 import com.karyastudio.izn.model.api.kdz.KajianDampakZakatKeluarga;
 import com.karyastudio.izn.network.BaseApi;
+import com.karyastudio.izn.views.activities.SurveyKDZActivity;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import java.util.ArrayList;
@@ -26,11 +30,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Utils {
 
+    public static void log(String message){
+        Log.d("MYAPP", message);
+    }
+
     public static Toast Toast(Context context, String msg) {
         return Toast.makeText(context, msg, Toast.LENGTH_SHORT);
     }
     public static boolean isOnline(Context context) {
-
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         //should check null because in airplane mode it will be null
@@ -82,8 +89,8 @@ public class Utils {
         List<Keluarga> newList = removeDuplicates(list);
         for (int i = 0; i < newList.size(); i++){
             saveAndNextKeluarga(context,
-                    "NULL",
-                    Prefs.getString("parent_id","kososng"),
+                    newList.get(i).getFki_id(),
+                    newList.get(i).getFki_fk_id(),
                     newList.get(i).getFk_202_nama(),
                     newList.get(i).getFk_202_nik(),
                     newList.get(i).getFk_203(),
@@ -100,107 +107,202 @@ public class Utils {
                     newList.get(i).getFk_306(),
                     newList.get(i).getFk_307(),
                     newList.get(i).getFk_308()
-
             );
         }
-        KeluargaManager.removeAll(context);
 
+        KeluargaManager.removeAll(context);
     }
 
-    public static void sendModul1(Context context) {
-        saveAndNextKajian(context,
-                "NULL",
-                Prefs.getString("UID", "kosong"),
-                Prefs.getString(StaticStrings.M1_created_at, "kosong"),
-                Prefs.getString(StaticStrings.M1_update_at, "kosong"),
-                Prefs.getString(StaticStrings.M1_nama, "kosong"),
-                Prefs.getString(StaticStrings.M1_101, "kosong"),
-                Prefs.getString(StaticStrings.M1_102, "kosong"),
-                Prefs.getString(StaticStrings.M1_103, "kosong"),
-                Prefs.getString(StaticStrings.M1_104, "kosong"),
-                Prefs.getString(StaticStrings.M1_105, "kosong"),
-                Prefs.getString(StaticStrings.M1_106, "kosong"),
-                Prefs.getString(StaticStrings.M1_107, "kosong"),
-                Prefs.getString(StaticStrings.M1_108, "kosong"),
-                Prefs.getString(StaticStrings.M1_109, "kosong"),
-                Prefs.getString(StaticStrings.M1_110, "kosong"),
-                Prefs.getString(StaticStrings.M1_401, "kosong"),
-                Prefs.getString(StaticStrings.M1_402, "kosong"),
-                Prefs.getString(StaticStrings.M1_403, "kosong"),
-                Prefs.getString(StaticStrings.M1_404, "kosong"),
-                Prefs.getString(StaticStrings.M1_405, "kosong"),
-                Prefs.getString(StaticStrings.M1_406, "kosong"),
-                Prefs.getString(StaticStrings.M1_407, "kosong"),
-                Prefs.getString(StaticStrings.M1_501, "kosong"),
-                Prefs.getString(StaticStrings.M1_502, "kosong"),
-                Prefs.getString(StaticStrings.M1_503, "kosong"),
-                Prefs.getString(StaticStrings.M1_504, "kosong"),
-                Prefs.getString(StaticStrings.M1_505, "kosong"),
-                Prefs.getString(StaticStrings.M1_506, "kosong"),
-                Prefs.getString(StaticStrings.M1_507, "kosong"),
-                Prefs.getString(StaticStrings.M1_508, "kosong"),
-                Prefs.getString(StaticStrings.M1_509, "kosong"),
-                Prefs.getString(StaticStrings.M1_510, "kosong"),
-                Prefs.getString(StaticStrings.M1_601, "kosong"),
-                "",
-                Prefs.getString(StaticStrings.M1_602, "kosong"),
-                "",
-                Prefs.getString(StaticStrings.M1_603, "kosong"),
-                "",
-                Prefs.getString(StaticStrings.M1_604, "kosong"),
-                Prefs.getString(StaticStrings.M1_605, "kosong"),
-                Prefs.getString(StaticStrings.M1_606, "kosong"),
-                Prefs.getString(StaticStrings.M1_607, "kosong"),
-                Prefs.getString(StaticStrings.M1_608, "kosong"),
-                Prefs.getString(StaticStrings.M1_609, "kosong"),
-                Prefs.getString(StaticStrings.M1_610, "kosong"),
-                Prefs.getString(StaticStrings.M1_611, "kosong"),
-                Prefs.getString(StaticStrings.M1_612, "kosong"),
-                Prefs.getString(StaticStrings.M1_613, "kosong"),
-                Prefs.getString(StaticStrings.M1_614, "kosong"),
-                Prefs.getString(StaticStrings.M1_615, "kosong"),
-                Prefs.getString(StaticStrings.M1_616, "kosong"),
-                Prefs.getString(StaticStrings.M1_617, "kosong"),
-                Prefs.getString(StaticStrings.M1_618, "kosong"),
-                Prefs.getString(StaticStrings.M1_701, "kosong"),
-                Prefs.getString(StaticStrings.M1_702, "kosong"),
-                Prefs.getString(StaticStrings.M1_703, "kosong"),
-                Prefs.getString(StaticStrings.M1_801, "kosong"),
-                Prefs.getString(StaticStrings.M1_802, "kosong"),
-                Prefs.getString(StaticStrings.M1_803, "kosong"),
-                Prefs.getString(StaticStrings.M1_804, "kosong"),
-                Prefs.getString(StaticStrings.M1_805, "kosong"),
-                Prefs.getString(StaticStrings.M1_806, "kosong"),
-                Prefs.getString(StaticStrings.M1_807, "kosong"),
-                Prefs.getString(StaticStrings.M1_808, "kosong"),
-                Prefs.getString(StaticStrings.M1_809, "kosong"),
-                Prefs.getString(StaticStrings.M1_810, "kosong"),
-                Prefs.getString(StaticStrings.M1_811, "kosong"),
-                Prefs.getString(StaticStrings.M1_812, "kosong"),
-                Prefs.getString(StaticStrings.M1_813, "kosong"),
-                Prefs.getString(StaticStrings.M1_814, "kosong"),
-                Prefs.getString(StaticStrings.M1_815, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik1, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik1, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik2, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik2, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik3, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik3, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik4, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik4, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik5, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik5, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik1B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik1B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik2B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik2B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik3B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik3B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik4B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik4B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik5B, "kosong"),
-                Prefs.getString(StaticStrings.M1_lik5B, "kosong")
-        );
+    public static void sendModul1(Context context){
+        List<Kdzformqueue> list = KDZFormQueueManager.loadAll(context);
+        List<Kdzformqueue> newList = removeDuplicates(list);
+
+        for (Kdzformqueue queue : newList) {
+            saveAndNextKajian(context,
+                    queue.getRequest_type(),
+                    queue.getFk_id(),
+                    queue.getUID(),
+                    queue.getM1_created_at(),
+                    queue.getM1_updated_at(),
+                    queue.getM1_nama(),
+                    queue.getM1_101(),
+                    queue.getM1_102(),
+                    queue.getM1_103(),
+                    queue.getM1_104(),
+                    queue.getM1_105(),
+                    queue.getM1_106(),
+                    queue.getM1_107(),
+                    queue.getM1_108(),
+                    queue.getM1_109(),
+                    queue.getM1_110(),
+                    queue.getM1_401(),
+                    queue.getM1_402(),
+                    queue.getM1_403(),
+                    queue.getM1_404(),
+                    queue.getM1_405(),
+                    queue.getM1_406(),
+                    queue.getM1_407(),
+                    queue.getM1_501(),
+                    queue.getM1_502(),
+                    queue.getM1_503(),
+                    queue.getM1_504(),
+                    queue.getM1_505(),
+                    queue.getM1_506(),
+                    queue.getM1_507(),
+                    queue.getM1_508(),
+                    queue.getM1_509(),
+                    queue.getM1_510(),
+                    queue.getM1_601(),
+                    queue.getM1_601_kode(),
+                    queue.getM1_602(),
+                    queue.getM1_602_kode(),
+                    queue.getM1_603(),
+                    queue.getM1_603_kode(),
+                    queue.getM1_604(),
+                    queue.getM1_605(),
+                    queue.getM1_606(),
+                    queue.getM1_607(),
+                    queue.getM1_608(),
+                    queue.getM1_609(),
+                    queue.getM1_610(),
+                    queue.getM1_611(),
+                    queue.getM1_612(),
+                    queue.getM1_613(),
+                    queue.getM1_614(),
+                    queue.getM1_615(),
+                    queue.getM1_616(),
+                    queue.getM1_617(),
+                    queue.getM1_618(),
+                    queue.getM1_701(),
+                    queue.getM1_702(),
+                    queue.getM1_703(),
+                    queue.getM1_801(),
+                    queue.getM1_802(),
+                    queue.getM1_803(),
+                    queue.getM1_804(),
+                    queue.getM1_805(),
+                    queue.getM1_806(),
+                    queue.getM1_807(),
+                    queue.getM1_808(),
+                    queue.getM1_809(),
+                    queue.getM1_810(),
+                    queue.getM1_811(),
+                    queue.getM1_812(),
+                    queue.getM1_813(),
+                    queue.getM1_814(),
+                    queue.getM1_815(),
+                    queue.getM1_lik1(),
+                    queue.getM1_lik1(),
+                    queue.getM1_lik2(),
+                    queue.getM1_lik2(),
+                    queue.getM1_lik3(),
+                    queue.getM1_lik3(),
+                    queue.getM1_lik4(),
+                    queue.getM1_lik4(),
+                    queue.getM1_lik5(),
+                    queue.getM1_lik5(),
+                    queue.getM1_lik1B(),
+                    queue.getM1_lik1B(),
+                    queue.getM1_lik2B(),
+                    queue.getM1_lik2B(),
+                    queue.getM1_lik3B(),
+                    queue.getM1_lik3B(),
+                    queue.getM1_lik4B(),
+                    queue.getM1_lik4B(),
+                    queue.getM1_lik5B(),
+                    queue.getM1_lik5B()
+            );
+        }
+
+        KDZFormQueueManager.removeAll(context);
+    }
+
+    public static void addQueueModul1(Context context, String type) {
+        Kdzformqueue KDZFORMQUEUE = new Kdzformqueue();
+        KDZFORMQUEUE.setRequest_type(type);
+        KDZFORMQUEUE.setFk_id(SurveyKDZActivity.form_input_id);
+        KDZFORMQUEUE.setUID(Prefs.getString("UID", "kosong"));
+        KDZFORMQUEUE.setM1_created_at(Prefs.getString(StaticStrings.M1_created_at, "kosong"));
+        KDZFORMQUEUE.setM1_updated_at(Prefs.getString(StaticStrings.M1_update_at, "kosong"));
+        KDZFORMQUEUE.setM1_nama(Prefs.getString(StaticStrings.M1_nama, "kosong"));
+        KDZFORMQUEUE.setM1_101(Prefs.getString(StaticStrings.M1_101, "kosong"));
+        KDZFORMQUEUE.setM1_102(Prefs.getString(StaticStrings.M1_102, "kosong"));
+        KDZFORMQUEUE.setM1_103(Prefs.getString(StaticStrings.M1_103, "kosong"));
+        KDZFORMQUEUE.setM1_104(Prefs.getString(StaticStrings.M1_104, "kosong"));
+        KDZFORMQUEUE.setM1_105(Prefs.getString(StaticStrings.M1_105, "kosong"));
+        KDZFORMQUEUE.setM1_106(Prefs.getString(StaticStrings.M1_106, "kosong"));
+        KDZFORMQUEUE.setM1_107(Prefs.getString(StaticStrings.M1_107, "kosong"));
+        KDZFORMQUEUE.setM1_108(Prefs.getString(StaticStrings.M1_108, "kosong"));
+        KDZFORMQUEUE.setM1_109(Prefs.getString(StaticStrings.M1_109, "kosong"));
+        KDZFORMQUEUE.setM1_110(Prefs.getString(StaticStrings.M1_110, "kosong"));
+        KDZFORMQUEUE.setM1_401(Prefs.getString(StaticStrings.M1_401, "kosong"));
+        KDZFORMQUEUE.setM1_402(Prefs.getString(StaticStrings.M1_402, "kosong"));
+        KDZFORMQUEUE.setM1_403(Prefs.getString(StaticStrings.M1_403, "kosong"));
+        KDZFORMQUEUE.setM1_404(Prefs.getString(StaticStrings.M1_404, "kosong"));
+        KDZFORMQUEUE.setM1_405(Prefs.getString(StaticStrings.M1_405, "kosong"));
+        KDZFORMQUEUE.setM1_406(Prefs.getString(StaticStrings.M1_406, "kosong"));
+        KDZFORMQUEUE.setM1_407(Prefs.getString(StaticStrings.M1_407, "kosong"));
+        KDZFORMQUEUE.setM1_501(Prefs.getString(StaticStrings.M1_501, "kosong"));
+        KDZFORMQUEUE.setM1_502(Prefs.getString(StaticStrings.M1_502, "kosong"));
+        KDZFORMQUEUE.setM1_503(Prefs.getString(StaticStrings.M1_503, "kosong"));
+        KDZFORMQUEUE.setM1_504(Prefs.getString(StaticStrings.M1_504, "kosong"));
+        KDZFORMQUEUE.setM1_505(Prefs.getString(StaticStrings.M1_505, "kosong"));
+        KDZFORMQUEUE.setM1_506(Prefs.getString(StaticStrings.M1_506, "kosong"));
+        KDZFORMQUEUE.setM1_507(Prefs.getString(StaticStrings.M1_507, "kosong"));
+        KDZFORMQUEUE.setM1_508(Prefs.getString(StaticStrings.M1_508, "kosong"));
+        KDZFORMQUEUE.setM1_509(Prefs.getString(StaticStrings.M1_509, "kosong"));
+        KDZFORMQUEUE.setM1_510(Prefs.getString(StaticStrings.M1_510, "kosong"));
+        KDZFORMQUEUE.setM1_601(Prefs.getString(StaticStrings.M1_601, "kosong"));
+        KDZFORMQUEUE.setM1_601_kode("");
+        KDZFORMQUEUE.setM1_602(Prefs.getString(StaticStrings.M1_602, "kosong"));
+        KDZFORMQUEUE.setM1_602_kode("");
+        KDZFORMQUEUE.setM1_603(Prefs.getString(StaticStrings.M1_603, "kosong"));
+        KDZFORMQUEUE.setM1_603_kode("");
+        KDZFORMQUEUE.setM1_604(Prefs.getString(StaticStrings.M1_604, "kosong"));
+        KDZFORMQUEUE.setM1_605(Prefs.getString(StaticStrings.M1_605, "kosong"));
+        KDZFORMQUEUE.setM1_606(Prefs.getString(StaticStrings.M1_606, "kosong"));
+        KDZFORMQUEUE.setM1_607(Prefs.getString(StaticStrings.M1_607, "kosong"));
+        KDZFORMQUEUE.setM1_608(Prefs.getString(StaticStrings.M1_608, "kosong"));
+        KDZFORMQUEUE.setM1_609(Prefs.getString(StaticStrings.M1_609, "kosong"));
+        KDZFORMQUEUE.setM1_610(Prefs.getString(StaticStrings.M1_610, "kosong"));
+        KDZFORMQUEUE.setM1_611(Prefs.getString(StaticStrings.M1_611, "kosong"));
+        KDZFORMQUEUE.setM1_612(Prefs.getString(StaticStrings.M1_612, "kosong"));
+        KDZFORMQUEUE.setM1_613(Prefs.getString(StaticStrings.M1_613, "kosong"));
+        KDZFORMQUEUE.setM1_614(Prefs.getString(StaticStrings.M1_614, "kosong"));
+        KDZFORMQUEUE.setM1_615(Prefs.getString(StaticStrings.M1_615, "kosong"));
+        KDZFORMQUEUE.setM1_616(Prefs.getString(StaticStrings.M1_616, "kosong"));
+        KDZFORMQUEUE.setM1_617(Prefs.getString(StaticStrings.M1_617, "kosong"));
+        KDZFORMQUEUE.setM1_618(Prefs.getString(StaticStrings.M1_618, "kosong"));
+        KDZFORMQUEUE.setM1_701(Prefs.getString(StaticStrings.M1_701, "kosong"));
+        KDZFORMQUEUE.setM1_702(Prefs.getString(StaticStrings.M1_702, "kosong"));
+        KDZFORMQUEUE.setM1_703(Prefs.getString(StaticStrings.M1_703, "kosong"));
+        KDZFORMQUEUE.setM1_801(Prefs.getString(StaticStrings.M1_801, "kosong"));
+        KDZFORMQUEUE.setM1_802(Prefs.getString(StaticStrings.M1_802, "kosong"));
+        KDZFORMQUEUE.setM1_803(Prefs.getString(StaticStrings.M1_803, "kosong"));
+        KDZFORMQUEUE.setM1_804(Prefs.getString(StaticStrings.M1_804, "kosong"));
+        KDZFORMQUEUE.setM1_805(Prefs.getString(StaticStrings.M1_805, "kosong"));
+        KDZFORMQUEUE.setM1_806(Prefs.getString(StaticStrings.M1_806, "kosong"));
+        KDZFORMQUEUE.setM1_807(Prefs.getString(StaticStrings.M1_807, "kosong"));
+        KDZFORMQUEUE.setM1_808(Prefs.getString(StaticStrings.M1_808, "kosong"));
+        KDZFORMQUEUE.setM1_809(Prefs.getString(StaticStrings.M1_809, "kosong"));
+        KDZFORMQUEUE.setM1_810(Prefs.getString(StaticStrings.M1_810, "kosong"));
+        KDZFORMQUEUE.setM1_811(Prefs.getString(StaticStrings.M1_811, "kosong"));
+        KDZFORMQUEUE.setM1_812(Prefs.getString(StaticStrings.M1_812, "kosong"));
+        KDZFORMQUEUE.setM1_813(Prefs.getString(StaticStrings.M1_813, "kosong"));
+        KDZFORMQUEUE.setM1_814(Prefs.getString(StaticStrings.M1_814, "kosong"));
+        KDZFORMQUEUE.setM1_815(Prefs.getString(StaticStrings.M1_815, "kosong"));
+        KDZFORMQUEUE.setM1_lik1(Prefs.getString(StaticStrings.M1_lik1, "kosong"));
+        KDZFORMQUEUE.setM1_lik2(Prefs.getString(StaticStrings.M1_lik2, "kosong"));
+        KDZFORMQUEUE.setM1_lik3(Prefs.getString(StaticStrings.M1_lik3, "kosong"));
+        KDZFORMQUEUE.setM1_lik4(Prefs.getString(StaticStrings.M1_lik4, "kosong"));
+        KDZFORMQUEUE.setM1_lik5(Prefs.getString(StaticStrings.M1_lik5, "kosong"));
+        KDZFORMQUEUE.setM1_lik1B(Prefs.getString(StaticStrings.M1_lik1B, "kosong"));
+        KDZFORMQUEUE.setM1_lik2B(Prefs.getString(StaticStrings.M1_lik2B, "kosong"));
+        KDZFORMQUEUE.setM1_lik3B(Prefs.getString(StaticStrings.M1_lik3B, "kosong"));
+        KDZFORMQUEUE.setM1_lik4B(Prefs.getString(StaticStrings.M1_lik4B, "kosong"));
+        KDZFORMQUEUE.setM1_lik5B(Prefs.getString(StaticStrings.M1_lik5B, "kosong"));
+
+        KDZFormQueueManager.insertOrReplace(context, KDZFORMQUEUE);
     }
 
     public static void sendModul2(Context context) {
@@ -353,7 +455,7 @@ public class Utils {
                     if (response.body().getStatus().equalsIgnoreCase("success")) {
                         Toast.makeText(context, "Berhasil Dimasukan", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(context, "Data anda telah tersimpan offline, data menunggu online", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Data gagal dimasukkan, silakan periksa data Anda", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -368,6 +470,7 @@ public class Utils {
     }
 
     private static void saveAndNextKajian(final Context context,
+                                          String type,
                                           String fk_id,
                                           String fk_u_id,
                                           String fk_date_created,
@@ -459,110 +562,214 @@ public class Utils {
                                           String fk_lingkungan2_keterangan,
                                           String fk_kebijakan2,
                                           String fk_kebijakan2_keterangan) {
+
         BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
-        Call<KajianDampakZakat> result =
-                apiService.kdz(StaticStrings.API_KEY,
-                        fk_id,
-                        fk_u_id,
-                        fk_date_created,
-                        fk_date_updated,
-                        fk_nama,
-                        fk_101_provinsi,
-                        fk_102_kabupaten,
-                        fk_103_kecamatan,
-                        fk_104_desa,
-                        fk_105_klasisfikasi_desan,
-                        fk_106_kode_rumah,
-                        fk_107_nama_kepala_rumah,
-                        fk_108_jumlah_anggota_rumah,
-                        fk_109_nomor_hp,
-                        fk_110_alamat_lengkap,
-                        fk_401_tabungan_bank_konvensional,
-                        fk_402_tabungan_bank_syariah,
-                        fk_403_tabungan_koeprasi_konvensional,
-                        fk_404_tabungan_koeprasi_syariah,
-                        fk_405_tabungan_lembaga_zakat,
-                        fk_406_arisan,
-                        fk_407_simpanan_di_rumah,
-                        fk_501_memiliki_atap,
-                        fk_502_memiliki_dinding,
-                        fk_503_memiliki_listrik,
-                        fk_504_memiliki_lantai,
-                        fk_505_memiliki_air,
-                        fk_506_memiliki_sanitasi,
-                        fk_507_memiliki_penyakit,
-                        fk_508_tidak_memiliki_cacat,
-                        fk_509_memiliki_bpjs,
-                        fk_510_tidak_memiliki_rokok,
-                        fk_601_penerima_zakat,
-                        fk_601_kode,
-                        fk_602_jenis_lembaga,
-                        fk_602_kode,
-                        fk_603_jenis_lembaga,
-                        fk_603_kode,
-                        fk_604_tanggal_menerima,
-                        fk_605_pendapatan,
-                        fk_606_berapa_kali,
-                        fk_607_jenis_zakat,
-                        fk_608_pangan,
-                        fk_609_kesehatan,
-                        fk_610_pendidikan,
-                        fk_611_lainnya,
-                        fk_612_total_bantuan,
-                        fk_613_bantuan_modal,
-                        fk_614_bantuan_alat,
-                        fk_615_bantuan_lain,
-                        fk_616_total_bantuan,
-                        fk_617,
-                        fk_618,
-                        fk_701,
-                        fk_702,
-                        fk_703,
-                        fk_801,
-                        fk_802,
-                        fk_803,
-                        fk_804,
-                        fk_805,
-                        fk_806,
-                        fk_807,
-                        fk_808,
-                        fk_809,
-                        fk_810,
-                        fk_811,
-                        fk_812,
-                        fk_813,
-                        fk_814,
-                        fk_815,
-                        fk_shalat,
-                        fk_shalat_keterangan,
-                        fk_puasa,
-                        fk_puasa_keterangan,
-                        fk_zakat,
-                        fk_zakat_keterangan,
-                        fk_lingkungan,
-                        fk_lingkungan_keterangan,
-                        fk_kebijakan,
-                        fk_kebijakan_keterangan,
-                        fk_shalat2,
-                        fk_shalat2_keterangan,
-                        fk_puasa2,
-                        fk_puasa2_keterangan,
-                        fk_zakat2,
-                        fk_zakat2_keterangan,
-                        fk_lingkungan2,
-                        fk_lingkungan2_keterangan,
-                        fk_kebijakan2,
-                        fk_kebijakan2_keterangan
-                );
+        Call<KajianDampakZakat> result = null;
+
+        if (type.equals(SurveyKDZActivity.REQUEST_TYPE_INSERT)) {
+            result = apiService.kdz(StaticStrings.API_KEY,
+                            fk_id,
+                            fk_u_id,
+                            fk_date_created,
+                            fk_date_updated,
+                            fk_nama,
+                            fk_101_provinsi,
+                            fk_102_kabupaten,
+                            fk_103_kecamatan,
+                            fk_104_desa,
+                            fk_105_klasisfikasi_desan,
+                            fk_106_kode_rumah,
+                            fk_107_nama_kepala_rumah,
+                            fk_108_jumlah_anggota_rumah,
+                            fk_109_nomor_hp,
+                            fk_110_alamat_lengkap,
+                            fk_401_tabungan_bank_konvensional,
+                            fk_402_tabungan_bank_syariah,
+                            fk_403_tabungan_koeprasi_konvensional,
+                            fk_404_tabungan_koeprasi_syariah,
+                            fk_405_tabungan_lembaga_zakat,
+                            fk_406_arisan,
+                            fk_407_simpanan_di_rumah,
+                            fk_501_memiliki_atap,
+                            fk_502_memiliki_dinding,
+                            fk_503_memiliki_listrik,
+                            fk_504_memiliki_lantai,
+                            fk_505_memiliki_air,
+                            fk_506_memiliki_sanitasi,
+                            fk_507_memiliki_penyakit,
+                            fk_508_tidak_memiliki_cacat,
+                            fk_509_memiliki_bpjs,
+                            fk_510_tidak_memiliki_rokok,
+                            fk_601_penerima_zakat,
+                            fk_601_kode,
+                            fk_602_jenis_lembaga,
+                            fk_602_kode,
+                            fk_603_jenis_lembaga,
+                            fk_603_kode,
+                            fk_604_tanggal_menerima,
+                            fk_605_pendapatan,
+                            fk_606_berapa_kali,
+                            fk_607_jenis_zakat,
+                            fk_608_pangan,
+                            fk_609_kesehatan,
+                            fk_610_pendidikan,
+                            fk_611_lainnya,
+                            fk_612_total_bantuan,
+                            fk_613_bantuan_modal,
+                            fk_614_bantuan_alat,
+                            fk_615_bantuan_lain,
+                            fk_616_total_bantuan,
+                            fk_617,
+                            fk_618,
+                            fk_701,
+                            fk_702,
+                            fk_703,
+                            fk_801,
+                            fk_802,
+                            fk_803,
+                            fk_804,
+                            fk_805,
+                            fk_806,
+                            fk_807,
+                            fk_808,
+                            fk_809,
+                            fk_810,
+                            fk_811,
+                            fk_812,
+                            fk_813,
+                            fk_814,
+                            fk_815,
+                            fk_shalat,
+                            fk_shalat_keterangan,
+                            fk_puasa,
+                            fk_puasa_keterangan,
+                            fk_zakat,
+                            fk_zakat_keterangan,
+                            fk_lingkungan,
+                            fk_lingkungan_keterangan,
+                            fk_kebijakan,
+                            fk_kebijakan_keterangan,
+                            fk_shalat2,
+                            fk_shalat2_keterangan,
+                            fk_puasa2,
+                            fk_puasa2_keterangan,
+                            fk_zakat2,
+                            fk_zakat2_keterangan,
+                            fk_lingkungan2,
+                            fk_lingkungan2_keterangan,
+                            fk_kebijakan2,
+                            fk_kebijakan2_keterangan
+                    );
+        } else if (type.equals(SurveyKDZActivity.REQUEST_TYPE_UPDATE)){
+            result = apiService.kdzUpdate(StaticStrings.API_KEY,
+                            fk_id,
+                            fk_u_id,
+                            fk_date_created,
+                            fk_date_updated,
+                            fk_nama,
+                            fk_101_provinsi,
+                            fk_102_kabupaten,
+                            fk_103_kecamatan,
+                            fk_104_desa,
+                            fk_105_klasisfikasi_desan,
+                            fk_106_kode_rumah,
+                            fk_107_nama_kepala_rumah,
+                            fk_108_jumlah_anggota_rumah,
+                            fk_109_nomor_hp,
+                            fk_110_alamat_lengkap,
+                            fk_401_tabungan_bank_konvensional,
+                            fk_402_tabungan_bank_syariah,
+                            fk_403_tabungan_koeprasi_konvensional,
+                            fk_404_tabungan_koeprasi_syariah,
+                            fk_405_tabungan_lembaga_zakat,
+                            fk_406_arisan,
+                            fk_407_simpanan_di_rumah,
+                            fk_501_memiliki_atap,
+                            fk_502_memiliki_dinding,
+                            fk_503_memiliki_listrik,
+                            fk_504_memiliki_lantai,
+                            fk_505_memiliki_air,
+                            fk_506_memiliki_sanitasi,
+                            fk_507_memiliki_penyakit,
+                            fk_508_tidak_memiliki_cacat,
+                            fk_509_memiliki_bpjs,
+                            fk_510_tidak_memiliki_rokok,
+                            fk_601_penerima_zakat,
+                            fk_601_kode,
+                            fk_602_jenis_lembaga,
+                            fk_602_kode,
+                            fk_603_jenis_lembaga,
+                            fk_603_kode,
+                            fk_604_tanggal_menerima,
+                            fk_605_pendapatan,
+                            fk_606_berapa_kali,
+                            fk_607_jenis_zakat,
+                            fk_608_pangan,
+                            fk_609_kesehatan,
+                            fk_610_pendidikan,
+                            fk_611_lainnya,
+                            fk_612_total_bantuan,
+                            fk_613_bantuan_modal,
+                            fk_614_bantuan_alat,
+                            fk_615_bantuan_lain,
+                            fk_616_total_bantuan,
+                            fk_617,
+                            fk_618,
+                            fk_701,
+                            fk_702,
+                            fk_703,
+                            fk_801,
+                            fk_802,
+                            fk_803,
+                            fk_804,
+                            fk_805,
+                            fk_806,
+                            fk_807,
+                            fk_808,
+                            fk_809,
+                            fk_810,
+                            fk_811,
+                            fk_812,
+                            fk_813,
+                            fk_814,
+                            fk_815,
+                            fk_shalat,
+                            fk_shalat_keterangan,
+                            fk_puasa,
+                            fk_puasa_keterangan,
+                            fk_zakat,
+                            fk_zakat_keterangan,
+                            fk_lingkungan,
+                            fk_lingkungan_keterangan,
+                            fk_kebijakan,
+                            fk_kebijakan_keterangan,
+                            fk_shalat2,
+                            fk_shalat2_keterangan,
+                            fk_puasa2,
+                            fk_puasa2_keterangan,
+                            fk_zakat2,
+                            fk_zakat2_keterangan,
+                            fk_lingkungan2,
+                            fk_lingkungan2_keterangan,
+                            fk_kebijakan2,
+                            fk_kebijakan2_keterangan
+                    );
+        }
+
+        Utils.log("UTILS : " + fk_shalat_keterangan);
+
         result.enqueue(new Callback<KajianDampakZakat>() {
             @Override
             public void onResponse(@NonNull Call<KajianDampakZakat> call, @NonNull Response<KajianDampakZakat> response) {
                 try {
                     if (response.body().getStatus().equalsIgnoreCase("success")) {
                         Prefs.putString("parent_id", response.body().getIdParent().toString());
-                        Toast.makeText(context, "Berhasil Dimasukan", Toast.LENGTH_LONG).show();
+
+                        Utils.log("Send Modul 1 Berhasil, PARENT/FAMILY ID : " + response.body().getIdParent().toString());
+                        Toast.makeText(context, "Data Kajian Dampak Zakat berhasil dikirim", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(context, "Data anda telah tersimpan offline, data menunggu online", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        Utils.log("RESPONSE :  " + response.body().getMessage());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -621,6 +828,7 @@ public class Utils {
                          fk_307,
                          fk_308
                 );
+
         result.enqueue(new Callback<KajianDampakZakatKeluarga>() {
             @Override
             public void onResponse(@NonNull Call<KajianDampakZakatKeluarga> call, @NonNull Response<KajianDampakZakatKeluarga> response) {

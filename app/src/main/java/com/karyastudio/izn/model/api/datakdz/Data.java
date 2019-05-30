@@ -7,16 +7,16 @@ import java.util.List;
 
 public class Data {
 
-    @SerializedName("indeksZakatNasional")
+    @SerializedName("kajianDampakZakat")
     @Expose
-    private List<IndeksZakatNasional> indeksZakatNasional = null;
+    private List<KajianDampakZakatResponse> kajianDampakZakat = null;
 
-    public List<IndeksZakatNasional> getIndeksZakatNasional() {
-        return indeksZakatNasional;
+    public List<KajianDampakZakatResponse> getKajianDampakZakat() {
+        return kajianDampakZakat;
     }
 
-    public void setIndeksZakatNasional(List<IndeksZakatNasional> indeksZakatNasional) {
-        this.indeksZakatNasional = indeksZakatNasional;
+    public void setKajianDampakZakat(List<KajianDampakZakatResponse> kajianDampakZakat) {
+        this.kajianDampakZakat = kajianDampakZakat;
     }
 
 }

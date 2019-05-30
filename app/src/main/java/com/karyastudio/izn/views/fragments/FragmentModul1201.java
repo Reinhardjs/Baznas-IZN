@@ -14,29 +14,65 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.adapter.AdapterKeluarga;
+import com.karyastudio.izn.dao.generateSchema.Keluarga;
+import com.karyastudio.izn.dao.managerSchema.KeluargaManager;
 import com.karyastudio.izn.utils.StaticStrings;
 import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
+import com.stepstone.stepper.Step;
+import com.stepstone.stepper.VerificationError;
 
-public class FragmentModul1201 extends Fragment {
+import java.util.ArrayList;
+
+public class FragmentModul1201 extends Fragment implements Step {
     private FragmentManager fms;
     private RecyclerView mRecyclerView;
 
     private Button btnNext;
     private AdapterKeluarga mAdapter;
+    private boolean isSuccess;
+    private View rootView;
+    private ArrayList<Keluarga> list = new ArrayList<>();
 
     public FragmentModul1201() {
 
     }
 
+    // method ini hanya dipanggil sekali untuk fragment ini
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // jangan hapus fragment ini saat activity dibuat ulang.
+        setRetainInstance(true);
+    }
+
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putSerializable("list", list);
+//    }
+//
+//    @Override
+//    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+//        super.onViewStateRestored(savedInstanceState);
+//
+//        if (savedInstanceState != null) {
+//            list = (ArrayList<Keluarga>) savedInstanceState.getSerializable("list");
+//
+//            if (mAdapter != null) {
+//                mAdapter.setList(list);
+//                mAdapter.notifyDataSetChanged();
+//            }
+//        }
+//    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_modul1_201, container, false);
-        fms = ((MainActivity) getActivity()).fms;
+        rootView = inflater.inflate(R.layout.fragment_modul1_201, container, false);
+//        fms = ((MainActivity) getActivity()).fms;
         Toolbar toolbar = rootView.findViewById(R.id.toolbar6);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,28 +84,67 @@ public class FragmentModul1201 extends Fragment {
 
         mRecyclerView = rootView.findViewById(R.id.recyclerView3);
         btnNext = rootView.findViewById(R.id.btn_next1_201);
-        mAdapter = new AdapterKeluarga(getActivity(),Integer.parseInt(Prefs.getString(StaticStrings.M1_108,"1")));
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setHasFixedSize(true);
+
+        if (mAdapter == null) {
+            mAdapter = new AdapterKeluarga(getActivity());
+            mAdapter.setList(list);
+        }
+
+//        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(mAdapter);
+
+//        btnNext.setVisibility(View.GONE);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndNext(rootView);
-                fms= getActivity().getSupportFragmentManager();
-                for(int i = 0; i < fms.getBackStackEntryCount(); ++i) {
-                    fms.popBackStack();
-                }
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1401()).addToBackStack("comm").commit();
+//                fms= getActivity().getSupportFragmentManager();
+//                for(int i = 0; i < fms.getBackStackEntryCount(); ++i) {
+//                    fms.popBackStack();
+//                }
+//                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1401()).addToBackStack("comm").commit();
             }
         });
 
         return rootView;
     }
 
+    private VerificationError saveAndNext(View view){
+        try {
+            isSuccess = true;
+            Utils.Toast(getContext(), StaticStrings.TOAST_SUKSES_SIMPAN).show();
+        } catch (Exception e){
+            return new VerificationError("Mohon lengkapi form pada halaman ini");
+        }
 
-    private void saveAndNext(View view){
-        Utils.sendModulKeluarga(view.getContext());
-        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public VerificationError verifyStep() {
+        if (isSuccess){
+            return null;
+        }
+
+        if (KeluargaManager.loadAll(getActivity()).size() == 0){
+            return new VerificationError("Data keluarga harus diisi");
+        }
+
+        return saveAndNext(rootView);
+    }
+
+    @Override
+    public void onSelected() {
+        Utils.log("(ON SELECTED) ADAPTER KELUARGA ITEM COUNT : " + Integer.parseInt(Prefs.getString(StaticStrings.M1_108, "0")));
+        mAdapter.setCount(Integer.parseInt(Prefs.getString(StaticStrings.M1_108, "0")));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onError(@NonNull VerificationError error) {
+
     }
 }

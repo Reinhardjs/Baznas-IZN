@@ -10,6 +10,7 @@ import org.greenrobot.greendao.annotation.*;
 @Entity
 public class KDZ {
 
+    @Id
     @NotNull
     private String fk_id;
 
@@ -27,6 +28,10 @@ public class KDZ {
 
     @Generated(hash = 763870821)
     public KDZ() {
+    }
+
+    public KDZ(String fk_id) {
+        this.fk_id = fk_id;
     }
 
     @Generated(hash = 837041414)

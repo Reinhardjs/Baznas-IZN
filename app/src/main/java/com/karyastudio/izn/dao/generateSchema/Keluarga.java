@@ -19,6 +19,7 @@ public class Keluarga {
     @NotNull
     private String fk_202_nama;
 
+    @Id
     @NotNull
     private String fk_202_nik;
 
@@ -66,6 +67,10 @@ public class Keluarga {
 
     @Generated(hash = 234628915)
     public Keluarga() {
+    }
+
+    public Keluarga(String fk_202_nik) {
+        this.fk_202_nik = fk_202_nik;
     }
 
     @Generated(hash = 769705410)

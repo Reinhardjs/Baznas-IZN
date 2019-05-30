@@ -71,7 +71,7 @@ public class FragmentModul2901 extends Fragment {
             Utils.sendModul2(getActivity());
         }else{
             Toast.makeText(getActivity(),"Koneksi anda tidak ada, data anda akan dikirim setelah anda online", Toast.LENGTH_LONG).show();
-            StaticStrings.readyToSendViaOffline = true;
+            StaticStrings.readyToSendViaOfflineModul2 = true;
         }
     }
 }

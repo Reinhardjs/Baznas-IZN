@@ -18,13 +18,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
 import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
+import com.stepstone.stepper.Step;
+import com.stepstone.stepper.VerificationError;
 
-public class FragmentModul1601 extends Fragment {
+public class FragmentModul1601 extends Fragment implements Step {
     private FragmentManager fms;
     private Button btnNext;
     private Spinner edt_601;
@@ -60,17 +61,27 @@ public class FragmentModul1601 extends Fragment {
     private RadioGroup edt_617;
     private TextView txt_618;
     private EditText edt_618;
+    private boolean isSuccess;
+    private View rootView;
 
 
     public FragmentModul1601() {
 
     }
 
+    // method ini hanya dipanggil sekali untuk fragment ini
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // jangan hapus fragment ini saat activity dibuat ulang.
+        setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_modul1_601, container, false);
-        fms = ((MainActivity) getActivity()).fms;
+        rootView = inflater.inflate(R.layout.fragment_modul1_601, container, false);
+//        fms = ((MainActivity) getActivity()).fms;
         Toolbar toolbar = rootView.findViewById(R.id.toolbar6);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +89,7 @@ public class FragmentModul1601 extends Fragment {
                 getActivity().onBackPressed();
             }
         });
+
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
 
         btnNext = rootView.findViewById(R.id.btn_next1_601);
@@ -224,36 +236,39 @@ public class FragmentModul1601 extends Fragment {
 
             }
         });
+
+//        btnNext.setVisibility(View.GONE);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (edt_605.getText().length() < 4) {
-                    Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                    Utils.Toast(getActivity(), "Nominal harus diisi lebih dari 4 angka").show();
                 } else if (edt_607.getSelectedItem().toString().equals("1. Bantuan Konsumtif")){
                     if (edt_608.getText().length() < 4 || edt_609.getText().length() < 4
-                    || edt_610.getText().length() < 4 || edt_611.getText().length() < 4) {
-                        Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                            || edt_610.getText().length() < 4 || edt_611.getText().length() < 4) {
+                        Utils.Toast(getActivity(), "Nominal harus diisi lebih dari 4 angka").show();
                     }else{
                         saveAndNext(rootView);
-                        fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+                        // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
                     }
                 } else if (edt_607.getSelectedItem().toString().equals("2. Bantuan Produktif")){
                     if (edt_613.getText().length() < 4 || edt_614.getText().length() < 4
                             || edt_615.getText().length() < 4 || edt_618.getText().length() < 4) {
-                        Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                        Utils.Toast(getActivity(), "Nominal harus diisi lebih dari 4 angka").show();
                     }else{
                         saveAndNext(rootView);
-                        fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+                        // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
                     }
                 } else if (edt_607.getSelectedItem().toString().equals("3. Keduanya")){
                     if (edt_608.getText().length() < 4 || edt_609.getText().length() < 4
                             || edt_610.getText().length() < 4 || edt_611.getText().length() < 4 ||
                             edt_613.getText().length() < 4 || edt_614.getText().length() < 4
                             || edt_615.getText().length() < 4 || edt_618.getText().length() < 4) {
-                        Utils.Toast(v.getContext(), "Nominal harus diisi lebih dari 4 angka").show();
+                        Utils.Toast(getActivity(), "Nominal harus diisi lebih dari 4 angka").show();
                     }else{
                         saveAndNext(rootView);
-                        fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+                        // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
                     }
                 }
 
@@ -265,74 +280,134 @@ public class FragmentModul1601 extends Fragment {
     }
 
 
-    private void saveAndNext(View view) {
-        Prefs.remove(StaticStrings.M1_601);
-        Prefs.remove(StaticStrings.M1_602);
-        Prefs.remove(StaticStrings.M1_603);
-        Prefs.remove(StaticStrings.M1_604);
-        Prefs.remove(StaticStrings.M1_605);
-        Prefs.remove(StaticStrings.M1_606);
-        Prefs.remove(StaticStrings.M1_607);
-        Prefs.remove(StaticStrings.M1_608);
-        Prefs.remove(StaticStrings.M1_609);
-        Prefs.remove(StaticStrings.M1_610);
-        Prefs.remove(StaticStrings.M1_611);
-        Prefs.remove(StaticStrings.M1_612);
-        Prefs.remove(StaticStrings.M1_613);
-        Prefs.remove(StaticStrings.M1_614);
-        Prefs.remove(StaticStrings.M1_615);
-        Prefs.remove(StaticStrings.M1_616);
-        Prefs.remove(StaticStrings.M1_617);
-        Prefs.remove(StaticStrings.M1_618);
+    private VerificationError saveAndNext(View view) {
+        try {
+            Prefs.remove(StaticStrings.M1_601);
+            Prefs.remove(StaticStrings.M1_602);
+            Prefs.remove(StaticStrings.M1_603);
+            Prefs.remove(StaticStrings.M1_604);
+            Prefs.remove(StaticStrings.M1_605);
+            Prefs.remove(StaticStrings.M1_606);
+            Prefs.remove(StaticStrings.M1_607);
+            Prefs.remove(StaticStrings.M1_608);
+            Prefs.remove(StaticStrings.M1_609);
+            Prefs.remove(StaticStrings.M1_610);
+            Prefs.remove(StaticStrings.M1_611);
+            Prefs.remove(StaticStrings.M1_612);
+            Prefs.remove(StaticStrings.M1_613);
+            Prefs.remove(StaticStrings.M1_614);
+            Prefs.remove(StaticStrings.M1_615);
+            Prefs.remove(StaticStrings.M1_616);
+            Prefs.remove(StaticStrings.M1_617);
+            Prefs.remove(StaticStrings.M1_618);
 
-        Prefs.putString(StaticStrings.M1_601, edt_601.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_602, edt_602.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_601, edt_601.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_602, edt_602.getSelectedItem().toString());
 
-        if (edt_603.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_603, edt_603.getSelectedItem().toString());
-        }
-        Prefs.putString(StaticStrings.M1_604, edt_604.getText() + "/" + edt_604_lanjut.getText().toString());
+            if (edt_603.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_603, edt_603.getSelectedItem().toString());
+            }
+            Prefs.putString(StaticStrings.M1_604, edt_604.getText() + "/" + edt_604_lanjut.getText().toString());
 
-        Prefs.putString(StaticStrings.M1_605,edt_605.getText().toString() +" "+  spn_605.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_606, edt_606.getText().toString());
-        Prefs.putString(StaticStrings.M1_607, edt_607.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_605, edt_605.getText().toString() + " " + spn_605.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_606, edt_606.getText().toString());
+            Prefs.putString(StaticStrings.M1_607, edt_607.getSelectedItem().toString());
 
-        if (edt_608.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_608, edt_608.getText().toString());
-        }
-        if (edt_609.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_609, edt_609.getText().toString());
-        }
-        if (edt_610.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_610, edt_610.getText().toString());
-        }
-        if (edt_611.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_611, edt_611.getText().toString());
-        }
-        if (edt_612.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_612, edt_612.getText().toString());
-        }
-        if (edt_613.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_613, edt_613.getText().toString());
-        }
-        if (edt_614.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_614, edt_614.getText().toString());
-        }
-        if (edt_615.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_615, edt_615.getText().toString());
-        }
-        if (edt_616.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_616, edt_616.getText().toString());
-        }
-        if (edt_617.getVisibility() == View.VISIBLE) {
-            int selectedId = edt_617.getCheckedRadioButtonId();
-            RadioButton M1_617 = view.findViewById(selectedId);
-            Prefs.putString(StaticStrings.M1_617, M1_617.getText().toString());
-        }
-        if (edt_618.getVisibility() == View.VISIBLE) {
-            Prefs.putString(StaticStrings.M1_618, edt_618.getText().toString());
+            if (edt_608.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_608, edt_608.getText().toString());
+            }
+            if (edt_609.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_609, edt_609.getText().toString());
+            }
+            if (edt_610.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_610, edt_610.getText().toString());
+            }
+            if (edt_611.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_611, edt_611.getText().toString());
+            }
+            if (edt_612.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_612, edt_612.getText().toString());
+            }
+            if (edt_613.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_613, edt_613.getText().toString());
+            }
+            if (edt_614.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_614, edt_614.getText().toString());
+            }
+            if (edt_615.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_615, edt_615.getText().toString());
+            }
+            if (edt_616.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_616, edt_616.getText().toString());
+            }
+            if (edt_617.getVisibility() == View.VISIBLE) {
+                int selectedId = edt_617.getCheckedRadioButtonId();
+                RadioButton M1_617 = view.findViewById(selectedId);
+                Prefs.putString(StaticStrings.M1_617, M1_617.getText().toString());
+            }
+            if (edt_618.getVisibility() == View.VISIBLE) {
+                Prefs.putString(StaticStrings.M1_618, edt_618.getText().toString());
+            }
+
+            isSuccess = true;
+            Utils.Toast(getContext(), StaticStrings.TOAST_SUKSES_SIMPAN).show();
+        } catch (Exception e){
+            return new VerificationError("Mohon lengkapi form pada halaman ini");
         }
 
-        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public VerificationError verifyStep() {
+        if (isSuccess){
+            return null;
+        }
+
+        if (edt_605.getText().length() < 4) {
+            return new VerificationError("Nominal harus diisi lebih dari 4 angka");
+        } else if (edt_607.getSelectedItem().toString().equals("1. Bantuan Konsumtif")){
+            if (edt_608.getText().length() < 4 || edt_609.getText().length() < 4
+                    || edt_610.getText().length() < 4 || edt_611.getText().length() < 4) {
+                return new VerificationError("Nominal harus diisi lebih dari 4 angka");
+            }else{
+                return saveAndNext(rootView);
+                // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+            }
+        } else if (edt_607.getSelectedItem().toString().equals("2. Bantuan Produktif")){
+            if (edt_613.getText().length() < 4 || edt_614.getText().length() < 4
+                    || edt_615.getText().length() < 4 || edt_618.getText().length() < 4) {
+                return new VerificationError("Nominal harus diisi lebih dari 4 angka");
+            }else{
+                return saveAndNext(rootView);
+                // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+            }
+        } else if (edt_607.getSelectedItem().toString().equals("3. Keduanya")){
+            if (edt_608.getText().length() < 4 || edt_609.getText().length() < 4
+                    || edt_610.getText().length() < 4 || edt_611.getText().length() < 4 ||
+                    edt_613.getText().length() < 4 || edt_614.getText().length() < 4
+                    || edt_615.getText().length() < 4 || edt_618.getText().length() < 4) {
+                return new VerificationError("Nominal harus diisi lebih dari 4 angka");
+            }else{
+                return saveAndNext(rootView);
+                // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1701()).addToBackStack("7").commit();
+            }
+        } else if (edt_604_lanjut.getText().toString().length() < 4){
+            return new VerificationError("Input tahun harus 4 digit");
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public void onSelected() {
+
+    }
+
+    @Override
+    public void onError(@NonNull VerificationError error) {
+
     }
 }

@@ -10,7 +10,8 @@ import com.karyastudio.izn.dao.generateSchema.KeluargaDao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KeluargaManager  {
+public class KeluargaManager {
+
     public static List<Keluarga> loadAll(Context ctx) {
         return getKeluargaDao(ctx).loadAll();
     }
@@ -47,9 +48,11 @@ public class KeluargaManager  {
         getKeluargaDao(ctx).deleteAll();
         getKeluargaDao(ctx).insertOrReplaceInTx(newList);
     }
+
     public static void insertOrReplaceArray(Context ctx, List<Keluarga> Keluarga) {
         getKeluargaDao(ctx).insertOrReplaceInTx(Keluarga);
     }
+
     public static void remove(Context ctx, Keluarga Keluarga) {
         getKeluargaDao(ctx).delete(Keluarga);
     }

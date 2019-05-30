@@ -27,8 +27,11 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText txtEmail;
     private EditText txtPhone;
     private EditText txtNama;
+    private EditText txtAlamat;
+    private String username;
     private Button btnSignUp;
     private Button btnGoToLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.email);
         txtPhone = findViewById(R.id.phone);
         txtNama = findViewById(R.id.name);
+        txtAlamat = findViewById(R.id.alamat_reg);
 
         btnSignUp = findViewById(R.id.btn_exe_daftar);
         btnGoToLogin = findViewById(R.id.btn_goto_login);
@@ -47,13 +51,13 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register(txtProvinsi.getText().toString(),
-                        txtPassword.getText().toString(),
+                register(txtEmail.getText().toString(),
                         txtEmail.getText().toString(),
                         txtNama.getText().toString(),
-                        "",
-                        txtPhone.getText().toString()
-                );
+                        txtPassword.getText().toString(),
+                        txtAlamat.getText().toString(),
+                        txtPhone.getText().toString(),
+                        txtProvinsi.getText().toString());
             }
         });
 
@@ -65,12 +69,15 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register(String province,
-                          String password,
+    private void register(
+                          String username,
                           String email,
                           String name,
-                          String alamat,
-                          String phone) {
+                          String password,
+                          String address,
+                          String phone,
+                          String province) {
+
         if (!txtPassword2.getText().toString().equals(txtPassword.getText().toString())){
             Utils.Toast(getApplicationContext(), StaticStrings.TIDAK_MATCH).show();
         }else if (TextUtils.isEmpty(province) || TextUtils.isEmpty(password) ||  TextUtils.isEmpty(email)
@@ -78,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
             Utils.Toast(getApplicationContext(), StaticStrings.ISI_SEMUA).show();
         } else {
             BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
-            Call<Daftar> result = apiService.daftar(StaticStrings.API_KEY, province, email, password, alamat, phone, name);
+            Call<Daftar> result = apiService.daftar(StaticStrings.API_KEY, username, email, name, password, address, phone, province);
             result.enqueue(new Callback<Daftar>() {
                 @Override
                 public void onResponse(Call<Daftar> call, Response<Daftar> response) {

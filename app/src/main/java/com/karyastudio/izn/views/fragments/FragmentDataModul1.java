@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.karyastudio.izn.R;
+import com.karyastudio.izn.adapter.ActionModeCallback;
 import com.karyastudio.izn.adapter.AdapterDampakKajianZakat;
 import com.karyastudio.izn.dao.generateSchema.KDZ;
 import com.karyastudio.izn.dao.managerSchema.KDZManager;
@@ -41,6 +42,7 @@ public class FragmentDataModul1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_data_modul1, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
+
         if (Utils.isOnline(rootView.getContext())){
             showDataOnline();
         }else{
@@ -51,14 +53,31 @@ public class FragmentDataModul1 extends Fragment {
 
 
     private void showDataOffline() {
+        mAdapter = new AdapterDampakKajianZakat(KDZManager.loadAll(getActivity()), new AdapterDampakKajianZakat.ClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                if (mAdapter.getIsInChoiceMode()) {
+                    mAdapter.switchSelectedState(position);
+                } else {
+                    // normal click handling
+                    // ...
+                }
+            }
 
-        mAdapter = new AdapterDampakKajianZakat(KDZManager.loadAll(getActivity()));
+            @Override
+            public boolean onItemLongClicked(int position) {
+                Utils.log("ON LONG CLICK");
+                mAdapter.beginChoiceMode(position);
+                return true;
+            }
+        });
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
-    private void showDataOnline() {
 
+    private void showDataOnline() {
         BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
         Call<DataKDZ> result = apiService.kdzData(StaticStrings.API_KEY, Prefs.getString("UID","kosong"));
         result.enqueue(new Callback<DataKDZ>() {
@@ -67,17 +86,38 @@ public class FragmentDataModul1 extends Fragment {
                 try {
                     List<KDZ> list = new ArrayList<>();
 
-                    for (int i = 0; i < response.body().getData().getIndeksZakatNasional().size(); i++) {
+                    for (int i = 0; i < response.body().getData().getKajianDampakZakat().size(); i++) {
                         list.add(new KDZ(
-                                (String) response.body().getData().getIndeksZakatNasional().get(i).getFkId(),
-                                response.body().getData().getIndeksZakatNasional().get(i).getFkDateCreated(),
-                                response.body().getData().getIndeksZakatNasional().get(i).getFkDateUpdated(),
-                                response.body().getData().getIndeksZakatNasional().get(i).getFkNama(),
-                                response.body().getData().getIndeksZakatNasional().get(i).getCountKeluarga()
+                                (String) response.body().getData().getKajianDampakZakat().get(i).getFk_id(),
+                                response.body().getData().getKajianDampakZakat().get(i).getFk_date_created(),
+                                response.body().getData().getKajianDampakZakat().get(i).getFk_date_updated(),
+                                response.body().getData().getKajianDampakZakat().get(i).getFk_nama(),
+                                response.body().getData().getKajianDampakZakat().get(i).getCountKeluarga()
                         ));
 
                     }
-                    mAdapter = new AdapterDampakKajianZakat(list);
+
+                    mAdapter = new AdapterDampakKajianZakat(list, new AdapterDampakKajianZakat.ClickListener() {
+                        @Override
+                        public void onItemClicked(int position) {
+                            if (mAdapter.getIsInChoiceMode()) {
+                                mAdapter.switchSelectedState(position);
+                            } else {
+                                // normal click handling
+                                // ...
+                                Utils.log("Normal click");
+                            }
+                        }
+
+                        @Override
+                        public boolean onItemLongClicked(int position) {
+                            Utils.log("ON LONG CLICK");
+                            mAdapter.beginChoiceMode(position);
+                            ActionModeCallback.startActionMode(getActivity(), mAdapter);
+                            return true;
+                        }
+                    });
+
                     mRecyclerView.setAdapter(mAdapter);
                     mRecyclerView.setHasFixedSize(true);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

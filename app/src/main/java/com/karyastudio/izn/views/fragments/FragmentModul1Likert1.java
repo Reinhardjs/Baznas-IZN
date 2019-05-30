@@ -12,13 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
 import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
+import com.stepstone.stepper.Step;
+import com.stepstone.stepper.VerificationError;
 
-public class FragmentModul1Likert1 extends Fragment {
+public class FragmentModul1Likert1 extends Fragment implements Step {
     private FragmentManager fms;
     private Spinner edt_lik1;
     private Spinner edt_lik2;
@@ -27,6 +28,8 @@ public class FragmentModul1Likert1 extends Fragment {
     private Spinner edt_lik5;
 
     private Button btnNext;
+    private boolean isSuccess;
+    private View rootView;
 
     public FragmentModul1Likert1() {
 
@@ -35,8 +38,8 @@ public class FragmentModul1Likert1 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_modul1_likert1, container, false);
-        fms = ((MainActivity) getActivity()).fms;
+        rootView = inflater.inflate(R.layout.fragment_modul1_likert1, container, false);
+//        fms = ((MainActivity) getActivity()).fms;
         edt_lik1 = rootView.findViewById(R.id.edt1_lik_1);
         edt_lik2 = rootView.findViewById(R.id.edt1_lik_2);
         edt_lik3 = rootView.findViewById(R.id.edt1_lik_3);
@@ -111,12 +114,12 @@ public class FragmentModul1Likert1 extends Fragment {
         edt_lik5.setAdapter(spinnerArrayAdapter4);
 
         btnNext = rootView.findViewById(R.id.btn_next1_lik_1);
-
+//        btnNext.setVisibility(View.GONE);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndNext(rootView);
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1Likert2()).addToBackStack("10").commit();
+//                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1Likert2()).addToBackStack("10").commit();
             }
         });
 
@@ -124,18 +127,46 @@ public class FragmentModul1Likert1 extends Fragment {
     }
 
 
-    private void saveAndNext(View view){
-        Prefs.remove(StaticStrings.M1_lik1);
-        Prefs.remove(StaticStrings.M1_lik2);
-        Prefs.remove(StaticStrings.M1_lik3);
-        Prefs.remove(StaticStrings.M1_lik4);
-        Prefs.remove(StaticStrings.M1_lik5);
+    private VerificationError saveAndNext(View view){
+        try {
+            Prefs.remove(StaticStrings.M1_lik1);
+            Prefs.remove(StaticStrings.M1_lik2);
+            Prefs.remove(StaticStrings.M1_lik3);
+            Prefs.remove(StaticStrings.M1_lik4);
+            Prefs.remove(StaticStrings.M1_lik5);
 
-        Prefs.putString(StaticStrings.M1_lik1,edt_lik1.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik2,edt_lik2.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik3,edt_lik3.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik4,edt_lik4.getSelectedItem().toString());
-        Prefs.putString(StaticStrings.M1_lik5,edt_lik5.getSelectedItem().toString());
-        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
+            Prefs.putString(StaticStrings.M1_lik1, edt_lik1.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik2, edt_lik2.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik3, edt_lik3.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik4, edt_lik4.getSelectedItem().toString());
+            Prefs.putString(StaticStrings.M1_lik5, edt_lik5.getSelectedItem().toString());
+            Utils.Toast(getContext(), StaticStrings.TOAST_SUKSES_SIMPAN).show();
+
+            isSuccess = true;
+        } catch (Exception e){
+            return new VerificationError("Mohon lengkapi form pada halaman ini");
+        }
+
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public VerificationError verifyStep() {
+        if (isSuccess){
+            return null;
+        }
+
+        return saveAndNext(rootView);
+    }
+
+    @Override
+    public void onSelected() {
+
+    }
+
+    @Override
+    public void onError(@NonNull VerificationError error) {
+
     }
 }

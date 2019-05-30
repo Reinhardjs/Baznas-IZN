@@ -1,4 +1,4 @@
-#Sun Apr 21 16:46:21 WIB 2019
-base.0=/Users/maseza/Documents/projectandroids/Bazarnas/app/build/intermediates/transforms/dexMerger/release/0
+#Wed May 29 17:00:24 ICT 2019
+base.0=D\:\\RJS Files\\My Project\\Android Project\\Bazarnas\\app\\build\\intermediates\\transforms\\dexMerger\\release\\0
 path.0=classes.dex
 renamed.0=classes.dex

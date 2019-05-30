@@ -160,7 +160,8 @@
         <item>07. BAZNAS Tanggap Bencana (BTB)</item>
         <item>08. Mualaf Center BAZNAS (MCB)</item>
         <item>09. Rumah Sehat BAZNAS (RSB)</item>
-        <item>10. Layanan Publik</item>
+        <!--<item>10. Layanan Publik</item>-->
+        <item>10. Lembaga Pemberdayaan Peternak Mustahik (LPPM)</item>
     </string-array>
     <string-array name="items_modul1_607">
         <item>1. Bantuan Konsumtif</item>
@@ -241,5 +242,8 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
+    <string name="done">done</string>
 
 </resources>

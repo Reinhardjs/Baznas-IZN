@@ -1,28 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar6"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
             app:navigationIcon="?attr/homeAsUpIndicator"
-            android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Total pengeluaran konsumsi RT"
-            app:titleTextColor="@android:color/white" />
+            app:titleTextColor="@android:color/white"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:nestedScrollingEnabled="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,18 +50,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
                 android:fontFamily="@font/poppins_light"
-
                 android:text="1. Pertanyaan berikut ini berkenaan dengan jenis makanan/barang yang dibeli/dikonsumsi oleh satu rumah tangga ini (akumulasi selama 1 Minggu terakhir)"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="2. Konsumsi Pangan (Makanan Pokok, Sayur Mayur, Makanan Kering, Daging/ikan, Susu/Telur. Dll) " />
+
 
             <EditText
                 android:id="@+id/edt1_801"
@@ -69,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="3. Rokok,Tembakau" />
 
             <EditText
@@ -76,7 +86,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
@@ -86,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
-
+                android:textColor="@android:color/black"
                 android:text="4. Pertanyaan berikut ini berkenaan dengan uang yang dikeluarkan oleh satu rumah tangga ini (akumulasi selama 1 Bulan terakhir)"
                 android:textStyle="bold" />
 
@@ -95,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="5. Listrik" />
 
             <EditText
@@ -102,17 +112,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
-
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="6. Air" />
 
             <EditText
@@ -120,15 +129,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="7. Gas/Bahan Bakar Lainnya" />
 
             <EditText
@@ -136,7 +146,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
@@ -146,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="8. Komunikasi (Pembayaran rekening telepon dan pembelian voucher/isi pulsa, Kartu Perdana, Paket data internet)" />
 
             <EditText
@@ -153,15 +163,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="9. Kebutuhan Perawatan Badan dan Muka (Mencakup sabun mandi, perlengkapan cukur, kosmetik dll)" />
 
             <EditText
@@ -169,15 +180,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="10. Rekreasi dan Hiburan (Mencakup nonton, teater/bioskop, jalan-jalan,peralatan olah raga,Koran, majalah, dan sejenisnya)" />
 
             <EditText
@@ -185,15 +197,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="11. Transportasi (Mencakup biaya bis, ojek, angkot, perahu, dan biaya perbaikan kendaraan, bahan bakar kendaraan dan sejenisnya)" />
 
             <EditText
@@ -201,15 +214,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="12. Biaya Sewa Rumah/Kontrakan" />
 
             <EditText
@@ -217,15 +232,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="13. Angsuran Kredit/Cicilan " />
 
             <EditText
@@ -233,15 +249,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="14. Biaya Sekolah (SPP, Uang Saku, Buku, Seragam)" />
 
             <EditText
@@ -249,7 +266,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
@@ -259,14 +275,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@android:color/black"
                 android:text="15. Pertanyaan berikut ini berkenaan dengan uang yang dikeluarkan oleh satu rumah tangga ini (selama 1 tahun terakhir)"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="16. Pakaian untuk anak-anak dan orang dewasa (Mencakup sepatu, topi, kemeja, celana, pakaian anak-anak, pria dan wanita, baju lebaran dan sejenisnya)" />
 
             <EditText
@@ -274,15 +292,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="17. Biaya kesehatan (Mencakup biaya rumah sakit, Puskesmas, konsultasi dokter praktek, bidan, dukun, mantri, obat-obatan dan lainnya)" />
 
             <EditText
@@ -290,15 +309,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:textColor="@color/text_form_normal"
                 android:text="18. Sumbangan dan hadiah (Mencakup pernikahan, sunatan,sedekah, kado dan sejenisnya)" />
 
             <EditText
@@ -306,7 +326,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 android:inputType="number"
                 android:fontFamily="@font/poppins_light"
                 android:hint="Rp. " />
@@ -318,9 +337,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="130dp"
                 android:background="@drawable/rounded_btn2"
-                android:text="Next"
+                android:text="Save"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

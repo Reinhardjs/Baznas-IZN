@@ -13,13 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
 import com.karyastudio.izn.utils.StaticStrings;
 import com.karyastudio.izn.utils.Utils;
 import com.pixplicity.easyprefs.library.Prefs;
+import com.stepstone.stepper.Step;
+import com.stepstone.stepper.VerificationError;
 
-public class FragmentModul1801 extends Fragment {
+public class FragmentModul1801 extends Fragment implements Step {
     private FragmentManager fms;
     private EditText edt_801;
     private EditText edt_802;
@@ -38,16 +39,26 @@ public class FragmentModul1801 extends Fragment {
     private EditText edt_815;
 
     private Button btnNext;
+    private boolean isSuccess;
+    private View rootView;
 
     public FragmentModul1801() {
 
     }
 
+    // method ini hanya dipanggil sekali untuk fragment ini
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // jangan hapus fragment ini saat activity dibuat ulang.
+        setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_modul1_801, container, false);
-        fms = ((MainActivity) getActivity()).fms;
+        rootView = inflater.inflate(R.layout.fragment_modul1_801, container, false);
+//        fms = ((MainActivity) getActivity()).fms;
         Toolbar toolbar = rootView.findViewById(R.id.toolbar6);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +84,13 @@ public class FragmentModul1801 extends Fragment {
         edt_813 = rootView.findViewById(R.id.edt1_813);
         edt_814 = rootView.findViewById(R.id.edt1_814);
         edt_815 = rootView.findViewById(R.id.edt1_815);
-        
+
+//        btnNext.setVisibility(View.GONE);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndNext(rootView);
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1Likert1()).addToBackStack("9").commit();
+//                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul1Likert1()).addToBackStack("9").commit();
             }
         });
 
@@ -86,39 +98,67 @@ public class FragmentModul1801 extends Fragment {
     }
 
 
-    private void saveAndNext(View view){
-        Prefs.remove(StaticStrings.M1_801);
-        Prefs.remove(StaticStrings.M1_802);
-        Prefs.remove(StaticStrings.M1_803);
-        Prefs.remove(StaticStrings.M1_804);
-        Prefs.remove(StaticStrings.M1_805);
-        Prefs.remove(StaticStrings.M1_806);
-        Prefs.remove(StaticStrings.M1_807);
-        Prefs.remove(StaticStrings.M1_808);
-        Prefs.remove(StaticStrings.M1_809);
-        Prefs.remove(StaticStrings.M1_810);
-        Prefs.remove(StaticStrings.M1_811);
-        Prefs.remove(StaticStrings.M1_812);
-        Prefs.remove(StaticStrings.M1_813);
-        Prefs.remove(StaticStrings.M1_814);
-        Prefs.remove(StaticStrings.M1_815);
+    private VerificationError saveAndNext(View view){
+        try {
+            Prefs.remove(StaticStrings.M1_801);
+            Prefs.remove(StaticStrings.M1_802);
+            Prefs.remove(StaticStrings.M1_803);
+            Prefs.remove(StaticStrings.M1_804);
+            Prefs.remove(StaticStrings.M1_805);
+            Prefs.remove(StaticStrings.M1_806);
+            Prefs.remove(StaticStrings.M1_807);
+            Prefs.remove(StaticStrings.M1_808);
+            Prefs.remove(StaticStrings.M1_809);
+            Prefs.remove(StaticStrings.M1_810);
+            Prefs.remove(StaticStrings.M1_811);
+            Prefs.remove(StaticStrings.M1_812);
+            Prefs.remove(StaticStrings.M1_813);
+            Prefs.remove(StaticStrings.M1_814);
+            Prefs.remove(StaticStrings.M1_815);
 
 
-        Prefs.putString(StaticStrings.M1_801, edt_801.getText().toString());
-        Prefs.putString(StaticStrings.M1_802, edt_802.getText().toString());
-        Prefs.putString(StaticStrings.M1_803, edt_803.getText().toString());
-        Prefs.putString(StaticStrings.M1_804, edt_804.getText().toString());
-        Prefs.putString(StaticStrings.M1_805, edt_805.getText().toString());
-        Prefs.putString(StaticStrings.M1_806, edt_806.getText().toString());
-        Prefs.putString(StaticStrings.M1_807, edt_807.getText().toString());
-        Prefs.putString(StaticStrings.M1_808, edt_808.getText().toString());
-        Prefs.putString(StaticStrings.M1_809, edt_809.getText().toString());
-        Prefs.putString(StaticStrings.M1_810, edt_810.getText().toString());
-        Prefs.putString(StaticStrings.M1_811, edt_811.getText().toString());
-        Prefs.putString(StaticStrings.M1_812, edt_812.getText().toString());
-        Prefs.putString(StaticStrings.M1_813, edt_813.getText().toString());
-        Prefs.putString(StaticStrings.M1_814, edt_814.getText().toString());
-        Prefs.putString(StaticStrings.M1_815, edt_815.getText().toString());
-        Utils.Toast(getContext(),StaticStrings.TOAST_SUKSES_SIMPAN).show();
+            Prefs.putString(StaticStrings.M1_801, edt_801.getText().toString());
+            Prefs.putString(StaticStrings.M1_802, edt_802.getText().toString());
+            Prefs.putString(StaticStrings.M1_803, edt_803.getText().toString());
+            Prefs.putString(StaticStrings.M1_804, edt_804.getText().toString());
+            Prefs.putString(StaticStrings.M1_805, edt_805.getText().toString());
+            Prefs.putString(StaticStrings.M1_806, edt_806.getText().toString());
+            Prefs.putString(StaticStrings.M1_807, edt_807.getText().toString());
+            Prefs.putString(StaticStrings.M1_808, edt_808.getText().toString());
+            Prefs.putString(StaticStrings.M1_809, edt_809.getText().toString());
+            Prefs.putString(StaticStrings.M1_810, edt_810.getText().toString());
+            Prefs.putString(StaticStrings.M1_811, edt_811.getText().toString());
+            Prefs.putString(StaticStrings.M1_812, edt_812.getText().toString());
+            Prefs.putString(StaticStrings.M1_813, edt_813.getText().toString());
+            Prefs.putString(StaticStrings.M1_814, edt_814.getText().toString());
+            Prefs.putString(StaticStrings.M1_815, edt_815.getText().toString());
+
+            isSuccess = true;
+            Utils.Toast(getContext(), StaticStrings.TOAST_SUKSES_SIMPAN).show();
+        } catch (Exception e){
+            return new VerificationError("Mohon lengkapi form pada halaman ini");
+        }
+
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public VerificationError verifyStep() {
+        if (isSuccess){
+            return null;
+        }
+
+        return saveAndNext(rootView);
+    }
+
+    @Override
+    public void onSelected() {
+
+    }
+
+    @Override
+    public void onError(@NonNull VerificationError error) {
+
     }
 }

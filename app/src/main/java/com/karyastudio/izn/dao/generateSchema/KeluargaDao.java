@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "KELUARGA".
 */
-public class KeluargaDao extends AbstractDao<Keluarga, Void> {
+public class KeluargaDao extends AbstractDao<Keluarga, String> {
 
     public static final String TABLENAME = "KELUARGA";
 
@@ -25,7 +25,7 @@ public class KeluargaDao extends AbstractDao<Keluarga, Void> {
         public final static Property Fki_id = new Property(0, String.class, "fki_id", false, "FKI_ID");
         public final static Property Fki_fk_id = new Property(1, String.class, "fki_fk_id", false, "FKI_FK_ID");
         public final static Property Fk_202_nama = new Property(2, String.class, "fk_202_nama", false, "FK_202_NAMA");
-        public final static Property Fk_202_nik = new Property(3, String.class, "fk_202_nik", false, "FK_202_NIK");
+        public final static Property Fk_202_nik = new Property(3, String.class, "fk_202_nik", true, "FK_202_NIK");
         public final static Property Fk_203 = new Property(4, String.class, "fk_203", false, "FK_203");
         public final static Property Fk_204 = new Property(5, String.class, "fk_204", false, "FK_204");
         public final static Property Fk_205 = new Property(6, String.class, "fk_205", false, "FK_205");
@@ -58,7 +58,7 @@ public class KeluargaDao extends AbstractDao<Keluarga, Void> {
                 "\"FKI_ID\" TEXT NOT NULL ," + // 0: fki_id
                 "\"FKI_FK_ID\" TEXT NOT NULL ," + // 1: fki_fk_id
                 "\"FK_202_NAMA\" TEXT NOT NULL ," + // 2: fk_202_nama
-                "\"FK_202_NIK\" TEXT NOT NULL ," + // 3: fk_202_nik
+                "\"FK_202_NIK\" TEXT PRIMARY KEY NOT NULL ," + // 3: fk_202_nik
                 "\"FK_203\" TEXT NOT NULL ," + // 4: fk_203
                 "\"FK_204\" TEXT NOT NULL ," + // 5: fk_204
                 "\"FK_205\" TEXT NOT NULL ," + // 6: fk_205
@@ -128,8 +128,8 @@ public class KeluargaDao extends AbstractDao<Keluarga, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 3);
     }    
 
     @Override
@@ -180,20 +180,22 @@ public class KeluargaDao extends AbstractDao<Keluarga, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(Keluarga entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(Keluarga entity, long rowId) {
+        return entity.getFk_202_nik();
     }
     
     @Override
-    public Void getKey(Keluarga entity) {
-        return null;
+    public String getKey(Keluarga entity) {
+        if(entity != null) {
+            return entity.getFk_202_nik();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(Keluarga entity) {
-        // TODO
-        return false;
+        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
     }
 
     @Override
