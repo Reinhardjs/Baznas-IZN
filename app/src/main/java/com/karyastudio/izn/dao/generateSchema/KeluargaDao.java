@@ -22,24 +22,27 @@ public class KeluargaDao extends AbstractDao<Keluarga, String> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Fki_id = new Property(0, String.class, "fki_id", false, "FKI_ID");
-        public final static Property Fki_fk_id = new Property(1, String.class, "fki_fk_id", false, "FKI_FK_ID");
-        public final static Property Fk_202_nama = new Property(2, String.class, "fk_202_nama", false, "FK_202_NAMA");
-        public final static Property Fk_202_nik = new Property(3, String.class, "fk_202_nik", true, "FK_202_NIK");
-        public final static Property Fk_203 = new Property(4, String.class, "fk_203", false, "FK_203");
-        public final static Property Fk_204 = new Property(5, String.class, "fk_204", false, "FK_204");
-        public final static Property Fk_205 = new Property(6, String.class, "fk_205", false, "FK_205");
-        public final static Property Fk_206 = new Property(7, String.class, "fk_206", false, "FK_206");
-        public final static Property Fk_207 = new Property(8, String.class, "fk_207", false, "FK_207");
-        public final static Property Fk_208 = new Property(9, String.class, "fk_208", false, "FK_208");
-        public final static Property Fk_209 = new Property(10, String.class, "fk_209", false, "FK_209");
-        public final static Property Fk_210 = new Property(11, String.class, "fk_210", false, "FK_210");
-        public final static Property Fk_303 = new Property(12, String.class, "fk_303", false, "FK_303");
-        public final static Property Fk_304 = new Property(13, String.class, "fk_304", false, "FK_304");
-        public final static Property Fk_305 = new Property(14, String.class, "fk_305", false, "FK_305");
-        public final static Property Fk_306 = new Property(15, String.class, "fk_306", false, "FK_306");
-        public final static Property Fk_307 = new Property(16, String.class, "fk_307", false, "FK_307");
-        public final static Property Fk_308 = new Property(17, String.class, "fk_308", false, "FK_308");
+        public final static Property Posisi = new Property(0, Integer.class, "posisi", false, "POSISI");
+        public final static Property Status = new Property(1, String.class, "status", false, "STATUS");
+        public final static Property Request_type = new Property(2, String.class, "request_type", false, "REQUEST_TYPE");
+        public final static Property Fki_id = new Property(3, String.class, "fki_id", true, "FKI_ID");
+        public final static Property Fki_fk_id = new Property(4, String.class, "fki_fk_id", false, "FKI_FK_ID");
+        public final static Property Fk_202_nama = new Property(5, String.class, "fk_202_nama", false, "FK_202_NAMA");
+        public final static Property Fk_202_nik = new Property(6, String.class, "fk_202_nik", false, "FK_202_NIK");
+        public final static Property Fk_203 = new Property(7, String.class, "fk_203", false, "FK_203");
+        public final static Property Fk_204 = new Property(8, String.class, "fk_204", false, "FK_204");
+        public final static Property Fk_205 = new Property(9, String.class, "fk_205", false, "FK_205");
+        public final static Property Fk_206 = new Property(10, String.class, "fk_206", false, "FK_206");
+        public final static Property Fk_207 = new Property(11, String.class, "fk_207", false, "FK_207");
+        public final static Property Fk_208 = new Property(12, String.class, "fk_208", false, "FK_208");
+        public final static Property Fk_209 = new Property(13, String.class, "fk_209", false, "FK_209");
+        public final static Property Fk_210 = new Property(14, String.class, "fk_210", false, "FK_210");
+        public final static Property Fk_303 = new Property(15, String.class, "fk_303", false, "FK_303");
+        public final static Property Fk_304 = new Property(16, String.class, "fk_304", false, "FK_304");
+        public final static Property Fk_305 = new Property(17, String.class, "fk_305", false, "FK_305");
+        public final static Property Fk_306 = new Property(18, String.class, "fk_306", false, "FK_306");
+        public final static Property Fk_307 = new Property(19, String.class, "fk_307", false, "FK_307");
+        public final static Property Fk_308 = new Property(20, String.class, "fk_308", false, "FK_308");
     }
 
 
@@ -55,24 +58,27 @@ public class KeluargaDao extends AbstractDao<Keluarga, String> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"KELUARGA\" (" + //
-                "\"FKI_ID\" TEXT NOT NULL ," + // 0: fki_id
-                "\"FKI_FK_ID\" TEXT NOT NULL ," + // 1: fki_fk_id
-                "\"FK_202_NAMA\" TEXT NOT NULL ," + // 2: fk_202_nama
-                "\"FK_202_NIK\" TEXT PRIMARY KEY NOT NULL ," + // 3: fk_202_nik
-                "\"FK_203\" TEXT NOT NULL ," + // 4: fk_203
-                "\"FK_204\" TEXT NOT NULL ," + // 5: fk_204
-                "\"FK_205\" TEXT NOT NULL ," + // 6: fk_205
-                "\"FK_206\" TEXT NOT NULL ," + // 7: fk_206
-                "\"FK_207\" TEXT NOT NULL ," + // 8: fk_207
-                "\"FK_208\" TEXT NOT NULL ," + // 9: fk_208
-                "\"FK_209\" TEXT NOT NULL ," + // 10: fk_209
-                "\"FK_210\" TEXT NOT NULL ," + // 11: fk_210
-                "\"FK_303\" TEXT NOT NULL ," + // 12: fk_303
-                "\"FK_304\" TEXT NOT NULL ," + // 13: fk_304
-                "\"FK_305\" TEXT NOT NULL ," + // 14: fk_305
-                "\"FK_306\" TEXT NOT NULL ," + // 15: fk_306
-                "\"FK_307\" TEXT NOT NULL ," + // 16: fk_307
-                "\"FK_308\" TEXT NOT NULL );"); // 17: fk_308
+                "\"POSISI\" INTEGER," + // 0: posisi
+                "\"STATUS\" TEXT," + // 1: status
+                "\"REQUEST_TYPE\" TEXT NOT NULL ," + // 2: request_type
+                "\"FKI_ID\" TEXT PRIMARY KEY NOT NULL ," + // 3: fki_id
+                "\"FKI_FK_ID\" TEXT NOT NULL ," + // 4: fki_fk_id
+                "\"FK_202_NAMA\" TEXT NOT NULL ," + // 5: fk_202_nama
+                "\"FK_202_NIK\" TEXT NOT NULL ," + // 6: fk_202_nik
+                "\"FK_203\" TEXT NOT NULL ," + // 7: fk_203
+                "\"FK_204\" TEXT NOT NULL ," + // 8: fk_204
+                "\"FK_205\" TEXT NOT NULL ," + // 9: fk_205
+                "\"FK_206\" TEXT NOT NULL ," + // 10: fk_206
+                "\"FK_207\" TEXT NOT NULL ," + // 11: fk_207
+                "\"FK_208\" TEXT NOT NULL ," + // 12: fk_208
+                "\"FK_209\" TEXT NOT NULL ," + // 13: fk_209
+                "\"FK_210\" TEXT NOT NULL ," + // 14: fk_210
+                "\"FK_303\" TEXT NOT NULL ," + // 15: fk_303
+                "\"FK_304\" TEXT NOT NULL ," + // 16: fk_304
+                "\"FK_305\" TEXT NOT NULL ," + // 17: fk_305
+                "\"FK_306\" TEXT NOT NULL ," + // 18: fk_306
+                "\"FK_307\" TEXT NOT NULL ," + // 19: fk_307
+                "\"FK_308\" TEXT NOT NULL );"); // 20: fk_308
     }
 
     /** Drops the underlying database table. */
@@ -84,47 +90,69 @@ public class KeluargaDao extends AbstractDao<Keluarga, String> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Keluarga entity) {
         stmt.clearBindings();
-        stmt.bindString(1, entity.getFki_id());
-        stmt.bindString(2, entity.getFki_fk_id());
-        stmt.bindString(3, entity.getFk_202_nama());
-        stmt.bindString(4, entity.getFk_202_nik());
-        stmt.bindString(5, entity.getFk_203());
-        stmt.bindString(6, entity.getFk_204());
-        stmt.bindString(7, entity.getFk_205());
-        stmt.bindString(8, entity.getFk_206());
-        stmt.bindString(9, entity.getFk_207());
-        stmt.bindString(10, entity.getFk_208());
-        stmt.bindString(11, entity.getFk_209());
-        stmt.bindString(12, entity.getFk_210());
-        stmt.bindString(13, entity.getFk_303());
-        stmt.bindString(14, entity.getFk_304());
-        stmt.bindString(15, entity.getFk_305());
-        stmt.bindString(16, entity.getFk_306());
-        stmt.bindString(17, entity.getFk_307());
-        stmt.bindString(18, entity.getFk_308());
+ 
+        Integer posisi = entity.getPosisi();
+        if (posisi != null) {
+            stmt.bindLong(1, posisi);
+        }
+ 
+        String status = entity.getStatus();
+        if (status != null) {
+            stmt.bindString(2, status);
+        }
+        stmt.bindString(3, entity.getRequest_type());
+        stmt.bindString(4, entity.getFki_id());
+        stmt.bindString(5, entity.getFki_fk_id());
+        stmt.bindString(6, entity.getFk_202_nama());
+        stmt.bindString(7, entity.getFk_202_nik());
+        stmt.bindString(8, entity.getFk_203());
+        stmt.bindString(9, entity.getFk_204());
+        stmt.bindString(10, entity.getFk_205());
+        stmt.bindString(11, entity.getFk_206());
+        stmt.bindString(12, entity.getFk_207());
+        stmt.bindString(13, entity.getFk_208());
+        stmt.bindString(14, entity.getFk_209());
+        stmt.bindString(15, entity.getFk_210());
+        stmt.bindString(16, entity.getFk_303());
+        stmt.bindString(17, entity.getFk_304());
+        stmt.bindString(18, entity.getFk_305());
+        stmt.bindString(19, entity.getFk_306());
+        stmt.bindString(20, entity.getFk_307());
+        stmt.bindString(21, entity.getFk_308());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, Keluarga entity) {
         stmt.clearBindings();
-        stmt.bindString(1, entity.getFki_id());
-        stmt.bindString(2, entity.getFki_fk_id());
-        stmt.bindString(3, entity.getFk_202_nama());
-        stmt.bindString(4, entity.getFk_202_nik());
-        stmt.bindString(5, entity.getFk_203());
-        stmt.bindString(6, entity.getFk_204());
-        stmt.bindString(7, entity.getFk_205());
-        stmt.bindString(8, entity.getFk_206());
-        stmt.bindString(9, entity.getFk_207());
-        stmt.bindString(10, entity.getFk_208());
-        stmt.bindString(11, entity.getFk_209());
-        stmt.bindString(12, entity.getFk_210());
-        stmt.bindString(13, entity.getFk_303());
-        stmt.bindString(14, entity.getFk_304());
-        stmt.bindString(15, entity.getFk_305());
-        stmt.bindString(16, entity.getFk_306());
-        stmt.bindString(17, entity.getFk_307());
-        stmt.bindString(18, entity.getFk_308());
+ 
+        Integer posisi = entity.getPosisi();
+        if (posisi != null) {
+            stmt.bindLong(1, posisi);
+        }
+ 
+        String status = entity.getStatus();
+        if (status != null) {
+            stmt.bindString(2, status);
+        }
+        stmt.bindString(3, entity.getRequest_type());
+        stmt.bindString(4, entity.getFki_id());
+        stmt.bindString(5, entity.getFki_fk_id());
+        stmt.bindString(6, entity.getFk_202_nama());
+        stmt.bindString(7, entity.getFk_202_nik());
+        stmt.bindString(8, entity.getFk_203());
+        stmt.bindString(9, entity.getFk_204());
+        stmt.bindString(10, entity.getFk_205());
+        stmt.bindString(11, entity.getFk_206());
+        stmt.bindString(12, entity.getFk_207());
+        stmt.bindString(13, entity.getFk_208());
+        stmt.bindString(14, entity.getFk_209());
+        stmt.bindString(15, entity.getFk_210());
+        stmt.bindString(16, entity.getFk_303());
+        stmt.bindString(17, entity.getFk_304());
+        stmt.bindString(18, entity.getFk_305());
+        stmt.bindString(19, entity.getFk_306());
+        stmt.bindString(20, entity.getFk_307());
+        stmt.bindString(21, entity.getFk_308());
     }
 
     @Override
@@ -135,59 +163,65 @@ public class KeluargaDao extends AbstractDao<Keluarga, String> {
     @Override
     public Keluarga readEntity(Cursor cursor, int offset) {
         Keluarga entity = new Keluarga( //
-            cursor.getString(offset + 0), // fki_id
-            cursor.getString(offset + 1), // fki_fk_id
-            cursor.getString(offset + 2), // fk_202_nama
-            cursor.getString(offset + 3), // fk_202_nik
-            cursor.getString(offset + 4), // fk_203
-            cursor.getString(offset + 5), // fk_204
-            cursor.getString(offset + 6), // fk_205
-            cursor.getString(offset + 7), // fk_206
-            cursor.getString(offset + 8), // fk_207
-            cursor.getString(offset + 9), // fk_208
-            cursor.getString(offset + 10), // fk_209
-            cursor.getString(offset + 11), // fk_210
-            cursor.getString(offset + 12), // fk_303
-            cursor.getString(offset + 13), // fk_304
-            cursor.getString(offset + 14), // fk_305
-            cursor.getString(offset + 15), // fk_306
-            cursor.getString(offset + 16), // fk_307
-            cursor.getString(offset + 17) // fk_308
+            cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // posisi
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // status
+            cursor.getString(offset + 2), // request_type
+            cursor.getString(offset + 3), // fki_id
+            cursor.getString(offset + 4), // fki_fk_id
+            cursor.getString(offset + 5), // fk_202_nama
+            cursor.getString(offset + 6), // fk_202_nik
+            cursor.getString(offset + 7), // fk_203
+            cursor.getString(offset + 8), // fk_204
+            cursor.getString(offset + 9), // fk_205
+            cursor.getString(offset + 10), // fk_206
+            cursor.getString(offset + 11), // fk_207
+            cursor.getString(offset + 12), // fk_208
+            cursor.getString(offset + 13), // fk_209
+            cursor.getString(offset + 14), // fk_210
+            cursor.getString(offset + 15), // fk_303
+            cursor.getString(offset + 16), // fk_304
+            cursor.getString(offset + 17), // fk_305
+            cursor.getString(offset + 18), // fk_306
+            cursor.getString(offset + 19), // fk_307
+            cursor.getString(offset + 20) // fk_308
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, Keluarga entity, int offset) {
-        entity.setFki_id(cursor.getString(offset + 0));
-        entity.setFki_fk_id(cursor.getString(offset + 1));
-        entity.setFk_202_nama(cursor.getString(offset + 2));
-        entity.setFk_202_nik(cursor.getString(offset + 3));
-        entity.setFk_203(cursor.getString(offset + 4));
-        entity.setFk_204(cursor.getString(offset + 5));
-        entity.setFk_205(cursor.getString(offset + 6));
-        entity.setFk_206(cursor.getString(offset + 7));
-        entity.setFk_207(cursor.getString(offset + 8));
-        entity.setFk_208(cursor.getString(offset + 9));
-        entity.setFk_209(cursor.getString(offset + 10));
-        entity.setFk_210(cursor.getString(offset + 11));
-        entity.setFk_303(cursor.getString(offset + 12));
-        entity.setFk_304(cursor.getString(offset + 13));
-        entity.setFk_305(cursor.getString(offset + 14));
-        entity.setFk_306(cursor.getString(offset + 15));
-        entity.setFk_307(cursor.getString(offset + 16));
-        entity.setFk_308(cursor.getString(offset + 17));
+        entity.setPosisi(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
+        entity.setStatus(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setRequest_type(cursor.getString(offset + 2));
+        entity.setFki_id(cursor.getString(offset + 3));
+        entity.setFki_fk_id(cursor.getString(offset + 4));
+        entity.setFk_202_nama(cursor.getString(offset + 5));
+        entity.setFk_202_nik(cursor.getString(offset + 6));
+        entity.setFk_203(cursor.getString(offset + 7));
+        entity.setFk_204(cursor.getString(offset + 8));
+        entity.setFk_205(cursor.getString(offset + 9));
+        entity.setFk_206(cursor.getString(offset + 10));
+        entity.setFk_207(cursor.getString(offset + 11));
+        entity.setFk_208(cursor.getString(offset + 12));
+        entity.setFk_209(cursor.getString(offset + 13));
+        entity.setFk_210(cursor.getString(offset + 14));
+        entity.setFk_303(cursor.getString(offset + 15));
+        entity.setFk_304(cursor.getString(offset + 16));
+        entity.setFk_305(cursor.getString(offset + 17));
+        entity.setFk_306(cursor.getString(offset + 18));
+        entity.setFk_307(cursor.getString(offset + 19));
+        entity.setFk_308(cursor.getString(offset + 20));
      }
     
     @Override
     protected final String updateKeyAfterInsert(Keluarga entity, long rowId) {
-        return entity.getFk_202_nik();
+        return entity.getFki_id();
     }
     
     @Override
     public String getKey(Keluarga entity) {
         if(entity != null) {
-            return entity.getFk_202_nik();
+            return entity.getFki_id();
         } else {
             return null;
         }

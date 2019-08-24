@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
+import com.karyastudio.izn.views.fragments.modul1.FragmentDataModul1;
+import com.karyastudio.izn.views.fragments.modul2.FragmentDataModul2;
 
 public class FragmentData extends Fragment {
     private FragmentManager fms;

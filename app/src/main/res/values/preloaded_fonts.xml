@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
+        <item>@font/amiko_bold</item>
         <item>@font/habibi</item>
         <item>@font/judson</item>
         <item>@font/poppins_light</item>

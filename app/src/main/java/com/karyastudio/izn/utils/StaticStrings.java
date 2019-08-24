@@ -1,9 +1,20 @@
 package com.karyastudio.izn.utils;
 
 public class StaticStrings {
+
+    public static final String SHOWCASE_OPEN1 = "SHOWCASE_OPEN1";
+    public static final String SHOWCASE_OPEN2 = "SHOWCASE_OPEN2";
+
+    public static final String KDZ_STATUS_SENT = "SENT";
+    public static final String KDZ_STATUS_PENDING = "PENDING";
+
+    public static final String IZN_STATUS_SENT = "SENT";
+    public static final String IZN_STATUS_PENDING = "PENDING";
+
     public static final String TOAST_SUKSES_SIMPAN = "Sukses disimpan";
-    public static final String BASE_URL = "https://baznas.playon-id.com/webservice/v1/";
-    public static final String API_KEY = "155150200111030";
+    // public static final String BASE_URL = "https://baznas.playon-id.com/webservice/v1/";   http://app.puskasbaznas.com/
+    public static final String BASE_URL = "http://app.puskasbaznas.com/webservice/v1/";
+    public static final String API_KEY = "PRIVATE-API-KEY";
     public static final String M2_101 = "M2_101";
     public static final String M2_102 = "M2_102";
     public static final String M2_103 = "M2_103";
@@ -90,7 +101,6 @@ public class StaticStrings {
     public static final String M1_109 = "M1_109";
     public static final String M1_110 = "M1_110";
 
-
     public static final String M1_202nama = "M1_202nama";
     public static final String M1_202nik = "M1_202nik";
     public static final String M1_203 = "M1_203";
@@ -102,14 +112,12 @@ public class StaticStrings {
     public static final String M1_209 = "M1_209";
     public static final String M1_210 = "M1_210";
 
-
     public static final String M1_303 = "M1_303";
     public static final String M1_304 = "M1_304";
     public static final String M1_305 = "M1_305";
     public static final String M1_306 = "M1_306";
     public static final String M1_307 = "M1_307";
     public static final String M1_308 = "M1_308";
-
 
     public static final String M1_401 = "M1_401";
     public static final String M1_402 = "M1_402";
@@ -169,14 +177,11 @@ public class StaticStrings {
     public static final String M1_814 = "M1_814";
     public static final String M1_815 = "M1_815";
 
-
-
     public static final String M1_lik1 = "M1_lik1";
     public static final String M1_lik2 = "M1_lik2";
     public static final String M1_lik3 = "M1_lik3";
     public static final String M1_lik4 = "M1_lik4";
     public static final String M1_lik5 = "M1_lik5";
-
 
     public static final String M1_lik1B = "M1_lik1B";
     public static final String M1_lik2B = "M1_lik2B";

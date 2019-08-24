@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<com.emmasuzuki.easyform.EasyForm
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/easyForm"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:showErrorOn="change">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar10"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="Biaya Operasional"
-        app:titleTextColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txt_901"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="1. Biaya Operasional Pengelolaan ZIS setahun sebelumnya"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar10" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar10"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="Biaya Operasional"
+            app:titleTextColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/Toolbar.TitleTextSmall"/>
 
-    <EditText
-        android:id="@+id/edt_901"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Dalam Angka"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/txt_901"
-        app:layout_constraintStart_toStartOf="@+id/txt_901"
-        app:layout_constraintTop_toBottomOf="@+id/txt_901" />
+        <TextView
+            android:id="@+id/txt_901"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="1. Biaya Operasional Pengelolaan ZIS setahun sebelumnya"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar10" />
 
-
-    <Button
-        android:id="@+id/btn_next_901"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_btn2"
-        android:text="Simpan Semua"
-
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/edt_901"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edt_901"
-        app:layout_constraintTop_toBottomOf="@+id/edt_901" />
+        <com.emmasuzuki.easyform.EasyTextInputLayout
+            android:id="@+id/edt_901"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Dalam Angka"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/txt_901"
+            app:layout_constraintStart_toStartOf="@+id/txt_901"
+            app:layout_constraintTop_toBottomOf="@+id/txt_901"
+            app:errorMessage="@string/error_message_empty"
+            app:errorType="empty" />
 
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_next_901"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_btn2"
+            android:text="@string/btn_save"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/edt_901"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edt_901"
+            app:layout_constraintTop_toBottomOf="@+id/edt_901" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</com.emmasuzuki.easyform.EasyForm>

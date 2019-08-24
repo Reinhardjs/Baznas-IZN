@@ -1,22 +1,44 @@
 package com.karyastudio.izn.utils;
 
+import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.karyastudio.izn.dao.generateSchema.Kdzformqueue;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
+import com.karyastudio.izn.dao.generateSchema.IZN;
+import com.karyastudio.izn.dao.generateSchema.Iznformqueue;
+import com.karyastudio.izn.dao.generateSchema.KDZ;
 import com.karyastudio.izn.dao.generateSchema.Keluarga;
-import com.karyastudio.izn.dao.managerSchema.KDZFormQueueManager;
+import com.karyastudio.izn.dao.managerSchema.IZNFormQueueManager;
+import com.karyastudio.izn.dao.managerSchema.IZNManager;
+import com.karyastudio.izn.dao.managerSchema.KDZManager;
 import com.karyastudio.izn.dao.managerSchema.KeluargaManager;
+import com.karyastudio.izn.model.api.dataizn.IndeksZakatNasionalPojo;
+import com.karyastudio.izn.model.api.datakdz.KajianDampakZakatPojo;
 import com.karyastudio.izn.model.api.izn.IndeksZakatNasional;
 import com.karyastudio.izn.model.api.kdz.KajianDampakZakat;
 import com.karyastudio.izn.model.api.kdz.KajianDampakZakatKeluarga;
 import com.karyastudio.izn.network.BaseApi;
+import com.karyastudio.izn.views.activities.SurveyIZNActivity;
 import com.karyastudio.izn.views.activities.SurveyKDZActivity;
+import com.karyastudio.izn.views.fragments.modul1.FragmentDataModul1;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import java.util.ArrayList;
@@ -30,18 +52,59 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Utils {
 
+    static String debug_else = "";
+
+    private static List<Toast> toasts = new ArrayList<>();
+
+    public static void log(Class anyClass, String message){
+        Log.d("MYAPP", anyClass.getSimpleName() + ", " + message);
+    }
+
     public static void log(String message){
         Log.d("MYAPP", message);
     }
 
-    public static Toast Toast(Context context, String msg) {
-        return Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+    public static void toast(Context context, String msg) {
+        for (Toast toast : Utils.toasts){
+            toast.cancel();
+        }
+
+        toasts.clear();
+
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        toasts.add(toast);
+        toast.show();
     }
+
     public static boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+
+        if (netInfo == null) return false;
+
+        for (NetworkInfo networkInfo : netInfo) {
+            if (networkInfo == null)
+                continue;
+
+            if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                return true;
+            }
+        }
+
         //should check null because in airplane mode it will be null
-        return (netInfo != null && netInfo.isConnected());
+
+        boolean have_WIFI = false;
+        boolean have_MobileData = false;
+
+        for (NetworkInfo info : netInfo){
+            if (info.getTypeName().equalsIgnoreCase("WIFI"))
+                if (info.isConnected())
+                    have_WIFI = true;
+            if (info.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (info.isConnected())
+                    have_MobileData = true;
+        }
+        return have_MobileData | have_WIFI;
     }
 
     public static Retrofit initializeRetrofit() {
@@ -63,13 +126,112 @@ public class Utils {
     }
 
 
+    public static void checkAppUpdates(Context context){
+        // AppUpdater appUpdater = new AppUpdater(this);
+        // appUpdater.start();
+
+        // Creates instance of the manager.
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(context);
+
+        // Returns an intent object that you use to check for an update.
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        Utils.log("REQUEST UPDATE ?");
+
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+
+            Utils.log("REQUEST UPDATE RESPONES ?");
+
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    // For a flexible update, use AppUpdateType.FLEXIBLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                // Request the update.
+
+                Utils.log("REQUEST UPDATE YES");
+
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                            appUpdateInfo,
+                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                            AppUpdateType.FLEXIBLE,
+                            // The current activity making the update request.
+                            (Activity) context,
+                            // Include a request code to later monitor this update request.
+                            123);
+                } catch (IntentSender.SendIntentException e) {
+                    log("UPDATE MANAGER EXCEPTION : " + e.toString());
+                    // Toast.makeText(context, "Checking updates, (1)", Toast.LENGTH_SHORT).show();
+                    manualUpdateRequest(context);
+                    debug_else = "(1)";
+                    e.printStackTrace();
+                }
+            }
+
+            else {
+                // Toast.makeText(context, "Checking updates, (2)", Toast.LENGTH_SHORT).show();
+                manualUpdateRequest(context);
+                debug_else = "(2)";
+            }
+
+        });
+    }
+
+    public static void manualUpdateRequest(Context context){
+        WSCallerVersionListener listener = new WSCallerVersionListener() {
+            @Override
+            public void onGetResponse(boolean isUpdateAvailable, String versionName) {
+                Log.e("ResultAPPMAIN", String.valueOf(isUpdateAvailable));
+                if (isUpdateAvailable) {
+                    showUpdateDialog(versionName, context);
+                }
+            }
+        };
+
+        new GooglePlayStoreAppVersionNameLoader(context, listener).execute();
+    }
+
+    /**
+     * Method to show update dialog
+     */
+    private static void showUpdateDialog(String versionName, Context context) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // alertDialogBuilder.setTitle(context.getString(R.string.app_name));
+        // alertDialogBuilder.setMessage(MainActivity.this.getString(R.string.update_message));
+        alertDialogBuilder.setTitle("Pembaruan aplikasi " + debug_else);
+        alertDialogBuilder.setMessage("Versi terbaru (v" + versionName + ") aplikasi tersedia di playstore. Update sekarang?");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName())));
+                dialog.cancel();
+            }
+        });
+//        alertDialogBuilder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                if (isForceUpdate) {
+//                    finish();
+//                }
+//                dialog.dismiss();
+//            }
+//        });
+
+        alertDialogBuilder.show();
+    }
+
+
+
     public static <T> List<T> removeDuplicates(List<T> list)
     {
 
         // Create a new ArrayList
         List<T> newList = new ArrayList<T>();
 
-        // Traverse through the first list
+        // Traverse through the first keluargaList
         for (T element : list) {
 
             // If this element is not present in newList
@@ -80,145 +242,120 @@ public class Utils {
             }
         }
 
-        // return the new list
+        // return the new keluargaList
         return newList;
     }
-    public static void sendModulKeluarga(Context context) {
 
-        List<Keluarga> list = KeluargaManager.loadAll(context);
-        List<Keluarga> newList = removeDuplicates(list);
-        for (int i = 0; i < newList.size(); i++){
+    public static List<IZN> removeDuplicatesIZN(List<IZN> list){
+        List<IZN> newList = new ArrayList<>();
+
+        for (IZN element : list){
+            boolean found = false;
+
+            for (IZN newElement : newList){
+                if (newElement.getFi_id().equals(element.getFi_id())){
+                    found = true;
+                }
+            }
+
+            if (!found){
+                newList.add(element);
+            }
+        }
+
+        return newList;
+    }
+
+    public static List<KDZ> removeDuplicatesKDZ(List<KDZ> list){
+        List<KDZ> newList = new ArrayList<>();
+
+        for (KDZ element : list){
+            boolean found = false;
+
+            for (KDZ newElement : newList){
+                if (newElement.getFk_id().equals(element.getFk_id())){
+                    found = true;
+                }
+            }
+
+            if (!found){
+                newList.add(element);
+            }
+        }
+
+        return newList;
+    }
+
+    public static boolean replaceOldIZN(List<IZN> list, IZN newElement){
+        boolean isFound = false;
+
+        try {
+            for (IZN element : list) {
+                if (element.getFi_id().equals(newElement.getFi_id())) {
+                    isFound = true;
+                    int index = list.indexOf(element);
+
+                    list.remove(index);
+                    list.add(index, newElement);
+                    break;
+                }
+            }
+        } catch (Exception e){
+            Utils.log("replace old IZN EXCEPTION : " + e.toString());
+        }
+
+        return isFound;
+    }
+
+    public static boolean replaceOldKDZ(List<KDZ> list, KDZ newElement){
+        boolean isFound = false;
+
+        try {
+            for (KDZ element : list) {
+                if (element.getFk_id().equals(newElement.getFk_id())) {
+                    isFound = true;
+                    int index = list.indexOf(element);
+
+                    list.remove(index);
+                    list.add(index, newElement);
+                    break;
+                }
+            }
+        } catch (Exception e){
+            Utils.log("replace old KDZ EXCEPTION : " + e.toString());
+        }
+
+        return isFound;
+    }
+
+    public static void sendModulKeluarga(Context context, String fk_id, String type) {
+
+        List<Keluarga> queue = KeluargaManager.loadAllwithFKID(context, fk_id);
+        // List<Keluarga> queue = removeDuplicates(list);
+
+        Utils.log("SEND MODUL KELUARGA COUNT : " + queue.size());
+
+        for (int i = 0; i < queue.size(); i++){
+            Utils.log("KELUARGA FKI ID : " + queue.get(i).getFki_id());
+            Utils.log("Keluarga FKI FK ID : " + queue.get(i).getFki_fk_id());
+            Utils.log("KELUARGA NAMA : " + queue.get(i).getFk_202_nama());
+            Utils.log("KELUARGA POS : " + i);
+
             saveAndNextKeluarga(context,
-                    newList.get(i).getFki_id(),
-                    newList.get(i).getFki_fk_id(),
-                    newList.get(i).getFk_202_nama(),
-                    newList.get(i).getFk_202_nik(),
-                    newList.get(i).getFk_203(),
-                    newList.get(i).getFk_204(),
-                    newList.get(i).getFk_205(),
-                    newList.get(i).getFk_206(),
-                    newList.get(i).getFk_207(),
-                    newList.get(i).getFk_208(),
-                    newList.get(i).getFk_209(),
-                    newList.get(i).getFk_210(),
-                    newList.get(i).getFk_303(),
-                    newList.get(i).getFk_304(),
-                    newList.get(i).getFk_305(),
-                    newList.get(i).getFk_306(),
-                    newList.get(i).getFk_307(),
-                    newList.get(i).getFk_308()
+                    type,
+                    queue.get(i)
             );
         }
 
-        KeluargaManager.removeAll(context);
+        // KeluargaManager.removeAll(context);
     }
 
-    public static void sendModul1(Context context){
-        List<Kdzformqueue> list = KDZFormQueueManager.loadAll(context);
-        List<Kdzformqueue> newList = removeDuplicates(list);
-
-        for (Kdzformqueue queue : newList) {
-            saveAndNextKajian(context,
-                    queue.getRequest_type(),
-                    queue.getFk_id(),
-                    queue.getUID(),
-                    queue.getM1_created_at(),
-                    queue.getM1_updated_at(),
-                    queue.getM1_nama(),
-                    queue.getM1_101(),
-                    queue.getM1_102(),
-                    queue.getM1_103(),
-                    queue.getM1_104(),
-                    queue.getM1_105(),
-                    queue.getM1_106(),
-                    queue.getM1_107(),
-                    queue.getM1_108(),
-                    queue.getM1_109(),
-                    queue.getM1_110(),
-                    queue.getM1_401(),
-                    queue.getM1_402(),
-                    queue.getM1_403(),
-                    queue.getM1_404(),
-                    queue.getM1_405(),
-                    queue.getM1_406(),
-                    queue.getM1_407(),
-                    queue.getM1_501(),
-                    queue.getM1_502(),
-                    queue.getM1_503(),
-                    queue.getM1_504(),
-                    queue.getM1_505(),
-                    queue.getM1_506(),
-                    queue.getM1_507(),
-                    queue.getM1_508(),
-                    queue.getM1_509(),
-                    queue.getM1_510(),
-                    queue.getM1_601(),
-                    queue.getM1_601_kode(),
-                    queue.getM1_602(),
-                    queue.getM1_602_kode(),
-                    queue.getM1_603(),
-                    queue.getM1_603_kode(),
-                    queue.getM1_604(),
-                    queue.getM1_605(),
-                    queue.getM1_606(),
-                    queue.getM1_607(),
-                    queue.getM1_608(),
-                    queue.getM1_609(),
-                    queue.getM1_610(),
-                    queue.getM1_611(),
-                    queue.getM1_612(),
-                    queue.getM1_613(),
-                    queue.getM1_614(),
-                    queue.getM1_615(),
-                    queue.getM1_616(),
-                    queue.getM1_617(),
-                    queue.getM1_618(),
-                    queue.getM1_701(),
-                    queue.getM1_702(),
-                    queue.getM1_703(),
-                    queue.getM1_801(),
-                    queue.getM1_802(),
-                    queue.getM1_803(),
-                    queue.getM1_804(),
-                    queue.getM1_805(),
-                    queue.getM1_806(),
-                    queue.getM1_807(),
-                    queue.getM1_808(),
-                    queue.getM1_809(),
-                    queue.getM1_810(),
-                    queue.getM1_811(),
-                    queue.getM1_812(),
-                    queue.getM1_813(),
-                    queue.getM1_814(),
-                    queue.getM1_815(),
-                    queue.getM1_lik1(),
-                    queue.getM1_lik1(),
-                    queue.getM1_lik2(),
-                    queue.getM1_lik2(),
-                    queue.getM1_lik3(),
-                    queue.getM1_lik3(),
-                    queue.getM1_lik4(),
-                    queue.getM1_lik4(),
-                    queue.getM1_lik5(),
-                    queue.getM1_lik5(),
-                    queue.getM1_lik1B(),
-                    queue.getM1_lik1B(),
-                    queue.getM1_lik2B(),
-                    queue.getM1_lik2B(),
-                    queue.getM1_lik3B(),
-                    queue.getM1_lik3B(),
-                    queue.getM1_lik4B(),
-                    queue.getM1_lik4B(),
-                    queue.getM1_lik5B(),
-                    queue.getM1_lik5B()
-            );
-        }
-
-        KDZFormQueueManager.removeAll(context);
-    }
 
     public static void addQueueModul1(Context context, String type) {
-        Kdzformqueue KDZFORMQUEUE = new Kdzformqueue();
+//        Kdzformqueue KDZFORMQUEUE = new Kdzformqueue();
+        KDZ KDZFORMQUEUE = new KDZ();
+        KDZFORMQUEUE.setCountKeluarga(Prefs.getString(StaticStrings.M1_108, "0"));
+        KDZFORMQUEUE.setStatus(StaticStrings.KDZ_STATUS_PENDING);
         KDZFORMQUEUE.setRequest_type(type);
         KDZFORMQUEUE.setFk_id(SurveyKDZActivity.form_input_id);
         KDZFORMQUEUE.setUID(Prefs.getString("UID", "kosong"));
@@ -232,7 +369,7 @@ public class Utils {
         KDZFORMQUEUE.setM1_105(Prefs.getString(StaticStrings.M1_105, "kosong"));
         KDZFORMQUEUE.setM1_106(Prefs.getString(StaticStrings.M1_106, "kosong"));
         KDZFORMQUEUE.setM1_107(Prefs.getString(StaticStrings.M1_107, "kosong"));
-        KDZFORMQUEUE.setM1_108(Prefs.getString(StaticStrings.M1_108, "kosong"));
+        KDZFORMQUEUE.setM1_108(Prefs.getString(StaticStrings.M1_108, "0"));
         KDZFORMQUEUE.setM1_109(Prefs.getString(StaticStrings.M1_109, "kosong"));
         KDZFORMQUEUE.setM1_110(Prefs.getString(StaticStrings.M1_110, "kosong"));
         KDZFORMQUEUE.setM1_401(Prefs.getString(StaticStrings.M1_401, "kosong"));
@@ -302,162 +439,279 @@ public class Utils {
         KDZFORMQUEUE.setM1_lik4B(Prefs.getString(StaticStrings.M1_lik4B, "kosong"));
         KDZFORMQUEUE.setM1_lik5B(Prefs.getString(StaticStrings.M1_lik5B, "kosong"));
 
-        KDZFormQueueManager.insertOrReplace(context, KDZFORMQUEUE);
+        //KDZFormQueueManager.insertOrReplace(context, KDZFORMQUEUE);
+        KDZManager.insertOrReplace(context, KDZFORMQUEUE, SurveyKDZActivity.getIsComplete());
+    }
+
+    public static void addQueueModul2(Context context, String type){
+        IZN iznformqueue = new IZN();
+        iznformqueue.setStatus(StaticStrings.IZN_STATUS_PENDING);
+        iznformqueue.setRequest_type(type);
+        iznformqueue.setFi_id(SurveyIZNActivity.form_input_id);
+        iznformqueue.setFi_u_id(Prefs.getString("UID", "kosong"));
+        iznformqueue.setFi_date_created(Prefs.getString(StaticStrings.M2_created_at, "kosong"));
+        iznformqueue.setFi_date_updated(Prefs.getString(StaticStrings.M2_update_at, "kosong"));
+        iznformqueue.setFi_101_jenis_lembaga(Prefs.getString(StaticStrings.M2_101, "kosong"));
+        iznformqueue.setFi_102_nama_laz(Prefs.getString(StaticStrings.M2_102, "kosong"));
+        iznformqueue.setFi_103_provinsi(Prefs.getString(StaticStrings.M2_103, "kosong"));
+        iznformqueue.setFi_104_kabupaten(Prefs.getString(StaticStrings.M2_104, "kosong"));
+        iznformqueue.setFi_201_regulasi_ada(Prefs.getString(StaticStrings.M2_201yt, "-1. Nochoice"));
+        iznformqueue.setFi_201_regulasi(Prefs.getString(StaticStrings.M2_201, ""));
+        iznformqueue.setFi_301_alokasi_apbn_2_tahun_lalu_ada(Prefs.getString(StaticStrings.M2_301yt, "-1. Nochoice"));
+        iznformqueue.setFi_301_alokasi_apbn_2_tahun_lalu(Prefs.getString(StaticStrings.M2_301, "0"));
+        iznformqueue.setFi_302_alokasi_apbn_1_tahun_lalu_ada(Prefs.getString(StaticStrings.M2_302yt, "-1. Nochoice"));
+        iznformqueue.setFi_302_alokasi_apbn_1_tahun_lalu(Prefs.getString(StaticStrings.M2_302, "0"));
+        iznformqueue.setFi_401_lembaga_zakat_resmi_ada(Prefs.getString(StaticStrings.M2_401yt, "-1. Nochoice"));
+        iznformqueue.setFi_401_lembaga_zakat_resmi(Prefs.getString(StaticStrings.M2_401, "0"));
+        iznformqueue.setFi_402_jumlah_mustahik(Prefs.getString(StaticStrings.M2_402, "kosong"));
+        iznformqueue.setFi_403_mustahik_kabupaten(Prefs.getString(StaticStrings.M2_403yt1, "kosong"));
+        iznformqueue.setFi_403_mustahik_kecamatan(Prefs.getString(StaticStrings.M2_403yt2, "kosong"));
+        iznformqueue.setFi_404_jumlah_muzakki(Prefs.getString(StaticStrings.M2_404, "kosong"));
+        iznformqueue.setFi_405_jumlah_munsafki(Prefs.getString(StaticStrings.M2_405, "kosong"));
+        iznformqueue.setFi_406_jumlah_muzakki_badan_usaha(Prefs.getString(StaticStrings.M2_406, "kosong"));
+        iznformqueue.setFi_501_total_himpunan_tahun_2(Prefs.getString(StaticStrings.M2_501, "kosong"));
+        iznformqueue.setFi_502_total_himpunan_tahun_1(Prefs.getString(StaticStrings.M2_502, "kosong"));
+        iznformqueue.setFi_601_program_kerja(Prefs.getString(StaticStrings.M2_601yt, "kosong"));
+        iznformqueue.setFi_602_rencana_strategis(Prefs.getString(StaticStrings.M2_602yt, "kosong"));
+        iznformqueue.setFi_603_sop_ada(Prefs.getString(StaticStrings.M2_603yt, "kosong"));
+        iznformqueue.setFi_603_sop(Prefs.getString(StaticStrings.M2_603, "kosong"));
+        iznformqueue.setFi_604_iso_ada(Prefs.getString(StaticStrings.M2_604yt, "kosong"));
+        iznformqueue.setFi_604_iso(Prefs.getString(StaticStrings.M2_604, "kosong"));
+        iznformqueue.setFi_701_total_dana_zis(Prefs.getString(StaticStrings.M2_701, "kosong"));
+        iznformqueue.setFi_702_dana_zis_dakwah_ada(Prefs.getString(StaticStrings.M2_702yt, "kosong"));
+        iznformqueue.setFi_702_dana_zis_dakwah(Prefs.getString(StaticStrings.M2_702, "kosong"));
+        iznformqueue.setFi_703_penyaluran_zis_produktif_rencana(Prefs.getString(StaticStrings.M2_7031, "kosong"));
+        iznformqueue.setFi_703_penyaluran_zis_produktif_realisasi(Prefs.getString(StaticStrings.M2_7032, "kosong"));
+        iznformqueue.setFi_704_penyaluran_zis_sosial_rencana(Prefs.getString(StaticStrings.M2_7041, "kosong"));
+        iznformqueue.setFi_704_penyaluran_zis_sosial_realisasi(Prefs.getString(StaticStrings.M2_7042, "kosong"));
+        iznformqueue.setFi_801_laporan_keuangan(Prefs.getString(StaticStrings.M2_801yt, "kosong"));
+        iznformqueue.setFi_802_laporan_keuangan_teraudit(Prefs.getString(StaticStrings.M2_802yt1, "kosong"));
+        iznformqueue.setFi_802_laporan_keuangan_wtp(Prefs.getString(StaticStrings.M2_802yt2, "kosong"));
+        iznformqueue.setFi_803_laporan_keuangan_publikasi(Prefs.getString(StaticStrings.M2_803yt, "kosong"));
+        iznformqueue.setFi_804_laporan_audit_syariah(Prefs.getString(StaticStrings.M2_804yt, "kosong"));
+        iznformqueue.setFi_901_biaya_operasional(Prefs.getString(StaticStrings.M2_901, "kosong"));
+
+        // IZNFormQueueManager.insertOrReplace(context, iznformqueue);
+        IZNManager.insertOrReplace(context, iznformqueue, SurveyIZNActivity.getIsComplete());
+        Utils.log("INSERT M2 SUCCESS");
+    }
+
+    public static void sendModul1(Context context){
+        List<KDZ> list = KDZManager.loadAll(context);
+        List<KDZ> newList = removeDuplicates(list);
+
+        for (KDZ queue : newList) {
+            saveAndNextKajian(context,
+                    SetGet.getResponseFromKDZ(queue)
+            );
+        }
+
+        KDZManager.removeAll(context);
     }
 
     public static void sendModul2(Context context) {
-        saveAndNext(context,
-                "NULL",
-                Prefs.getString("UID", "kosong"),
-                Prefs.getString(StaticStrings.M2_created_at, "kosong"),
-                Prefs.getString(StaticStrings.M2_update_at, "kosong"),
-                Prefs.getString(StaticStrings.M2_101, "kosong"),
-                Prefs.getString(StaticStrings.M2_102, "kosong"),
-                Prefs.getString(StaticStrings.M2_103, "kosong"),
-                Prefs.getString(StaticStrings.M2_104, "kosong"),
-                Prefs.getString(StaticStrings.M2_201yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_201, "kosong"),
-                Prefs.getString(StaticStrings.M2_301yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_301, "kosong"),
-                Prefs.getString(StaticStrings.M2_302yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_302, "kosong"),
-                Prefs.getString(StaticStrings.M2_401yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_401, "kosong"),
-                Prefs.getString(StaticStrings.M2_402, "kosong"),
-                Prefs.getString(StaticStrings.M2_403yt1, "kosong"),
-                Prefs.getString(StaticStrings.M2_403yt2, "kosong"),
-                Prefs.getString(StaticStrings.M2_404, "kosong"),
-                Prefs.getString(StaticStrings.M2_405, "kosong"),
-                Prefs.getString(StaticStrings.M2_406, "kosong"),
+        List<Iznformqueue> list = IZNFormQueueManager.loadAll(context);
+        List<Iznformqueue> newList = removeDuplicates(list);
 
-                Prefs.getString(StaticStrings.M2_501, "kosong"),
-                Prefs.getString(StaticStrings.M2_502, "kosong"),
-                Prefs.getString(StaticStrings.M2_601yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_602yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_603yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_603, "kosong"),
-                Prefs.getString(StaticStrings.M2_604yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_604, "kosong"),
-                Prefs.getString(StaticStrings.M2_701, "kosong"),
-                Prefs.getString(StaticStrings.M2_702yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_702, "kosong"),
-                Prefs.getString(StaticStrings.M2_7031, "kosong"),
-                Prefs.getString(StaticStrings.M2_7032, "kosong"),
-                Prefs.getString(StaticStrings.M2_7041, "kosong"),
-                Prefs.getString(StaticStrings.M2_7042, "kosong"),
-                Prefs.getString(StaticStrings.M2_801yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_802yt1, "kosong"),
-                Prefs.getString(StaticStrings.M2_802yt2, "kosong"),
-                Prefs.getString(StaticStrings.M2_803yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_804yt, "kosong"),
-                Prefs.getString(StaticStrings.M2_901, "kosong")
-        );
+        Utils.log("SEND MODULE QUEUE SIZE : " + list.size());
+
+//        for (Iznformqueue queue : newList) {
+//            saveAndNext(context,
+//                    queue.getRequest_type(),
+//                    queue.getFi_id(),
+//                    queue.getFi_u_id(),
+//                    queue.getFi_date_created(),
+//                    queue.getFi_date_updated(),
+//                    queue.getFi_101_jenis_lembaga(),
+//                    queue.getFi_102_nama_laz(),
+//                    queue.getFi_103_provinsi(),
+//                    queue.getFi_104_kabupaten(),
+//                    queue.getFi_201_regulasi_ada(),
+//                    queue.getFi_201_regulasi(),
+//                    queue.getFi_301_alokasi_apbn_2_tahun_lalu_ada(),
+//                    queue.getFi_301_alokasi_apbn_2_tahun_lalu(),
+//                    queue.getFi_302_alokasi_apbn_1_tahun_lalu_ada(),
+//                    queue.getFi_302_alokasi_apbn_1_tahun_lalu(),
+//                    queue.getFi_401_lembaga_zakat_resmi_ada(),
+//                    queue.getFi_401_lembaga_zakat_resmi(),
+//                    queue.getFi_402_jumlah_mustahik(),
+//                    queue.getFi_403_mustahik_kabupaten(),
+//                    queue.getFi_403_mustahik_kecamatan(),
+//                    queue.getFi_404_jumlah_muzakki(),
+//                    queue.getFi_405_jumlah_munsafki(),
+//                    queue.getFi_406_jumlah_muzakki_badan_usaha(),
+//                    queue.getFi_501_total_himpunan_tahun_2(),
+//                    queue.getFi_502_total_himpunan_tahun_1(),
+//                    queue.getFi_601_program_kerja(),
+//                    queue.getFi_602_rencana_strategis(),
+//                    queue.getFi_603_sop_ada(),
+//                    queue.getFi_603_sop(),
+//                    queue.getFi_604_iso_ada(),
+//                    queue.getFi_604_iso(),
+//                    queue.getFi_701_total_dana_zis(),
+//                    queue.getFi_702_dana_zis_dakwah_ada(),
+//                    queue.getFi_702_dana_zis_dakwah(),
+//                    queue.getFi_703_penyaluran_zis_produktif_rencana(),
+//                    queue.getFi_703_penyaluran_zis_produktif_realisasi(),
+//                    queue.getFi_704_penyaluran_zis_sosial_rencana(),
+//                    queue.getFi_704_penyaluran_zis_sosial_realisasi(),
+//                    queue.getFi_801_laporan_keuangan(),
+//                    queue.getFi_802_laporan_keuangan_teraudit(),
+//                    queue.getFi_802_laporan_keuangan_wtp(),
+//                    queue.getFi_803_laporan_keuangan_publikasi(),
+//                    queue.getFi_804_laporan_audit_syariah(),
+//                    queue.getFi_901_biaya_operasional()
+//            );
+//        }
+
+        IZNFormQueueManager.removeAll(context);
     }
 
 
-    private static void saveAndNext(final Context context,
-                                    String fi_id,
-                                    String fi_u_id,
-                                    String fi_date_created,
-                                    String fi_date_updated,
-                                    String fi_101_jenis_lembaga,
-                                    String fi_102_nama_laz,
-                                    String fi_103_provinsi,
-                                    String fi_104_kabupaten,
-                                    String fi_201_regulasi_ada,
-                                    String fi_201_regulasi,
-                                    String fi_301_alokasi_apbn_2_tahun_lalu_ada,
-                                    String fi_301_alokasi_apbn_2_tahun_lalu,
-                                    String fi_302_alokasi_apbn_1_tahun_lalu_ada,
-                                    String fi_302_alokasi_apbn_1_tahun_lalu,
-                                    String fi_401_lembaga_zakat_resmi_ada,
-                                    String fi_401_lembaga_zakat_resmi,
-                                    String fi_402_jumlah_mustahik,
-                                    String fi_403_mustahik_kabupaten,
-                                    String fi_403_mustahik_kecamatan,
-                                    String fi_404_jumlah_muzakki,
-                                    String fi_405_jumlah_munsafik,
-                                    String fi_406_jumlah_muzakki_badan_usaha,
-                                    String fi_501_total_himpunan_tahun_2,
-                                    String fi_502_total_himpunan_tahun_1,
-                                    String fi_601_program_kerja,
-                                    String fi_602_rencana_strategis,
-                                    String fi_603_sop_ada,
-                                    String fi_603_sop,
-                                    String fi_604_iso_ada,
-                                    String fi_604_iso,
-                                    String fi_701_total_dana_zis,
-                                    String fi_702_dana_zis_dakwah_ada,
-                                    String fi_702_dana_zis_dakwah,
-                                    String fi_703_penyaluran_zis_produktif_rencana,
-                                    String fi_703_penyaluran_zis_produktif_realisasi,
-                                    String fi_704_penyaluran_zis_sosial_rencana,
-                                    String fi_704_penyaluran_zis_sosial_realisasi,
-                                    String fi_801_laporan_keuangan,
-                                    String fi_802_laporan_keuangan_teraudit,
-                                    String fi_802_laporan_keuangan_wtp,
-                                    String fi_803_laporan_keuangan_publikasi,
-                                    String fi_804_laporan_audit_syariah,
-                                    String fi_805_biaya_operasional) {
+    public static void saveAndNext(final Context context, IndeksZakatNasionalPojo data) {
 
+        Utils.log("SENDING MODUL 2 TO SERVER");
 
         BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
-        Call<IndeksZakatNasional> result =
-                apiService.izn(StaticStrings.API_KEY,
-                        fi_id,
-                        fi_u_id,
-                        fi_date_created,
-                        fi_date_updated,
-                        fi_101_jenis_lembaga,
-                        fi_102_nama_laz,
-                        fi_103_provinsi,
-                        fi_104_kabupaten,
-                        fi_201_regulasi_ada,
-                        fi_201_regulasi,
-                        fi_301_alokasi_apbn_2_tahun_lalu_ada,
-                        fi_301_alokasi_apbn_2_tahun_lalu,
-                        fi_302_alokasi_apbn_1_tahun_lalu_ada,
-                        fi_302_alokasi_apbn_1_tahun_lalu,
-                        fi_401_lembaga_zakat_resmi_ada,
-                        fi_401_lembaga_zakat_resmi,
-                        fi_402_jumlah_mustahik,
-                        fi_403_mustahik_kabupaten,
-                        fi_403_mustahik_kecamatan,
-                        fi_404_jumlah_muzakki,
-                        fi_405_jumlah_munsafik,
-                        fi_406_jumlah_muzakki_badan_usaha,
-                        fi_501_total_himpunan_tahun_2,
-                        fi_502_total_himpunan_tahun_1,
-                        fi_601_program_kerja,
-                        fi_602_rencana_strategis,
-                        fi_603_sop_ada,
-                        fi_603_sop,
-                        fi_604_iso_ada,
-                        fi_604_iso,
-                        fi_701_total_dana_zis,
-                        fi_702_dana_zis_dakwah_ada,
-                        fi_702_dana_zis_dakwah,
-                        fi_703_penyaluran_zis_produktif_rencana,
-                        fi_703_penyaluran_zis_produktif_realisasi,
-                        fi_704_penyaluran_zis_sosial_rencana,
-                        fi_704_penyaluran_zis_sosial_realisasi,
-                        fi_801_laporan_keuangan,
-                        fi_802_laporan_keuangan_teraudit,
-                        fi_802_laporan_keuangan_wtp,
-                        fi_803_laporan_keuangan_publikasi,
-                        fi_804_laporan_audit_syariah,
-                        fi_805_biaya_operasional
-                );
+        Call<IndeksZakatNasional> result = null;
+
+        IZN queue = SetGet.getIZNFromResponse(data);
+
+        if (queue.getRequest_type().equals(SurveyIZNActivity.REQUEST_TYPE_INSERT)) {
+            result =
+                    apiService.izn(StaticStrings.API_KEY,
+                            queue.getFi_id(),
+                            queue.getFi_u_id(),
+                            queue.getFi_date_created(),
+                            queue.getFi_date_updated(),
+                            queue.getFi_101_jenis_lembaga(),
+                            queue.getFi_102_nama_laz(),
+                            queue.getFi_103_provinsi(),
+                            queue.getFi_104_kabupaten(),
+                            queue.getFi_201_regulasi_ada(),
+                            queue.getFi_201_regulasi(),
+                            queue.getFi_301_alokasi_apbn_2_tahun_lalu_ada(),
+                            queue.getFi_301_alokasi_apbn_2_tahun_lalu(),
+                            queue.getFi_302_alokasi_apbn_1_tahun_lalu_ada(),
+                            queue.getFi_302_alokasi_apbn_1_tahun_lalu(),
+                            queue.getFi_401_lembaga_zakat_resmi_ada(),
+                            queue.getFi_401_lembaga_zakat_resmi(),
+                            queue.getFi_402_jumlah_mustahik(),
+                            queue.getFi_403_mustahik_kabupaten(),
+                            queue.getFi_403_mustahik_kecamatan(),
+                            queue.getFi_404_jumlah_muzakki(),
+                            queue.getFi_405_jumlah_munsafki(),
+                            queue.getFi_406_jumlah_muzakki_badan_usaha(),
+                            queue.getFi_501_total_himpunan_tahun_2(),
+                            queue.getFi_502_total_himpunan_tahun_1(),
+                            queue.getFi_601_program_kerja(),
+                            queue.getFi_602_rencana_strategis(),
+                            queue.getFi_603_sop_ada(),
+                            queue.getFi_603_sop(),
+                            queue.getFi_604_iso_ada(),
+                            queue.getFi_604_iso(),
+                            queue.getFi_701_total_dana_zis(),
+                            queue.getFi_702_dana_zis_dakwah_ada(),
+                            queue.getFi_702_dana_zis_dakwah(),
+                            queue.getFi_703_penyaluran_zis_produktif_rencana(),
+                            queue.getFi_703_penyaluran_zis_produktif_realisasi(),
+                            queue.getFi_704_penyaluran_zis_sosial_rencana(),
+                            queue.getFi_704_penyaluran_zis_sosial_realisasi(),
+                            queue.getFi_801_laporan_keuangan(),
+                            queue.getFi_802_laporan_keuangan_teraudit(),
+                            queue.getFi_802_laporan_keuangan_wtp(),
+                            queue.getFi_803_laporan_keuangan_publikasi(),
+                            queue.getFi_804_laporan_audit_syariah(),
+                            queue.getFi_901_biaya_operasional()
+                    );
+        } else if (queue.getRequest_type().equals(SurveyKDZActivity.REQUEST_TYPE_UPDATE)){
+            result =
+                    apiService.iznUpdate(StaticStrings.API_KEY,
+                            queue.getFi_id(),
+                            queue.getFi_u_id(),
+                            queue.getFi_date_created(),
+                            queue.getFi_date_updated(),
+                            queue.getFi_101_jenis_lembaga(),
+                            queue.getFi_102_nama_laz(),
+                            queue.getFi_103_provinsi(),
+                            queue.getFi_104_kabupaten(),
+                            queue.getFi_201_regulasi_ada(),
+                            queue.getFi_201_regulasi(),
+                            queue.getFi_301_alokasi_apbn_2_tahun_lalu_ada(),
+                            queue.getFi_301_alokasi_apbn_2_tahun_lalu(),
+                            queue.getFi_302_alokasi_apbn_1_tahun_lalu_ada(),
+                            queue.getFi_302_alokasi_apbn_1_tahun_lalu(),
+                            queue.getFi_401_lembaga_zakat_resmi_ada(),
+                            queue.getFi_401_lembaga_zakat_resmi(),
+                            queue.getFi_402_jumlah_mustahik(),
+                            queue.getFi_403_mustahik_kabupaten(),
+                            queue.getFi_403_mustahik_kecamatan(),
+                            queue.getFi_404_jumlah_muzakki(),
+                            queue.getFi_405_jumlah_munsafki(),
+                            queue.getFi_406_jumlah_muzakki_badan_usaha(),
+                            queue.getFi_501_total_himpunan_tahun_2(),
+                            queue.getFi_502_total_himpunan_tahun_1(),
+                            queue.getFi_601_program_kerja(),
+                            queue.getFi_602_rencana_strategis(),
+                            queue.getFi_603_sop_ada(),
+                            queue.getFi_603_sop(),
+                            queue.getFi_604_iso_ada(),
+                            queue.getFi_604_iso(),
+                            queue.getFi_701_total_dana_zis(),
+                            queue.getFi_702_dana_zis_dakwah_ada(),
+                            queue.getFi_702_dana_zis_dakwah(),
+                            queue.getFi_703_penyaluran_zis_produktif_rencana(),
+                            queue.getFi_703_penyaluran_zis_produktif_realisasi(),
+                            queue.getFi_704_penyaluran_zis_sosial_rencana(),
+                            queue.getFi_704_penyaluran_zis_sosial_realisasi(),
+                            queue.getFi_801_laporan_keuangan(),
+                            queue.getFi_802_laporan_keuangan_teraudit(),
+                            queue.getFi_802_laporan_keuangan_wtp(),
+                            queue.getFi_803_laporan_keuangan_publikasi(),
+                            queue.getFi_804_laporan_audit_syariah(),
+                            queue.getFi_901_biaya_operasional()
+                    );
+        }
+
         result.enqueue(new Callback<IndeksZakatNasional>() {
             @Override
             public void onResponse(@NonNull Call<IndeksZakatNasional> call, @NonNull Response<IndeksZakatNasional> response) {
                 try {
                     if (response.body().getStatus().equalsIgnoreCase("success")) {
-                        Toast.makeText(context, "Berhasil Dimasukan", Toast.LENGTH_LONG).show();
+
+                        String familyID;
+                        if (queue.getRequest_type().equals(SurveyIZNActivity.REQUEST_TYPE_INSERT)) {
+                            Prefs.putString("parent_id_izn", response.body().getFi_id().toString());
+                            Utils.log("MESSAGE : " + response.body().getMessage());
+
+                            Utils.log("Send Modul 2 Berhasil, PARENT/FAMILY ID : " + response.body().getFi_id().toString());
+
+                            familyID = response.body().getFi_id().toString();
+
+                            // Karena id nya itu random (date) maka harus diupdate jadi id yang beneran
+                            data.setFi_id(familyID);
+                        } else {
+                            familyID = queue.getFi_id();
+                        }
+
+                        Toast.makeText(context, "Berhasil dikirim ke server", Toast.LENGTH_LONG).show();
+
+                        queue.setStatus(StaticStrings.IZN_STATUS_SENT);
+                        IZNManager.remove(context, queue);
+
+                        queue.setFi_id(familyID);
+                        IZNManager.insertOrReplace(context, queue, null);
+
+                        data.setStatus(StaticStrings.IZN_STATUS_SENT);
+                        data.getLiveStatus().setValue(StaticStrings.IZN_STATUS_SENT);
+
                     } else {
-                        Toast.makeText(context, "Data gagal dimasukkan, silakan periksa data Anda", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Data gagal dikirim, silakan periksa data Anda", Toast.LENGTH_LONG).show();
                     }
+
+                    Utils.log("RESPONSE FROM SERVER SEND MODUL 2 : " + response.body().getMessage());
                 } catch (Exception e) {
+                    Utils.log("CATCH EXCEPTION : " + e.toString());
                     e.printStackTrace();
                 }
             }
@@ -469,316 +723,267 @@ public class Utils {
         });
     }
 
-    private static void saveAndNextKajian(final Context context,
-                                          String type,
-                                          String fk_id,
-                                          String fk_u_id,
-                                          String fk_date_created,
-                                          String fk_date_updated,
-                                          String fk_nama,
-                                          String fk_101_provinsi,
-                                          String fk_102_kabupaten,
-                                          String fk_103_kecamatan,
-                                          String fk_104_desa,
-                                          String fk_105_klasisfikasi_desan,
-                                          String fk_106_kode_rumah,
-                                          String fk_107_nama_kepala_rumah,
-                                          String fk_108_jumlah_anggota_rumah,
-                                          String fk_109_nomor_hp,
-                                          String fk_110_alamat_lengkap,
-                                          String fk_401_tabungan_bank_konvensional,
-                                          String fk_402_tabungan_bank_syariah,
-                                          String fk_403_tabungan_koeprasi_konvensional,
-                                          String fk_404_tabungan_koeprasi_syariah,
-                                          String fk_405_tabungan_lembaga_zakat,
-                                          String fk_406_arisan,
-                                          String fk_407_simpanan_di_rumah,
-                                          String fk_501_memiliki_atap,
-                                          String fk_502_memiliki_dinding,
-                                          String fk_503_memiliki_listrik,
-                                          String fk_504_memiliki_lantai,
-                                          String fk_505_memiliki_air,
-                                          String fk_506_memiliki_sanitasi,
-                                          String fk_507_memiliki_penyakit,
-                                          String fk_508_tidak_memiliki_cacat,
-                                          String fk_509_memiliki_bpjs,
-                                          String fk_510_tidak_memiliki_rokok,
-                                          String fk_601_penerima_zakat,
-                                          String fk_601_kode,
-                                          String fk_602_jenis_lembaga,
-                                          String fk_602_kode,
-                                          String fk_603_jenis_lembaga,
-                                          String fk_603_kode,
-                                          String fk_604_tanggal_menerima,
-                                          String fk_605_pendapatan,
-                                          String fk_606_berapa_kali,
-                                          String fk_607_jenis_zakat,
-                                          String fk_608_pangan,
-                                          String fk_609_kesehatan,
-                                          String fk_610_pendidikan,
-                                          String fk_611_lainnya,
-                                          String fk_612_total_bantuan,
-                                          String fk_613_bantuan_modal,
-                                          String fk_614_bantuan_alat,
-                                          String fk_615_bantuan_lain,
-                                          String fk_616_total_bantuan,
-                                          String fk_617,
-                                          String fk_618,
-                                          String fk_701,
-                                          String fk_702,
-                                          String fk_703,
-                                          String fk_801,
-                                          String fk_802,
-                                          String fk_803,
-                                          String fk_804,
-                                          String fk_805,
-                                          String fk_806,
-                                          String fk_807,
-                                          String fk_808,
-                                          String fk_809,
-                                          String fk_810,
-                                          String fk_811,
-                                          String fk_812,
-                                          String fk_813,
-                                          String fk_814,
-                                          String fk_815,
-                                          String fk_shalat,
-                                          String fk_shalat_keterangan,
-                                          String fk_puasa,
-                                          String fk_puasa_keterangan,
-                                          String fk_zakat,
-                                          String fk_zakat_keterangan,
-                                          String fk_lingkungan,
-                                          String fk_lingkungan_keterangan,
-                                          String fk_kebijakan,
-                                          String fk_kebijakan_keterangan,
-                                          String fk_shalat2,
-                                          String fk_shalat2_keterangan,
-                                          String fk_puasa2,
-                                          String fk_puasa2_keterangan,
-                                          String fk_zakat2,
-                                          String fk_zakat2_keterangan,
-                                          String fk_lingkungan2,
-                                          String fk_lingkungan2_keterangan,
-                                          String fk_kebijakan2,
-                                          String fk_kebijakan2_keterangan) {
+    public static void saveAndNextKajian(final Context context,
+                                          KajianDampakZakatPojo data) {
 
         BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
         Call<KajianDampakZakat> result = null;
 
-        if (type.equals(SurveyKDZActivity.REQUEST_TYPE_INSERT)) {
+        KDZ queue = SetGet.getKDZFromResponse(data);
+
+        // inisialisasi object result ada di dalam blok if berikut
+        if (queue.getRequest_type().equals(SurveyKDZActivity.REQUEST_TYPE_INSERT)) {
             result = apiService.kdz(StaticStrings.API_KEY,
-                            fk_id,
-                            fk_u_id,
-                            fk_date_created,
-                            fk_date_updated,
-                            fk_nama,
-                            fk_101_provinsi,
-                            fk_102_kabupaten,
-                            fk_103_kecamatan,
-                            fk_104_desa,
-                            fk_105_klasisfikasi_desan,
-                            fk_106_kode_rumah,
-                            fk_107_nama_kepala_rumah,
-                            fk_108_jumlah_anggota_rumah,
-                            fk_109_nomor_hp,
-                            fk_110_alamat_lengkap,
-                            fk_401_tabungan_bank_konvensional,
-                            fk_402_tabungan_bank_syariah,
-                            fk_403_tabungan_koeprasi_konvensional,
-                            fk_404_tabungan_koeprasi_syariah,
-                            fk_405_tabungan_lembaga_zakat,
-                            fk_406_arisan,
-                            fk_407_simpanan_di_rumah,
-                            fk_501_memiliki_atap,
-                            fk_502_memiliki_dinding,
-                            fk_503_memiliki_listrik,
-                            fk_504_memiliki_lantai,
-                            fk_505_memiliki_air,
-                            fk_506_memiliki_sanitasi,
-                            fk_507_memiliki_penyakit,
-                            fk_508_tidak_memiliki_cacat,
-                            fk_509_memiliki_bpjs,
-                            fk_510_tidak_memiliki_rokok,
-                            fk_601_penerima_zakat,
-                            fk_601_kode,
-                            fk_602_jenis_lembaga,
-                            fk_602_kode,
-                            fk_603_jenis_lembaga,
-                            fk_603_kode,
-                            fk_604_tanggal_menerima,
-                            fk_605_pendapatan,
-                            fk_606_berapa_kali,
-                            fk_607_jenis_zakat,
-                            fk_608_pangan,
-                            fk_609_kesehatan,
-                            fk_610_pendidikan,
-                            fk_611_lainnya,
-                            fk_612_total_bantuan,
-                            fk_613_bantuan_modal,
-                            fk_614_bantuan_alat,
-                            fk_615_bantuan_lain,
-                            fk_616_total_bantuan,
-                            fk_617,
-                            fk_618,
-                            fk_701,
-                            fk_702,
-                            fk_703,
-                            fk_801,
-                            fk_802,
-                            fk_803,
-                            fk_804,
-                            fk_805,
-                            fk_806,
-                            fk_807,
-                            fk_808,
-                            fk_809,
-                            fk_810,
-                            fk_811,
-                            fk_812,
-                            fk_813,
-                            fk_814,
-                            fk_815,
-                            fk_shalat,
-                            fk_shalat_keterangan,
-                            fk_puasa,
-                            fk_puasa_keterangan,
-                            fk_zakat,
-                            fk_zakat_keterangan,
-                            fk_lingkungan,
-                            fk_lingkungan_keterangan,
-                            fk_kebijakan,
-                            fk_kebijakan_keterangan,
-                            fk_shalat2,
-                            fk_shalat2_keterangan,
-                            fk_puasa2,
-                            fk_puasa2_keterangan,
-                            fk_zakat2,
-                            fk_zakat2_keterangan,
-                            fk_lingkungan2,
-                            fk_lingkungan2_keterangan,
-                            fk_kebijakan2,
-                            fk_kebijakan2_keterangan
-                    );
-        } else if (type.equals(SurveyKDZActivity.REQUEST_TYPE_UPDATE)){
-            result = apiService.kdzUpdate(StaticStrings.API_KEY,
-                            fk_id,
-                            fk_u_id,
-                            fk_date_created,
-                            fk_date_updated,
-                            fk_nama,
-                            fk_101_provinsi,
-                            fk_102_kabupaten,
-                            fk_103_kecamatan,
-                            fk_104_desa,
-                            fk_105_klasisfikasi_desan,
-                            fk_106_kode_rumah,
-                            fk_107_nama_kepala_rumah,
-                            fk_108_jumlah_anggota_rumah,
-                            fk_109_nomor_hp,
-                            fk_110_alamat_lengkap,
-                            fk_401_tabungan_bank_konvensional,
-                            fk_402_tabungan_bank_syariah,
-                            fk_403_tabungan_koeprasi_konvensional,
-                            fk_404_tabungan_koeprasi_syariah,
-                            fk_405_tabungan_lembaga_zakat,
-                            fk_406_arisan,
-                            fk_407_simpanan_di_rumah,
-                            fk_501_memiliki_atap,
-                            fk_502_memiliki_dinding,
-                            fk_503_memiliki_listrik,
-                            fk_504_memiliki_lantai,
-                            fk_505_memiliki_air,
-                            fk_506_memiliki_sanitasi,
-                            fk_507_memiliki_penyakit,
-                            fk_508_tidak_memiliki_cacat,
-                            fk_509_memiliki_bpjs,
-                            fk_510_tidak_memiliki_rokok,
-                            fk_601_penerima_zakat,
-                            fk_601_kode,
-                            fk_602_jenis_lembaga,
-                            fk_602_kode,
-                            fk_603_jenis_lembaga,
-                            fk_603_kode,
-                            fk_604_tanggal_menerima,
-                            fk_605_pendapatan,
-                            fk_606_berapa_kali,
-                            fk_607_jenis_zakat,
-                            fk_608_pangan,
-                            fk_609_kesehatan,
-                            fk_610_pendidikan,
-                            fk_611_lainnya,
-                            fk_612_total_bantuan,
-                            fk_613_bantuan_modal,
-                            fk_614_bantuan_alat,
-                            fk_615_bantuan_lain,
-                            fk_616_total_bantuan,
-                            fk_617,
-                            fk_618,
-                            fk_701,
-                            fk_702,
-                            fk_703,
-                            fk_801,
-                            fk_802,
-                            fk_803,
-                            fk_804,
-                            fk_805,
-                            fk_806,
-                            fk_807,
-                            fk_808,
-                            fk_809,
-                            fk_810,
-                            fk_811,
-                            fk_812,
-                            fk_813,
-                            fk_814,
-                            fk_815,
-                            fk_shalat,
-                            fk_shalat_keterangan,
-                            fk_puasa,
-                            fk_puasa_keterangan,
-                            fk_zakat,
-                            fk_zakat_keterangan,
-                            fk_lingkungan,
-                            fk_lingkungan_keterangan,
-                            fk_kebijakan,
-                            fk_kebijakan_keterangan,
-                            fk_shalat2,
-                            fk_shalat2_keterangan,
-                            fk_puasa2,
-                            fk_puasa2_keterangan,
-                            fk_zakat2,
-                            fk_zakat2_keterangan,
-                            fk_lingkungan2,
-                            fk_lingkungan2_keterangan,
-                            fk_kebijakan2,
-                            fk_kebijakan2_keterangan
+                            queue.getFk_id(),
+                            queue.getUID(),
+                            queue.getM1_created_at(),
+                            queue.getM1_updated_at(),
+                            queue.getM1_nama(),
+                            queue.getM1_101(),
+                            queue.getM1_102(),
+                            queue.getM1_103(),
+                            queue.getM1_104(),
+                            queue.getM1_105(),
+                            queue.getM1_106(),
+                            queue.getM1_107(),
+                            queue.getM1_108(),
+                            queue.getM1_109(),
+                            queue.getM1_110(),
+                            queue.getM1_401(),
+                            queue.getM1_402(),
+                            queue.getM1_403(),
+                            queue.getM1_404(),
+                            queue.getM1_405(),
+                            queue.getM1_406(),
+                            queue.getM1_407(),
+                            queue.getM1_501(),
+                            queue.getM1_502(),
+                            queue.getM1_503(),
+                            queue.getM1_504(),
+                            queue.getM1_505(),
+                            queue.getM1_506(),
+                            queue.getM1_507(),
+                            queue.getM1_508(),
+                            queue.getM1_509(),
+                            queue.getM1_510(),
+                            queue.getM1_601(),
+                            queue.getM1_601_kode(),
+                            queue.getM1_602(),
+                            queue.getM1_602_kode(),
+                            queue.getM1_603(),
+                            queue.getM1_603_kode(),
+                            queue.getM1_604(),
+                            queue.getM1_605(),
+                            queue.getM1_606(),
+                            queue.getM1_607(),
+                            queue.getM1_608(),
+                            queue.getM1_609(),
+                            queue.getM1_610(),
+                            queue.getM1_611(),
+                            queue.getM1_612(),
+                            queue.getM1_613(),
+                            queue.getM1_614(),
+                            queue.getM1_615(),
+                            queue.getM1_616(),
+                            queue.getM1_617(),
+                            queue.getM1_618(),
+                            queue.getM1_701(),
+                            queue.getM1_702(),
+                            queue.getM1_703(),
+                            queue.getM1_801(),
+                            queue.getM1_802(),
+                            queue.getM1_803(),
+                            queue.getM1_804(),
+                            queue.getM1_805(),
+                            queue.getM1_806(),
+                            queue.getM1_807(),
+                            queue.getM1_808(),
+                            queue.getM1_809(),
+                            queue.getM1_810(),
+                            queue.getM1_811(),
+                            queue.getM1_812(),
+                            queue.getM1_813(),
+                            queue.getM1_814(),
+                            queue.getM1_815(),
+                            queue.getM1_lik1(),
+                            queue.getM1_lik1(),
+                            queue.getM1_lik2(),
+                            queue.getM1_lik2(),
+                            queue.getM1_lik3(),
+                            queue.getM1_lik3(),
+                            queue.getM1_lik4(),
+                            queue.getM1_lik4(),
+                            queue.getM1_lik5(),
+                            queue.getM1_lik5(),
+                            queue.getM1_lik1B(),
+                            queue.getM1_lik1B(),
+                            queue.getM1_lik2B(),
+                            queue.getM1_lik2B(),
+                            queue.getM1_lik3B(),
+                            queue.getM1_lik3B(),
+                            queue.getM1_lik4B(),
+                            queue.getM1_lik4B(),
+                            queue.getM1_lik5B(),
+                            queue.getM1_lik5B()
                     );
         }
-
-        Utils.log("UTILS : " + fk_shalat_keterangan);
+        else if (queue.getRequest_type().equals(SurveyKDZActivity.REQUEST_TYPE_UPDATE)){
+                    result = apiService.kdzUpdate(StaticStrings.API_KEY,
+                            queue.getFk_id(),
+                            queue.getUID(),
+                            queue.getM1_created_at(),
+                            queue.getM1_updated_at(),
+                            queue.getM1_nama(),
+                            queue.getM1_101(),
+                            queue.getM1_102(),
+                            queue.getM1_103(),
+                            queue.getM1_104(),
+                            queue.getM1_105(),
+                            queue.getM1_106(),
+                            queue.getM1_107(),
+                            queue.getM1_108(),
+                            queue.getM1_109(),
+                            queue.getM1_110(),
+                            queue.getM1_401(),
+                            queue.getM1_402(),
+                            queue.getM1_403(),
+                            queue.getM1_404(),
+                            queue.getM1_405(),
+                            queue.getM1_406(),
+                            queue.getM1_407(),
+                            queue.getM1_501(),
+                            queue.getM1_502(),
+                            queue.getM1_503(),
+                            queue.getM1_504(),
+                            queue.getM1_505(),
+                            queue.getM1_506(),
+                            queue.getM1_507(),
+                            queue.getM1_508(),
+                            queue.getM1_509(),
+                            queue.getM1_510(),
+                            queue.getM1_601(),
+                            queue.getM1_601_kode(),
+                            queue.getM1_602(),
+                            queue.getM1_602_kode(),
+                            queue.getM1_603(),
+                            queue.getM1_603_kode(),
+                            queue.getM1_604(),
+                            queue.getM1_605(),
+                            queue.getM1_606(),
+                            queue.getM1_607(),
+                            queue.getM1_608(),
+                            queue.getM1_609(),
+                            queue.getM1_610(),
+                            queue.getM1_611(),
+                            queue.getM1_612(),
+                            queue.getM1_613(),
+                            queue.getM1_614(),
+                            queue.getM1_615(),
+                            queue.getM1_616(),
+                            queue.getM1_617(),
+                            queue.getM1_618(),
+                            queue.getM1_701(),
+                            queue.getM1_702(),
+                            queue.getM1_703(),
+                            queue.getM1_801(),
+                            queue.getM1_802(),
+                            queue.getM1_803(),
+                            queue.getM1_804(),
+                            queue.getM1_805(),
+                            queue.getM1_806(),
+                            queue.getM1_807(),
+                            queue.getM1_808(),
+                            queue.getM1_809(),
+                            queue.getM1_810(),
+                            queue.getM1_811(),
+                            queue.getM1_812(),
+                            queue.getM1_813(),
+                            queue.getM1_814(),
+                            queue.getM1_815(),
+                            queue.getM1_lik1(),
+                            queue.getM1_lik1(),
+                            queue.getM1_lik2(),
+                            queue.getM1_lik2(),
+                            queue.getM1_lik3(),
+                            queue.getM1_lik3(),
+                            queue.getM1_lik4(),
+                            queue.getM1_lik4(),
+                            queue.getM1_lik5(),
+                            queue.getM1_lik5(),
+                            queue.getM1_lik1B(),
+                            queue.getM1_lik1B(),
+                            queue.getM1_lik2B(),
+                            queue.getM1_lik2B(),
+                            queue.getM1_lik3B(),
+                            queue.getM1_lik3B(),
+                            queue.getM1_lik4B(),
+                            queue.getM1_lik4B(),
+                            queue.getM1_lik5B(),
+                            queue.getM1_lik5B()
+                    );
+        }
 
         result.enqueue(new Callback<KajianDampakZakat>() {
             @Override
             public void onResponse(@NonNull Call<KajianDampakZakat> call, @NonNull Response<KajianDampakZakat> response) {
                 try {
                     if (response.body().getStatus().equalsIgnoreCase("success")) {
-                        Prefs.putString("parent_id", response.body().getIdParent().toString());
 
-                        Utils.log("Send Modul 1 Berhasil, PARENT/FAMILY ID : " + response.body().getIdParent().toString());
-                        Toast.makeText(context, "Data Kajian Dampak Zakat berhasil dikirim", Toast.LENGTH_LONG).show();
+                        String familyID;
+
+                        if (queue.getRequest_type().equals(SurveyKDZActivity.REQUEST_TYPE_INSERT)) {
+                            Prefs.putString("parent_id", response.body().getFk_id().toString());
+
+                            Utils.log("Send Modul 1 Berhasil, PARENT/FAMILY ID : " + response.body().getFk_id().toString());
+                            familyID = response.body().getFk_id().toString();
+
+                            // Karena id nya itu random (date) maka harus diupdate jadi id yang beneran
+                            data.setFk_id(familyID);
+                        } else {
+                            familyID = queue.getFk_id();
+                        }
+
+                        List<Keluarga> keluargaList = KeluargaManager.loadAllwithFKID(context, queue.getFk_id());
+
+                        for (Keluarga keluarga : keluargaList){
+                            keluarga.setFki_fk_id(familyID);
+                        }
+
+                        KeluargaManager.insertOrReplaceArray(context, keluargaList).observe(FragmentDataModul1.getInstance(), new Observer<Boolean>() {
+                            @Override
+                            public void onChanged(@Nullable Boolean aBoolean) {
+                                if (aBoolean){
+                                    Utils.sendModulKeluarga(context, familyID, queue.getRequest_type());
+
+                                    queue.setStatus(StaticStrings.KDZ_STATUS_SENT);
+                                    KDZManager.remove(context, queue);
+
+                                    queue.setFk_id(familyID);
+                                    KDZManager.insertOrReplace(context, queue, null);
+
+                                    data.setStatus(StaticStrings.KDZ_STATUS_SENT);
+                                    data.getLiveStatus().setValue(StaticStrings.KDZ_STATUS_SENT);
+
+                                    Toast.makeText(context, "Berhasil dikirim ke server", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
                     } else {
-                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        // Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         Utils.log("RESPONSE :  " + response.body().getMessage());
+                        Toast.makeText(context, "Data gagal dikirim, silakan periksa data Anda", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Utils.log("EXCEPTION SAVE NEXT : " + e.toString());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<KajianDampakZakat> call, @NonNull Throwable t) {
                 t.printStackTrace();
+                Utils.log("ON FAILURE : " + t.toString());
             }
         });
 
@@ -786,65 +991,92 @@ public class Utils {
 
 
     private static void saveAndNextKeluarga(final Context context,
-                                            String fki_id,
-                                            String fki_fk_id,
-                                            String fk_202_nama,
-                                            String fk_202_nik,
-                                            String fk_203,
-                                            String fk_204,
-                                            String fk_205,
-                                            String fk_206,
-                                            String fk_207,
-                                            String fk_208,
-                                            String fk_209,
-                                            String fk_210,
-                                            String fk_303,
-                                            String fk_304,
-                                            String fk_305,
-                                            String fk_306,
-                                            String fk_307,
-                                            String fk_308) {
-
+                                            String type,
+                                            Keluarga queue) {
 
         BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
-        Call<KajianDampakZakatKeluarga> result =
-                apiService.kdzKeluarga(StaticStrings.API_KEY,
-                         fki_id,
-                         fki_fk_id,
-                         fk_202_nama,
-                         fk_202_nik,
-                         fk_203,
-                         fk_204,
-                         fk_205,
-                         fk_206,
-                         fk_207,
-                         fk_208,
-                         fk_209,
-                         fk_210,
-                         fk_303,
-                         fk_304,
-                         fk_305,
-                         fk_306,
-                         fk_307,
-                         fk_308
-                );
+        Call<KajianDampakZakatKeluarga> result = null;
+
+        if (type.equals(SurveyKDZActivity.REQUEST_TYPE_INSERT)) {
+            result =
+                    apiService.kdzKeluarga(StaticStrings.API_KEY,
+                            queue.getPosisi(),
+                            queue.getFki_id(),
+                            queue.getFki_fk_id(),
+                            queue.getFk_202_nama(),
+                            queue.getFk_202_nik(),
+                            queue.getFk_203(),
+                            queue.getFk_204(),
+                            queue.getFk_205(),
+                            queue.getFk_206(),
+                            queue.getFk_207(),
+                            queue.getFk_208(),
+                            queue.getFk_209(),
+                            queue.getFk_210(),
+                            queue.getFk_303(),
+                            queue.getFk_304(),
+                            queue.getFk_305(),
+                            queue.getFk_306(),
+                            queue.getFk_307(),
+                            queue.getFk_308()
+                    );
+        } else if (type.equals(SurveyKDZActivity.REQUEST_TYPE_UPDATE)) {
+            result =
+                    apiService.kdzKeluargaUpdate(StaticStrings.API_KEY,
+                            queue.getFki_id(),
+                            queue.getFki_fk_id(),
+                            queue.getFk_202_nama(),
+                            queue.getFk_202_nik(),
+                            queue.getFk_203(),
+                            queue.getFk_204(),
+                            queue.getFk_205(),
+                            queue.getFk_206(),
+                            queue.getFk_207(),
+                            queue.getFk_208(),
+                            queue.getFk_209(),
+                            queue.getFk_210(),
+                            queue.getFk_303(),
+                            queue.getFk_304(),
+                            queue.getFk_305(),
+                            queue.getFk_306(),
+                            queue.getFk_307(),
+                            queue.getFk_308()
+                    );
+        }
+
+        Utils.log("ID FK DARI KELUARGA : " + queue.getFki_fk_id());
 
         result.enqueue(new Callback<KajianDampakZakatKeluarga>() {
             @Override
             public void onResponse(@NonNull Call<KajianDampakZakatKeluarga> call, @NonNull Response<KajianDampakZakatKeluarga> response) {
                 try {
                     if (response.body().getStatus().equalsIgnoreCase("success")) {
-//                        Toast.makeText(context, "Berhasil Dimasukan", Toast.LENGTH_LONG).show();
+                        Utils.log("SUCCESS KELUARGA, message : " + response.body().getMessage());
+                        Utils.log("SUCCESS WITH FKI ID : " + response.body().getFki_id());
+
+                        String fki_id = response.body().getFki_id();
+
+                        queue.setStatus(StaticStrings.KDZ_STATUS_SENT);
+
+                        if (fki_id != null) {
+                            KeluargaManager.remove(context, queue);
+                            queue.setFki_id(response.body().getFki_id());
+                        }
+
+                        KeluargaManager.insertOrReplace(context, queue);
+
                     } else {
-//                        Toast.makeText(context, "Data anda telah tersimpan", Toast.LENGTH_LONG).show();
+                        Utils.log("FAILED KELUARGA, message : " + response.body().getMessage());
                     }
                 } catch (Exception e) {
+                    Utils.log("ON EXCEPTION KELUARGA " + e.toString());
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<KajianDampakZakatKeluarga> call, @NonNull Throwable t) {
+                Utils.log("ON FAILURE KELUARGA " + t.toString());
                 t.printStackTrace();
             }
         });

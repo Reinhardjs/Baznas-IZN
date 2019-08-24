@@ -21,74 +21,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="Penyaluran"
+            app:title="Penyaluran ZIS Tahun Sebelumnya"
             app:titleMarginStart="20dp"
-            app:titleTextColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/txt_702"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="2. Dana ZIS untuk kegiatan Dakwah"
-            app:layout_constraintEnd_toEndOf="@+id/txt_701"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/txt_701"
-            app:layout_constraintTop_toBottomOf="@+id/edt_701" />
-
-        <RadioGroup
-            android:id="@+id/radioGrup702"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/txt_702"
-            app:layout_constraintTop_toBottomOf="@+id/txt_702">
-
-            <RadioButton
-                android:id="@+id/radioYa702"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Ada" />
-
-            <RadioButton
-                android:id="@+id/radioTidak702"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tidak Ada" />
-
-        </RadioGroup>
-
-        <EditText
-            android:id="@+id/edt_iya_702"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_light"
-            android:hint="Jumlah"
-            android:inputType="number"
-            app:layout_constraintBottom_toBottomOf="@+id/radioGrup702"
-            app:layout_constraintEnd_toEndOf="@+id/txt_702"
-            app:layout_constraintStart_toEndOf="@+id/radioGrup702"
-            app:layout_constraintTop_toTopOf="@+id/radioGrup702" />
-
-        <Button
-            android:id="@+id/btn_next_702"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_btn2"
-            android:text="Next"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="@+id/txt_702"
-            app:layout_constraintStart_toStartOf="@+id/txt_702"
-            app:layout_constraintTop_toBottomOf="@+id/edt_7041" />
+            app:titleTextColor="@android:color/white"
+            app:titleTextAppearance="@style/Toolbar.TitleTextSmall"/>
 
         <TextView
             android:id="@+id/txt_701"
@@ -105,27 +41,116 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar8" />
 
-        <EditText
-            android:id="@+id/edt_701"
+        <com.emmasuzuki.easyform.EasyForm
+            android:id="@+id/easyform_701"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/txt_701"
+            app:layout_constraintStart_toStartOf="@+id/txt_701"
+            app:layout_constraintTop_toBottomOf="@+id/txt_701"
+            app:showErrorOn="change">
+
+            <com.emmasuzuki.easyform.EasyTextInputLayout
+                android:id="@+id/edt_701"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="@font/poppins_light"
+                android:inputType="number"
+                app:errorMessage="Tidak boleh kosong, min. 5 digit"
+                app:errorType="empty"
+                app:minChars="5"/>
+
+        </com.emmasuzuki.easyform.EasyForm>
+
+        <TextView
+            android:id="@+id/txt_702"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:ems="10"
-
             android:fontFamily="@font/poppins_light"
-
-            android:inputType="number"
+            android:text="2. Dana ZIS untuk kegiatan Dakwah"
             app:layout_constraintEnd_toEndOf="@+id/txt_701"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/txt_701"
-            app:layout_constraintTop_toBottomOf="@+id/txt_701" />
+            app:layout_constraintTop_toBottomOf="@+id/easyform_701" />
+
+        <RadioGroup
+            android:id="@+id/radioGrup702"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/txt_702"
+            app:layout_constraintTop_toBottomOf="@+id/txt_702">
+
+            <RadioButton
+                android:id="@+id/radioYa702"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Ada" />
+
+            <RadioButton
+                android:id="@+id/radioTidak702"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0. Tidak Ada" />
+
+        </RadioGroup>
+
+        <com.emmasuzuki.easyform.EasyForm
+            android:id="@+id/easyform_iya_702"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/radioGrup702"
+            app:layout_constraintEnd_toEndOf="@+id/txt_702"
+            app:layout_constraintStart_toEndOf="@+id/radioGrup702"
+            app:layout_constraintTop_toTopOf="@+id/radioGrup702"
+            app:showErrorOn="change">
+
+            <com.emmasuzuki.easyform.EasyTextInputLayout
+                android:id="@+id/edt_iya_702"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Jumlah"
+                android:inputType="number"
+                app:errorMessage="@string/error_message_empty"
+                app:errorType="empty" />
+
+        </com.emmasuzuki.easyform.EasyForm>
+
+        <Button
+            android:id="@+id/btn_next_702"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="132dp"
+            android:background="@drawable/rounded_btn2"
+            android:text="@string/btn_save"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/txt_702"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_702"
+            app:layout_constraintTop_toBottomOf="@+id/edt_7041" />
 
         <TextView
             android:id="@+id/txt_7031"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_light"
             android:text="3. Rencana penyaluran ZIS produktif"
+            app:layout_constraintEnd_toEndOf="@+id/txt_702"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="@+id/txt_702"
             app:layout_constraintTop_toBottomOf="@+id/radioGrup702" />
 
@@ -133,12 +158,12 @@
             android:id="@+id/txt_7041"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_light"
             android:text="5. Rencana penyaluran ZIS sosial/konsumtif"
-            app:layout_constraintEnd_toEndOf="@+id/edt_7031"
-            app:layout_constraintStart_toStartOf="@+id/edt_7031"
-            app:layout_constraintTop_toBottomOf="@+id/edt_7031" />
+            app:layout_constraintEnd_toEndOf="@+id/txt_7032"
+            app:layout_constraintStart_toStartOf="@+id/txt_7032"
+            app:layout_constraintTop_toBottomOf="@+id/edt_7032" />
 
         <Spinner
             android:id="@+id/edt_7031"
@@ -151,33 +176,33 @@
 
         <TextView
             android:id="@+id/txt_7032"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_light"
             android:text="4. Realisasi penyaluran ZIS produktif"
-            app:layout_constraintBottom_toTopOf="@+id/edt_7031"
-            app:layout_constraintEnd_toEndOf="@+id/txt_702"
-            app:layout_constraintTop_toTopOf="@+id/txt_7031" />
+            app:layout_constraintEnd_toEndOf="@+id/txt_7031"
+            app:layout_constraintStart_toStartOf="@+id/txt_7031"
+            app:layout_constraintTop_toBottomOf="@+id/edt_7031" />
 
         <Spinner
             android:id="@+id/edt_7032"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/edt_7031"
             app:layout_constraintEnd_toEndOf="@+id/txt_7032"
             app:layout_constraintStart_toStartOf="@+id/txt_7032"
-            app:layout_constraintTop_toTopOf="@+id/edt_7031" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_7032" />
 
         <TextView
             android:id="@+id/txt_7042"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_light"
             android:text="6. Realisasi penyaluran ZIS sosial/konsumtif"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_7041"
-            app:layout_constraintEnd_toEndOf="@+id/edt_7032"
-            app:layout_constraintStart_toStartOf="@+id/edt_7032"
-            app:layout_constraintTop_toTopOf="@+id/txt_7041" />
+            app:layout_constraintEnd_toEndOf="@+id/txt_7041"
+            app:layout_constraintStart_toStartOf="@+id/txt_7041"
+            app:layout_constraintTop_toBottomOf="@+id/edt_7041" />
 
         <Spinner
             android:id="@+id/edt_7041"
@@ -192,10 +217,11 @@
             android:id="@+id/edt_7042"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/edt_7041"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="@+id/txt_7042"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txt_7042"
-            app:layout_constraintTop_toTopOf="@+id/edt_7041" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_7042" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

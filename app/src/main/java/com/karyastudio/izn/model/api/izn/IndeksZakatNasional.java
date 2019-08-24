@@ -8,9 +8,22 @@ public class IndeksZakatNasional {
     @SerializedName("status")
     @Expose
     private String status;
+
     @SerializedName("message")
     @Expose
     private String message;
+
+    @SerializedName("fi_id")
+    @Expose
+    private Long fi_id;
+
+    public Long getFi_id() {
+        return fi_id;
+    }
+
+    public void setFi_id(Long fi_id) {
+        this.fi_id = fi_id;
+    }
 
     public String getStatus() {
         return status;

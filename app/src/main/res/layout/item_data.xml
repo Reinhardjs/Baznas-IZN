@@ -11,6 +11,9 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         app:cardElevation="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,6 +22,32 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/dua"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/status"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:tint="@color/colorAccent"
+                app:srcCompat="@drawable/ic_info_black_24dp" />
+
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -53,10 +82,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:fontFamily="@font/poppins_light"
-                android:text="fk_nama"
+                android:text="m1_nama"
                 android:textColor="@color/colorLabel"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:singleLine="false"
+                android:scrollHorizontally="false"/>
 
             <TextView
                 android:id="@+id/fk_nama2"
@@ -66,10 +97,12 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_light"
-                android:text="fk_nama"
+                android:text="m1_nama"
                 android:textColor="@color/colorLabel"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:singleLine="false"
+                android:scrollHorizontally="false"/>
 
         </LinearLayout>
 
@@ -94,7 +127,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:fontFamily="@font/poppins_light"
-                android:text="fk_date_created"
+                android:text="m1_created_at"
                 android:textColor="@color/colorLabel"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -107,7 +140,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_light"
-                android:text="fk_date_updated"
+                android:text="m1_updated_at"
                 android:textColor="@color/colorLabel"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@+id/fk_date_created"

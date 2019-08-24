@@ -11,9 +11,10 @@ public class KajianDampakZakat {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("idParent")
+
+    @SerializedName("fk_id")
     @Expose
-    private Integer idParent;
+    private Long fk_id;
 
     public String getStatus() {
         return status;
@@ -31,12 +32,12 @@ public class KajianDampakZakat {
         this.message = message;
     }
 
-    public Integer getIdParent() {
-        return idParent;
+    public Long getFk_id() {
+        return fk_id;
     }
 
-    public void setIdParent(Integer idParent) {
-        this.idParent = idParent;
+    public void setFk_id(Long fk_id) {
+        this.fk_id = fk_id;
     }
 
 }

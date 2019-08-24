@@ -24,7 +24,8 @@
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="Nama dan keterangan tempat"
-                app:titleTextColor="@android:color/white"/>
+                app:titleTextColor="@android:color/white"
+                app:titleTextAppearance="@style/Toolbar.TitleTextSmall"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -38,7 +39,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:layout_width="match_parent"
@@ -64,7 +69,7 @@
                 android:text="2. Provinsi" />
 
             <Spinner
-                android:id="@+id/edt1_101"
+                android:id="@+id/spinner_provinsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -78,7 +83,7 @@
                 android:text="3. Kabupaten/Kota" />
 
             <Spinner
-                android:id="@+id/edt1_102"
+                android:id="@+id/spinner_kota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -92,7 +97,7 @@
                 android:text="4. Kecamatan" />
 
             <EditText
-                android:id="@+id/edt1_103"
+                android:id="@+id/et_kecamatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -107,7 +112,7 @@
                 android:text="5. Desa/Kelurahan" />
 
             <EditText
-                android:id="@+id/edt1_104"
+                android:id="@+id/et_kelurahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -122,7 +127,7 @@
                 android:text="6. Klasifikasi Desa/Kelurahan" />
 
             <RadioGroup
-                android:id="@+id/edt1_105"
+                android:id="@+id/radio_kota_desa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
@@ -149,7 +154,7 @@
                 android:text="7. Nama Kepala Rumah Tangga" />
 
             <EditText
-                android:id="@+id/edt1_107"
+                android:id="@+id/et_nama_kepala"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -164,7 +169,7 @@
                 android:text="8. Jumlah Anggota Rumah Tangga " />
 
             <EditText
-                android:id="@+id/edt1_108"
+                android:id="@+id/et_jlh_keluraga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -180,11 +185,12 @@
                 android:text="9. Nomor HP" />
 
             <EditText
-                android:id="@+id/edt1_109"
+                android:id="@+id/et_no_hp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:maxLength="16"
                 android:inputType="number"
                 android:hint="Nomor HP" />
 
@@ -196,7 +202,7 @@
                 android:text="10. Alamat (Nama Jalan/Gang, RT/RW/Dusun)" />
 
             <EditText
-                android:id="@+id/edt1_110"
+                android:id="@+id/et_alamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -207,10 +213,13 @@
                 android:id="@+id/btn_next1_101"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="30dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_btn2"
-                android:text="Save"
-                android:textColor="@android:color/white" />
+                android:text="@string/btn_save"
+                android:textColor="@android:color/white"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

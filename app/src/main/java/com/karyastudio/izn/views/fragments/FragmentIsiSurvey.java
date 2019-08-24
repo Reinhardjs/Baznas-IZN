@@ -13,10 +13,12 @@ import android.view.ViewGroup;
 
 import com.karyastudio.izn.MainActivity;
 import com.karyastudio.izn.R;
+import com.karyastudio.izn.views.activities.SurveyIZNActivity;
 import com.karyastudio.izn.views.activities.SurveyKDZActivity;
 
 public class FragmentIsiSurvey extends Fragment {
     private FragmentManager fms;
+
     public FragmentIsiSurvey(){
 
     }
@@ -32,7 +34,10 @@ public class FragmentIsiSurvey extends Fragment {
         linkToSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fms.beginTransaction().replace(R.id.content_frames, new FragmentModul2101()).addToBackStack("3").commit();
+                // fms.beginTransaction().replace(R.id.content_frames, new FragmentModul2101()).addToBackStack("3").commit();
+                Intent intent = new Intent(getActivity(), SurveyIZNActivity.class);
+                intent.putExtra(SurveyIZNActivity.FORM_REQUEST_TYPE_DATA, SurveyIZNActivity.REQUEST_TYPE_INSERT);
+                startActivity(intent);
             }
         });
 

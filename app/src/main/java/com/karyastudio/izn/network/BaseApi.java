@@ -4,11 +4,13 @@ import com.karyastudio.izn.model.api.city.DataCity;
 import com.karyastudio.izn.model.api.daftar.Daftar;
 import com.karyastudio.izn.model.api.dataizn.DataIZN;
 import com.karyastudio.izn.model.api.datakdz.DataKDZ;
+import com.karyastudio.izn.model.api.datakdzkeluarga.DataKDZKeluarga;
 import com.karyastudio.izn.model.api.izn.IndeksZakatNasional;
 import com.karyastudio.izn.model.api.kdz.KajianDampakZakat;
 import com.karyastudio.izn.model.api.kdz.KajianDampakZakatKeluarga;
 import com.karyastudio.izn.model.api.login.Login;
 import com.karyastudio.izn.model.api.province.DataProvinsi;
+import com.karyastudio.izn.model.api.simple.SimpleResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -23,8 +25,25 @@ public interface BaseApi {
 
     // login
     @FormUrlEncoded
+    @POST("petugas/request-reset-password")
+    Call<SimpleResponse> resetPassword(@Header("key") String apikey, @Field("email") String email);
+
+    // login
+    @FormUrlEncoded
     @POST("authPetugasProcess")
     Call<Login> login(@Header("key") String apikey, @Field("username") String username, @Field("password") String password);
+
+    //daftar
+    @FormUrlEncoded
+    @POST("registerPetugasProcess")
+    Call<Daftar> daftar(@Header("key") String apikey,
+                        @Field("username") String username,
+                        @Field("email") String email,
+                        @Field("name") String name,
+                        @Field("password") String password,
+                        @Field("address") String address,
+                        @Field("phone") String phone,
+                        @Field("province") String province);
 
     //data getProvince
     @GET("getProvince")
@@ -39,12 +58,15 @@ public interface BaseApi {
     @POST("getCity")
     Call<DataCity> getCity(@Header("key") String apikey, @Field("pro_code") String pro_code);
 
-
     //data izn
     @FormUrlEncoded
     @POST("data/indeksZakatNasional")
     Call<DataIZN> iznData(@Header("key") String apikey,  @Field("idUser") String idUser);
 
+    //data izn
+    @FormUrlEncoded
+    @POST("itemData/indeksZakatNasional")
+    Call<DataIZN> iznItemData(@Header("key") String apikey,  @Field("fi_id") String idUser);
 
     //data kdz
     @FormUrlEncoded
@@ -56,90 +78,34 @@ public interface BaseApi {
     @POST("itemData/kajianDampakZakat")
     Call<DataKDZ> kdzItemData(@Header("key") String apikey,  @Field("fk_id") String fk_id);
 
-    //daftar
+    //data kdz keluarga
     @FormUrlEncoded
-    @POST("registerPetugasProcess")
-    Call<Daftar> daftar(@Header("key") String apikey,
-                        @Field("username") String username,
-                        @Field("email") String email,
-                        @Field("name") String name,
-                        @Field("password") String password,
-                        @Field("address") String address,
-                        @Field("phone") String phone,
-                        @Field("province") String province);
+    @POST("data/kajianDampakZakatItems")
+    Call<DataKDZKeluarga> kdzDataKeluarga(@Header("key") String apikey, @Field("fk_id") String idUser);
 
-    //izn
     @FormUrlEncoded
-    @POST("input/indeksZakatNasional")
-    Call<IndeksZakatNasional> izn(@Header("key") String apikey,
-                                  @Field("fi_id") String fi_id,
-                                  @Field("fi_u_id") String fi_u_id,
-                                  @Field("fi_date_created") String fi_date_created,
-                                  @Field("fi_date_updated") String fi_date_updated,
-                                  @Field("fi_101_jenis_lembaga") String fi_101_jenis_lembaga,
-                                  @Field("fi_102_nama_laz") String fi_102_nama_laz,
-
-                                  @Field("fi_103_provinsi") String fi_103_provinsi,
-                                  @Field("fi_104_kabupaten") String fi_104_kabupaten,
-                                  @Field("fi_201_regulasi_ada") String fi_201_regulasi_ada,
-                                  @Field("fi_201_regulasi") String fi_201_regulasi,
-                                  @Field("fi_301_alokasi_apbn_2_tahun_lalu_ada") String fi_301_alokasi_apbn_2_tahun_lalu_ada,
-                                  @Field("fi_301_alokasi_apbn_2_tahun_lalu") String fi_301_alokasi_apbn_2_tahun_lalu,
-
-                                  @Field("fi_302_alokasi_apbn_1_tahun_lalu_ada") String fi_302_alokasi_apbn_1_tahun_lalu_ada,
-                                  @Field("fi_302_alokasi_apbn_1_tahun_lalu") String fi_302_alokasi_apbn_1_tahun_lalu,
-                                  @Field("fi_401_lembaga_zakat_resmi_ada") String fi_401_lembaga_zakat_resmi_ada,
-
-                                  @Field("fi_401_lembaga_zakat_resmi") String fi_401_lembaga_zakat_resmi,
-                                  @Field("fi_402_jumlah_mustahik") String fi_402_jumlah_mustahik,
-                                  @Field("fi_403_mustahik_kabupaten") String fi_403_mustahik_kabupaten,
-                                  @Field("fi_403_mustahik_kecamatan") String fi_403_mustahik_kecamatan,
-
-                                  @Field("fi_404_jumlah_muzakki") String fi_404_jumlah_muzakki,
-                                  @Field("fi_405_jumlah_munsafik") String fi_405_jumlah_munsafik,
-                                  @Field("fi_406_jumlah_muzakki_badan_usaha") String fi_406_jumlah_muzakki_badan_usaha,
-                                  @Field("fi_501_total_himpunan_tahun_2") String fi_501_total_himpunan_tahun_2,
-                                  @Field("fi_502_total_himpunan_tahun_1") String fi_502_total_himpunan_tahun_1,
-                                  @Field("fi_601_program_kerja") String fi_601_program_kerja,
-
-                                  @Field("fi_602_rencana_strategis") String fi_602_rencana_strategis,
-                                  @Field("fi_603_sop_ada") String fi_603_sop_ada,
-                                  @Field("fi_603_sop") String fi_603_sop,
-                                  @Field("fi_604_iso_ada") String fi_604_iso_ada,
-                                  @Field("fi_604_iso") String fi_604_iso,
-                                  @Field("fi_701_total_dana_zis") String fi_701_total_dana_zis,
-
-                                  @Field("fi_702_dana_zis_dakwah_ada") String fi_702_dana_zis_dakwah_ada,
-                                  @Field("fi_702_dana_zis_dakwah") String fi_702_dana_zis_dakwah,
-                                  @Field("fi_703_penyaluran_zis_produktif_rencana") String fi_703_penyaluran_zis_produktif_rencana,
-                                  @Field("fi_703_penyaluran_zis_produktif_realisasi") String fi_703_penyaluran_zis_produktif_realisasi,
-                                  @Field("fi_704_penyaluran_zis_sosial_rencana") String fi_704_penyaluran_zis_sosial_rencana,
-                                  @Field("fi_704_penyaluran_zis_sosial_realisasi") String fi_704_penyaluran_zis_sosial_realisasi,
+    @POST("delete/kajianDampakZakat")
+    Call<KajianDampakZakat> deleteKdz(@Header("key") String apiKey, @Field("fk_id") String fk_id);
 
 
-                                  @Field("fi_801_laporan_keuangan") String fi_801_laporan_keuangan,
-                                  @Field("fi_802_laporan_keuangan_teraudit") String fi_802_laporan_keuangan_teraudit,
-                                  @Field("fi_802_laporan_keuangan_wtp") String fi_802_laporan_keuangan_wtp,
-                                  @Field("fi_803_laporan_keuangan_publikasi") String fi_803_laporan_keuangan_publikasi,
-                                  @Field("fi_804_laporan_audit_syariah") String fi_804_laporan_audit_syariah,
-                                  @Field("fi_805_biaya_operasional") String fi_805_biaya_operasional);
+    @FormUrlEncoded
+    @POST("delete/indeksZakatNasional")
+    Call<IndeksZakatNasional> deleteIzn(@Header("key") String apiKey, @Field("fi_id") String fi_id);
+
 
     //keluarga
     @FormUrlEncoded
     @POST("input/kajianDampakZakatItems")
     Call<KajianDampakZakatKeluarga> kdzKeluarga(@Header("key") String apikey,
+                                                @Field("posisi") Integer posisi,
                                                 @Field("fki_id") String fki_id,
                                                 @Field("fki_fk_id") String fki_fk_id,
-
                                                 @Field("fk_202_nama") String fk_202_nama,
                                                 @Field("fk_202_nik") String fk_202_nik,
-
                                                 @Field("fk_203") String fk_203,
                                                 @Field("fk_204") String fk_204,
-
                                                 @Field("fk_205") String fk_205,
                                                 @Field("fk_206") String fk_206,
-
                                                 @Field("fk_207") String fk_207,
                                                 @Field("fk_208") String fk_208,
                                                 @Field("fk_209") String fk_209,
@@ -151,9 +117,123 @@ public interface BaseApi {
                                                 @Field("fk_307") String fk_307,
                                                 @Field("fk_308") String fk_308);
 
+    //keluarga
     @FormUrlEncoded
-    @POST("delete/kajianDampakZakat")
-    Call<KajianDampakZakat> deleteKdz(@Header("key") String apiKey, @Field("fk_id") String fk_id);
+    @POST("update/kajianDampakZakatItems")
+    Call<KajianDampakZakatKeluarga> kdzKeluargaUpdate(@Header("key") String apikey,
+                                                @Field("fki_id") String fki_id,
+                                                @Field("fki_fk_id") String fki_fk_id,
+                                                @Field("fk_202_nama") String fk_202_nama,
+                                                @Field("fk_202_nik") String fk_202_nik,
+                                                @Field("fk_203") String fk_203,
+                                                @Field("fk_204") String fk_204,
+                                                @Field("fk_205") String fk_205,
+                                                @Field("fk_206") String fk_206,
+                                                @Field("fk_207") String fk_207,
+                                                @Field("fk_208") String fk_208,
+                                                @Field("fk_209") String fk_209,
+                                                @Field("fk_210") String fk_210,
+                                                @Field("fk_303") String fk_303,
+                                                @Field("fk_304") String fk_304,
+                                                @Field("fk_305") String fk_305,
+                                                @Field("fk_306") String fk_306,
+                                                @Field("fk_307") String fk_307,
+                                                @Field("fk_308") String fk_308);
+
+    //izn
+    @FormUrlEncoded
+    @POST("input/indeksZakatNasional")
+    Call<IndeksZakatNasional> izn(@Header("key") String apikey,
+                                  @Field("fi_id") String fi_id,
+                                  @Field("fi_u_id") String fi_u_id,
+                                  @Field("fi_date_created") String fi_date_created,
+                                  @Field("fi_date_updated") String fi_date_updated,
+                                  @Field("fi_101_jenis_lembaga") String fi_101_jenis_lembaga,
+                                  @Field("fi_102_nama_laz") String fi_102_nama_laz,
+                                  @Field("fi_103_provinsi") String fi_103_provinsi,
+                                  @Field("fi_104_kabupaten") String fi_104_kabupaten,
+                                  @Field("fi_201_regulasi_ada") String fi_201_regulasi_ada,
+                                  @Field("fi_201_regulasi") String fi_201_regulasi,
+                                  @Field("fi_301_alokasi_apbn_2_tahun_lalu_ada") String fi_301_alokasi_apbn_2_tahun_lalu_ada,
+                                  @Field("fi_301_alokasi_apbn_2_tahun_lalu") String fi_301_alokasi_apbn_2_tahun_lalu,
+                                  @Field("fi_302_alokasi_apbn_1_tahun_lalu_ada") String fi_302_alokasi_apbn_1_tahun_lalu_ada,
+                                  @Field("fi_302_alokasi_apbn_1_tahun_lalu") String fi_302_alokasi_apbn_1_tahun_lalu,
+                                  @Field("fi_401_lembaga_zakat_resmi_ada") String fi_401_lembaga_zakat_resmi_ada,
+                                  @Field("fi_401_lembaga_zakat_resmi") String fi_401_lembaga_zakat_resmi,
+                                  @Field("fi_402_jumlah_mustahik") String fi_402_jumlah_mustahik,
+                                  @Field("fi_403_mustahik_kabupaten") String fi_403_mustahik_kabupaten,
+                                  @Field("fi_403_mustahik_kecamatan") String fi_403_mustahik_kecamatan,
+                                  @Field("fi_404_jumlah_muzakki") String fi_404_jumlah_muzakki,
+                                  @Field("fi_405_jumlah_munsafik") String fi_405_jumlah_munsafik,
+                                  @Field("fi_406_jumlah_muzakki_badan_usaha") String fi_406_jumlah_muzakki_badan_usaha,
+                                  @Field("fi_501_total_himpunan_tahun_2") String fi_501_total_himpunan_tahun_2,
+                                  @Field("fi_502_total_himpunan_tahun_1") String fi_502_total_himpunan_tahun_1,
+                                  @Field("fi_601_program_kerja") String fi_601_program_kerja,
+                                  @Field("fi_602_rencana_strategis") String fi_602_rencana_strategis,
+                                  @Field("fi_603_sop_ada") String fi_603_sop_ada,
+                                  @Field("fi_603_sop") String fi_603_sop,
+                                  @Field("fi_604_iso_ada") String fi_604_iso_ada,
+                                  @Field("fi_604_iso") String fi_604_iso,
+                                  @Field("fi_701_total_dana_zis") String fi_701_total_dana_zis,
+                                  @Field("fi_702_dana_zis_dakwah_ada") String fi_702_dana_zis_dakwah_ada,
+                                  @Field("fi_702_dana_zis_dakwah") String fi_702_dana_zis_dakwah,
+                                  @Field("fi_703_penyaluran_zis_produktif_rencana") String fi_703_penyaluran_zis_produktif_rencana,
+                                  @Field("fi_703_penyaluran_zis_produktif_realisasi") String fi_703_penyaluran_zis_produktif_realisasi,
+                                  @Field("fi_704_penyaluran_zis_sosial_rencana") String fi_704_penyaluran_zis_sosial_rencana,
+                                  @Field("fi_704_penyaluran_zis_sosial_realisasi") String fi_704_penyaluran_zis_sosial_realisasi,
+                                  @Field("fi_801_laporan_keuangan") String fi_801_laporan_keuangan,
+                                  @Field("fi_802_laporan_keuangan_teraudit") String fi_802_laporan_keuangan_teraudit,
+                                  @Field("fi_802_laporan_keuangan_wtp") String fi_802_laporan_keuangan_wtp,
+                                  @Field("fi_803_laporan_keuangan_publikasi") String fi_803_laporan_keuangan_publikasi,
+                                  @Field("fi_804_laporan_audit_syariah") String fi_804_laporan_audit_syariah,
+                                  @Field("fi_805_biaya_operasional") String fi_805_biaya_operasional);
+
+    @FormUrlEncoded
+    @POST("update/indeksZakatNasional")
+    Call<IndeksZakatNasional> iznUpdate(@Header("key") String apikey,
+                                  @Field("fi_id") String fi_id,
+                                  @Field("fi_u_id") String fi_u_id,
+                                  @Field("fi_date_created") String fi_date_created,
+                                  @Field("fi_date_updated") String fi_date_updated,
+                                  @Field("fi_101_jenis_lembaga") String fi_101_jenis_lembaga,
+                                  @Field("fi_102_nama_laz") String fi_102_nama_laz,
+                                  @Field("fi_103_provinsi") String fi_103_provinsi,
+                                  @Field("fi_104_kabupaten") String fi_104_kabupaten,
+                                  @Field("fi_201_regulasi_ada") String fi_201_regulasi_ada,
+                                  @Field("fi_201_regulasi") String fi_201_regulasi,
+                                  @Field("fi_301_alokasi_apbn_2_tahun_lalu_ada") String fi_301_alokasi_apbn_2_tahun_lalu_ada,
+                                  @Field("fi_301_alokasi_apbn_2_tahun_lalu") String fi_301_alokasi_apbn_2_tahun_lalu,
+                                  @Field("fi_302_alokasi_apbn_1_tahun_lalu_ada") String fi_302_alokasi_apbn_1_tahun_lalu_ada,
+                                  @Field("fi_302_alokasi_apbn_1_tahun_lalu") String fi_302_alokasi_apbn_1_tahun_lalu,
+                                  @Field("fi_401_lembaga_zakat_resmi_ada") String fi_401_lembaga_zakat_resmi_ada,
+                                  @Field("fi_401_lembaga_zakat_resmi") String fi_401_lembaga_zakat_resmi,
+                                  @Field("fi_402_jumlah_mustahik") String fi_402_jumlah_mustahik,
+                                  @Field("fi_403_mustahik_kabupaten") String fi_403_mustahik_kabupaten,
+                                  @Field("fi_403_mustahik_kecamatan") String fi_403_mustahik_kecamatan,
+                                  @Field("fi_404_jumlah_muzakki") String fi_404_jumlah_muzakki,
+                                  @Field("fi_405_jumlah_munsafik") String fi_405_jumlah_munsafik,
+                                  @Field("fi_406_jumlah_muzakki_badan_usaha") String fi_406_jumlah_muzakki_badan_usaha,
+                                  @Field("fi_501_total_himpunan_tahun_2") String fi_501_total_himpunan_tahun_2,
+                                  @Field("fi_502_total_himpunan_tahun_1") String fi_502_total_himpunan_tahun_1,
+                                  @Field("fi_601_program_kerja") String fi_601_program_kerja,
+                                  @Field("fi_602_rencana_strategis") String fi_602_rencana_strategis,
+                                  @Field("fi_603_sop_ada") String fi_603_sop_ada,
+                                  @Field("fi_603_sop") String fi_603_sop,
+                                  @Field("fi_604_iso_ada") String fi_604_iso_ada,
+                                  @Field("fi_604_iso") String fi_604_iso,
+                                  @Field("fi_701_total_dana_zis") String fi_701_total_dana_zis,
+                                  @Field("fi_702_dana_zis_dakwah_ada") String fi_702_dana_zis_dakwah_ada,
+                                  @Field("fi_702_dana_zis_dakwah") String fi_702_dana_zis_dakwah,
+                                  @Field("fi_703_penyaluran_zis_produktif_rencana") String fi_703_penyaluran_zis_produktif_rencana,
+                                  @Field("fi_703_penyaluran_zis_produktif_realisasi") String fi_703_penyaluran_zis_produktif_realisasi,
+                                  @Field("fi_704_penyaluran_zis_sosial_rencana") String fi_704_penyaluran_zis_sosial_rencana,
+                                  @Field("fi_704_penyaluran_zis_sosial_realisasi") String fi_704_penyaluran_zis_sosial_realisasi,
+                                  @Field("fi_801_laporan_keuangan") String fi_801_laporan_keuangan,
+                                  @Field("fi_802_laporan_keuangan_teraudit") String fi_802_laporan_keuangan_teraudit,
+                                  @Field("fi_802_laporan_keuangan_wtp") String fi_802_laporan_keuangan_wtp,
+                                  @Field("fi_803_laporan_keuangan_publikasi") String fi_803_laporan_keuangan_publikasi,
+                                  @Field("fi_804_laporan_audit_syariah") String fi_804_laporan_audit_syariah,
+                                  @Field("fi_805_biaya_operasional") String fi_805_biaya_operasional);
 
     @FormUrlEncoded
     @POST("input/kajianDampakZakat")
@@ -193,7 +273,6 @@ public interface BaseApi {
                                 @Field("fk_601_penerima_zakat") String fk_601_penerima_zakat,
                                 @Field("fk_601_kode") String fk_601_kode,
                                 @Field("fk_602_jenis_lembaga") String fk_602_jenis_lembaga,
-
                                 @Field("fk_602_kode") String fk_602_kode,
                                 @Field("fk_603_jenis_lembaga") String fk_603_jenis_lembaga,
                                 @Field("fk_603_kode") String fk_603_kode,

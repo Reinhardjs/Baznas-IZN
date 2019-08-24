@@ -27,6 +27,16 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Delen met"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Delen met <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Samenvouwen"</string>
+    <string name="appupdater_btn_disable">Niet meer laten zien</string>
+    <string name="appupdater_btn_dismiss">Afwijzen</string>
+    <string name="appupdater_btn_update">Update</string>
+    <string name="appupdater_update_available">Nieuwe update beschikbaar!</string>
+    <string name="appupdater_update_available_description_dialog">Update %1$s is beschikbaar om te downloaden. Door het downloaden van de nieuwste update kunt u de nieuwste functies, verbeteringen en bug fixes voor %2$s krijgen.</string>
+    <string name="appupdater_update_available_description_dialog_before_release_notes">Update %1$s is beschikbaar om te downloaden.\n\nU kunt deze nieuwe functies te krijgen:\n%2$s</string>
+    <string name="appupdater_update_available_description_notification">Update %1$s voor %2$s is beschikbaar om te downloaden</string>
+    <string name="appupdater_update_available_description_snackbar">Update %1$s is beschikbaar!</string>
+    <string name="appupdater_update_not_available">Geen updates beschikbaar</string>
+    <string name="appupdater_update_not_available_description">U hebt de laatste versie beschikbaar voor %s!</string>
     <string msgid="146198913615257606" name="search_menu_title">"Zoeken"</string>
     <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

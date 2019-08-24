@@ -9,6 +9,7 @@ public class MainGenerator {
         Schema schema = new Schema(1, "com.karyastudio.izn.dao.generateSchema");
         addPetugas(schema);
         addIZN(schema);
+        addIZNFormQueue(schema);
         addKDZ(schema);
         addKDZFormQueue(schema);
         addProvince(schema);
@@ -32,25 +33,82 @@ public class MainGenerator {
 
     private static void addIZN(Schema schema) {
         Entity entity = schema.addEntity("IZN");
-        entity.addStringProperty("fi_id").notNull();
-        entity.addStringProperty("fi_code").notNull();
-        entity.addStringProperty("fi_date_created").notNull();
-        entity.addStringProperty("fi_date_updated").notNull();
-        entity.addStringProperty("fi_jenis_lembaga").notNull();
+//        entity.addStringProperty("fi_id").notNull();
+//        entity.addStringProperty("fi_code").notNull();
+//        entity.addStringProperty("fi_date_created").notNull();
+//        entity.addStringProperty("fi_date_updated").notNull();
+//        entity.addStringProperty("fi_jenis_lembaga").notNull();
+        IZN(entity);
+    }
 
+    private static void addIZNFormQueue(Schema schema) {
+        Entity entity = schema.addEntity("Iznformqueue");
+        IZN(entity);
+    }
+
+    private static void IZN(Entity entity){
+        entity.addStringProperty("status").notNull();
+        entity.addStringProperty("request_type").notNull();
+        entity.addStringProperty("fi_id").notNull().primaryKey();
+        entity.addStringProperty("fi_u_id");
+        entity.addStringProperty("fi_date_created");
+        entity.addStringProperty("fi_date_updated");
+        entity.addStringProperty("fi_code");
+        entity.addStringProperty("fi_101_jenis_lembaga");
+        entity.addStringProperty("fi_102_nama_laz");
+        entity.addStringProperty("fi_103_provinsi");
+        entity.addStringProperty("fi_104_kabupaten");
+        entity.addStringProperty("fi_201_regulasi_ada");
+        entity.addStringProperty("fi_201_regulasi");
+        entity.addStringProperty("fi_301_alokasi_apbn_2_tahun_lalu_ada");
+        entity.addStringProperty("fi_301_alokasi_apbn_2_tahun_lalu");
+        entity.addStringProperty("fi_302_alokasi_apbn_1_tahun_lalu_ada");
+        entity.addStringProperty("fi_302_alokasi_apbn_1_tahun_lalu");
+        entity.addStringProperty("fi_401_lembaga_zakat_resmi_ada");
+        entity.addStringProperty("fi_401_lembaga_zakat_resmi");
+        entity.addStringProperty("fi_402_jumlah_mustahik");
+        entity.addStringProperty("fi_403_mustahik_kabupaten");
+        entity.addStringProperty("fi_403_mustahik_kecamatan");
+        entity.addStringProperty("fi_404_jumlah_muzakki");
+        entity.addStringProperty("fi_405_jumlah_munsafki");
+        entity.addStringProperty("fi_406_jumlah_muzakki_badan_usaha");
+        entity.addStringProperty("fi_501_total_himpunan_tahun_2");
+        entity.addStringProperty("fi_502_total_himpunan_tahun_1");
+        entity.addStringProperty("fi_601_program_kerja");
+        entity.addStringProperty("fi_602_rencana_strategis");
+        entity.addStringProperty("fi_603_sop_ada");
+        entity.addStringProperty("fi_603_sop");
+        entity.addStringProperty("fi_604_iso_ada");
+        entity.addStringProperty("fi_604_iso");
+        entity.addStringProperty("fi_701_total_dana_zis");
+        entity.addStringProperty("fi_702_dana_zis_dakwah_ada");
+        entity.addStringProperty("fi_702_dana_zis_dakwah");
+        entity.addStringProperty("fi_703_penyaluran_zis_produktif_rencana");
+        entity.addStringProperty("fi_703_penyaluran_zis_produktif_realisasi");
+        entity.addStringProperty("fi_704_penyaluran_zis_sosial_rencana");
+        entity.addStringProperty("fi_704_penyaluran_zis_sosial_realisasi");
+        entity.addStringProperty("fi_801_laporan_keuangan");
+        entity.addStringProperty("fi_802_laporan_keuangan_teraudit");
+        entity.addStringProperty("fi_802_laporan_keuangan_wtp");
+        entity.addStringProperty("fi_803_laporan_keuangan_publikasi");
+        entity.addStringProperty("fi_804_laporan_audit_syariah");
+        entity.addStringProperty("fi_901_biaya_operasional");
     }
 
     private static void addKDZ(Schema schema) {
         Entity entity = schema.addEntity("KDZ");
-        entity.addStringProperty("fk_id").notNull().primaryKey();
-        entity.addStringProperty("fk_date_created").notNull();
-        entity.addStringProperty("fk_date_updated").notNull();
-        entity.addStringProperty("fk_nama").notNull();
         entity.addStringProperty("countKeluarga").notNull();
+        KDZ(entity);
+
     }
 
     private static void addKDZFormQueue(Schema schema) {
         Entity entity = schema.addEntity("Kdzformqueue");
+        KDZ(entity);
+    }
+
+    private static void KDZ(Entity entity){
+        entity.addStringProperty("status").notNull();
         entity.addStringProperty("request_type").notNull();
         entity.addStringProperty("fk_id").notNull().primaryKey();
         entity.addStringProperty("UID").notNull();
@@ -153,10 +211,13 @@ public class MainGenerator {
 
     private static void addKeluarga(Schema schema){
         Entity entity = schema.addEntity("Keluarga");
-        entity.addStringProperty("fki_id").notNull();
+        entity.addIntProperty("posisi");
+        entity.addStringProperty("status");
+        entity.addStringProperty("request_type").notNull();
+        entity.addStringProperty("fki_id").notNull().primaryKey();
         entity.addStringProperty("fki_fk_id").notNull();
         entity.addStringProperty("fk_202_nama").notNull();
-        entity.addStringProperty("fk_202_nik").notNull().primaryKey();
+        entity.addStringProperty("fk_202_nik").notNull();
         entity.addStringProperty("fk_203").notNull();
         entity.addStringProperty("fk_204").notNull();
         entity.addStringProperty("fk_205").notNull();

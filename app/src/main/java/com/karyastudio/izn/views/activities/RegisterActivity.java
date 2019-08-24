@@ -79,10 +79,12 @@ public class RegisterActivity extends AppCompatActivity {
                           String province) {
 
         if (!txtPassword2.getText().toString().equals(txtPassword.getText().toString())){
-            Utils.Toast(getApplicationContext(), StaticStrings.TIDAK_MATCH).show();
-        }else if (TextUtils.isEmpty(province) || TextUtils.isEmpty(password) ||  TextUtils.isEmpty(email)
+            Utils.toast(getApplicationContext(), StaticStrings.TIDAK_MATCH);
+        } else if (TextUtils.isEmpty(province) || TextUtils.isEmpty(password) ||  TextUtils.isEmpty(email)
                 || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone)){
-            Utils.Toast(getApplicationContext(), StaticStrings.ISI_SEMUA).show();
+            Utils.toast(getApplicationContext(), StaticStrings.ISI_SEMUA);
+        } else if (phone.length() < 10){
+            Utils.toast(getApplicationContext(), "Nomor telepon harus 10 digit atau lebih");
         } else {
             BaseApi apiService = Utils.initializeRetrofit().create(BaseApi.class);
             Call<Daftar> result = apiService.daftar(StaticStrings.API_KEY, username, email, name, password, address, phone, province);

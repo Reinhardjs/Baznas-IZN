@@ -10,9 +10,9 @@ import org.greenrobot.greendao.internal.DaoConfig;
 
 import com.karyastudio.izn.dao.generateSchema.City;
 import com.karyastudio.izn.dao.generateSchema.IZN;
+import com.karyastudio.izn.dao.generateSchema.Iznformqueue;
 import com.karyastudio.izn.dao.generateSchema.KDZ;
 import com.karyastudio.izn.dao.generateSchema.Kdzformqueue;
-import com.karyastudio.izn.dao.generateSchema.KDZQueue;
 import com.karyastudio.izn.dao.generateSchema.Keluarga;
 import com.karyastudio.izn.dao.generateSchema.KeluargaQueue;
 import com.karyastudio.izn.dao.generateSchema.Petugas;
@@ -21,9 +21,9 @@ import com.karyastudio.izn.dao.generateSchema.Provinsi;
 
 import com.karyastudio.izn.dao.generateSchema.CityDao;
 import com.karyastudio.izn.dao.generateSchema.IZNDao;
+import com.karyastudio.izn.dao.generateSchema.IznformqueueDao;
 import com.karyastudio.izn.dao.generateSchema.KDZDao;
 import com.karyastudio.izn.dao.generateSchema.KdzformqueueDao;
-import com.karyastudio.izn.dao.generateSchema.KDZQueueDao;
 import com.karyastudio.izn.dao.generateSchema.KeluargaDao;
 import com.karyastudio.izn.dao.generateSchema.KeluargaQueueDao;
 import com.karyastudio.izn.dao.generateSchema.PetugasDao;
@@ -41,9 +41,9 @@ public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig cityDaoConfig;
     private final DaoConfig iZNDaoConfig;
+    private final DaoConfig iznformqueueDaoConfig;
     private final DaoConfig kDZDaoConfig;
     private final DaoConfig kdzformqueueDaoConfig;
-    private final DaoConfig kDZQueueDaoConfig;
     private final DaoConfig keluargaDaoConfig;
     private final DaoConfig keluargaQueueDaoConfig;
     private final DaoConfig petugasDaoConfig;
@@ -52,9 +52,9 @@ public class DaoSession extends AbstractDaoSession {
 
     private final CityDao cityDao;
     private final IZNDao iZNDao;
+    private final IznformqueueDao iznformqueueDao;
     private final KDZDao kDZDao;
     private final KdzformqueueDao kdzformqueueDao;
-    private final KDZQueueDao kDZQueueDao;
     private final KeluargaDao keluargaDao;
     private final KeluargaQueueDao keluargaQueueDao;
     private final PetugasDao petugasDao;
@@ -71,14 +71,14 @@ public class DaoSession extends AbstractDaoSession {
         iZNDaoConfig = daoConfigMap.get(IZNDao.class).clone();
         iZNDaoConfig.initIdentityScope(type);
 
+        iznformqueueDaoConfig = daoConfigMap.get(IznformqueueDao.class).clone();
+        iznformqueueDaoConfig.initIdentityScope(type);
+
         kDZDaoConfig = daoConfigMap.get(KDZDao.class).clone();
         kDZDaoConfig.initIdentityScope(type);
 
         kdzformqueueDaoConfig = daoConfigMap.get(KdzformqueueDao.class).clone();
         kdzformqueueDaoConfig.initIdentityScope(type);
-
-        kDZQueueDaoConfig = daoConfigMap.get(KDZQueueDao.class).clone();
-        kDZQueueDaoConfig.initIdentityScope(type);
 
         keluargaDaoConfig = daoConfigMap.get(KeluargaDao.class).clone();
         keluargaDaoConfig.initIdentityScope(type);
@@ -97,9 +97,9 @@ public class DaoSession extends AbstractDaoSession {
 
         cityDao = new CityDao(cityDaoConfig, this);
         iZNDao = new IZNDao(iZNDaoConfig, this);
+        iznformqueueDao = new IznformqueueDao(iznformqueueDaoConfig, this);
         kDZDao = new KDZDao(kDZDaoConfig, this);
         kdzformqueueDao = new KdzformqueueDao(kdzformqueueDaoConfig, this);
-        kDZQueueDao = new KDZQueueDao(kDZQueueDaoConfig, this);
         keluargaDao = new KeluargaDao(keluargaDaoConfig, this);
         keluargaQueueDao = new KeluargaQueueDao(keluargaQueueDaoConfig, this);
         petugasDao = new PetugasDao(petugasDaoConfig, this);
@@ -108,9 +108,9 @@ public class DaoSession extends AbstractDaoSession {
 
         registerDao(City.class, cityDao);
         registerDao(IZN.class, iZNDao);
+        registerDao(Iznformqueue.class, iznformqueueDao);
         registerDao(KDZ.class, kDZDao);
         registerDao(Kdzformqueue.class, kdzformqueueDao);
-        registerDao(KDZQueue.class, kDZQueueDao);
         registerDao(Keluarga.class, keluargaDao);
         registerDao(KeluargaQueue.class, keluargaQueueDao);
         registerDao(Petugas.class, petugasDao);
@@ -121,9 +121,9 @@ public class DaoSession extends AbstractDaoSession {
     public void clear() {
         cityDaoConfig.clearIdentityScope();
         iZNDaoConfig.clearIdentityScope();
+        iznformqueueDaoConfig.clearIdentityScope();
         kDZDaoConfig.clearIdentityScope();
         kdzformqueueDaoConfig.clearIdentityScope();
-        kDZQueueDaoConfig.clearIdentityScope();
         keluargaDaoConfig.clearIdentityScope();
         keluargaQueueDaoConfig.clearIdentityScope();
         petugasDaoConfig.clearIdentityScope();
@@ -139,16 +139,16 @@ public class DaoSession extends AbstractDaoSession {
         return iZNDao;
     }
 
+    public IznformqueueDao getIznformqueueDao() {
+        return iznformqueueDao;
+    }
+
     public KDZDao getKDZDao() {
         return kDZDao;
     }
 
     public KdzformqueueDao getKdzformqueueDao() {
         return kdzformqueueDao;
-    }
-
-    public KDZQueueDao getKDZQueueDao() {
-        return kDZQueueDao;
     }
 
     public KeluargaDao getKeluargaDao() {

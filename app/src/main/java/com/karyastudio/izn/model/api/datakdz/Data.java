@@ -9,13 +9,13 @@ public class Data {
 
     @SerializedName("kajianDampakZakat")
     @Expose
-    private List<KajianDampakZakatResponse> kajianDampakZakat = null;
+    private List<KajianDampakZakatPojo> kajianDampakZakat = null;
 
-    public List<KajianDampakZakatResponse> getKajianDampakZakat() {
+    public List<KajianDampakZakatPojo> getKajianDampakZakat() {
         return kajianDampakZakat;
     }
 
-    public void setKajianDampakZakat(List<KajianDampakZakatResponse> kajianDampakZakat) {
+    public void setKajianDampakZakat(List<KajianDampakZakatPojo> kajianDampakZakat) {
         this.kajianDampakZakat = kajianDampakZakat;
     }
 

@@ -27,6 +27,15 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Comparteix amb"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Comparteix amb <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Replega"</string>
+    <string name="appupdater_btn_disable">No ho mostris de nou</string>
+    <string name="appupdater_btn_dismiss">Amaga</string>
+    <string name="appupdater_btn_update">Actualitzar</string>
+    <string name="appupdater_update_available">Nova actualització disponible!</string>
+    <string name="appupdater_update_available_description_dialog">L\'actualització %1$s està disponible per descarregar. Baixant la l\'última actualització tindràs les novetats, millores i solucions d\'errors més recents de %2$s.</string>
+    <string name="appupdater_update_available_description_notification">L\'actualització %1$s de %2$s està disponible per descarregar</string>
+    <string name="appupdater_update_available_description_snackbar">Està disponible l\'actualització %1$s!</string>
+    <string name="appupdater_update_not_available">No hi ha actualitzacions disponibles</string>
+    <string name="appupdater_update_not_available_description">Tens l\'última versió disponible de %s!</string>
     <string msgid="146198913615257606" name="search_menu_title">"Cerca"</string>
     <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

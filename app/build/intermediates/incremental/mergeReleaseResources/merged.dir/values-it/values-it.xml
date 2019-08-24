@@ -27,6 +27,16 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Condividi con"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Condividi tramite <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Comprimi"</string>
+    <string name="appupdater_btn_disable">Non mostrare di nuovo</string>
+    <string name="appupdater_btn_dismiss">Ignora</string>
+    <string name="appupdater_btn_update">Aggiorna</string>
+    <string name="appupdater_update_available">Nuovo aggiornamento disponibile!</string>
+    <string name="appupdater_update_available_description_dialog">L\'aggiornamento %1$s è disponibile al download. Scaricando l\'ultimo aggiornamento avrai le ultime funzionalità, migliorie e bug fix per %2$s.</string>
+    <string name="appupdater_update_available_description_dialog_before_release_notes">Aggiornamento %1$s è disponibile al download.\n\nPuoi avere queste nuove funzionalità:\n%2$s</string>
+    <string name="appupdater_update_available_description_notification">L\'aggiornamento %1$s di %2$s è disponibile al download</string>
+    <string name="appupdater_update_available_description_snackbar">L\'aggiornamento %1$s è disponibile!</string>
+    <string name="appupdater_update_not_available">Nessun aggiornamento disponibile</string>
+    <string name="appupdater_update_not_available_description">Hai l\'ultima versione disponibile di %s!</string>
     <string msgid="146198913615257606" name="search_menu_title">"Ricerca"</string>
     <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

@@ -23,9 +23,9 @@ public class DaoMaster extends AbstractDaoMaster {
     public static void createAllTables(Database db, boolean ifNotExists) {
         CityDao.createTable(db, ifNotExists);
         IZNDao.createTable(db, ifNotExists);
+        IznformqueueDao.createTable(db, ifNotExists);
         KDZDao.createTable(db, ifNotExists);
         KdzformqueueDao.createTable(db, ifNotExists);
-        KDZQueueDao.createTable(db, ifNotExists);
         KeluargaDao.createTable(db, ifNotExists);
         KeluargaQueueDao.createTable(db, ifNotExists);
         PetugasDao.createTable(db, ifNotExists);
@@ -37,9 +37,9 @@ public class DaoMaster extends AbstractDaoMaster {
     public static void dropAllTables(Database db, boolean ifExists) {
         CityDao.dropTable(db, ifExists);
         IZNDao.dropTable(db, ifExists);
+        IznformqueueDao.dropTable(db, ifExists);
         KDZDao.dropTable(db, ifExists);
         KdzformqueueDao.dropTable(db, ifExists);
-        KDZQueueDao.dropTable(db, ifExists);
         KeluargaDao.dropTable(db, ifExists);
         KeluargaQueueDao.dropTable(db, ifExists);
         PetugasDao.dropTable(db, ifExists);
@@ -65,9 +65,9 @@ public class DaoMaster extends AbstractDaoMaster {
         super(db, SCHEMA_VERSION);
         registerDaoClass(CityDao.class);
         registerDaoClass(IZNDao.class);
+        registerDaoClass(IznformqueueDao.class);
         registerDaoClass(KDZDao.class);
         registerDaoClass(KdzformqueueDao.class);
-        registerDaoClass(KDZQueueDao.class);
         registerDaoClass(KeluargaDao.class);
         registerDaoClass(KeluargaQueueDao.class);
         registerDaoClass(PetugasDao.class);

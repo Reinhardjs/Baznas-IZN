@@ -37,17 +37,18 @@
         <item>4. Cerai mati</item>
     </string-array>
     <string-array name="items_208">
-        <item>00. Belum/Tidak Bersekolah</item>
-        <item>01. SD/SDLB</item>
-        <item>02. Paket A</item>
-        <item>03. Madrasah Ibtidaiyah</item>
-        <item>04. SMP/SMPLB</item>
-        <item>05. Paket B</item>
-        <item>06. Madrasah Tsanawiyah</item>
-        <item>07. SMA/SMK/SMALB</item>
-        <item>08. Paket C</item>
-        <item>09. Madrasah Aliyah</item>
-        <item>10. Perguruan tinggi (D1/D2/D3/S1)</item>
+        <item>00. Belum Bersekolah</item>
+        <item>01. Tidak Bersekolah</item>
+        <item>02. SD/SDLB</item>
+        <item>03. Paket A</item>
+        <item>04. Madrasah Ibtidaiyah</item>
+        <item>05. SMP/SMPLB</item>
+        <item>06. Paket B</item>
+        <item>07. Madrasah Tsanawiyah</item>
+        <item>08. SMA/SMK/SMALB</item>
+        <item>09. Paket C</item>
+        <item>10. Madrasah Aliyah</item>
+        <item>11. Perguruan tinggi (D1/D2/D3/S1)</item>
     </string-array>
     <string-array name="items_209">
         <item>00. Tidak/Belum menyelesaikan kelas/tingkat 1</item>
@@ -90,6 +91,7 @@
         <item>Desember</item>
     </string-array>
     <string-array name="items_likert_kebijakan">
+        <item>0. Pilih</item>
         <item>1. Melarang ibadah untuk setiap keluarga</item>
         <item>2. Menolak pelaksanaan ibadah</item>
         <item>3. Menganggap ibadah sebagai urusan pribadi masyarakat</item>
@@ -97,6 +99,7 @@
         <item>5. Menciptakan lingkungan yang kondusif untuk ibadah</item>
     </string-array>
     <string-array name="items_likert_lingkungan">
+        <item>0. Pilih</item>
         <item>1. Melarang anggota keluarga ibadah</item>
         <item>2. Menolak pelaksanaan ibadah</item>
         <item>3. Menganggap ibadah sebagai urusan pribadi anggota keluarga</item>
@@ -104,6 +107,7 @@
         <item>5. Membangun suasana keluarga yang mendukung ibadah secara bersama-sama</item>
     </string-array>
     <string-array name="items_likert_puasa">
+        <item>0. Pilih</item>
         <item>1. Melarang orang lain berpuasa</item>
         <item>2. Menolak konsep puasa</item>
         <item>3. Melaksanakan puasa wajib
@@ -113,6 +117,7 @@
         <item>5. Melaksanakan puasa wajib penuh dan puasa sunah</item>
     </string-array>
     <string-array name="items_likert_sholat">
+        <item>0. Pilih</item>
         <item>1. Melarang orang lain shalat</item>
         <item>2. Menolak konsep shalat</item>
         <item>3. Melaksanakan shalat wajib tidak rutin</item>
@@ -120,6 +125,7 @@
         <item>5. Melaksanakan shalat wajib rutin berjamaah dan melakukan shalat sunnah</item>
     </string-array>
     <string-array name="items_likert_zakat">
+        <item>0. Pilih</item>
         <item>1. Melarang orang lain berzakat dan infak</item>
         <item>2. Menolak zakat dan infak</item>
         <item>3. Tidak pernah berinfak walau sekali dalam setahun</item>
@@ -152,6 +158,8 @@
         <item>09. Rumah Sehat BAZNAS (RSB)</item>
         <!--<item>10. Layanan Publik</item>-->
         <item>10. Lembaga Pemberdayaan Peternak Mustahik (LPPM)</item>
+        <item>11. Layanan Publik</item>
+        <item>12. Lainnya</item>
     </string-array>
     <string-array name="items_modul1_607">
         <item>1. Bantuan Konsumtif</item>
@@ -203,6 +211,7 @@
     </string-array>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
+        <item>@font/amiko_bold</item>
         <item>@font/habibi</item>
         <item>@font/judson</item>
         <item>@font/poppins_light</item>
@@ -349,6 +358,54 @@
     </attr>
     <attr format="reference" name="materialButtonStyle"/>
     <attr format="reference" name="materialCardViewStyle"/>
+    <attr format="color" name="md_background_color"/>
+    <attr format="reference" name="md_btn_negative_selector"/>
+    <attr format="reference" name="md_btn_neutral_selector"/>
+    <attr format="reference" name="md_btn_positive_selector"/>
+    <attr format="color" name="md_btn_ripple_color"/>
+    <attr format="reference" name="md_btn_stacked_selector"/>
+    <attr format="enum" name="md_btnstacked_gravity">
+    <enum name="start" value="0"/>
+    <enum name="center" value="1"/>
+    <enum name="end" value="2"/>
+  </attr>
+    <attr format="enum" name="md_buttons_gravity">
+    <enum name="start" value="0"/>
+    <enum name="center" value="1"/>
+    <enum name="end" value="2"/>
+  </attr>
+    <attr format="color" name="md_content_color"/>
+    <attr format="enum" name="md_content_gravity">
+    <enum name="start" value="0"/>
+    <enum name="center" value="1"/>
+    <enum name="end" value="2"/>
+  </attr>
+    <attr format="boolean" name="md_dark_theme"/>
+    <attr format="color" name="md_divider"/>
+    <attr format="color" name="md_divider_color"/>
+    <attr format="reference" name="md_icon"/>
+    <attr format="boolean" name="md_icon_limit_icon_to_default_size"/>
+    <attr format="dimension" name="md_icon_max_size"/>
+    <attr format="color" name="md_item_color"/>
+    <attr format="enum" name="md_items_gravity">
+    <enum name="start" value="0"/>
+    <enum name="center" value="1"/>
+    <enum name="end" value="2"/>
+  </attr>
+    <attr format="color" name="md_link_color"/>
+    <attr format="reference" name="md_list_selector"/>
+    <attr format="string" name="md_medium_font"/>
+    <attr format="color" name="md_negative_color"/>
+    <attr format="color" name="md_neutral_color"/>
+    <attr format="color" name="md_positive_color"/>
+    <attr format="string" name="md_regular_font"/>
+    <attr format="color" name="md_title_color"/>
+    <attr format="enum" name="md_title_gravity">
+    <enum name="start" value="0"/>
+    <enum name="center" value="1"/>
+    <enum name="end" value="2"/>
+  </attr>
+    <attr format="color" name="md_widget_color"/>
     <attr format="reference" name="ms_stepperStyle"/>
     <attr format="reference" name="navigationViewStyle"/>
     <attr format="color" name="rippleColor"/>
@@ -422,6 +479,7 @@
     <color name="dim_foreground_material_light">#ff323232</color>
     <color name="error_color_material_dark">#ff7043</color>
     <color name="error_color_material_light">#ff5722</color>
+    <color name="fancy_showcase_view_default_background_color">#CC000000</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
@@ -438,6 +496,13 @@
     <color name="material_grey_800">#ff424242</color>
     <color name="material_grey_850">#ff303030</color>
     <color name="material_grey_900">#ff212121</color>
+    <color name="md_btn_selected">#33969696</color>
+    <color name="md_btn_selected_dark">#40CBCBCB</color>
+    <color name="md_divider_black">#10000000</color>
+    <color name="md_divider_white">#10FFFFFF</color>
+    <color name="md_edittext_error">#DD2C00</color>
+    <color name="md_material_blue_600">#2196F3</color>
+    <color name="md_material_blue_800">#1565C0</color>
     <color name="ms_black">#000000</color>
     <color name="ms_black_38_opacity">#61000000</color>
     <color name="ms_black_87_opacity">#DD000000</color>
@@ -1421,6 +1486,17 @@
         <!-- The thickness (stroke size) for the bar paint -->
         <attr format="dimension" name="thickness"/>
     </declare-styleable>
+    <declare-styleable name="EasyAutoCompleteTextView"><attr name="errorType"/><attr name="errorMessage"/><attr name="regexPattern"/><attr name="minChars"/><attr name="maxChars"/><attr format="reference" name="items"/></declare-styleable>
+    <declare-styleable name="EasyForm"><attr format="reference" name="submitButton"/><attr format="enum" name="showErrorOn">
+            <enum name="unfocus" value="0"/>
+            <enum name="change" value="1"/>
+        </attr></declare-styleable>
+    <declare-styleable name="EasyFormEditText"><attr format="enum" name="errorType">
+            <enum name="empty" value="0"/>
+            <enum name="pattern" value="1"/>
+            <enum name="value" value="2"/>
+            <enum name="chars" value="3"/>
+        </attr><attr format="string|reference" name="errorMessage"/><attr format="string|reference" name="regexPattern"/><attr format="float" name="minValue"/><attr format="float" name="maxValue"/><attr format="integer" name="minChars"/><attr format="integer" name="maxChars"/><attr format="dimension" name="textSize"/><attr format="color|reference" name="textColor"/></declare-styleable>
     <declare-styleable name="FloatingActionButton"><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr name="rippleColor"/><attr name="fabSize">
       
       <enum name="auto" value="-1"/>
@@ -1600,6 +1676,7 @@
         <!-- Amount of pixels by which the drop down should be offset horizontally. -->
         <attr name="android:dropDownHorizontalOffset"/>
     </declare-styleable>
+    <declare-styleable name="MDRootLayout"><attr format="boolean" name="md_reduce_padding_no_title_no_buttons"/></declare-styleable>
     <declare-styleable name="MaterialButton"><attr name="android:insetLeft"/><attr name="android:insetRight"/><attr name="android:insetTop"/><attr name="android:insetBottom"/><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr format="reference" name="icon"/><attr format="dimension" name="iconSize"/><attr format="dimension" name="iconPadding"/><attr name="iconGravity">
       
       <flag name="start" value="0x1"/>
@@ -1608,6 +1685,41 @@
     </attr><attr format="color" name="iconTint"/><attr name="iconTintMode"/><attr name="strokeColor"/><attr name="strokeWidth"/><attr format="dimension" name="cornerRadius"/><attr name="rippleColor"/></declare-styleable>
     <declare-styleable name="MaterialCardView"><attr name="strokeColor"/><attr name="strokeWidth"/></declare-styleable>
     <declare-styleable name="MaterialComponentsTheme"><attr name="colorAccent"/><attr name="colorPrimary"/><attr name="colorPrimaryDark"/><attr name="colorSecondary"/><attr name="scrimBackground"/><attr name="colorBackgroundFloating"/><attr name="bottomSheetDialogTheme"/><attr name="bottomSheetStyle"/><attr name="materialButtonStyle"/><attr name="chipGroupStyle"/><attr name="chipStyle"/><attr name="chipStandaloneStyle"/><attr name="editTextStyle"/><attr name="floatingActionButtonStyle"/><attr name="materialCardViewStyle"/><attr name="navigationViewStyle"/><attr name="tabStyle"/><attr name="textInputStyle"/><attr name="snackbarButtonStyle"/><attr name="textAppearanceHeadline1"/><attr name="textAppearanceHeadline2"/><attr name="textAppearanceHeadline3"/><attr name="textAppearanceHeadline4"/><attr name="textAppearanceHeadline5"/><attr name="textAppearanceHeadline6"/><attr name="textAppearanceSubtitle1"/><attr name="textAppearanceSubtitle2"/><attr name="textAppearanceBody1"/><attr name="textAppearanceBody2"/><attr name="textAppearanceCaption"/><attr name="textAppearanceButton"/><attr name="textAppearanceOverline"/></declare-styleable>
+    <declare-styleable name="MaterialProgressBar"><attr format="enum" name="mpb_progressStyle">
+            <enum name="circular" value="0"/>
+            <enum name="horizontal" value="1"/>
+        </attr><attr format="boolean" name="mpb_setBothDrawables"/><attr format="boolean" name="mpb_useIntrinsicPadding"/><attr format="boolean" name="mpb_showProgressBackground"/><attr format="enum" name="mpb_determinateCircularProgressStyle">
+            <enum name="normal" value="0"/>
+            <enum name="dynamic" value="1"/>
+        </attr><attr format="color|reference" name="mpb_progressTint"/><attr format="enum" name="mpb_progressTintMode">
+            <enum name="src_over" value="3"/>
+            <enum name="src_in" value="5"/>
+            <enum name="src_atop" value="9"/>
+            <enum name="multiply" value="14"/>
+            <enum name="screen" value="15"/>
+            <enum name="add" value="16"/>
+        </attr><attr format="color|reference" name="mpb_secondaryProgressTint"/><attr format="enum" name="mpb_secondaryProgressTintMode">
+            <enum name="src_over" value="3"/>
+            <enum name="src_in" value="5"/>
+            <enum name="src_atop" value="9"/>
+            <enum name="multiply" value="14"/>
+            <enum name="screen" value="15"/>
+            <enum name="add" value="16"/>
+        </attr><attr format="color|reference" name="mpb_progressBackgroundTint"/><attr format="enum" name="mpb_progressBackgroundTintMode">
+            <enum name="src_over" value="3"/>
+            <enum name="src_in" value="5"/>
+            <enum name="src_atop" value="9"/>
+            <enum name="multiply" value="14"/>
+            <enum name="screen" value="15"/>
+            <enum name="add" value="16"/>
+        </attr><attr format="color|reference" name="mpb_indeterminateTint"/><attr format="enum" name="mpb_indeterminateTintMode">
+            <enum name="src_over" value="3"/>
+            <enum name="src_in" value="5"/>
+            <enum name="src_atop" value="9"/>
+            <enum name="multiply" value="14"/>
+            <enum name="screen" value="15"/>
+            <enum name="add" value="16"/>
+        </attr></declare-styleable>
     <declare-styleable name="MenuGroup">
 
         <!-- The ID of the group. -->
@@ -2262,6 +2374,7 @@
     <dimen name="cardview_compat_inset_shadow">1dp</dimen>
     <dimen name="cardview_default_elevation">2dp</dimen>
     <dimen name="cardview_default_radius">2dp</dimen>
+    <dimen name="circular_progress_border">4dp</dimen>
     <dimen name="compat_button_inset_horizontal_material">4dp</dimen>
     <dimen name="compat_button_inset_vertical_material">6dp</dimen>
     <dimen name="compat_button_padding_horizontal_material">8dp</dimen>
@@ -2329,6 +2442,42 @@
     <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
+    <dimen name="md_action_corner_radius">2dp</dimen>
+    <dimen name="md_bg_corner_radius">2dp</dimen>
+    <dimen name="md_button_frame_vertical_padding">8dp</dimen>
+    <dimen name="md_button_height">48dp</dimen>
+    <dimen name="md_button_inset_horizontal">4dp</dimen>
+    <dimen name="md_button_inset_vertical">6dp</dimen>
+    <dimen name="md_button_min_width">72dp</dimen>
+    <dimen name="md_button_padding_frame_side">12dp</dimen>
+    <dimen name="md_button_padding_horizontal">8dp</dimen>
+    <dimen name="md_button_padding_horizontal_internalexternal">32dp</dimen>
+    <dimen name="md_button_padding_vertical">4dp</dimen>
+    <dimen name="md_button_textpadding_horizontal">1dp</dimen>
+    <dimen name="md_button_textsize">14sp</dimen>
+    <dimen name="md_content_padding_bottom">8dp</dimen>
+    <dimen name="md_content_padding_top">8dp</dimen>
+    <dimen name="md_content_textsize">16sp</dimen>
+    <dimen name="md_dialog_frame_margin">24dp</dimen>
+    <dimen name="md_dialog_horizontal_margin">28dp</dimen>
+    <dimen name="md_dialog_max_width">356dp</dimen>
+    <dimen name="md_dialog_vertical_margin">52dp</dimen>
+    <dimen name="md_divider_height">1dp</dimen>
+    <dimen name="md_icon_margin">16dp</dimen>
+    <dimen name="md_icon_max_size">48dp</dimen>
+    <dimen name="md_listitem_control_margin">6dp</dimen>
+    <dimen name="md_listitem_height">48dp</dimen>
+    <dimen name="md_listitem_margin_left">24dp</dimen>
+    <dimen name="md_listitem_textsize">16sp</dimen>
+    <dimen name="md_listitem_vertical_margin">12dp</dimen>
+    <dimen name="md_listitem_vertical_margin_choice">8dp</dimen>
+    <dimen name="md_neutral_button_margin">12dp</dimen>
+    <dimen name="md_notitle_vertical_padding">16dp</dimen>
+    <dimen name="md_notitle_vertical_padding_more">20dp</dimen>
+    <dimen name="md_simplelistitem_padding_top">8dp</dimen>
+    <dimen name="md_title_frame_margin_bottom">12dp</dimen>
+    <dimen name="md_title_frame_margin_bottom_less">6dp</dimen>
+    <dimen name="md_title_textsize">20sp</dimen>
     <dimen name="ms_bottom_navigation_bar_height">48dp</dimen>
     <dimen name="ms_dotted_progress_bar_dot_size">10dp</dimen>
     <dimen name="ms_material_button_corner_radius">2dp</dimen>
@@ -2417,6 +2566,7 @@
     <dimen name="subtitle_outline_width">2dp</dimen>
     <dimen name="subtitle_shadow_offset">2dp</dimen>
     <dimen name="subtitle_shadow_radius">2dp</dimen>
+    <dimen name="text_status_size">12sp</dimen>
     <dimen name="tooltip_corner_radius">2dp</dimen>
     <dimen name="tooltip_horizontal_padding">16dp</dimen>
     <dimen name="tooltip_margin">8dp</dimen>
@@ -2433,6 +2583,7 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
+    <item name="fscv_id" type="id"/>
     <item name="ghost_view" type="id"/>
     <item name="home" type="id"/>
     <item name="item_touch_helper_previous_elevation" type="id"/>
@@ -2523,16 +2674,39 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="app_name"> IZN</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="appupdater_btn_disable">Don\'t show again</string>
+    <string name="appupdater_btn_dismiss">Dismiss</string>
+    <string name="appupdater_btn_update">Update</string>
+    <string name="appupdater_channel" translatable="false">appupdater_channel_01</string>
+    <string name="appupdater_channel_name">Update notifications</string>
+    <string name="appupdater_update_available">New update available!</string>
+    <string name="appupdater_update_available_description_dialog">Update %1$s is available to download. By downloading the latest update you will get the latest features, improvements and bug fixes for %2$s.</string>
+    <string name="appupdater_update_available_description_dialog_before_release_notes">Update %1$s is available to download.\n\nYou can get these new features:\n%2$s</string>
+    <string name="appupdater_update_available_description_notification">Update %1$s of %2$s is available to download</string>
+    <string name="appupdater_update_available_description_snackbar">Update %1$s is available!</string>
+    <string name="appupdater_update_not_available">No updates available</string>
+    <string name="appupdater_update_not_available_description">You\'ve got the latest version available of %s!</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
+    <string name="btn_save">SAVE</string>
     <string name="character_counter_content_description">Character limit exceeded %1$d of %2$d</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
+    <string name="define_appupdater" translatable="false"/>
     <string name="define_easypreferences"/>
     <string name="delete">delete</string>
     <string name="done">done</string>
     <string name="edit">edit</string>
+    <string name="error_message_empty">Tidak boleh kosong</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">android.support.design.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">android.support.design.transformation.FabTransformationSheetBehavior</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">android.support.design.behavior.HideBottomViewOnScrollBehavior</string>
+    <string name="library_appupdater_author" translatable="false">Javier Santos</string>
+    <string name="library_appupdater_authorWebsite" translatable="false">https://github.com/javiersantos</string>
+    <string name="library_appupdater_isOpenSource" translatable="false">true</string>
+    <string name="library_appupdater_libraryDescription" translatable="false">AppUpdater is a library that checks for your apps\' updates on Google Play, GitHub, Amazon and F-Droid, showing a Material dialog, Snackbar or notification when a new version is available.</string>
+    <string name="library_appupdater_libraryName" translatable="false">AppUpdater</string>
+    <string name="library_appupdater_libraryWebsite" translatable="false">https://github.com/javiersantos/AppUpdater</string>
+    <string name="library_appupdater_licenseId" translatable="false">apache_2_0</string>
+    <string name="library_appupdater_repositoryLink" translatable="false">https://github.com/javiersantos/AppUpdater</string>
     <string name="library_easypreferences_author">Pixplicity</string>
     <string name="library_easypreferences_authorWebsite">http://pixplicity.com</string>
     <string name="library_easypreferences_classPath">com.pixplicity.easyprefs.library</string>
@@ -2543,6 +2717,7 @@
     <string name="library_easypreferences_libraryWebsite">https://github.com/Pixplicity/EasyPreferences</string>
     <string name="library_easypreferences_licenseId">apache_2_0</string>
     <string name="library_easypreferences_repositoryLink">https://github.com/Pixplicity/EasyPreferences</string>
+    <string name="modul_add_action_menu_item">Tambah Data</string>
     <string name="ms_back">BACK</string>
     <string name="ms_circle_path">M 12,0
             C 2.7795742,0.00373968 -2.992,9.9726253 1.5957031,17.970703
@@ -2586,8 +2761,19 @@
     <string name="pref_title_sync_frequency">Sync frequency</string>
     <string name="pref_title_system_sync_settings">System sync settings</string>
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="register">Daftar</string>
+    <string name="register_back_login">Kembali ke login</string>
+    <string name="register_email">Email</string>
+    <string name="register_nama">Nama</string>
+    <string name="register_nama_lembaga">Nama Lembaga</string>
+    <string name="register_password">Password</string>
+    <string name="register_phone">No Telp</string>
+    <string name="register_provinsi">Provinsi</string>
+    <string name="register_repeat_password">Ulangi password</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="status_pending">Tertunda</string>
+    <string name="status_sent">Terkirim</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_tes">Tes</string>
     <string name="title_dashboard">Dashboard</string>
@@ -2595,6 +2781,7 @@
     <string name="title_home">Home</string>
     <string name="title_logout">Logout</string>
     <string name="title_survey">Survey</string>
+    <string name="toolbar_action_info">ShowCaseInfo</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
@@ -4059,6 +4246,62 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
+    <style name="FancyShowCaseDefaultTitleStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="MD_ActionButton">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">@dimen/md_button_height</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+    <style name="MD_ActionButton.Text" ns2:ignore="NewApi">
+    <item name="android:textSize">@dimen/md_button_textsize</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:gravity">center</item>
+    <item name="android:stateListAnimator">@null</item>
+    <item name="android:background">@null</item>
+    <item name="android:minWidth">@dimen/md_button_min_width</item>
+    <item name="android:paddingLeft">@dimen/md_button_textpadding_horizontal</item>
+    <item name="android:paddingRight">@dimen/md_button_textpadding_horizontal</item>
+  </style>
+    <style name="MD_ActionButtonStacked" ns2:ignore="NewApi" parent="@style/MD_ActionButton">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:paddingLeft">@dimen/md_button_padding_horizontal_internalexternal</item>
+    <item name="android:paddingStart">@dimen/md_button_padding_horizontal_internalexternal
+    </item>
+    <item name="android:paddingRight">@dimen/md_button_padding_horizontal_internalexternal
+    </item>
+    <item name="android:paddingEnd">@dimen/md_button_padding_horizontal_internalexternal</item>
+  </style>
+    <style name="MD_Dark" parent="Theme.AppCompat.Dialog.Alert">
+    <item name="md_divider">@color/md_divider_white</item>
+    <item name="md_list_selector">@drawable/md_selector_dark</item>
+    <item name="md_btn_stacked_selector">@drawable/md_selector_dark</item>
+    <item name="md_btn_positive_selector">@drawable/md_btn_selector_dark</item>
+    <item name="md_btn_neutral_selector">@drawable/md_btn_selector_dark</item>
+    <item name="md_btn_negative_selector">@drawable/md_btn_selector_dark</item>
+
+    <item name="android:windowAnimationStyle">@style/MD_WindowAnimation</item>
+    <item name="android:backgroundDimEnabled">true</item>
+  </style>
+    <style name="MD_Light" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="md_divider">@color/md_divider_black</item>
+    <item name="md_list_selector">@drawable/md_selector</item>
+    <item name="md_btn_stacked_selector">@drawable/md_selector</item>
+    <item name="md_btn_positive_selector">@drawable/md_btn_selector</item>
+    <item name="md_btn_neutral_selector">@drawable/md_btn_selector</item>
+    <item name="md_btn_negative_selector">@drawable/md_btn_selector</item>
+
+    <item name="android:windowAnimationStyle">@style/MD_WindowAnimation</item>
+    <item name="android:backgroundDimEnabled">true</item>
+  </style>
+    <style name="MD_WindowAnimation">
+    <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+    <item name="android:windowExitAnimation">@anim/popup_exit</item>
+  </style>
     <style name="MSBottomNavigation">
         <item name="android:layout_height">@dimen/ms_bottom_navigation_bar_height</item>
         <item name="android:background">@color/ms_bottomNavigationBackgroundColor</item>
@@ -4374,6 +4617,13 @@
     <style name="RtlUnderlay.Widget.AppCompat.ActionButton.Overflow" parent="Base.Widget.AppCompat.ActionButton">
         <item name="android:paddingLeft">@dimen/abc_action_bar_overflow_padding_start_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_overflow_padding_end_material</item>
+    </style>
+    <style name="ShowCaseStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">50dp</item>
+        <item name="android:layout_marginTop">100dp</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>
@@ -4714,6 +4964,9 @@
     <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense
     </item>
   </style>
+    <style name="Toolbar.TitleTextSmall" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>
     <style name="Widget.AppCompat.ActionBar.Solid" parent="Base.Widget.AppCompat.ActionBar.Solid">
@@ -5084,6 +5337,59 @@
          height concerns. -->
     <item name="android:minHeight">@dimen/mtrl_toolbar_default_height</item>
   </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar" parent="android:Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@null</item>
+        <!-- We have support for determinate circular progress drawable. -->
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:maxWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:maxHeight">48dp</item>
+    </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar.Horizontal" parent="android:Widget.ProgressBar.Horizontal">
+        <!--
+        Disabled for correct behavior on Android 4.x, see
+        https://github.com/android/platform_frameworks_base/commit/911743652b597057a1bd7ef8a921e9ff8dce0f4a#diff-149f45c5ff2d3185bb79688ba17bc432L536
+        <item name="android:progressDrawable">@null</item>
+        -->
+        <item name="android:indeterminateDrawable">@null</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
+    </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding">
+        <item name="android:minHeight">4dp</item>
+        <item name="android:maxHeight">4dp</item>
+    </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar.Large">
+        <item name="android:minWidth">76dp</item>
+        <item name="android:maxWidth">76dp</item>
+        <item name="android:minHeight">76dp</item>
+        <item name="android:maxHeight">76dp</item>
+    </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar.Large.NoPadding">
+        <item name="android:minWidth">66.5dp</item>
+        <item name="android:maxWidth">66.5dp</item>
+        <item name="android:minHeight">66.5dp</item>
+        <item name="android:maxHeight">66.5dp</item>
+    </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar.NoPadding">
+        <item name="android:minWidth">42dp</item>
+        <item name="android:maxWidth">42dp</item>
+        <item name="android:minHeight">42dp</item>
+        <item name="android:maxHeight">42dp</item>
+    </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar.Small">
+        <item name="android:minWidth">16dp</item>
+        <item name="android:maxWidth">16dp</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
+    </style>
+    <style name="Widget.MaterialProgressBar.ProgressBar.Small.NoPadding">
+        <item name="android:minWidth">14dp</item>
+        <item name="android:maxWidth">14dp</item>
+        <item name="android:minHeight">14dp</item>
+        <item name="android:maxHeight">14dp</item>
+    </style>
     <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
         <item name="statusBarBackground">#000000</item>
     </style>

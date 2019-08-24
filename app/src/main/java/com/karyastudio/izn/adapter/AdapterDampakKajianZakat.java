@@ -1,34 +1,48 @@
 package com.karyastudio.izn.adapter;
 
+import android.arch.lifecycle.Observer;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 import com.karyastudio.izn.R;
-import com.karyastudio.izn.dao.generateSchema.KDZ;
+import com.karyastudio.izn.model.api.datakdz.KajianDampakZakatPojo;
+import com.karyastudio.izn.utils.StaticStrings;
+import com.karyastudio.izn.utils.Utils;
+import com.karyastudio.izn.views.fragments.modul1.FragmentDataModul1;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterDampakKajianZakat  extends RecyclerView.Adapter<AdapterDampakKajianZakat.ViewHolder> {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
-    private List<KDZ> arrayList;
+public class AdapterDampakKajianZakat extends RecyclerView.Adapter<AdapterDampakKajianZakat.ViewHolder> {
+
+    private List<KajianDampakZakatPojo> arrayList;
 
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray();
     private boolean mIsInChoiceMode = false;
     private AdapterDampakKajianZakat.ClickListener mClickListener;
 
-    public AdapterDampakKajianZakat(List<KDZ> arrayList, ClickListener clickListener){
+    public AdapterDampakKajianZakat(List<KajianDampakZakatPojo> arrayList, ClickListener clickListener){
         this.arrayList= arrayList;
         mClickListener = clickListener;
     }
 
-    public List<KDZ> getArrayList() {
+    public List<KajianDampakZakatPojo> getArrayList() {
         return arrayList;
     }
 
@@ -96,6 +110,9 @@ public class AdapterDampakKajianZakat  extends RecyclerView.Adapter<AdapterDampa
     @Override
     public void onBindViewHolder(@NonNull AdapterDampakKajianZakat.ViewHolder viewHolder, int position) {
 
+        viewHolder.setData(arrayList.get(position).getFk_id(),arrayList.get(position).getFk_date_created(),
+                arrayList.get(position).getFk_date_updated(),arrayList.get(position).getFk_108_jumlah_anggota_rumah(),arrayList.get(position).getFk_nama());
+
         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +127,6 @@ public class AdapterDampakKajianZakat  extends RecyclerView.Adapter<AdapterDampa
             }
         });
 
-        viewHolder.setData(arrayList.get(position).getFk_id(),arrayList.get(position).getFk_date_created(),
-                arrayList.get(position).getFk_date_updated(),arrayList.get(position).getCountKeluarga(),arrayList.get(position).getFk_nama());
-
         if (mIsInChoiceMode) {
             viewHolder.checkBox.setVisibility(View.VISIBLE);
             viewHolder.checkBox.setChecked(mSelectedItems.get(position));
@@ -120,6 +134,64 @@ public class AdapterDampakKajianZakat  extends RecyclerView.Adapter<AdapterDampa
             viewHolder.checkBox.setChecked(false);      // clear all checkbox if we want.
             viewHolder.checkBox.setVisibility(View.GONE);
         }
+
+        if (arrayList.get(position).getStatus().equals(StaticStrings.KDZ_STATUS_PENDING)){
+            viewHolder.status.setImageResource(R.drawable.ic_info_black_24dp);
+            viewHolder.status.setColorFilter(ContextCompat.getColor(FragmentDataModul1.context, R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
+        } else {
+            viewHolder.status.setImageResource(R.drawable.ic_check_black);
+            viewHolder.status.setColorFilter(ContextCompat.getColor(FragmentDataModul1.context, R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+
+        Disposable networkDisposable = ReactiveNetwork.observeInternetConnectivity()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(error -> Utils.log("ERROR RX NETWORK : " + error.toString()))
+                .subscribe(isConnected -> {
+
+                    if (isConnected){
+                        Utils.log("RX JAVA CONNECTED TO INTERNET");
+                        Utils.log("DATA POS ("+ position +"), TYPE : " + arrayList.get(position).getRequest_type());
+
+                        if (arrayList.get(position).getStatus().equals(StaticStrings.KDZ_STATUS_PENDING) && !arrayList.get(position).isSending){
+
+                            arrayList.get(position).isSending = true;
+                            viewHolder.progressBar.setVisibility(View.VISIBLE);
+                            viewHolder.status.setVisibility(View.GONE);
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Utils.log("REQUEST TYPE : " + arrayList.get(position).getRequest_type());
+                                    Utils.saveAndNextKajian(FragmentDataModul1.context, arrayList.get(position));
+                                }
+                            }, 2000);
+                        }
+
+                    }
+
+                }, error -> Utils.log("ERROR RX NETWORK : " + error.getMessage()));
+
+
+        arrayList.get(position).getLiveStatus().observe(FragmentDataModul1.getInstance(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String status) {
+                Utils.log(AdapterDampakKajianZakat.class, "CHANGED : " + status);
+
+                if (status.equals(StaticStrings.KDZ_STATUS_SENT)){
+                    viewHolder.progressBar.setVisibility(View.GONE);
+                    viewHolder.status.setImageResource(R.drawable.ic_check_black);
+                    viewHolder.status.setColorFilter(ContextCompat.getColor(FragmentDataModul1.context, R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
+                    viewHolder.status.setVisibility(View.VISIBLE);
+
+                    // Untuk menghindari java.lang.IndexOutOfBoundsException: Invalid index 0,
+                    // Saat repopulate. Karna livedata bisa dipanggil saat perubahan,
+                    // sedangkan datanya(list) udah ganti pointer
+                    if (position < arrayList.size())
+                    arrayList.get(position).isSending = false;
+                }
+            }
+        });
     }
 
     @Override
@@ -136,6 +208,8 @@ public class AdapterDampakKajianZakat  extends RecyclerView.Adapter<AdapterDampa
         private TextView date_updated;
         private TextView jenis_lembaga;
         private TextView counKel;
+        private ImageView status;
+        private ProgressBar progressBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,6 +219,8 @@ public class AdapterDampakKajianZakat  extends RecyclerView.Adapter<AdapterDampa
             date_created = itemView.findViewById(R.id.fk_date_created);
             date_updated = itemView.findViewById(R.id.fk_date_updated);
             counKel = itemView.findViewById(R.id.fk_nama2);
+            status = itemView.findViewById(R.id.status);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
 
         void setData(String fi_id, String fi_date_created, String fi_date_updated, String countKeluarga, String fi_jenis_lembaga){

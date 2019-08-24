@@ -1,209 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<com.emmasuzuki.easyform.EasyForm
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/easyForm"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:showErrorOn="change">
 
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <RadioGroup
-            android:id="@+id/radioGrup4032"
-            android:layout_width="0dp"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/txt_4032"
-            app:layout_constraintStart_toStartOf="@+id/txt_4032"
-            app:layout_constraintTop_toBottomOf="@+id/txt_4032">
+            android:layout_marginBottom="80dp">
 
-            <RadioButton
-                android:id="@+id/radioYa4032"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar5"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Ada" />
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                app:title="Database Tahun Sebelumnya"
+                app:titleMarginStart="20dp"
+                app:titleTextAppearance="@style/Toolbar.TitleTextSmall"
+                app:titleTextColor="@android:color/white" />
 
-            <RadioButton
-                android:id="@+id/radioTidak4032"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radioGrup4032"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Tidak Ada" />
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_4032"
+                app:layout_constraintStart_toStartOf="@+id/txt_4032"
+                app:layout_constraintTop_toBottomOf="@+id/txt_4032">
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/radioYa4032"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. Ada" />
 
-        <RadioGroup
-            android:id="@+id/radioGrup4031"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/txt_403"
-            app:layout_constraintStart_toStartOf="@+id/txt_403"
-            app:layout_constraintTop_toBottomOf="@+id/txt_403">
+                <RadioButton
+                    android:id="@+id/radioTidak4032"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak Ada" />
 
-            <RadioButton
-                android:id="@+id/radioYa4031"
-                android:layout_width="wrap_content"
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radioGrup4031"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Ada" />
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_403"
+                app:layout_constraintStart_toStartOf="@+id/txt_403"
+                app:layout_constraintTop_toBottomOf="@+id/txt_403">
 
-            <RadioButton
-                android:id="@+id/radioTidak4031"
-                android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/radioYa4031"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. Ada" />
+
+                <RadioButton
+                    android:id="@+id/radioTidak4031"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak Ada" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txt_403"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Tidak Ada" />
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="3. Apakah memiliki data mustahik OPZ provinsi yang dikelompokkan berdasarkan kabupaten DAN data mustahik OPZ Kabupaten/Kota?
+            \n(Hanya untuk OPZ tingkat Provinsi)"
+                app:layout_constraintEnd_toEndOf="@+id/edt_402"
+                app:layout_constraintStart_toStartOf="@+id/edt_402"
+                app:layout_constraintTop_toBottomOf="@+id/edt_402" />
 
-        </RadioGroup>
+            <TextView
+                android:id="@+id/txt_4032"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="4. Apakah memiliki data mustahik yang dikelompokkan berdasarkan kecamatan ?
+            \n(Hanya untuk OPZ tingkat Kabupaten/Kota)"
+                app:layout_constraintEnd_toEndOf="@+id/radioGrup4031"
+                app:layout_constraintStart_toStartOf="@+id/radioGrup4031"
+                app:layout_constraintTop_toBottomOf="@+id/radioGrup4031" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar5"
-            app:navigationIcon="?attr/homeAsUpIndicator"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="Database Tahun Sebelumnya"
-            app:titleMarginStart="20dp"
-            app:titleTextColor="@android:color/white" />
+            <Button
+                android:id="@+id/btn_next_401"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_btn2"
+                android:text="@string/btn_save"
+                android:textColor="@android:color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/edt_406"
+                app:layout_constraintStart_toStartOf="@+id/edt_406"
+                app:layout_constraintTop_toBottomOf="@+id/edt_406" />
 
-        <TextView
-            android:id="@+id/txt_403"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="2. Apakah memiliki data mustahik OPZ provinsi yang dikelompokkan berdasarkan kabupaten DAN data mustahik OPZ Kabupaten/Kota? "
-            app:layout_constraintEnd_toEndOf="@+id/edt_402"
-            app:layout_constraintStart_toStartOf="@+id/edt_402"
-            app:layout_constraintTop_toBottomOf="@+id/edt_402" />
+            <TextView
+                android:id="@+id/txt_401"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="1. Jumlah OPZ resmi yang terdaftar di BAZNAS"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar5"
+                app:layout_constraintStart_toStartOf="@+id/toolbar5"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
 
-        <TextView
-            android:id="@+id/txt_4032"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="3. Apakah memiliki data mustahik yang dikelompokkan berdasarkan kecamatan ? "
-            app:layout_constraintEnd_toEndOf="@+id/radioGrup4031"
-            app:layout_constraintStart_toStartOf="@+id/radioGrup4031"
-            app:layout_constraintTop_toBottomOf="@+id/radioGrup4031" />
+            <RadioGroup
+                android:id="@+id/radioGrup401"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/toolbar5"
+                app:layout_constraintTop_toBottomOf="@+id/txt_401">
 
-        <Button
-            android:id="@+id/btn_next_401"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="80dp"
-            android:background="@drawable/rounded_btn2"
-            android:text="Next"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/edt_406"
-            app:layout_constraintStart_toStartOf="@+id/edt_406"
-            app:layout_constraintTop_toBottomOf="@+id/edt_406" />
+                <RadioButton
+                    android:id="@+id/radioYa401"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. Ada" />
 
-        <TextView
-            android:id="@+id/txt_402"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="1. Jumlah mustahik yang terdaftar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
+                <RadioButton
+                    android:id="@+id/radioTidak401"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0. Tidak Ada" />
 
-        <EditText
-            android:id="@+id/edt_402"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins_light"
-            android:hint=" "
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/txt_402"
-            app:layout_constraintStart_toStartOf="@+id/txt_402"
-            app:layout_constraintTop_toBottomOf="@+id/txt_402" />
+            </RadioGroup>
 
-        <TextView
-            android:id="@+id/txt_404"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="4. Jumlah muzakki perorangan yang terdaftar "
-            app:layout_constraintEnd_toEndOf="@+id/radioGrup4032"
-            app:layout_constraintStart_toStartOf="@+id/radioGrup4032"
-            app:layout_constraintTop_toBottomOf="@+id/radioGrup4032" />
+            <EditText
+                android:id="@+id/edt_401"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:ems="10"
+                android:fontFamily="@font/poppins_light"
+                android:hint=" "
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/radioGrup401"
+                app:layout_constraintEnd_toEndOf="@+id/txt_401"
+                app:layout_constraintStart_toEndOf="@+id/radioGrup401"
+                app:layout_constraintTop_toTopOf="@+id/radioGrup401" />
 
-        <TextView
-            android:id="@+id/txt_405"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="5. Jumlah munfik perorangan yang terdaftar "
-            app:layout_constraintEnd_toEndOf="@+id/edt_404"
-            app:layout_constraintStart_toStartOf="@+id/edt_404"
-            app:layout_constraintTop_toBottomOf="@+id/edt_404" />
+            <TextView
+                android:id="@+id/txt_402"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="2. Jumlah mustahik yang terdaftar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGrup401" />
 
-        <TextView
-            android:id="@+id/txt_406"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="6. Jumlah muzakki badan usaha yang terdaftar "
-            app:layout_constraintEnd_toEndOf="@+id/edt_405"
-            app:layout_constraintStart_toStartOf="@+id/edt_405"
-            app:layout_constraintTop_toBottomOf="@+id/edt_405" />
+            <com.emmasuzuki.easyform.EasyTextInputLayout
+                android:id="@+id/edt_402"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:fontFamily="@font/poppins_light"
+                android:hint=" "
+                android:inputType="number"
+                app:errorMessage="@string/error_message_empty"
+                app:errorType="empty"
+                app:layout_constraintEnd_toEndOf="@+id/txt_402"
+                app:layout_constraintStart_toStartOf="@+id/txt_402"
+                app:layout_constraintTop_toBottomOf="@+id/txt_402" />
 
-        <EditText
-            android:id="@+id/edt_404"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint=" "
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/txt_404"
-            app:layout_constraintStart_toStartOf="@+id/txt_404"
-            app:layout_constraintTop_toBottomOf="@+id/txt_404" />
+            <TextView
+                android:id="@+id/txt_404"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="5. Jumlah muzakki perorangan yang terdaftar "
+                app:layout_constraintEnd_toEndOf="@+id/radioGrup4032"
+                app:layout_constraintStart_toStartOf="@+id/radioGrup4032"
+                app:layout_constraintTop_toBottomOf="@+id/radioGrup4032" />
 
-        <EditText
-            android:id="@+id/edt_405"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:ems="10"
-            android:hint=" "
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/txt_405"
-            app:layout_constraintStart_toStartOf="@+id/txt_405"
-            app:layout_constraintTop_toBottomOf="@+id/txt_405" />
+            <TextView
+                android:id="@+id/txt_405"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="6. Jumlah munfik perorangan yang terdaftar "
+                app:layout_constraintEnd_toEndOf="@+id/edt_404"
+                app:layout_constraintStart_toStartOf="@+id/edt_404"
+                app:layout_constraintTop_toBottomOf="@+id/edt_404" />
 
-        <EditText
-            android:id="@+id/edt_406"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint=" "
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/txt_406"
-            app:layout_constraintStart_toStartOf="@+id/txt_406"
-            app:layout_constraintTop_toBottomOf="@+id/txt_406" />
+            <TextView
+                android:id="@+id/txt_406"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="7. Jumlah muzakki badan usaha yang terdaftar "
+                app:layout_constraintEnd_toEndOf="@+id/edt_405"
+                app:layout_constraintStart_toStartOf="@+id/edt_405"
+                app:layout_constraintTop_toBottomOf="@+id/edt_405" />
 
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+            <com.emmasuzuki.easyform.EasyTextInputLayout
+                android:id="@+id/edt_404"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint=" "
+                android:inputType="number"
+                app:errorMessage="@string/error_message_empty"
+                app:errorType="empty"
+                app:layout_constraintEnd_toEndOf="@+id/txt_404"
+                app:layout_constraintStart_toStartOf="@+id/txt_404"
+                app:layout_constraintTop_toBottomOf="@+id/txt_404" />
+
+            <com.emmasuzuki.easyform.EasyTextInputLayout
+                android:id="@+id/edt_405"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=" "
+                android:inputType="number"
+                app:errorMessage="@string/error_message_empty"
+                app:errorType="empty"
+                app:layout_constraintEnd_toEndOf="@+id/txt_405"
+                app:layout_constraintStart_toStartOf="@+id/txt_405"
+                app:layout_constraintTop_toBottomOf="@+id/txt_405" />
+
+            <com.emmasuzuki.easyform.EasyTextInputLayout
+                android:id="@+id/edt_406"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint=" "
+                android:inputType="number"
+                app:errorMessage="@string/error_message_empty"
+                app:errorType="empty"
+                app:layout_constraintEnd_toEndOf="@+id/txt_406"
+                app:layout_constraintStart_toStartOf="@+id/txt_406"
+                app:layout_constraintTop_toBottomOf="@+id/txt_406" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</com.emmasuzuki.easyform.EasyForm>

@@ -9,7 +9,13 @@ import org.greenrobot.greendao.annotation.*;
  */
 @Entity
 public class Keluarga {
+    private Integer posisi;
+    private String status;
 
+    @NotNull
+    private String request_type;
+
+    @Id
     @NotNull
     private String fki_id;
 
@@ -19,7 +25,6 @@ public class Keluarga {
     @NotNull
     private String fk_202_nama;
 
-    @Id
     @NotNull
     private String fk_202_nik;
 
@@ -69,13 +74,16 @@ public class Keluarga {
     public Keluarga() {
     }
 
-    public Keluarga(String fk_202_nik) {
-        this.fk_202_nik = fk_202_nik;
+    public Keluarga(String fki_id) {
+        this.fki_id = fki_id;
     }
 
-    @Generated(hash = 769705410)
-    public Keluarga(@NotNull String fki_id, @NotNull String fki_fk_id, @NotNull String fk_202_nama, @NotNull String fk_202_nik, @NotNull String fk_203, @NotNull String fk_204, @NotNull String fk_205, @NotNull String fk_206, @NotNull String fk_207, @NotNull String fk_208, @NotNull String fk_209,
+    @Generated(hash = 161654311)
+    public Keluarga(Integer posisi, String status, @NotNull String request_type, @NotNull String fki_id, @NotNull String fki_fk_id, @NotNull String fk_202_nama, @NotNull String fk_202_nik, @NotNull String fk_203, @NotNull String fk_204, @NotNull String fk_205, @NotNull String fk_206, @NotNull String fk_207, @NotNull String fk_208, @NotNull String fk_209,
             @NotNull String fk_210, @NotNull String fk_303, @NotNull String fk_304, @NotNull String fk_305, @NotNull String fk_306, @NotNull String fk_307, @NotNull String fk_308) {
+        this.posisi = posisi;
+        this.status = status;
+        this.request_type = request_type;
         this.fki_id = fki_id;
         this.fki_fk_id = fki_fk_id;
         this.fk_202_nama = fk_202_nama;
@@ -94,6 +102,32 @@ public class Keluarga {
         this.fk_306 = fk_306;
         this.fk_307 = fk_307;
         this.fk_308 = fk_308;
+    }
+
+    public Integer getPosisi() {
+        return posisi;
+    }
+
+    public void setPosisi(Integer posisi) {
+        this.posisi = posisi;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @NotNull
+    public String getRequest_type() {
+        return request_type;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setRequest_type(@NotNull String request_type) {
+        this.request_type = request_type;
     }
 
     @NotNull

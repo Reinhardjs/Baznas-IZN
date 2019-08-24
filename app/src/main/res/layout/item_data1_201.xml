@@ -20,7 +20,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:paddingRight="20dp"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true">
 
         <TextView
             android:layout_width="match_parent"
@@ -54,7 +57,7 @@
                 android:fontFamily="@font/poppins_light"
                 android:hint="NIK"
                 android:inputType="number"
-                android:maxLength="16" />
+                android:maxLength="16"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -150,33 +153,40 @@
             android:fontFamily="@font/poppins_light"
             android:text="7. Jenjang dan jenis pendidikan tertinggi yang pernah/ sedang diduduki" />
 
-
         <Spinner
             android:id="@+id/edt1_208"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:entries="@array/items_208"
-            android:fontFamily="@font/poppins_light"
-            android:hint="NAMA" />
+            android:fontFamily="@font/poppins_light"/>
 
-        <TextView
-            android:id="@+id/txt1_209"
+        <LinearLayout
+            android:id="@+id/pendidikanForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="8. Kelas Tertinggi yang pernah/sedang diduduki" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt1_209"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="8. Kelas Tertinggi yang pernah/sedang diduduki" />
 
 
-        <Spinner
-            android:id="@+id/edt1_209"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:entries="@array/items_209"
-            android:fontFamily="@font/poppins_light"
-            android:hint="Kelas Tertinggi yang pernah/sedang diduduki" />
+            <Spinner
+                android:id="@+id/edt1_209"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/items_209"
+                android:fontFamily="@font/poppins_light"
+                android:hint="Kelas Tertinggi yang pernah/sedang diduduki" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/txt1_210"
@@ -186,7 +196,6 @@
             android:fontFamily="@font/poppins_light"
             android:text="9. Mengikuti Pendidikan Non-Formal" />
 
-
         <RadioGroup
             android:id="@+id/edt1_210"
             android:layout_width="match_parent"
@@ -194,19 +203,20 @@
             android:layout_marginTop="8dp">
 
             <RadioButton
-                android:id="@+id/radioYa"
+                android:id="@+id/radioYa210"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="1. Ya (Jika Memiliki Sertifikat)" />
 
             <RadioButton
-                android:id="@+id/radioTidak"
+                android:id="@+id/radioTidak210"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2. Tidak" />
+                android:text="0. Tidak" />
 
         </RadioGroup>
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -243,119 +253,123 @@
                 android:id="@+id/radioTidak303"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="1. Bekerja" />
 
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/txt1_304"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="11. Jenis Pekerjaan" />
-
-
-        <Spinner
-            android:id="@+id/edt1_304"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:entries="@array/items_304"
-            android:fontFamily="@font/poppins_light"
-            android:hint="NAMA" />
-
-
-        <TextView
-            android:id="@+id/txt1_305"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="12. Pendapatan  Rutin " />
-
         <LinearLayout
+            android:id="@+id/bekerjaForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/spin1_305"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:entries="@array/items_per"/>
-
-            <EditText
-                android:id="@+id/edt1_305"
+            <TextView
+                android:id="@+id/txt1_304"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
-                android:hint="MINIMAL 4 DIGIT"
-                android:maxLength="4"
-                android:inputType="number" />
+                android:text="11. Jenis Pekerjaan" />
 
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/txt1_306"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="13. Pendapatan Tidak Rutin " />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spin1_306"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:entries="@array/items_per"></Spinner>
+                android:id="@+id/edt1_304"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/items_304"
+                android:fontFamily="@font/poppins_light" />
 
-            <EditText
-                android:id="@+id/edt1_306"
+
+            <TextView
+                android:id="@+id/txt1_305"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
-                android:hint="MINIMAL 4 DIGIT"
-                android:inputType="number" />
-        </LinearLayout>
+                android:text="12. Pendapatan  Rutin " />
 
-        <TextView
-            android:id="@+id/txt1_307"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="14. Pendapatan dari Aset yang disewakan " />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spin1_305"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:entries="@array/items_per"/>
 
-            <Spinner
-                android:id="@+id/spin1_307"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:entries="@array/items_per"></Spinner>
+                <EditText
+                    android:id="@+id/edt1_305"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="MINIMAL 4 DIGIT"
+                    android:inputType="number" />
 
-            <EditText
-                android:id="@+id/edt1_307"
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txt1_306"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:text="13. Pendapatan Tidak Rutin " />
 
-                android:hint="MINIMAL 4 DIGIT"
-                android:inputType="number" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spin1_306"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:entries="@array/items_per" />
+
+                <EditText
+                    android:id="@+id/edt1_306"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="MINIMAL 4 DIGIT"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt1_307"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="14. Pendapatan dari Aset yang disewakan " />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spin1_307"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:entries="@array/items_per"/>
+
+                <EditText
+                    android:id="@+id/edt1_307"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="MINIMAL 4 DIGIT"
+                    android:inputType="number" />
+            </LinearLayout>
+
         </LinearLayout>
 
 

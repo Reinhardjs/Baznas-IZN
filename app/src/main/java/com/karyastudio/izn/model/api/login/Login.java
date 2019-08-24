@@ -11,6 +11,7 @@ public class Login {
     @SerializedName("message")
     @Expose
     private String message;
+
     @SerializedName("data")
     @Expose
     private Data data;

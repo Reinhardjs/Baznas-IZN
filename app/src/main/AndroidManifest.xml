@@ -18,11 +18,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:icon"
+        tools:targetApi="m">
+        <activity android:name=".views.activities.ResetPasswordActivity"></activity>
+        <activity
+            android:name=".views.activities.SurveyIZNActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity
             android:name=".views.activities.SurveyKDZActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize|keyboardHidden" />
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".utils.NetworkStateChangeReceiver">
             <intent-filter>

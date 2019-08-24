@@ -5,6 +5,7 @@
     <string name="title_data">Data</string>
     <string name="title_survey">Survey</string>
     <string name="title_logout">Logout</string>
+
     <string-array name="items_301">
         <item>1. Baznas Pusat</item>
         <item>2. Baznas Provinsi</item>
@@ -60,17 +61,18 @@
     </string-array>
 
     <string-array name="items_208">
-        <item>00. Belum/Tidak Bersekolah</item>
-        <item>01. SD/SDLB</item>
-        <item>02. Paket A</item>
-        <item>03. Madrasah Ibtidaiyah</item>
-        <item>04. SMP/SMPLB</item>
-        <item>05. Paket B</item>
-        <item>06. Madrasah Tsanawiyah</item>
-        <item>07. SMA/SMK/SMALB</item>
-        <item>08. Paket C</item>
-        <item>09. Madrasah Aliyah</item>
-        <item>10. Perguruan tinggi (D1/D2/D3/S1)</item>
+        <item>00. Belum Bersekolah</item>
+        <item>01. Tidak Bersekolah</item>
+        <item>02. SD/SDLB</item>
+        <item>03. Paket A</item>
+        <item>04. Madrasah Ibtidaiyah</item>
+        <item>05. SMP/SMPLB</item>
+        <item>06. Paket B</item>
+        <item>07. Madrasah Tsanawiyah</item>
+        <item>08. SMA/SMK/SMALB</item>
+        <item>09. Paket C</item>
+        <item>10. Madrasah Aliyah</item>
+        <item>11. Perguruan tinggi (D1/D2/D3/S1)</item>
     </string-array>
 
     <string-array name="items_209">
@@ -92,7 +94,9 @@
         <item>05. Nelayan</item>
         <item>06. Lainnya</item>
     </string-array>
+
     <string-array name="items_likert_sholat">
+        <item>0. Pilih</item>
         <item>1. Melarang orang lain shalat</item>
         <item>2. Menolak konsep shalat</item>
         <item>3. Melaksanakan shalat wajib tidak rutin</item>
@@ -101,6 +105,7 @@
     </string-array>
 
     <string-array name="items_likert_puasa">
+        <item>0. Pilih</item>
         <item>1. Melarang orang lain berpuasa</item>
         <item>2. Menolak konsep puasa</item>
         <item>3. Melaksanakan puasa wajib
@@ -112,6 +117,7 @@
 
 
     <string-array name="items_likert_zakat">
+        <item>0. Pilih</item>
         <item>1. Melarang orang lain berzakat dan infak</item>
         <item>2. Menolak zakat dan infak</item>
         <item>3. Tidak pernah berinfak walau sekali dalam setahun</item>
@@ -120,6 +126,7 @@
     </string-array>
 
     <string-array name="items_likert_lingkungan">
+        <item>0. Pilih</item>
         <item>1. Melarang anggota keluarga ibadah</item>
         <item>2. Menolak pelaksanaan ibadah</item>
         <item>3. Menganggap ibadah sebagai urusan pribadi anggota keluarga</item>
@@ -128,6 +135,7 @@
     </string-array>
 
     <string-array name="items_likert_kebijakan">
+        <item>0. Pilih</item>
         <item>1. Melarang ibadah untuk setiap keluarga</item>
         <item>2. Menolak pelaksanaan ibadah</item>
         <item>3. Menganggap ibadah sebagai urusan pribadi masyarakat</item>
@@ -162,6 +170,8 @@
         <item>09. Rumah Sehat BAZNAS (RSB)</item>
         <!--<item>10. Layanan Publik</item>-->
         <item>10. Lembaga Pemberdayaan Peternak Mustahik (LPPM)</item>
+        <item>11. Layanan Publik</item>
+        <item>12. Lainnya</item>
     </string-array>
     <string-array name="items_modul1_607">
         <item>1. Bantuan Konsumtif</item>
@@ -245,5 +255,21 @@
     <string name="edit">edit</string>
     <string name="delete">delete</string>
     <string name="done">done</string>
+    <string name="error_message_empty">Tidak boleh kosong</string>
+    <string name="btn_save">SAVE</string>
+
+    <string name="status_pending">Tertunda</string>
+    <string name="status_sent">Terkirim</string>
+    <string name="register_phone">No Telp</string>
+    <string name="register_repeat_password">Ulangi password</string>
+    <string name="register_password">Password</string>
+    <string name="register_back_login">Kembali ke login</string>
+    <string name="register">Daftar</string>
+    <string name="register_nama">Nama</string>
+    <string name="register_email">Email</string>
+    <string name="register_provinsi">Provinsi</string>
+    <string name="register_nama_lembaga">Nama Lembaga</string>
+    <string name="modul_add_action_menu_item">Tambah Data</string>
+    <string name="toolbar_action_info">ShowCaseInfo</string>
 
 </resources>

@@ -12,16 +12,16 @@ public final class R {
     public static final class string {
         private string() {}
 
-        public static final int define_easypreferences = 0x7f10002c;
-        public static final int library_easypreferences_author = 0x7f100033;
-        public static final int library_easypreferences_authorWebsite = 0x7f100034;
-        public static final int library_easypreferences_classPath = 0x7f100035;
-        public static final int library_easypreferences_isOpenSource = 0x7f100036;
-        public static final int library_easypreferences_libraryDescription = 0x7f100037;
-        public static final int library_easypreferences_libraryName = 0x7f100038;
-        public static final int library_easypreferences_libraryVersion = 0x7f100039;
-        public static final int library_easypreferences_libraryWebsite = 0x7f10003a;
-        public static final int library_easypreferences_licenseId = 0x7f10003b;
-        public static final int library_easypreferences_repositoryLink = 0x7f10003c;
+        public static final int define_easypreferences = 0x7f10003a;
+        public static final int library_easypreferences_author = 0x7f10004a;
+        public static final int library_easypreferences_authorWebsite = 0x7f10004b;
+        public static final int library_easypreferences_classPath = 0x7f10004c;
+        public static final int library_easypreferences_isOpenSource = 0x7f10004d;
+        public static final int library_easypreferences_libraryDescription = 0x7f10004e;
+        public static final int library_easypreferences_libraryName = 0x7f10004f;
+        public static final int library_easypreferences_libraryVersion = 0x7f100050;
+        public static final int library_easypreferences_libraryWebsite = 0x7f100051;
+        public static final int library_easypreferences_licenseId = 0x7f100052;
+        public static final int library_easypreferences_repositoryLink = 0x7f100053;
     }
 }

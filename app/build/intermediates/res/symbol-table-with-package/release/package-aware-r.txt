@@ -11,10 +11,15 @@ anim abc_slide_out_bottom
 anim abc_slide_out_top
 anim abc_tooltip_enter
 anim abc_tooltip_exit
+anim decelerate_cubic
 anim design_bottom_sheet_slide_in
 anim design_bottom_sheet_slide_out
 anim design_snackbar_in
 anim design_snackbar_out
+anim fscv_fade_in
+anim fscv_fade_out
+anim popup_enter
+anim popup_exit
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -246,7 +251,9 @@ attr emptyVisibility
 attr enforceMaterialTheme
 attr enforceTextAppearance
 attr errorEnabled
+attr errorMessage
 attr errorTextAppearance
+attr errorType
 attr expandActivityOverflowButtonDrawable
 attr expanded
 attr expandedTitleGravity
@@ -323,6 +330,7 @@ attr itemTextAppearance
 attr itemTextAppearanceActive
 attr itemTextAppearanceInactive
 attr itemTextColor
+attr items
 attr keylines
 attr labelVisibilityMode
 attr lastBaselineToBottomHeight
@@ -408,9 +416,55 @@ attr materialButtonStyle
 attr materialCardViewStyle
 attr maxActionInlineWidth
 attr maxButtonHeight
+attr maxChars
 attr maxImageSize
+attr maxValue
+attr md_background_color
+attr md_btn_negative_selector
+attr md_btn_neutral_selector
+attr md_btn_positive_selector
+attr md_btn_ripple_color
+attr md_btn_stacked_selector
+attr md_btnstacked_gravity
+attr md_buttons_gravity
+attr md_content_color
+attr md_content_gravity
+attr md_dark_theme
+attr md_divider
+attr md_divider_color
+attr md_icon
+attr md_icon_limit_icon_to_default_size
+attr md_icon_max_size
+attr md_item_color
+attr md_items_gravity
+attr md_link_color
+attr md_list_selector
+attr md_medium_font
+attr md_negative_color
+attr md_neutral_color
+attr md_positive_color
+attr md_reduce_padding_no_title_no_buttons
+attr md_regular_font
+attr md_title_color
+attr md_title_gravity
+attr md_widget_color
 attr measureWithLargestChild
 attr menu
+attr minChars
+attr minValue
+attr mpb_determinateCircularProgressStyle
+attr mpb_indeterminateTint
+attr mpb_indeterminateTintMode
+attr mpb_progressBackgroundTint
+attr mpb_progressBackgroundTintMode
+attr mpb_progressStyle
+attr mpb_progressTint
+attr mpb_progressTintMode
+attr mpb_secondaryProgressTint
+attr mpb_secondaryProgressTintMode
+attr mpb_setBothDrawables
+attr mpb_showProgressBackground
+attr mpb_useIntrinsicPadding
 attr ms_activeStepColor
 attr ms_backButtonBackground
 attr ms_backButtonColor
@@ -489,6 +543,7 @@ attr radioButtonStyle
 attr ratingBarStyle
 attr ratingBarStyleIndicator
 attr ratingBarStyleSmall
+attr regexPattern
 attr reverseLayout
 attr rippleColor
 attr scrimAnimationDuration
@@ -502,6 +557,7 @@ attr selectableItemBackground
 attr selectableItemBackgroundBorderless
 attr showAsAction
 attr showDividers
+attr showErrorOn
 attr showMotionSpec
 attr showText
 attr showTitle
@@ -529,6 +585,7 @@ attr strokeColor
 attr strokeWidth
 attr subMenuArrow
 attr submitBackground
+attr submitButton
 attr subtitle
 attr subtitleTextAppearance
 attr subtitleTextColor
@@ -586,10 +643,12 @@ attr textAppearanceSearchResultTitle
 attr textAppearanceSmallPopupMenu
 attr textAppearanceSubtitle1
 attr textAppearanceSubtitle2
+attr textColor
 attr textColorAlertDialogListItem
 attr textColorSearchUrl
 attr textEndPadding
 attr textInputStyle
+attr textSize
 attr textStartPadding
 attr theme
 attr thickness
@@ -707,6 +766,7 @@ color dim_foreground_material_dark
 color dim_foreground_material_light
 color error_color_material_dark
 color error_color_material_light
+color fancy_showcase_view_default_background_color
 color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
@@ -723,6 +783,13 @@ color material_grey_600
 color material_grey_800
 color material_grey_850
 color material_grey_900
+color md_btn_selected
+color md_btn_selected_dark
+color md_divider_black
+color md_divider_white
+color md_edittext_error
+color md_material_blue_600
+color md_material_blue_800
 color ms_black
 color ms_black_38_opacity
 color ms_black_87_opacity
@@ -869,6 +936,7 @@ dimen activity_vertical_margin
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
 dimen cardview_default_radius
+dimen circular_progress_border
 dimen compat_button_inset_horizontal_material
 dimen compat_button_inset_vertical_material
 dimen compat_button_padding_horizontal_material
@@ -936,6 +1004,42 @@ dimen hint_pressed_alpha_material_light
 dimen item_touch_helper_max_drag_scroll_per_frame
 dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
+dimen md_action_corner_radius
+dimen md_bg_corner_radius
+dimen md_button_frame_vertical_padding
+dimen md_button_height
+dimen md_button_inset_horizontal
+dimen md_button_inset_vertical
+dimen md_button_min_width
+dimen md_button_padding_frame_side
+dimen md_button_padding_horizontal
+dimen md_button_padding_horizontal_internalexternal
+dimen md_button_padding_vertical
+dimen md_button_textpadding_horizontal
+dimen md_button_textsize
+dimen md_content_padding_bottom
+dimen md_content_padding_top
+dimen md_content_textsize
+dimen md_dialog_frame_margin
+dimen md_dialog_horizontal_margin
+dimen md_dialog_max_width
+dimen md_dialog_vertical_margin
+dimen md_divider_height
+dimen md_icon_margin
+dimen md_icon_max_size
+dimen md_listitem_control_margin
+dimen md_listitem_height
+dimen md_listitem_margin_left
+dimen md_listitem_textsize
+dimen md_listitem_vertical_margin
+dimen md_listitem_vertical_margin_choice
+dimen md_neutral_button_margin
+dimen md_notitle_vertical_padding
+dimen md_notitle_vertical_padding_more
+dimen md_simplelistitem_padding_top
+dimen md_title_frame_margin_bottom
+dimen md_title_frame_margin_bottom_less
+dimen md_title_textsize
 dimen ms_bottom_navigation_bar_height
 dimen ms_dotted_progress_bar_dot_size
 dimen ms_material_button_corner_radius
@@ -1024,6 +1128,7 @@ dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
 dimen subtitle_shadow_radius
+dimen text_status_size
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -1133,11 +1238,16 @@ drawable ic_action_delete_black
 drawable ic_action_done
 drawable ic_action_edit
 drawable ic_actionbar_back
+drawable ic_add_white_24dp
+drawable ic_check_black
+drawable ic_clear_all_white_24dp
 drawable ic_data
 drawable ic_data_dashboard
 drawable ic_data_indeks_zakat
 drawable ic_home
 drawable ic_info_black_24dp
+drawable ic_info_outline_black
+drawable ic_info_outline_white_24dp
 drawable ic_keyboard_arrow_down_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -1147,11 +1257,26 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_notifications_black_24dp
+drawable ic_stat_name
 drawable ic_survey
 drawable ic_survey_dasyboard
 drawable ic_sync_black_24dp
+drawable ic_system_update_white_24dp
 drawable logo
 drawable logos
+drawable md_btn_selected
+drawable md_btn_selected_dark
+drawable md_btn_selector
+drawable md_btn_selector_dark
+drawable md_btn_selector_ripple
+drawable md_btn_selector_ripple_dark
+drawable md_btn_shape
+drawable md_item_selected
+drawable md_item_selected_dark
+drawable md_nav_back
+drawable md_selector
+drawable md_selector_dark
+drawable md_transparent
 drawable ms_animated_vector_circle_to_warning_24dp
 drawable ms_animated_vector_warning_to_circle_24dp
 drawable ms_circle
@@ -1185,8 +1310,10 @@ drawable rounded
 drawable rounded_btn
 drawable rounded_btn2
 drawable rounded_spinner
+drawable survey_icon
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font amiko_bold
 font habibi
 font judson
 font poppins_light
@@ -1229,11 +1356,12 @@ id async
 id auto
 id barrier
 id beginning
+id bekerjaForm
 id bg_dashboard
 id blocking
 id bottom
+id btn_change_pass
 id btn_exe_daftar
-id btn_exe_login
 id btn_goto_daftar
 id btn_goto_login
 id btn_next1_101
@@ -1263,13 +1391,17 @@ id center
 id center_horizontal
 id center_vertical
 id chains
+id change
+id chars
 id checkBox
 id check_btn
 id checkbox
 id chronometer
+id circular
 id clip_horizontal
 id clip_vertical
 id collapseActionView
+id constraint
 id container
 id content
 id contentPanel
@@ -1296,17 +1428,16 @@ id disabled_bottom_navigation
 id disabled_content_interaction
 id dots
 id dua
+id dynamic
+id easyForm
+id easyform_701
+id easyform_iya_301
+id easyform_iya_3012
+id easyform_iya_603
+id easyform_iya_604
+id easyform_iya_702
 id edit_query
 id edt1_100
-id edt1_101
-id edt1_102
-id edt1_103
-id edt1_104
-id edt1_105
-id edt1_107
-id edt1_108
-id edt1_109
-id edt1_110
 id edt1_202_nama
 id edt1_202_nik
 id edt1_203
@@ -1384,6 +1515,7 @@ id edt_101
 id edt_102
 id edt_103
 id edt_104
+id edt_401
 id edt_402
 id edt_404
 id edt_405
@@ -1403,10 +1535,17 @@ id edt_iya_603
 id edt_iya_604
 id edt_iya_702
 id email
+id empty
 id end
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
+id et_alamat
+id et_jlh_keluraga
+id et_kecamatan
+id et_kelurahan
+id et_nama_kepala
+id et_no_hp
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1420,12 +1559,16 @@ id fk_date_updated
 id fk_nama
 id fk_nama2
 id forever
+id forgotTextView
+id fscv_id
+id fscv_title
 id ghost_view
 id gone
 id group_divider
 id groups
 id home
 id homeAsUp
+id horizontal
 id icon
 id icon_group
 id ifRoom
@@ -1450,6 +1593,22 @@ id listMode
 id list_item
 id ll_801
 id masked
+id md_buttonDefaultNegative
+id md_buttonDefaultNeutral
+id md_buttonDefaultPositive
+id md_content
+id md_contentListViewFrame
+id md_contentRecyclerView
+id md_contentScrollView
+id md_control
+id md_customViewFrame
+id md_icon
+id md_label
+id md_minMax
+id md_promptCheckbox
+id md_root
+id md_title
+id md_titleFrame
 id media_actions
 id message
 id middle
@@ -1481,10 +1640,8 @@ id multiply
 id name
 id navigation
 id navigation_dashboard
-id navigation_data
 id navigation_header_container
 id navigation_logout
-id navigation_survey
 id never
 id none
 id normal
@@ -1500,6 +1657,8 @@ id parent_matrix
 id password
 id password_reg
 id password_reg2
+id pattern
+id pendidikanForm
 id percent
 id phone
 id pin
@@ -1511,6 +1670,7 @@ id radio
 id radioGrup201
 id radioGrup301
 id radioGrup3012
+id radioGrup401
 id radioGrup4031
 id radioGrup4032
 id radioGrup601
@@ -1525,6 +1685,7 @@ id radioGrup803
 id radioGrup804
 id radioTidak
 id radioTidak201
+id radioTidak210
 id radioTidak301
 id radioTidak3012
 id radioTidak303
@@ -1562,6 +1723,7 @@ id radioTidak803
 id radioTidak804
 id radioYa
 id radioYa201
+id radioYa210
 id radioYa301
 id radioYa3012
 id radioYa303
@@ -1597,6 +1759,7 @@ id radioYa802
 id radioYa8022
 id radioYa803
 id radioYa804
+id radio_kota_desa
 id recyclerView
 id recyclerView2
 id recyclerView3
@@ -1639,6 +1802,8 @@ id spin1_305
 id spin1_306
 id spin1_307
 id spin1_605
+id spinner_kota
+id spinner_provinsi
 id split_action_bar
 id spread
 id spread_inside
@@ -1647,11 +1812,13 @@ id src_in
 id src_over
 id standard
 id start
+id status
 id status_bar_latest_event_content
 id stepperLayout
 id stretch
 id submenuarrow
 id submit_area
+id successMessage
 id tabMode
 id tabs
 id tag_transition_group
@@ -1719,6 +1886,7 @@ id txt1_618
 id txt_201
 id txt_301
 id txt_302
+id txt_401
 id txt_402
 id txt_403
 id txt_4032
@@ -1744,14 +1912,13 @@ id txt_802
 id txt_804
 id txt_901
 id txt_dia
-id txt_label_data
-id txt_label_survey
 id txt_label_title
+id unfocus
 id uniform
 id unlabeled
 id up
 id useLogo
-id username
+id value
 id view
 id view2
 id view3
@@ -1812,6 +1979,8 @@ layout abc_tooltip
 layout activity_login
 layout activity_main
 layout activity_register
+layout activity_reset_password
+layout activity_survey_izn
 layout activity_survey_kdz
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -1828,6 +1997,7 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout fancy_showcase_view_layout_title
 layout fragment_dashboard
 layout fragment_data
 layout fragment_data_modul1
@@ -1853,6 +2023,25 @@ layout fragment_modul2_801
 layout fragment_modul2_901
 layout item_data
 layout item_data1_201
+layout md_dialog_basic
+layout md_dialog_basic_check
+layout md_dialog_custom
+layout md_dialog_input
+layout md_dialog_input_check
+layout md_dialog_list
+layout md_dialog_list_check
+layout md_dialog_progress
+layout md_dialog_progress_indeterminate
+layout md_dialog_progress_indeterminate_horizontal
+layout md_listitem
+layout md_listitem_multichoice
+layout md_listitem_singlechoice
+layout md_stub_actionbuttons
+layout md_stub_progress
+layout md_stub_progress_indeterminate
+layout md_stub_progress_indeterminate_horizontal
+layout md_stub_titleframe
+layout md_stub_titleframe_lesspadding
 layout ms_dot
 layout ms_step_tab
 layout ms_step_tab_container
@@ -1878,10 +2067,12 @@ layout notification_template_part_time
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout showcase_layout
 layout spinner_style
 layout support_simple_spinner_dropdown_item
 menu navigation
 menu toolbar_action_mode
+menu toolbar_menu
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_logo
@@ -1928,16 +2119,39 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
 string appbar_scrolling_view_behavior
+string appupdater_btn_disable
+string appupdater_btn_dismiss
+string appupdater_btn_update
+string appupdater_channel
+string appupdater_channel_name
+string appupdater_update_available
+string appupdater_update_available_description_dialog
+string appupdater_update_available_description_dialog_before_release_notes
+string appupdater_update_available_description_notification
+string appupdater_update_available_description_snackbar
+string appupdater_update_not_available
+string appupdater_update_not_available_description
 string bottom_sheet_behavior
+string btn_save
 string character_counter_content_description
 string character_counter_pattern
+string define_appupdater
 string define_easypreferences
 string delete
 string done
 string edit
+string error_message_empty
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
+string library_appupdater_author
+string library_appupdater_authorWebsite
+string library_appupdater_isOpenSource
+string library_appupdater_libraryDescription
+string library_appupdater_libraryName
+string library_appupdater_libraryWebsite
+string library_appupdater_licenseId
+string library_appupdater_repositoryLink
 string library_easypreferences_author
 string library_easypreferences_authorWebsite
 string library_easypreferences_classPath
@@ -1948,6 +2162,7 @@ string library_easypreferences_libraryVersion
 string library_easypreferences_libraryWebsite
 string library_easypreferences_licenseId
 string library_easypreferences_repositoryLink
+string modul_add_action_menu_item
 string ms_back
 string ms_circle_path
 string ms_complete
@@ -1973,8 +2188,19 @@ string pref_title_social_recommendations
 string pref_title_sync_frequency
 string pref_title_system_sync_settings
 string pref_title_vibrate
+string register
+string register_back_login
+string register_email
+string register_nama
+string register_nama_lembaga
+string register_password
+string register_phone
+string register_provinsi
+string register_repeat_password
 string search_menu_title
 string status_bar_notification_info_overflow
+string status_pending
+string status_sent
 string title_activity_settings
 string title_activity_tes
 string title_dashboard
@@ -1982,6 +2208,7 @@ string title_data
 string title_home
 string title_logout
 string title_survey
+string toolbar_action_info
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -2184,6 +2411,13 @@ style Base_Widget_MaterialComponents_TextInputLayout
 style CardView
 style CardView_Dark
 style CardView_Light
+style FancyShowCaseDefaultTitleStyle
+style MD_ActionButton
+style MD_ActionButton_Text
+style MD_ActionButtonStacked
+style MD_Dark
+style MD_Light
+style MD_WindowAnimation
 style MSBottomNavigation
 style MSColorableProgressBar
 style MSDefaultStepperLayoutTheme
@@ -2235,6 +2469,7 @@ style RtlOverlay_Widget_AppCompat_Search_DropDown_Text
 style RtlOverlay_Widget_AppCompat_SearchView_MagIcon
 style RtlUnderlay_Widget_AppCompat_ActionButton
 style RtlUnderlay_Widget_AppCompat_ActionButton_Overflow
+style ShowCaseStyle
 style TextAppearance_AppCompat
 style TextAppearance_AppCompat_Body1
 style TextAppearance_AppCompat_Body2
@@ -2386,6 +2621,7 @@ style ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox
 style ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox_Dense
 style ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox
 style ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox_Dense
+style Toolbar_TitleTextSmall
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar
@@ -2506,6 +2742,14 @@ style Widget_MaterialComponents_TextInputLayout_FilledBox_Dense
 style Widget_MaterialComponents_TextInputLayout_OutlinedBox
 style Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense
 style Widget_MaterialComponents_Toolbar
+style Widget_MaterialProgressBar_ProgressBar
+style Widget_MaterialProgressBar_ProgressBar_Horizontal
+style Widget_MaterialProgressBar_ProgressBar_Horizontal_NoPadding
+style Widget_MaterialProgressBar_ProgressBar_Large
+style Widget_MaterialProgressBar_ProgressBar_Large_NoPadding
+style Widget_MaterialProgressBar_ProgressBar_NoPadding
+style Widget_MaterialProgressBar_ProgressBar_Small
+style Widget_MaterialProgressBar_ProgressBar_Small_NoPadding
 style Widget_Support_CoordinatorLayout
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
@@ -2543,6 +2787,9 @@ styleable CoordinatorLayout keylines statusBarBackground
 styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_anchorGravity layout_behavior layout_dodgeInsetEdges layout_insetEdge layout_keyline
 styleable DesignTheme bottomSheetDialogTheme bottomSheetStyle
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
+styleable EasyAutoCompleteTextView errorMessage errorType items maxChars minChars regexPattern
+styleable EasyForm showErrorOn submitButton
+styleable EasyFormEditText errorMessage errorType maxChars maxValue minChars minValue regexPattern textColor textSize
 styleable FloatingActionButton backgroundTint backgroundTintMode borderWidth elevation fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor showMotionSpec useCompatPadding
 styleable FloatingActionButton_Behavior_Layout behavior_autoHide
 styleable FlowLayout itemSpacing lineSpacing
@@ -2555,9 +2802,11 @@ styleable LinearConstraintLayout android_orientation
 styleable LinearLayoutCompat android_gravity android_orientation android_baselineAligned android_baselineAlignedChildIndex android_weightSum divider dividerPadding measureWithLargestChild showDividers
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable MDRootLayout md_reduce_padding_no_title_no_buttons
 styleable MaterialButton android_insetLeft android_insetRight android_insetTop android_insetBottom backgroundTint backgroundTintMode cornerRadius icon iconGravity iconPadding iconSize iconTint iconTintMode rippleColor strokeColor strokeWidth
 styleable MaterialCardView strokeColor strokeWidth
 styleable MaterialComponentsTheme bottomSheetDialogTheme bottomSheetStyle chipGroupStyle chipStandaloneStyle chipStyle colorAccent colorBackgroundFloating colorPrimary colorPrimaryDark colorSecondary editTextStyle floatingActionButtonStyle materialButtonStyle materialCardViewStyle navigationViewStyle scrimBackground snackbarButtonStyle tabStyle textAppearanceBody1 textAppearanceBody2 textAppearanceButton textAppearanceCaption textAppearanceHeadline1 textAppearanceHeadline2 textAppearanceHeadline3 textAppearanceHeadline4 textAppearanceHeadline5 textAppearanceHeadline6 textAppearanceOverline textAppearanceSubtitle1 textAppearanceSubtitle2 textInputStyle
+styleable MaterialProgressBar mpb_determinateCircularProgressStyle mpb_indeterminateTint mpb_indeterminateTintMode mpb_progressBackgroundTint mpb_progressBackgroundTintMode mpb_progressStyle mpb_progressTint mpb_progressTintMode mpb_secondaryProgressTint mpb_secondaryProgressTintMode mpb_setBothDrawables mpb_showProgressBackground mpb_useIntrinsicPadding
 styleable MenuGroup android_enabled android_id android_visible android_menuCategory android_orderInCategory android_checkableBehavior
 styleable MenuItem android_icon android_enabled android_id android_checked android_visible android_menuCategory android_orderInCategory android_title android_titleCondensed android_alphabeticShortcut android_numericShortcut android_checkable android_onClick actionLayout actionProviderClass actionViewClass alphabeticModifiers contentDescription iconTint iconTintMode numericModifiers showAsAction tooltipText
 styleable MenuView android_windowAnimationStyle android_itemTextAppearance android_horizontalDivider android_verticalDivider android_headerBackground android_itemBackground android_itemIconDisabledAlpha preserveIconSpacing subMenuArrow

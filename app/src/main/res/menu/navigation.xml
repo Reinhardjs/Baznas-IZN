@@ -6,15 +6,15 @@
         android:icon="@drawable/ic_home"
         android:title="@string/title_dashboard" />
 
-    <item
-        android:id="@+id/navigation_data"
-        android:icon="@drawable/ic_data"
-        android:title="@string/title_data" />
+    <!--<item-->
+        <!--android:id="@+id/navigation_data"-->
+        <!--android:icon="@drawable/ic_data"-->
+        <!--android:title="@string/title_data" />-->
 
-    <item
-        android:id="@+id/navigation_survey"
-        android:icon="@drawable/ic_survey"
-        android:title="@string/title_survey" />
+    <!--<item-->
+        <!--android:id="@+id/navigation_survey"-->
+        <!--android:icon="@drawable/ic_survey"-->
+        <!--android:title="@string/title_survey" />-->
 
     <item
         android:id="@+id/navigation_logout"

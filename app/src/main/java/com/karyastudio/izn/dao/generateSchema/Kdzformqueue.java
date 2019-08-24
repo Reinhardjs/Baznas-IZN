@@ -11,6 +11,9 @@ import org.greenrobot.greendao.annotation.*;
 public class Kdzformqueue {
 
     @NotNull
+    private String status;
+
+    @NotNull
     private String request_type;
 
     @Id
@@ -265,9 +268,10 @@ public class Kdzformqueue {
         this.fk_id = fk_id;
     }
 
-    @Generated(hash = 1692853260)
-    public Kdzformqueue(@NotNull String request_type, @NotNull String fk_id, @NotNull String UID, @NotNull String M1_created_at, @NotNull String M1_updated_at, @NotNull String M1_nama, @NotNull String M1_101, @NotNull String M1_102, @NotNull String M1_103, @NotNull String M1_104, @NotNull String M1_105, @NotNull String M1_106, @NotNull String M1_107, @NotNull String M1_108, @NotNull String M1_109, @NotNull String M1_110, @NotNull String M1_401, @NotNull String M1_402, @NotNull String M1_403, @NotNull String M1_404, @NotNull String M1_405, @NotNull String M1_406, @NotNull String M1_407, @NotNull String M1_501, @NotNull String M1_502, @NotNull String M1_503, @NotNull String M1_504, @NotNull String M1_505, @NotNull String M1_506, @NotNull String M1_507, @NotNull String M1_508, @NotNull String M1_509, @NotNull String M1_510, @NotNull String M1_601, @NotNull String M1_601_kode, @NotNull String M1_602_kode, @NotNull String M1_603_kode, @NotNull String M1_602, @NotNull String M1_603, @NotNull String M1_604, @NotNull String M1_605, @NotNull String M1_606, @NotNull String M1_607, @NotNull String M1_608, @NotNull String M1_609, @NotNull String M1_610, @NotNull String M1_611, @NotNull String M1_612, @NotNull String M1_613, @NotNull String M1_614, @NotNull String M1_615, @NotNull String M1_616,
-            @NotNull String M1_617, @NotNull String M1_618, @NotNull String M1_701, @NotNull String M1_702, @NotNull String M1_703, @NotNull String M1_801, @NotNull String M1_802, @NotNull String M1_803, @NotNull String M1_804, @NotNull String M1_805, @NotNull String M1_806, @NotNull String M1_807, @NotNull String M1_808, @NotNull String M1_809, @NotNull String M1_810, @NotNull String M1_811, @NotNull String M1_812, @NotNull String M1_813, @NotNull String M1_814, @NotNull String M1_815, @NotNull String M1_lik1, @NotNull String M1_lik2, @NotNull String M1_lik3, @NotNull String M1_lik4, @NotNull String M1_lik5, @NotNull String M1_lik1B, @NotNull String M1_lik2B, @NotNull String M1_lik3B, @NotNull String M1_lik4B, @NotNull String M1_lik5B) {
+    @Generated(hash = 1254543328)
+    public Kdzformqueue(@NotNull String status, @NotNull String request_type, @NotNull String fk_id, @NotNull String UID, @NotNull String M1_created_at, @NotNull String M1_updated_at, @NotNull String M1_nama, @NotNull String M1_101, @NotNull String M1_102, @NotNull String M1_103, @NotNull String M1_104, @NotNull String M1_105, @NotNull String M1_106, @NotNull String M1_107, @NotNull String M1_108, @NotNull String M1_109, @NotNull String M1_110, @NotNull String M1_401, @NotNull String M1_402, @NotNull String M1_403, @NotNull String M1_404, @NotNull String M1_405, @NotNull String M1_406, @NotNull String M1_407, @NotNull String M1_501, @NotNull String M1_502, @NotNull String M1_503, @NotNull String M1_504, @NotNull String M1_505, @NotNull String M1_506, @NotNull String M1_507, @NotNull String M1_508, @NotNull String M1_509, @NotNull String M1_510, @NotNull String M1_601, @NotNull String M1_601_kode, @NotNull String M1_602_kode, @NotNull String M1_603_kode, @NotNull String M1_602, @NotNull String M1_603, @NotNull String M1_604, @NotNull String M1_605, @NotNull String M1_606, @NotNull String M1_607, @NotNull String M1_608, @NotNull String M1_609, @NotNull String M1_610, @NotNull String M1_611, @NotNull String M1_612, @NotNull String M1_613, @NotNull String M1_614, @NotNull String M1_615,
+            @NotNull String M1_616, @NotNull String M1_617, @NotNull String M1_618, @NotNull String M1_701, @NotNull String M1_702, @NotNull String M1_703, @NotNull String M1_801, @NotNull String M1_802, @NotNull String M1_803, @NotNull String M1_804, @NotNull String M1_805, @NotNull String M1_806, @NotNull String M1_807, @NotNull String M1_808, @NotNull String M1_809, @NotNull String M1_810, @NotNull String M1_811, @NotNull String M1_812, @NotNull String M1_813, @NotNull String M1_814, @NotNull String M1_815, @NotNull String M1_lik1, @NotNull String M1_lik2, @NotNull String M1_lik3, @NotNull String M1_lik4, @NotNull String M1_lik5, @NotNull String M1_lik1B, @NotNull String M1_lik2B, @NotNull String M1_lik3B, @NotNull String M1_lik4B, @NotNull String M1_lik5B) {
+        this.status = status;
         this.request_type = request_type;
         this.fk_id = fk_id;
         this.UID = UID;
@@ -350,6 +354,16 @@ public class Kdzformqueue {
         this.M1_lik3B = M1_lik3B;
         this.M1_lik4B = M1_lik4B;
         this.M1_lik5B = M1_lik5B;
+    }
+
+    @NotNull
+    public String getStatus() {
+        return status;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setStatus(@NotNull String status) {
+        this.status = status;
     }
 
     @NotNull

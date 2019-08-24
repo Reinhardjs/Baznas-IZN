@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "IZN".
 */
-public class IZNDao extends AbstractDao<IZN, Void> {
+public class IZNDao extends AbstractDao<IZN, String> {
 
     public static final String TABLENAME = "IZN";
 
@@ -22,11 +22,52 @@ public class IZNDao extends AbstractDao<IZN, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Fi_id = new Property(0, String.class, "fi_id", false, "FI_ID");
-        public final static Property Fi_code = new Property(1, String.class, "fi_code", false, "FI_CODE");
-        public final static Property Fi_date_created = new Property(2, String.class, "fi_date_created", false, "FI_DATE_CREATED");
-        public final static Property Fi_date_updated = new Property(3, String.class, "fi_date_updated", false, "FI_DATE_UPDATED");
-        public final static Property Fi_jenis_lembaga = new Property(4, String.class, "fi_jenis_lembaga", false, "FI_JENIS_LEMBAGA");
+        public final static Property Status = new Property(0, String.class, "status", false, "STATUS");
+        public final static Property Request_type = new Property(1, String.class, "request_type", false, "REQUEST_TYPE");
+        public final static Property Fi_id = new Property(2, String.class, "fi_id", true, "FI_ID");
+        public final static Property Fi_u_id = new Property(3, String.class, "fi_u_id", false, "FI_U_ID");
+        public final static Property Fi_date_created = new Property(4, String.class, "fi_date_created", false, "FI_DATE_CREATED");
+        public final static Property Fi_date_updated = new Property(5, String.class, "fi_date_updated", false, "FI_DATE_UPDATED");
+        public final static Property Fi_code = new Property(6, String.class, "fi_code", false, "FI_CODE");
+        public final static Property Fi_101_jenis_lembaga = new Property(7, String.class, "fi_101_jenis_lembaga", false, "FI_101_JENIS_LEMBAGA");
+        public final static Property Fi_102_nama_laz = new Property(8, String.class, "fi_102_nama_laz", false, "FI_102_NAMA_LAZ");
+        public final static Property Fi_103_provinsi = new Property(9, String.class, "fi_103_provinsi", false, "FI_103_PROVINSI");
+        public final static Property Fi_104_kabupaten = new Property(10, String.class, "fi_104_kabupaten", false, "FI_104_KABUPATEN");
+        public final static Property Fi_201_regulasi_ada = new Property(11, String.class, "fi_201_regulasi_ada", false, "FI_201_REGULASI_ADA");
+        public final static Property Fi_201_regulasi = new Property(12, String.class, "fi_201_regulasi", false, "FI_201_REGULASI");
+        public final static Property Fi_301_alokasi_apbn_2_tahun_lalu_ada = new Property(13, String.class, "fi_301_alokasi_apbn_2_tahun_lalu_ada", false, "FI_301_ALOKASI_APBN_2_TAHUN_LALU_ADA");
+        public final static Property Fi_301_alokasi_apbn_2_tahun_lalu = new Property(14, String.class, "fi_301_alokasi_apbn_2_tahun_lalu", false, "FI_301_ALOKASI_APBN_2_TAHUN_LALU");
+        public final static Property Fi_302_alokasi_apbn_1_tahun_lalu_ada = new Property(15, String.class, "fi_302_alokasi_apbn_1_tahun_lalu_ada", false, "FI_302_ALOKASI_APBN_1_TAHUN_LALU_ADA");
+        public final static Property Fi_302_alokasi_apbn_1_tahun_lalu = new Property(16, String.class, "fi_302_alokasi_apbn_1_tahun_lalu", false, "FI_302_ALOKASI_APBN_1_TAHUN_LALU");
+        public final static Property Fi_401_lembaga_zakat_resmi_ada = new Property(17, String.class, "fi_401_lembaga_zakat_resmi_ada", false, "FI_401_LEMBAGA_ZAKAT_RESMI_ADA");
+        public final static Property Fi_401_lembaga_zakat_resmi = new Property(18, String.class, "fi_401_lembaga_zakat_resmi", false, "FI_401_LEMBAGA_ZAKAT_RESMI");
+        public final static Property Fi_402_jumlah_mustahik = new Property(19, String.class, "fi_402_jumlah_mustahik", false, "FI_402_JUMLAH_MUSTAHIK");
+        public final static Property Fi_403_mustahik_kabupaten = new Property(20, String.class, "fi_403_mustahik_kabupaten", false, "FI_403_MUSTAHIK_KABUPATEN");
+        public final static Property Fi_403_mustahik_kecamatan = new Property(21, String.class, "fi_403_mustahik_kecamatan", false, "FI_403_MUSTAHIK_KECAMATAN");
+        public final static Property Fi_404_jumlah_muzakki = new Property(22, String.class, "fi_404_jumlah_muzakki", false, "FI_404_JUMLAH_MUZAKKI");
+        public final static Property Fi_405_jumlah_munsafki = new Property(23, String.class, "fi_405_jumlah_munsafki", false, "FI_405_JUMLAH_MUNSAFKI");
+        public final static Property Fi_406_jumlah_muzakki_badan_usaha = new Property(24, String.class, "fi_406_jumlah_muzakki_badan_usaha", false, "FI_406_JUMLAH_MUZAKKI_BADAN_USAHA");
+        public final static Property Fi_501_total_himpunan_tahun_2 = new Property(25, String.class, "fi_501_total_himpunan_tahun_2", false, "FI_501_TOTAL_HIMPUNAN_TAHUN_2");
+        public final static Property Fi_502_total_himpunan_tahun_1 = new Property(26, String.class, "fi_502_total_himpunan_tahun_1", false, "FI_502_TOTAL_HIMPUNAN_TAHUN_1");
+        public final static Property Fi_601_program_kerja = new Property(27, String.class, "fi_601_program_kerja", false, "FI_601_PROGRAM_KERJA");
+        public final static Property Fi_602_rencana_strategis = new Property(28, String.class, "fi_602_rencana_strategis", false, "FI_602_RENCANA_STRATEGIS");
+        public final static Property Fi_603_sop_ada = new Property(29, String.class, "fi_603_sop_ada", false, "FI_603_SOP_ADA");
+        public final static Property Fi_603_sop = new Property(30, String.class, "fi_603_sop", false, "FI_603_SOP");
+        public final static Property Fi_604_iso_ada = new Property(31, String.class, "fi_604_iso_ada", false, "FI_604_ISO_ADA");
+        public final static Property Fi_604_iso = new Property(32, String.class, "fi_604_iso", false, "FI_604_ISO");
+        public final static Property Fi_701_total_dana_zis = new Property(33, String.class, "fi_701_total_dana_zis", false, "FI_701_TOTAL_DANA_ZIS");
+        public final static Property Fi_702_dana_zis_dakwah_ada = new Property(34, String.class, "fi_702_dana_zis_dakwah_ada", false, "FI_702_DANA_ZIS_DAKWAH_ADA");
+        public final static Property Fi_702_dana_zis_dakwah = new Property(35, String.class, "fi_702_dana_zis_dakwah", false, "FI_702_DANA_ZIS_DAKWAH");
+        public final static Property Fi_703_penyaluran_zis_produktif_rencana = new Property(36, String.class, "fi_703_penyaluran_zis_produktif_rencana", false, "FI_703_PENYALURAN_ZIS_PRODUKTIF_RENCANA");
+        public final static Property Fi_703_penyaluran_zis_produktif_realisasi = new Property(37, String.class, "fi_703_penyaluran_zis_produktif_realisasi", false, "FI_703_PENYALURAN_ZIS_PRODUKTIF_REALISASI");
+        public final static Property Fi_704_penyaluran_zis_sosial_rencana = new Property(38, String.class, "fi_704_penyaluran_zis_sosial_rencana", false, "FI_704_PENYALURAN_ZIS_SOSIAL_RENCANA");
+        public final static Property Fi_704_penyaluran_zis_sosial_realisasi = new Property(39, String.class, "fi_704_penyaluran_zis_sosial_realisasi", false, "FI_704_PENYALURAN_ZIS_SOSIAL_REALISASI");
+        public final static Property Fi_801_laporan_keuangan = new Property(40, String.class, "fi_801_laporan_keuangan", false, "FI_801_LAPORAN_KEUANGAN");
+        public final static Property Fi_802_laporan_keuangan_teraudit = new Property(41, String.class, "fi_802_laporan_keuangan_teraudit", false, "FI_802_LAPORAN_KEUANGAN_TERAUDIT");
+        public final static Property Fi_802_laporan_keuangan_wtp = new Property(42, String.class, "fi_802_laporan_keuangan_wtp", false, "FI_802_LAPORAN_KEUANGAN_WTP");
+        public final static Property Fi_803_laporan_keuangan_publikasi = new Property(43, String.class, "fi_803_laporan_keuangan_publikasi", false, "FI_803_LAPORAN_KEUANGAN_PUBLIKASI");
+        public final static Property Fi_804_laporan_audit_syariah = new Property(44, String.class, "fi_804_laporan_audit_syariah", false, "FI_804_LAPORAN_AUDIT_SYARIAH");
+        public final static Property Fi_901_biaya_operasional = new Property(45, String.class, "fi_901_biaya_operasional", false, "FI_901_BIAYA_OPERASIONAL");
     }
 
 
@@ -42,11 +83,52 @@ public class IZNDao extends AbstractDao<IZN, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IZN\" (" + //
-                "\"FI_ID\" TEXT NOT NULL ," + // 0: fi_id
-                "\"FI_CODE\" TEXT NOT NULL ," + // 1: fi_code
-                "\"FI_DATE_CREATED\" TEXT NOT NULL ," + // 2: fi_date_created
-                "\"FI_DATE_UPDATED\" TEXT NOT NULL ," + // 3: fi_date_updated
-                "\"FI_JENIS_LEMBAGA\" TEXT NOT NULL );"); // 4: fi_jenis_lembaga
+                "\"STATUS\" TEXT NOT NULL ," + // 0: status
+                "\"REQUEST_TYPE\" TEXT NOT NULL ," + // 1: request_type
+                "\"FI_ID\" TEXT PRIMARY KEY NOT NULL ," + // 2: fi_id
+                "\"FI_U_ID\" TEXT," + // 3: fi_u_id
+                "\"FI_DATE_CREATED\" TEXT," + // 4: fi_date_created
+                "\"FI_DATE_UPDATED\" TEXT," + // 5: fi_date_updated
+                "\"FI_CODE\" TEXT," + // 6: fi_code
+                "\"FI_101_JENIS_LEMBAGA\" TEXT," + // 7: fi_101_jenis_lembaga
+                "\"FI_102_NAMA_LAZ\" TEXT," + // 8: fi_102_nama_laz
+                "\"FI_103_PROVINSI\" TEXT," + // 9: fi_103_provinsi
+                "\"FI_104_KABUPATEN\" TEXT," + // 10: fi_104_kabupaten
+                "\"FI_201_REGULASI_ADA\" TEXT," + // 11: fi_201_regulasi_ada
+                "\"FI_201_REGULASI\" TEXT," + // 12: fi_201_regulasi
+                "\"FI_301_ALOKASI_APBN_2_TAHUN_LALU_ADA\" TEXT," + // 13: fi_301_alokasi_apbn_2_tahun_lalu_ada
+                "\"FI_301_ALOKASI_APBN_2_TAHUN_LALU\" TEXT," + // 14: fi_301_alokasi_apbn_2_tahun_lalu
+                "\"FI_302_ALOKASI_APBN_1_TAHUN_LALU_ADA\" TEXT," + // 15: fi_302_alokasi_apbn_1_tahun_lalu_ada
+                "\"FI_302_ALOKASI_APBN_1_TAHUN_LALU\" TEXT," + // 16: fi_302_alokasi_apbn_1_tahun_lalu
+                "\"FI_401_LEMBAGA_ZAKAT_RESMI_ADA\" TEXT," + // 17: fi_401_lembaga_zakat_resmi_ada
+                "\"FI_401_LEMBAGA_ZAKAT_RESMI\" TEXT," + // 18: fi_401_lembaga_zakat_resmi
+                "\"FI_402_JUMLAH_MUSTAHIK\" TEXT," + // 19: fi_402_jumlah_mustahik
+                "\"FI_403_MUSTAHIK_KABUPATEN\" TEXT," + // 20: fi_403_mustahik_kabupaten
+                "\"FI_403_MUSTAHIK_KECAMATAN\" TEXT," + // 21: fi_403_mustahik_kecamatan
+                "\"FI_404_JUMLAH_MUZAKKI\" TEXT," + // 22: fi_404_jumlah_muzakki
+                "\"FI_405_JUMLAH_MUNSAFKI\" TEXT," + // 23: fi_405_jumlah_munsafki
+                "\"FI_406_JUMLAH_MUZAKKI_BADAN_USAHA\" TEXT," + // 24: fi_406_jumlah_muzakki_badan_usaha
+                "\"FI_501_TOTAL_HIMPUNAN_TAHUN_2\" TEXT," + // 25: fi_501_total_himpunan_tahun_2
+                "\"FI_502_TOTAL_HIMPUNAN_TAHUN_1\" TEXT," + // 26: fi_502_total_himpunan_tahun_1
+                "\"FI_601_PROGRAM_KERJA\" TEXT," + // 27: fi_601_program_kerja
+                "\"FI_602_RENCANA_STRATEGIS\" TEXT," + // 28: fi_602_rencana_strategis
+                "\"FI_603_SOP_ADA\" TEXT," + // 29: fi_603_sop_ada
+                "\"FI_603_SOP\" TEXT," + // 30: fi_603_sop
+                "\"FI_604_ISO_ADA\" TEXT," + // 31: fi_604_iso_ada
+                "\"FI_604_ISO\" TEXT," + // 32: fi_604_iso
+                "\"FI_701_TOTAL_DANA_ZIS\" TEXT," + // 33: fi_701_total_dana_zis
+                "\"FI_702_DANA_ZIS_DAKWAH_ADA\" TEXT," + // 34: fi_702_dana_zis_dakwah_ada
+                "\"FI_702_DANA_ZIS_DAKWAH\" TEXT," + // 35: fi_702_dana_zis_dakwah
+                "\"FI_703_PENYALURAN_ZIS_PRODUKTIF_RENCANA\" TEXT," + // 36: fi_703_penyaluran_zis_produktif_rencana
+                "\"FI_703_PENYALURAN_ZIS_PRODUKTIF_REALISASI\" TEXT," + // 37: fi_703_penyaluran_zis_produktif_realisasi
+                "\"FI_704_PENYALURAN_ZIS_SOSIAL_RENCANA\" TEXT," + // 38: fi_704_penyaluran_zis_sosial_rencana
+                "\"FI_704_PENYALURAN_ZIS_SOSIAL_REALISASI\" TEXT," + // 39: fi_704_penyaluran_zis_sosial_realisasi
+                "\"FI_801_LAPORAN_KEUANGAN\" TEXT," + // 40: fi_801_laporan_keuangan
+                "\"FI_802_LAPORAN_KEUANGAN_TERAUDIT\" TEXT," + // 41: fi_802_laporan_keuangan_teraudit
+                "\"FI_802_LAPORAN_KEUANGAN_WTP\" TEXT," + // 42: fi_802_laporan_keuangan_wtp
+                "\"FI_803_LAPORAN_KEUANGAN_PUBLIKASI\" TEXT," + // 43: fi_803_laporan_keuangan_publikasi
+                "\"FI_804_LAPORAN_AUDIT_SYARIAH\" TEXT," + // 44: fi_804_laporan_audit_syariah
+                "\"FI_901_BIAYA_OPERASIONAL\" TEXT);"); // 45: fi_901_biaya_operasional
     }
 
     /** Drops the underlying database table. */
@@ -58,64 +140,574 @@ public class IZNDao extends AbstractDao<IZN, Void> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, IZN entity) {
         stmt.clearBindings();
-        stmt.bindString(1, entity.getFi_id());
-        stmt.bindString(2, entity.getFi_code());
-        stmt.bindString(3, entity.getFi_date_created());
-        stmt.bindString(4, entity.getFi_date_updated());
-        stmt.bindString(5, entity.getFi_jenis_lembaga());
+        stmt.bindString(1, entity.getStatus());
+        stmt.bindString(2, entity.getRequest_type());
+        stmt.bindString(3, entity.getFi_id());
+ 
+        String fi_u_id = entity.getFi_u_id();
+        if (fi_u_id != null) {
+            stmt.bindString(4, fi_u_id);
+        }
+ 
+        String fi_date_created = entity.getFi_date_created();
+        if (fi_date_created != null) {
+            stmt.bindString(5, fi_date_created);
+        }
+ 
+        String fi_date_updated = entity.getFi_date_updated();
+        if (fi_date_updated != null) {
+            stmt.bindString(6, fi_date_updated);
+        }
+ 
+        String fi_code = entity.getFi_code();
+        if (fi_code != null) {
+            stmt.bindString(7, fi_code);
+        }
+ 
+        String fi_101_jenis_lembaga = entity.getFi_101_jenis_lembaga();
+        if (fi_101_jenis_lembaga != null) {
+            stmt.bindString(8, fi_101_jenis_lembaga);
+        }
+ 
+        String fi_102_nama_laz = entity.getFi_102_nama_laz();
+        if (fi_102_nama_laz != null) {
+            stmt.bindString(9, fi_102_nama_laz);
+        }
+ 
+        String fi_103_provinsi = entity.getFi_103_provinsi();
+        if (fi_103_provinsi != null) {
+            stmt.bindString(10, fi_103_provinsi);
+        }
+ 
+        String fi_104_kabupaten = entity.getFi_104_kabupaten();
+        if (fi_104_kabupaten != null) {
+            stmt.bindString(11, fi_104_kabupaten);
+        }
+ 
+        String fi_201_regulasi_ada = entity.getFi_201_regulasi_ada();
+        if (fi_201_regulasi_ada != null) {
+            stmt.bindString(12, fi_201_regulasi_ada);
+        }
+ 
+        String fi_201_regulasi = entity.getFi_201_regulasi();
+        if (fi_201_regulasi != null) {
+            stmt.bindString(13, fi_201_regulasi);
+        }
+ 
+        String fi_301_alokasi_apbn_2_tahun_lalu_ada = entity.getFi_301_alokasi_apbn_2_tahun_lalu_ada();
+        if (fi_301_alokasi_apbn_2_tahun_lalu_ada != null) {
+            stmt.bindString(14, fi_301_alokasi_apbn_2_tahun_lalu_ada);
+        }
+ 
+        String fi_301_alokasi_apbn_2_tahun_lalu = entity.getFi_301_alokasi_apbn_2_tahun_lalu();
+        if (fi_301_alokasi_apbn_2_tahun_lalu != null) {
+            stmt.bindString(15, fi_301_alokasi_apbn_2_tahun_lalu);
+        }
+ 
+        String fi_302_alokasi_apbn_1_tahun_lalu_ada = entity.getFi_302_alokasi_apbn_1_tahun_lalu_ada();
+        if (fi_302_alokasi_apbn_1_tahun_lalu_ada != null) {
+            stmt.bindString(16, fi_302_alokasi_apbn_1_tahun_lalu_ada);
+        }
+ 
+        String fi_302_alokasi_apbn_1_tahun_lalu = entity.getFi_302_alokasi_apbn_1_tahun_lalu();
+        if (fi_302_alokasi_apbn_1_tahun_lalu != null) {
+            stmt.bindString(17, fi_302_alokasi_apbn_1_tahun_lalu);
+        }
+ 
+        String fi_401_lembaga_zakat_resmi_ada = entity.getFi_401_lembaga_zakat_resmi_ada();
+        if (fi_401_lembaga_zakat_resmi_ada != null) {
+            stmt.bindString(18, fi_401_lembaga_zakat_resmi_ada);
+        }
+ 
+        String fi_401_lembaga_zakat_resmi = entity.getFi_401_lembaga_zakat_resmi();
+        if (fi_401_lembaga_zakat_resmi != null) {
+            stmt.bindString(19, fi_401_lembaga_zakat_resmi);
+        }
+ 
+        String fi_402_jumlah_mustahik = entity.getFi_402_jumlah_mustahik();
+        if (fi_402_jumlah_mustahik != null) {
+            stmt.bindString(20, fi_402_jumlah_mustahik);
+        }
+ 
+        String fi_403_mustahik_kabupaten = entity.getFi_403_mustahik_kabupaten();
+        if (fi_403_mustahik_kabupaten != null) {
+            stmt.bindString(21, fi_403_mustahik_kabupaten);
+        }
+ 
+        String fi_403_mustahik_kecamatan = entity.getFi_403_mustahik_kecamatan();
+        if (fi_403_mustahik_kecamatan != null) {
+            stmt.bindString(22, fi_403_mustahik_kecamatan);
+        }
+ 
+        String fi_404_jumlah_muzakki = entity.getFi_404_jumlah_muzakki();
+        if (fi_404_jumlah_muzakki != null) {
+            stmt.bindString(23, fi_404_jumlah_muzakki);
+        }
+ 
+        String fi_405_jumlah_munsafki = entity.getFi_405_jumlah_munsafki();
+        if (fi_405_jumlah_munsafki != null) {
+            stmt.bindString(24, fi_405_jumlah_munsafki);
+        }
+ 
+        String fi_406_jumlah_muzakki_badan_usaha = entity.getFi_406_jumlah_muzakki_badan_usaha();
+        if (fi_406_jumlah_muzakki_badan_usaha != null) {
+            stmt.bindString(25, fi_406_jumlah_muzakki_badan_usaha);
+        }
+ 
+        String fi_501_total_himpunan_tahun_2 = entity.getFi_501_total_himpunan_tahun_2();
+        if (fi_501_total_himpunan_tahun_2 != null) {
+            stmt.bindString(26, fi_501_total_himpunan_tahun_2);
+        }
+ 
+        String fi_502_total_himpunan_tahun_1 = entity.getFi_502_total_himpunan_tahun_1();
+        if (fi_502_total_himpunan_tahun_1 != null) {
+            stmt.bindString(27, fi_502_total_himpunan_tahun_1);
+        }
+ 
+        String fi_601_program_kerja = entity.getFi_601_program_kerja();
+        if (fi_601_program_kerja != null) {
+            stmt.bindString(28, fi_601_program_kerja);
+        }
+ 
+        String fi_602_rencana_strategis = entity.getFi_602_rencana_strategis();
+        if (fi_602_rencana_strategis != null) {
+            stmt.bindString(29, fi_602_rencana_strategis);
+        }
+ 
+        String fi_603_sop_ada = entity.getFi_603_sop_ada();
+        if (fi_603_sop_ada != null) {
+            stmt.bindString(30, fi_603_sop_ada);
+        }
+ 
+        String fi_603_sop = entity.getFi_603_sop();
+        if (fi_603_sop != null) {
+            stmt.bindString(31, fi_603_sop);
+        }
+ 
+        String fi_604_iso_ada = entity.getFi_604_iso_ada();
+        if (fi_604_iso_ada != null) {
+            stmt.bindString(32, fi_604_iso_ada);
+        }
+ 
+        String fi_604_iso = entity.getFi_604_iso();
+        if (fi_604_iso != null) {
+            stmt.bindString(33, fi_604_iso);
+        }
+ 
+        String fi_701_total_dana_zis = entity.getFi_701_total_dana_zis();
+        if (fi_701_total_dana_zis != null) {
+            stmt.bindString(34, fi_701_total_dana_zis);
+        }
+ 
+        String fi_702_dana_zis_dakwah_ada = entity.getFi_702_dana_zis_dakwah_ada();
+        if (fi_702_dana_zis_dakwah_ada != null) {
+            stmt.bindString(35, fi_702_dana_zis_dakwah_ada);
+        }
+ 
+        String fi_702_dana_zis_dakwah = entity.getFi_702_dana_zis_dakwah();
+        if (fi_702_dana_zis_dakwah != null) {
+            stmt.bindString(36, fi_702_dana_zis_dakwah);
+        }
+ 
+        String fi_703_penyaluran_zis_produktif_rencana = entity.getFi_703_penyaluran_zis_produktif_rencana();
+        if (fi_703_penyaluran_zis_produktif_rencana != null) {
+            stmt.bindString(37, fi_703_penyaluran_zis_produktif_rencana);
+        }
+ 
+        String fi_703_penyaluran_zis_produktif_realisasi = entity.getFi_703_penyaluran_zis_produktif_realisasi();
+        if (fi_703_penyaluran_zis_produktif_realisasi != null) {
+            stmt.bindString(38, fi_703_penyaluran_zis_produktif_realisasi);
+        }
+ 
+        String fi_704_penyaluran_zis_sosial_rencana = entity.getFi_704_penyaluran_zis_sosial_rencana();
+        if (fi_704_penyaluran_zis_sosial_rencana != null) {
+            stmt.bindString(39, fi_704_penyaluran_zis_sosial_rencana);
+        }
+ 
+        String fi_704_penyaluran_zis_sosial_realisasi = entity.getFi_704_penyaluran_zis_sosial_realisasi();
+        if (fi_704_penyaluran_zis_sosial_realisasi != null) {
+            stmt.bindString(40, fi_704_penyaluran_zis_sosial_realisasi);
+        }
+ 
+        String fi_801_laporan_keuangan = entity.getFi_801_laporan_keuangan();
+        if (fi_801_laporan_keuangan != null) {
+            stmt.bindString(41, fi_801_laporan_keuangan);
+        }
+ 
+        String fi_802_laporan_keuangan_teraudit = entity.getFi_802_laporan_keuangan_teraudit();
+        if (fi_802_laporan_keuangan_teraudit != null) {
+            stmt.bindString(42, fi_802_laporan_keuangan_teraudit);
+        }
+ 
+        String fi_802_laporan_keuangan_wtp = entity.getFi_802_laporan_keuangan_wtp();
+        if (fi_802_laporan_keuangan_wtp != null) {
+            stmt.bindString(43, fi_802_laporan_keuangan_wtp);
+        }
+ 
+        String fi_803_laporan_keuangan_publikasi = entity.getFi_803_laporan_keuangan_publikasi();
+        if (fi_803_laporan_keuangan_publikasi != null) {
+            stmt.bindString(44, fi_803_laporan_keuangan_publikasi);
+        }
+ 
+        String fi_804_laporan_audit_syariah = entity.getFi_804_laporan_audit_syariah();
+        if (fi_804_laporan_audit_syariah != null) {
+            stmt.bindString(45, fi_804_laporan_audit_syariah);
+        }
+ 
+        String fi_901_biaya_operasional = entity.getFi_901_biaya_operasional();
+        if (fi_901_biaya_operasional != null) {
+            stmt.bindString(46, fi_901_biaya_operasional);
+        }
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, IZN entity) {
         stmt.clearBindings();
-        stmt.bindString(1, entity.getFi_id());
-        stmt.bindString(2, entity.getFi_code());
-        stmt.bindString(3, entity.getFi_date_created());
-        stmt.bindString(4, entity.getFi_date_updated());
-        stmt.bindString(5, entity.getFi_jenis_lembaga());
+        stmt.bindString(1, entity.getStatus());
+        stmt.bindString(2, entity.getRequest_type());
+        stmt.bindString(3, entity.getFi_id());
+ 
+        String fi_u_id = entity.getFi_u_id();
+        if (fi_u_id != null) {
+            stmt.bindString(4, fi_u_id);
+        }
+ 
+        String fi_date_created = entity.getFi_date_created();
+        if (fi_date_created != null) {
+            stmt.bindString(5, fi_date_created);
+        }
+ 
+        String fi_date_updated = entity.getFi_date_updated();
+        if (fi_date_updated != null) {
+            stmt.bindString(6, fi_date_updated);
+        }
+ 
+        String fi_code = entity.getFi_code();
+        if (fi_code != null) {
+            stmt.bindString(7, fi_code);
+        }
+ 
+        String fi_101_jenis_lembaga = entity.getFi_101_jenis_lembaga();
+        if (fi_101_jenis_lembaga != null) {
+            stmt.bindString(8, fi_101_jenis_lembaga);
+        }
+ 
+        String fi_102_nama_laz = entity.getFi_102_nama_laz();
+        if (fi_102_nama_laz != null) {
+            stmt.bindString(9, fi_102_nama_laz);
+        }
+ 
+        String fi_103_provinsi = entity.getFi_103_provinsi();
+        if (fi_103_provinsi != null) {
+            stmt.bindString(10, fi_103_provinsi);
+        }
+ 
+        String fi_104_kabupaten = entity.getFi_104_kabupaten();
+        if (fi_104_kabupaten != null) {
+            stmt.bindString(11, fi_104_kabupaten);
+        }
+ 
+        String fi_201_regulasi_ada = entity.getFi_201_regulasi_ada();
+        if (fi_201_regulasi_ada != null) {
+            stmt.bindString(12, fi_201_regulasi_ada);
+        }
+ 
+        String fi_201_regulasi = entity.getFi_201_regulasi();
+        if (fi_201_regulasi != null) {
+            stmt.bindString(13, fi_201_regulasi);
+        }
+ 
+        String fi_301_alokasi_apbn_2_tahun_lalu_ada = entity.getFi_301_alokasi_apbn_2_tahun_lalu_ada();
+        if (fi_301_alokasi_apbn_2_tahun_lalu_ada != null) {
+            stmt.bindString(14, fi_301_alokasi_apbn_2_tahun_lalu_ada);
+        }
+ 
+        String fi_301_alokasi_apbn_2_tahun_lalu = entity.getFi_301_alokasi_apbn_2_tahun_lalu();
+        if (fi_301_alokasi_apbn_2_tahun_lalu != null) {
+            stmt.bindString(15, fi_301_alokasi_apbn_2_tahun_lalu);
+        }
+ 
+        String fi_302_alokasi_apbn_1_tahun_lalu_ada = entity.getFi_302_alokasi_apbn_1_tahun_lalu_ada();
+        if (fi_302_alokasi_apbn_1_tahun_lalu_ada != null) {
+            stmt.bindString(16, fi_302_alokasi_apbn_1_tahun_lalu_ada);
+        }
+ 
+        String fi_302_alokasi_apbn_1_tahun_lalu = entity.getFi_302_alokasi_apbn_1_tahun_lalu();
+        if (fi_302_alokasi_apbn_1_tahun_lalu != null) {
+            stmt.bindString(17, fi_302_alokasi_apbn_1_tahun_lalu);
+        }
+ 
+        String fi_401_lembaga_zakat_resmi_ada = entity.getFi_401_lembaga_zakat_resmi_ada();
+        if (fi_401_lembaga_zakat_resmi_ada != null) {
+            stmt.bindString(18, fi_401_lembaga_zakat_resmi_ada);
+        }
+ 
+        String fi_401_lembaga_zakat_resmi = entity.getFi_401_lembaga_zakat_resmi();
+        if (fi_401_lembaga_zakat_resmi != null) {
+            stmt.bindString(19, fi_401_lembaga_zakat_resmi);
+        }
+ 
+        String fi_402_jumlah_mustahik = entity.getFi_402_jumlah_mustahik();
+        if (fi_402_jumlah_mustahik != null) {
+            stmt.bindString(20, fi_402_jumlah_mustahik);
+        }
+ 
+        String fi_403_mustahik_kabupaten = entity.getFi_403_mustahik_kabupaten();
+        if (fi_403_mustahik_kabupaten != null) {
+            stmt.bindString(21, fi_403_mustahik_kabupaten);
+        }
+ 
+        String fi_403_mustahik_kecamatan = entity.getFi_403_mustahik_kecamatan();
+        if (fi_403_mustahik_kecamatan != null) {
+            stmt.bindString(22, fi_403_mustahik_kecamatan);
+        }
+ 
+        String fi_404_jumlah_muzakki = entity.getFi_404_jumlah_muzakki();
+        if (fi_404_jumlah_muzakki != null) {
+            stmt.bindString(23, fi_404_jumlah_muzakki);
+        }
+ 
+        String fi_405_jumlah_munsafki = entity.getFi_405_jumlah_munsafki();
+        if (fi_405_jumlah_munsafki != null) {
+            stmt.bindString(24, fi_405_jumlah_munsafki);
+        }
+ 
+        String fi_406_jumlah_muzakki_badan_usaha = entity.getFi_406_jumlah_muzakki_badan_usaha();
+        if (fi_406_jumlah_muzakki_badan_usaha != null) {
+            stmt.bindString(25, fi_406_jumlah_muzakki_badan_usaha);
+        }
+ 
+        String fi_501_total_himpunan_tahun_2 = entity.getFi_501_total_himpunan_tahun_2();
+        if (fi_501_total_himpunan_tahun_2 != null) {
+            stmt.bindString(26, fi_501_total_himpunan_tahun_2);
+        }
+ 
+        String fi_502_total_himpunan_tahun_1 = entity.getFi_502_total_himpunan_tahun_1();
+        if (fi_502_total_himpunan_tahun_1 != null) {
+            stmt.bindString(27, fi_502_total_himpunan_tahun_1);
+        }
+ 
+        String fi_601_program_kerja = entity.getFi_601_program_kerja();
+        if (fi_601_program_kerja != null) {
+            stmt.bindString(28, fi_601_program_kerja);
+        }
+ 
+        String fi_602_rencana_strategis = entity.getFi_602_rencana_strategis();
+        if (fi_602_rencana_strategis != null) {
+            stmt.bindString(29, fi_602_rencana_strategis);
+        }
+ 
+        String fi_603_sop_ada = entity.getFi_603_sop_ada();
+        if (fi_603_sop_ada != null) {
+            stmt.bindString(30, fi_603_sop_ada);
+        }
+ 
+        String fi_603_sop = entity.getFi_603_sop();
+        if (fi_603_sop != null) {
+            stmt.bindString(31, fi_603_sop);
+        }
+ 
+        String fi_604_iso_ada = entity.getFi_604_iso_ada();
+        if (fi_604_iso_ada != null) {
+            stmt.bindString(32, fi_604_iso_ada);
+        }
+ 
+        String fi_604_iso = entity.getFi_604_iso();
+        if (fi_604_iso != null) {
+            stmt.bindString(33, fi_604_iso);
+        }
+ 
+        String fi_701_total_dana_zis = entity.getFi_701_total_dana_zis();
+        if (fi_701_total_dana_zis != null) {
+            stmt.bindString(34, fi_701_total_dana_zis);
+        }
+ 
+        String fi_702_dana_zis_dakwah_ada = entity.getFi_702_dana_zis_dakwah_ada();
+        if (fi_702_dana_zis_dakwah_ada != null) {
+            stmt.bindString(35, fi_702_dana_zis_dakwah_ada);
+        }
+ 
+        String fi_702_dana_zis_dakwah = entity.getFi_702_dana_zis_dakwah();
+        if (fi_702_dana_zis_dakwah != null) {
+            stmt.bindString(36, fi_702_dana_zis_dakwah);
+        }
+ 
+        String fi_703_penyaluran_zis_produktif_rencana = entity.getFi_703_penyaluran_zis_produktif_rencana();
+        if (fi_703_penyaluran_zis_produktif_rencana != null) {
+            stmt.bindString(37, fi_703_penyaluran_zis_produktif_rencana);
+        }
+ 
+        String fi_703_penyaluran_zis_produktif_realisasi = entity.getFi_703_penyaluran_zis_produktif_realisasi();
+        if (fi_703_penyaluran_zis_produktif_realisasi != null) {
+            stmt.bindString(38, fi_703_penyaluran_zis_produktif_realisasi);
+        }
+ 
+        String fi_704_penyaluran_zis_sosial_rencana = entity.getFi_704_penyaluran_zis_sosial_rencana();
+        if (fi_704_penyaluran_zis_sosial_rencana != null) {
+            stmt.bindString(39, fi_704_penyaluran_zis_sosial_rencana);
+        }
+ 
+        String fi_704_penyaluran_zis_sosial_realisasi = entity.getFi_704_penyaluran_zis_sosial_realisasi();
+        if (fi_704_penyaluran_zis_sosial_realisasi != null) {
+            stmt.bindString(40, fi_704_penyaluran_zis_sosial_realisasi);
+        }
+ 
+        String fi_801_laporan_keuangan = entity.getFi_801_laporan_keuangan();
+        if (fi_801_laporan_keuangan != null) {
+            stmt.bindString(41, fi_801_laporan_keuangan);
+        }
+ 
+        String fi_802_laporan_keuangan_teraudit = entity.getFi_802_laporan_keuangan_teraudit();
+        if (fi_802_laporan_keuangan_teraudit != null) {
+            stmt.bindString(42, fi_802_laporan_keuangan_teraudit);
+        }
+ 
+        String fi_802_laporan_keuangan_wtp = entity.getFi_802_laporan_keuangan_wtp();
+        if (fi_802_laporan_keuangan_wtp != null) {
+            stmt.bindString(43, fi_802_laporan_keuangan_wtp);
+        }
+ 
+        String fi_803_laporan_keuangan_publikasi = entity.getFi_803_laporan_keuangan_publikasi();
+        if (fi_803_laporan_keuangan_publikasi != null) {
+            stmt.bindString(44, fi_803_laporan_keuangan_publikasi);
+        }
+ 
+        String fi_804_laporan_audit_syariah = entity.getFi_804_laporan_audit_syariah();
+        if (fi_804_laporan_audit_syariah != null) {
+            stmt.bindString(45, fi_804_laporan_audit_syariah);
+        }
+ 
+        String fi_901_biaya_operasional = entity.getFi_901_biaya_operasional();
+        if (fi_901_biaya_operasional != null) {
+            stmt.bindString(46, fi_901_biaya_operasional);
+        }
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 2);
     }    
 
     @Override
     public IZN readEntity(Cursor cursor, int offset) {
         IZN entity = new IZN( //
-            cursor.getString(offset + 0), // fi_id
-            cursor.getString(offset + 1), // fi_code
-            cursor.getString(offset + 2), // fi_date_created
-            cursor.getString(offset + 3), // fi_date_updated
-            cursor.getString(offset + 4) // fi_jenis_lembaga
+            cursor.getString(offset + 0), // status
+            cursor.getString(offset + 1), // request_type
+            cursor.getString(offset + 2), // fi_id
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // fi_u_id
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // fi_date_created
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // fi_date_updated
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // fi_code
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // fi_101_jenis_lembaga
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // fi_102_nama_laz
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // fi_103_provinsi
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // fi_104_kabupaten
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // fi_201_regulasi_ada
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // fi_201_regulasi
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // fi_301_alokasi_apbn_2_tahun_lalu_ada
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // fi_301_alokasi_apbn_2_tahun_lalu
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // fi_302_alokasi_apbn_1_tahun_lalu_ada
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // fi_302_alokasi_apbn_1_tahun_lalu
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // fi_401_lembaga_zakat_resmi_ada
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // fi_401_lembaga_zakat_resmi
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // fi_402_jumlah_mustahik
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // fi_403_mustahik_kabupaten
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // fi_403_mustahik_kecamatan
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // fi_404_jumlah_muzakki
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // fi_405_jumlah_munsafki
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // fi_406_jumlah_muzakki_badan_usaha
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // fi_501_total_himpunan_tahun_2
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // fi_502_total_himpunan_tahun_1
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // fi_601_program_kerja
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // fi_602_rencana_strategis
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // fi_603_sop_ada
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // fi_603_sop
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // fi_604_iso_ada
+            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // fi_604_iso
+            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // fi_701_total_dana_zis
+            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34), // fi_702_dana_zis_dakwah_ada
+            cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35), // fi_702_dana_zis_dakwah
+            cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36), // fi_703_penyaluran_zis_produktif_rencana
+            cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37), // fi_703_penyaluran_zis_produktif_realisasi
+            cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38), // fi_704_penyaluran_zis_sosial_rencana
+            cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39), // fi_704_penyaluran_zis_sosial_realisasi
+            cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40), // fi_801_laporan_keuangan
+            cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41), // fi_802_laporan_keuangan_teraudit
+            cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42), // fi_802_laporan_keuangan_wtp
+            cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43), // fi_803_laporan_keuangan_publikasi
+            cursor.isNull(offset + 44) ? null : cursor.getString(offset + 44), // fi_804_laporan_audit_syariah
+            cursor.isNull(offset + 45) ? null : cursor.getString(offset + 45) // fi_901_biaya_operasional
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, IZN entity, int offset) {
-        entity.setFi_id(cursor.getString(offset + 0));
-        entity.setFi_code(cursor.getString(offset + 1));
-        entity.setFi_date_created(cursor.getString(offset + 2));
-        entity.setFi_date_updated(cursor.getString(offset + 3));
-        entity.setFi_jenis_lembaga(cursor.getString(offset + 4));
+        entity.setStatus(cursor.getString(offset + 0));
+        entity.setRequest_type(cursor.getString(offset + 1));
+        entity.setFi_id(cursor.getString(offset + 2));
+        entity.setFi_u_id(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setFi_date_created(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setFi_date_updated(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setFi_code(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setFi_101_jenis_lembaga(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setFi_102_nama_laz(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setFi_103_provinsi(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setFi_104_kabupaten(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setFi_201_regulasi_ada(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setFi_201_regulasi(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setFi_301_alokasi_apbn_2_tahun_lalu_ada(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setFi_301_alokasi_apbn_2_tahun_lalu(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setFi_302_alokasi_apbn_1_tahun_lalu_ada(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setFi_302_alokasi_apbn_1_tahun_lalu(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setFi_401_lembaga_zakat_resmi_ada(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setFi_401_lembaga_zakat_resmi(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setFi_402_jumlah_mustahik(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setFi_403_mustahik_kabupaten(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setFi_403_mustahik_kecamatan(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setFi_404_jumlah_muzakki(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setFi_405_jumlah_munsafki(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setFi_406_jumlah_muzakki_badan_usaha(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setFi_501_total_himpunan_tahun_2(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setFi_502_total_himpunan_tahun_1(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
+        entity.setFi_601_program_kerja(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setFi_602_rencana_strategis(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
+        entity.setFi_603_sop_ada(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setFi_603_sop(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
+        entity.setFi_604_iso_ada(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setFi_604_iso(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
+        entity.setFi_701_total_dana_zis(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
+        entity.setFi_702_dana_zis_dakwah_ada(cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34));
+        entity.setFi_702_dana_zis_dakwah(cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35));
+        entity.setFi_703_penyaluran_zis_produktif_rencana(cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36));
+        entity.setFi_703_penyaluran_zis_produktif_realisasi(cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37));
+        entity.setFi_704_penyaluran_zis_sosial_rencana(cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38));
+        entity.setFi_704_penyaluran_zis_sosial_realisasi(cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39));
+        entity.setFi_801_laporan_keuangan(cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40));
+        entity.setFi_802_laporan_keuangan_teraudit(cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41));
+        entity.setFi_802_laporan_keuangan_wtp(cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42));
+        entity.setFi_803_laporan_keuangan_publikasi(cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43));
+        entity.setFi_804_laporan_audit_syariah(cursor.isNull(offset + 44) ? null : cursor.getString(offset + 44));
+        entity.setFi_901_biaya_operasional(cursor.isNull(offset + 45) ? null : cursor.getString(offset + 45));
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(IZN entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(IZN entity, long rowId) {
+        return entity.getFi_id();
     }
     
     @Override
-    public Void getKey(IZN entity) {
-        return null;
+    public String getKey(IZN entity) {
+        if(entity != null) {
+            return entity.getFi_id();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(IZN entity) {
-        // TODO
-        return false;
+        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
     }
 
     @Override

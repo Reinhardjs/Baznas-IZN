@@ -8,9 +8,21 @@ public class KajianDampakZakatKeluarga {
     @SerializedName("status")
     @Expose
     private String status;
+
     @SerializedName("message")
     @Expose
     private String message;
+
+    @SerializedName("fki_id")
+    private String fki_id;
+
+    public String getFki_id() {
+        return fki_id;
+    }
+
+    public void setFki_id(String fki_id) {
+        this.fki_id = fki_id;
+    }
 
     public String getStatus() {
         return status;
